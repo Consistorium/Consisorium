@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="UI">
+      <UniqueIdentifier>{fd3a2a7a-bbad-40a9-8b6e-732317b93a1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Header Files">
+      <UniqueIdentifier>{a94722cf-8b93-492a-b501-652ed0925f65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Source Files">
+      <UniqueIdentifier>{9f98d015-9488-4656-9ab3-97b69d6a91c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{a5706b7f-09f0-49ec-af28-b76fb9b77ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a2a4d8eb-91ef-4470-ad1d-3e2cbc002242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{c12b6dc2-69f2-48c1-82c7-d7e4a0c857b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Pages">
+      <UniqueIdentifier>{ced3e39f-05b9-4447-b25d-2e580dfd5843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Pages\Header Files">
+      <UniqueIdentifier>{5ca3aae2-5376-410d-9234-adb13618e50a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Pages\Source Files">
+      <UniqueIdentifier>{f9907635-4bc8-45b1-9323-6b32fcaad4e5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UI\UIElement.cpp">
+      <Filter>UI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Player.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\main.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Button.cpp">
+      <Filter>UI\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Pages\MenuPage.cpp">
+      <Filter>UI\Pages\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UI\Button.h">
+      <Filter>UI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIElement.h">
+      <Filter>UI\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Player.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IVisible.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IGraphicsRenderer.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IMoveable.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IPositionable.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IRenderDescriptor.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Pages\IPage.h">
+      <Filter>UI\Pages\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Pages\MenuPage.h">
+      <Filter>UI\Pages\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
