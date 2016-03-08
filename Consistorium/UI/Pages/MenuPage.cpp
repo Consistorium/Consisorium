@@ -4,6 +4,14 @@
 #include "MenuPage.h"
 #include "GamePage.h"
 
+bool userQuit = false;
+
+enum class MouseButton
+{
+	Left = 1,
+	Right = 2
+};
+
 void* startButtonClickHandler(SDL_Window*  window)
 {
 	GamePage gamePage(window);
@@ -11,10 +19,54 @@ void* startButtonClickHandler(SDL_Window*  window)
 	return nullptr;
 }
 
+void* exitButtonClickHandler()
+{
+	userQuit = true;
+	return nullptr;
+}
+
+struct Point
+{
+	int x_;
+	int y_;
+
+	Point(int x, int y)
+	{
+		x_ = x;
+		y_ = y;
+	};
+};
+
+bool clickIsInsideBounds(Point click, SDL_Rect bounds)
+{
+	if ((click.x_ >= bounds.x && click.x_ <= bounds.x + bounds.w) &&
+		(click.y_ >= bounds.y && click.y_ <= bounds.y + bounds.h))
+	{
+		return true;
+	}
+
+	return false;
+}
+
 MenuPage::MenuPage(SDL_Window * window)
 	:Page(window)
 {
+}
 
+void MenuPage::handleMouseClick(SDL_Event e)
+{
+	if ((MouseButton)e.button.button == MouseButton::Left)
+	{
+		std::cout << "Clicked at: " << e.button.x << " " << e.button.y << std::endl;
+		for (size_t i = 0; i < buttons_.size(); i++)
+		{
+			Point clickPosition(e.button.x, e.button.y);
+			if (clickIsInsideBounds(clickPosition, buttons_[i]->getBounds()))
+			{
+				buttons_[i]->click(window_);
+			}
+		}
+	}
 }
 
 void MenuPage::CreateButtons()
@@ -23,6 +75,7 @@ void MenuPage::CreateButtons()
 	startButton->setOnClick(&startButtonClickHandler);
 	auto tutorialButton = new Button(50, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
 	auto exitButton = new Button(50, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
+	exitButton->setOnClick(&exitButtonClickHandler);
 
 	buttons_.push_back(startButton);
 	buttons_.push_back(tutorialButton);
@@ -46,8 +99,23 @@ void MenuPage::Run()
 {
 	Init();
 
+	SDL_Event e;
+
 	while (true)
 	{
+		while (SDL_PollEvent(&e) != 0)
+		{
+			if (e.type == SDL_MOUSEBUTTONDOWN)
+			{
+				handleMouseClick(e);
+			}
+		}
+
+		if (userQuit)
+		{
+			return;
+		}
+
 		for (size_t i = 0; i < buttons_.size(); i++)
 		{
 			SDL_BlitSurface(buttons_[i]->getModel(), &buttons_[i]->getModel()->clip_rect, windowSurface_, &buttons_[i]->getBounds());
