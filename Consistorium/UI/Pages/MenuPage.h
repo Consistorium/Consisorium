@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "IPage.h"
-#include "../UI/Button.h"
+#include "../Button.h"
 
 class MenuPage : public IPage
 {
