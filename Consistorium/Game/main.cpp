@@ -3,8 +3,6 @@
 #include <iostream>
 #include <memory>
 
-#include "../Entities/Player.h"
-#include "../UI/UIElement.h"
 #include "../UI/Pages/MenuPage.h"
 
 //Creates the default application window
@@ -15,33 +13,9 @@ void CleanUp(SDL_Window* window);
 
 int main(int argc, char* argv[]) {
 	auto window = CreateWindow();
-	auto windowSurface = SDL_GetWindowSurface(window);
-
-	auto previousTicks = 0L;
-	auto currentTicks = 0L;
-	auto deltaTicks = 0.0;
 
 	auto menuPage = * new MenuPage(window);
 	menuPage.Run();
-
-	/*Player player(0, 0, "mainCharacter.png");
-
-	while (true) {
-		currentTicks = SDL_GetTicks();
-		printf("previousTicks: %ld\ncurrentTicks: %ld\n", previousTicks, currentTicks);
-		deltaTicks = currentTicks - previousTicks;
-		deltaTicks /= 1000;
-		SDL_FillRect(windowSurface, NULL, 0x000000);
-		SDL_BlitSurface(player.getModel(), &player.getModel()->clip_rect, windowSurface, &player.getBounds());
-		player.setX(player.getX() + 10 * deltaTicks);
-		SDL_UpdateWindowSurface(window);
-
-		previousTicks = currentTicks;
-
-		auto playerBounds = player.getBounds();
-		playerBounds.x = player.getX();
-		player.setBounds(playerBounds);
-	}*/
 
 	CleanUp(window);
 	return 0;

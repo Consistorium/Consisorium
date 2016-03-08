@@ -6,6 +6,22 @@ UIElement::UIElement(float x, float y, const char* modelName)
 {
 }
 
+void UIElement::setOnClick(void* handler)
+{
+	onClick_ = (void*)handler;
+}
+
+void* UIElement::click(void* args)
+{
+	//delegate as function pointer
+	return ((void*(*)(void*)) onClick_)(args); //beautifull
+}
+
+void* UIElement::getOnClick()
+{
+	return onClick_;
+}
+
 UIElement::~UIElement()
 {
 }

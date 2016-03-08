@@ -1,17 +1,14 @@
 #pragma once
 #include <vector>
 
-#include "IPage.h"
+#include "Page.h"
 #include "../Button.h"
 
-class MenuPage : public IPage
+class MenuPage : public Page
 {
 private:
 	const char* DEFAULT_BTN_MODEL_NAME = "menuButton.png";
 	std::vector<Button*> buttons_;
-	SDL_Window* window_;
-	SDL_Surface* windowSurface_;
-
 	void Init();
 public:
 	MenuPage(SDL_Window* window);

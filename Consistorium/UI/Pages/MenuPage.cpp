@@ -1,23 +1,32 @@
-#include "MenuPage.h"
-
 #include <iostream>
 #include <SDL_ttf.h>
 
-MenuPage::MenuPage(SDL_Window * window)
-	: window_(window)
+#include "MenuPage.h"
+#include "GamePage.h"
+
+void* startButtonClickHandler(SDL_Window*  window)
 {
+	GamePage gamePage(window);
+	gamePage.Run();
+	return nullptr;
+}
+
+MenuPage::MenuPage(SDL_Window * window)
+	:Page(window)
+{
+
 }
 
 void MenuPage::CreateButtons()
 {
 	auto startButton = new Button(50, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
+	startButton->setOnClick(&startButtonClickHandler);
 	auto tutorialButton = new Button(50, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
-	auto ExitButton = new Button(50, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
+	auto exitButton = new Button(50, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
 
 	buttons_.push_back(startButton);
 	buttons_.push_back(tutorialButton);
-	buttons_.push_back(ExitButton);
-	auto a = window_;
+	buttons_.push_back(exitButton);
 }
 
 void MenuPage::Init()
@@ -30,7 +39,6 @@ void MenuPage::Init()
 		exit(1);
 	}
 
-	windowSurface_ = SDL_GetWindowSurface(window_);
 	CreateButtons();
 }
 
@@ -53,7 +61,6 @@ void MenuPage::Run()
 				TTF_Quit();
 				return;
 			}
-
 			
 			SDL_Color text_color = { 255, 255, 255 };
 			SDL_Surface *buttonText = TTF_RenderText_Solid(font,

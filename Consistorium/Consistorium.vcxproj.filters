@@ -45,6 +45,12 @@
     <ClCompile Include="UI\Pages\MenuPage.cpp">
       <Filter>UI\Pages\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Pages\GamePage.cpp">
+      <Filter>UI\Pages\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Pages\Page.cpp">
+      <Filter>UI\Pages\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\Button.h">
@@ -71,10 +77,14 @@
     <ClInclude Include="Interfaces\IRenderDescriptor.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Pages\IPage.h">
+    <ClInclude Include="UI\Pages\MenuPage.h">
       <Filter>UI\Pages\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Pages\MenuPage.h">
+    <ClInclude Include="IClickable.h" />
+    <ClInclude Include="UI\Pages\GamePage.h">
+      <Filter>UI\Pages\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Pages\Page.h">
       <Filter>UI\Pages\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
