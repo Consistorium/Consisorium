@@ -87,5 +87,8 @@
     <ClInclude Include="UI\Pages\Page.h">
       <Filter>UI\Pages\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Pages\MouseButtonEnum.h">
+      <Filter>UI\Pages\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

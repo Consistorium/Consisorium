@@ -150,6 +150,7 @@
     <ClInclude Include="Interfaces\IVisible.h" />
     <ClInclude Include="UI\Button.h" />
     <ClInclude Include="UI\Pages\GamePage.h" />
+    <ClInclude Include="UI\Pages\MouseButtonEnum.h" />
     <ClInclude Include="UI\Pages\Page.h" />
     <ClInclude Include="UI\Pages\MenuPage.h" />
     <ClInclude Include="UI\UIElement.h" />

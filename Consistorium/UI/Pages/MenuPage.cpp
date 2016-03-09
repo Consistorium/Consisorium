@@ -1,28 +1,54 @@
 #include <iostream>
 #include <SDL_ttf.h>
+#include <SDL_image.h>
 
 #include "MenuPage.h"
 #include "GamePage.h"
+#include "MouseButtonEnum.h"
 
-void* startButtonClickHandler(SDL_Window*  window)
-{
-	GamePage gamePage(window);
-	gamePage.Run();
-	return nullptr;
-}
+bool userQuit = false;
+
+void displayButtonOnScreen(Button &button, SDL_Surface* surface);
+void* startButtonClickHandler(SDL_Window*  window);
+void* exitButtonClickHandler();
 
 MenuPage::MenuPage(SDL_Window * window)
 	:Page(window)
 {
+}
 
+void MenuPage::handleMouseClick(SDL_Event e)
+{
+	if ((MouseButton)e.button.button == MouseButton::Left)
+	{
+		std::cout << "Clicked at: " << e.button.x << " " << e.button.y << std::endl;
+		for (size_t i = 0; i < buttons_.size(); i++)
+		{
+			SDL_Point clickPosition;
+			clickPosition.x = e.button.x;
+			clickPosition.y = e.button.y;
+			if (SDL_PointInRect(&clickPosition, &buttons_[i]->getBounds()))
+			{
+				buttons_[i]->click(window_);
+			}
+		}
+	}
 }
 
 void MenuPage::CreateButtons()
 {
-	auto startButton = new Button(50, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
+	auto badButton = new Button(0, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
+
+	int middleX = windowSurface_->clip_rect.w / 2;
+	int buttonX = middleX - badButton->getBounds().w / 2;
+
+	auto startButton = new Button(buttonX, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
 	startButton->setOnClick(&startButtonClickHandler);
-	auto tutorialButton = new Button(50, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
-	auto exitButton = new Button(50, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
+
+	auto tutorialButton = new Button(buttonX, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
+
+	auto exitButton = new Button(buttonX, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
+	exitButton->setOnClick(&exitButtonClickHandler);
 
 	buttons_.push_back(startButton);
 	buttons_.push_back(tutorialButton);
@@ -46,35 +72,29 @@ void MenuPage::Run()
 {
 	Init();
 
+	SDL_Surface* background = IMG_Load("background.png");
+	SDL_BlitSurface(background, nullptr, windowSurface_, nullptr);
+
+	SDL_Event e;
+
 	while (true)
 	{
+		while (SDL_PollEvent(&e) != 0)
+		{
+			if (e.type == SDL_MOUSEBUTTONDOWN)
+			{
+				handleMouseClick(e);
+			}
+		}
+
+		if (userQuit)
+		{
+			return;
+		}
+
 		for (size_t i = 0; i < buttons_.size(); i++)
 		{
-			SDL_BlitSurface(buttons_[i]->getModel(), &buttons_[i]->getModel()->clip_rect, windowSurface_, &buttons_[i]->getBounds());
-
-			// Load a font
-			TTF_Font *font;
-			font = TTF_OpenFont("FreeSans.ttf", 24);
-			if (font == NULL)
-			{
-				std::cerr << "TTF_OpenFont() Failed: " << TTF_GetError() << std::endl;
-				TTF_Quit();
-				return;
-			}
-			
-			SDL_Color text_color = { 255, 255, 255 };
-			SDL_Surface *buttonText = TTF_RenderText_Solid(font,
-				buttons_[i]->get_text(),
-				text_color);
-
-			if (buttonText == NULL)
-			{
-				std::cerr << "TTF_RenderText_Solid() Failed: " << TTF_GetError() << std::endl;
-				TTF_Quit();
-				return;
-			}
-
-			SDL_BlitSurface(buttonText, &buttons_[i]->getModel()->clip_rect, windowSurface_, &buttons_[i]->getBounds());
+			displayButtonOnScreen(*buttons_[i], windowSurface_);
 		}
 
 		SDL_UpdateWindowSurface(window_);
@@ -83,4 +103,50 @@ void MenuPage::Run()
 
 MenuPage::~MenuPage()
 {
+}
+
+void* startButtonClickHandler(SDL_Window*  window)
+{
+	GamePage gamePage(window);
+	gamePage.Run();
+	return nullptr;
+}
+
+void* exitButtonClickHandler()
+{
+	userQuit = true;
+	return nullptr;
+}
+
+void displayButtonOnScreen(Button &button, SDL_Surface* surface)
+{
+	SDL_BlitSurface(button.getModel(), &button.getModel()->clip_rect, surface, &button.getBounds());
+
+	// Load a font
+	TTF_Font *font;
+	font = TTF_OpenFont("FreeSans.ttf", 24);
+	if (font == NULL)
+	{
+		std::cerr << "TTF_OpenFont() Failed: " << TTF_GetError() << std::endl;
+		TTF_Quit();
+		return;
+	}
+
+	SDL_Color text_color = { 255, 255, 255 };
+	SDL_Surface *buttonText = TTF_RenderText_Solid(font,
+		button.get_text(),
+		text_color);
+
+	if (buttonText == NULL)
+	{
+		std::cerr << "TTF_RenderText_Solid() Failed: " << TTF_GetError() << std::endl;
+		TTF_Quit();
+		return;
+	}
+
+	SDL_Rect textPosition;
+	textPosition.x = button.getBounds().x + button.getBounds().w / 2 - buttonText->w / 2;
+	textPosition.y = button.getBounds().y + button.getBounds().h / 2 - buttonText->h / 2;
+
+	SDL_BlitSurface(buttonText, &button.getModel()->clip_rect, surface, &textPosition);
 }
