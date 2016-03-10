@@ -4,13 +4,14 @@
 #include "../Interfaces/IMoveable.h"
 #include "../Interfaces/IPositionable.h"
 #include "../Interfaces/IVisible.h"
+#include "Entity.h"
 
-class Player : public IMoveable, public IPositionable, public IVisible
+class Player : public Entity,
+	public IMoveable,
+	public IPositionable, public IVisible
 {
-private:
-	const float PLAYER_SPEED = 50;
 public:
-	Player(float beginX, float beginY, const char* modelName);
+	Player(float beginX, float beginY, const char *modelName, bool anchorState);
 	~Player();
 };
 

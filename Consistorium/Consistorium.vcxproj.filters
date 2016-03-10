@@ -19,14 +19,14 @@
     <Filter Include="Interfaces">
       <UniqueIdentifier>{c12b6dc2-69f2-48c1-82c7-d7e4a0c857b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Pages">
-      <UniqueIdentifier>{ced3e39f-05b9-4447-b25d-2e580dfd5843}</UniqueIdentifier>
+    <Filter Include="Game\Engine">
+      <UniqueIdentifier>{e7b56f6c-8757-40d7-9be6-8928aa9d3f2b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Pages\Header Files">
-      <UniqueIdentifier>{5ca3aae2-5376-410d-9234-adb13618e50a}</UniqueIdentifier>
+    <Filter Include="Game\Menu">
+      <UniqueIdentifier>{b479f201-f7d5-4368-986f-514e55161bfa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Pages\Source Files">
-      <UniqueIdentifier>{f9907635-4bc8-45b1-9323-6b32fcaad4e5}</UniqueIdentifier>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{8b61c010-9e85-4c57-ada4-c8b9fd281a59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,14 +42,20 @@
     <ClCompile Include="UI\Button.cpp">
       <Filter>UI\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Pages\MenuPage.cpp">
-      <Filter>UI\Pages\Source Files</Filter>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Pages\GamePage.cpp">
-      <Filter>UI\Pages\Source Files</Filter>
+    <ClCompile Include="Game\Engine\Engine.cpp">
+      <Filter>Game\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Pages\Page.cpp">
-      <Filter>UI\Pages\Source Files</Filter>
+    <ClCompile Include="Game\Engine\PlayerMovementManager.cpp">
+      <Filter>Game\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Menu\Menu.cpp">
+      <Filter>Game\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Page.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,18 +83,23 @@
     <ClInclude Include="Interfaces\IRenderDescriptor.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Pages\MenuPage.h">
-      <Filter>UI\Pages\Header Files</Filter>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="IClickable.h" />
-    <ClInclude Include="UI\Pages\GamePage.h">
-      <Filter>UI\Pages\Header Files</Filter>
+    <ClInclude Include="Game\Engine\Engine.h">
+      <Filter>Game\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Pages\Page.h">
-      <Filter>UI\Pages\Header Files</Filter>
+    <ClInclude Include="Game\Engine\PlayerMovementManager.h">
+      <Filter>Game\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Pages\MouseButtonEnum.h">
-      <Filter>UI\Pages\Header Files</Filter>
+    <ClInclude Include="Game\Menu\Menu.h">
+      <Filter>Game\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Menu\MouseButtonEnum.h">
+      <Filter>Game\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Page.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

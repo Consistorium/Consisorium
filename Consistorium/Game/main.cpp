@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 
-#include "../UI/Pages/MenuPage.h"
+#include "./Menu/Menu.h"
 
 //Creates the default application window
 SDL_Window * CreateWindow();
@@ -14,7 +14,7 @@ void CleanUp(SDL_Window* window);
 int main(int argc, char* argv[]) {
 	auto window = CreateWindow();
 
-	auto menuPage = * new MenuPage(window);
+	Menu menuPage = * new Menu(window);
 	menuPage.Run();
 
 	CleanUp(window);
