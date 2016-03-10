@@ -2,9 +2,10 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 
-#include "MenuPage.h"
-#include "GamePage.h"
+#include "Menu.h"
+#include "../Engine/Engine.h"
 #include "MouseButtonEnum.h"
+#include "../UI/Button.h"
 
 bool userQuit = false;
 
@@ -12,12 +13,12 @@ void displayButtonOnScreen(Button &button, SDL_Surface* surface);
 void* startButtonClickHandler(SDL_Window*  window);
 void* exitButtonClickHandler();
 
-MenuPage::MenuPage(SDL_Window * window)
+Menu::Menu(SDL_Window * window)
 	:Page(window)
 {
 }
 
-void MenuPage::handleMouseClick(SDL_Event e)
+void Menu::handleMouseClick(SDL_Event e)
 {
 	if ((MouseButton)e.button.button == MouseButton::Left)
 	{
@@ -35,7 +36,7 @@ void MenuPage::handleMouseClick(SDL_Event e)
 	}
 }
 
-void MenuPage::CreateButtons()
+void Menu::CreateButtons()
 {
 	auto badButton = new Button(0, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
 
@@ -55,7 +56,7 @@ void MenuPage::CreateButtons()
 	buttons_.push_back(exitButton);
 }
 
-void MenuPage::Init()
+void Menu::Init()
 {
 	// Initialize SDL_ttf library
 	if (TTF_Init() != 0)
@@ -68,7 +69,7 @@ void MenuPage::Init()
 	CreateButtons();
 }
 
-void MenuPage::Run()
+void Menu::Run()
 {
 	Init();
 
@@ -101,14 +102,14 @@ void MenuPage::Run()
 	}
 }
 
-MenuPage::~MenuPage()
+Menu::~Menu()
 {
 }
 
 void* startButtonClickHandler(SDL_Window*  window)
 {
-	GamePage gamePage(window);
-	gamePage.Run();
+	Engine engine(window);
+	engine.Run();
 	return nullptr;
 }
 

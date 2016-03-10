@@ -137,26 +137,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entities\Player.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Game\Engine\Engine.cpp" />
+    <ClCompile Include="Game\Engine\PlayerMovementManager.cpp" />
     <ClCompile Include="Game\main.cpp" />
+    <ClCompile Include="Game\Menu\Menu.cpp" />
+    <ClCompile Include="Game\Page.cpp" />
     <ClCompile Include="UI\Button.cpp" />
-    <ClCompile Include="UI\Pages\GamePage.cpp" />
-    <ClCompile Include="UI\Pages\MenuPage.cpp" />
-    <ClCompile Include="UI\Pages\Page.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Player.h" />
-    <ClInclude Include="IClickable.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Game\Engine\Engine.h" />
+    <ClInclude Include="Game\Engine\PlayerMovementManager.h" />
+    <ClInclude Include="Game\Menu\Menu.h" />
+    <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
+    <ClInclude Include="Game\Page.h" />
     <ClInclude Include="Interfaces\IGraphicsRenderer.h" />
     <ClInclude Include="Interfaces\IMoveable.h" />
     <ClInclude Include="Interfaces\IPositionable.h" />
     <ClInclude Include="Interfaces\IRenderDescriptor.h" />
     <ClInclude Include="Interfaces\IVisible.h" />
     <ClInclude Include="UI\Button.h" />
-    <ClInclude Include="UI\Pages\GamePage.h" />
-    <ClInclude Include="UI\Pages\MouseButtonEnum.h" />
-    <ClInclude Include="UI\Pages\Page.h" />
-    <ClInclude Include="UI\Pages\MenuPage.h" />
     <ClInclude Include="UI\UIElement.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
