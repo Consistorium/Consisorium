@@ -1,12 +1,11 @@
 #include <iostream>
-#include <SDL/SDL.h>
 
-int main(int argc, char **argv) {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-		return 1;
-	}
+#include <GameEngine/WindowManager.h>
 
-	SDL_Quit();
+int main(int argc, char **argv)
+{
+	GameEngine::WindowManager manager;
+
+	manager.create("New Game window", 500, 500);
 	return 0;
 }

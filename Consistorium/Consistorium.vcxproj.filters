@@ -11,4 +11,9 @@
       <UniqueIdentifier>{d3b7fcea-8e15-4fb5-8652-76e8176ec865}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\GameEngine\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
