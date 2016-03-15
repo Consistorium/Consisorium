@@ -84,7 +84,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)\sdl2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;glew32.lib;glew32s.lib;GLUI.lib;SDL2.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2main.lib;</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -94,12 +94,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\sdl2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\sdl2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_ttf.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;glew32.lib;glew32s.lib;GLUI.lib;SDL2.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2main.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,7 +115,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)\sdl2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;zdll.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;glew32.lib;glew32s.lib;GLUI.lib;SDL2.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2main.lib;</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -126,42 +126,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\sdl2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;SDL2_ttf.lib;</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\sdl2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;glew32.lib;glew32s.lib;GLUI.lib;SDL2.lib;SDL2_mixer.lib;SDL2_ttf.lib;SDL2main.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Entities\Player.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Game\Engine\Engine.cpp" />
-    <ClCompile Include="Game\Engine\PlayerMovementManager.cpp" />
-    <ClCompile Include="Game\main.cpp" />
-    <ClCompile Include="Game\Menu\Menu.cpp" />
-    <ClCompile Include="Game\Page.cpp" />
-    <ClCompile Include="UI\Button.cpp" />
-    <ClCompile Include="UI\UIElement.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Entities\Player.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Game\Engine\Engine.h" />
-    <ClInclude Include="Game\Engine\PlayerMovementManager.h" />
-    <ClInclude Include="Game\Menu\Menu.h" />
-    <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
-    <ClInclude Include="Game\Page.h" />
-    <ClInclude Include="Interfaces\IGraphicsRenderer.h" />
-    <ClInclude Include="Interfaces\IMoveable.h" />
-    <ClInclude Include="Interfaces\IPositionable.h" />
-    <ClInclude Include="Interfaces\IRenderDescriptor.h" />
-    <ClInclude Include="Interfaces\IVisible.h" />
-    <ClInclude Include="UI\Button.h" />
-    <ClInclude Include="UI\UIElement.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

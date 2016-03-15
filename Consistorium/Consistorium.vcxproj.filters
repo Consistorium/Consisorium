@@ -1,105 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="UI">
-      <UniqueIdentifier>{fd3a2a7a-bbad-40a9-8b6e-732317b93a1f}</UniqueIdentifier>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{deab0f1b-21d6-44fd-9c4f-629bc7b6719e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Header Files">
-      <UniqueIdentifier>{a94722cf-8b93-492a-b501-652ed0925f65}</UniqueIdentifier>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{f229d948-3847-4b1a-a329-3079c84f27a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Source Files">
-      <UniqueIdentifier>{9f98d015-9488-4656-9ab3-97b69d6a91c1}</UniqueIdentifier>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d3b7fcea-8e15-4fb5-8652-76e8176ec865}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entities">
-      <UniqueIdentifier>{a5706b7f-09f0-49ec-af28-b76fb9b77ee2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{a2a4d8eb-91ef-4470-ad1d-3e2cbc002242}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces">
-      <UniqueIdentifier>{c12b6dc2-69f2-48c1-82c7-d7e4a0c857b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Engine">
-      <UniqueIdentifier>{e7b56f6c-8757-40d7-9be6-8928aa9d3f2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Menu">
-      <UniqueIdentifier>{b479f201-f7d5-4368-986f-514e55161bfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics">
-      <UniqueIdentifier>{8b61c010-9e85-4c57-ada4-c8b9fd281a59}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="UI\UIElement.cpp">
-      <Filter>UI\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entities\Player.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\main.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Button.cpp">
-      <Filter>UI\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Engine\Engine.cpp">
-      <Filter>Game\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Engine\PlayerMovementManager.cpp">
-      <Filter>Game\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Menu\Menu.cpp">
-      <Filter>Game\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Page.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="UI\Button.h">
-      <Filter>UI\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\UIElement.h">
-      <Filter>UI\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\Player.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IVisible.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IGraphicsRenderer.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IMoveable.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IPositionable.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IRenderDescriptor.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Engine\Engine.h">
-      <Filter>Game\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Engine\PlayerMovementManager.h">
-      <Filter>Game\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Menu\Menu.h">
-      <Filter>Game\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Menu\MouseButtonEnum.h">
-      <Filter>Game\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Page.h">
-      <Filter>Game</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
