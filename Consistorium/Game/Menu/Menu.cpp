@@ -1,11 +1,9 @@
 #include <iostream>
-#include <SDL_ttf.h>
-#include <SDL_image.h>
 
 #include "Menu.h"
-#include "../Engine/Engine.h"
+#include "../Game.h"
 #include "MouseButtonEnum.h"
-#include "../UI/Button.h"
+#include "UI/Button.h"
 
 bool userQuit = false;
 
@@ -14,7 +12,7 @@ void* startButtonClickHandler(SDL_Window*  window);
 void* exitButtonClickHandler();
 
 Menu::Menu(SDL_Window * window)
-	:Page(window)
+	:Window(window)
 {
 }
 
@@ -108,8 +106,8 @@ Menu::~Menu()
 
 void* startButtonClickHandler(SDL_Window*  window)
 {
-	Engine engine(window);
-	engine.Run();
+	Game game(window);
+	game.Run();
 	return nullptr;
 }
 

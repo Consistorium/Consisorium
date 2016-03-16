@@ -1,10 +1,13 @@
 #pragma once
 #include <vector>
 
-#include "../Page.h"
-#include "../UI/Button.h"
+#include "SDL/SDL.h"
+#include "SDL/SDL_ttf.h"
+#include "SDL/SDL_image.h"
+#include "UI/Window.h"
+#include "UI/Button.h"
 
-class Menu : public Page
+class Menu : public Window
 {
 private:
 	const char* DEFAULT_BTN_MODEL_NAME = "menuButton.png";
