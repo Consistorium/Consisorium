@@ -1,14 +1,8 @@
-#include <iostream>
-
 #include "Game.h"
-#include "Entities/Player.h"
-
-void handleKeyPress(SDL_Event e, Player* player, float deltaTicks);
-void moveCharacterLeft(Player* player, float deltaTicks);
-void moveCharacterRight(Player* player, float deltaTicks);
 
 Game::Game(SDL_Window* window)
-:Window(window)
+	:Window(window),
+	renderer_(window)
 {
 }
 
@@ -23,13 +17,16 @@ void Game::Init()
 
 void Game::Run()
 {
-	Player player(0, 0, "mainCharacter.png", false);
+	GameEngine::Vector2D playerPosition(0, 0);
+	Player player(playerPosition, "mainCharacter.png");
 
-	long previousTicks = 0L;
-	long currentTicks = 0L;
-	long deltaTicks = 0.0;
+	double previousTicks = 0L;
+	double currentTicks = 0L;
+	double deltaTicks = 0.0;
 
 	SDL_Event e;
+
+	renderer_.AddRenderable(&player);
 
 	while (true) {
 		while (SDL_PollEvent(&e) != 0)
@@ -42,17 +39,15 @@ void Game::Run()
 
 		currentTicks = SDL_GetTicks();
 		deltaTicks = currentTicks - previousTicks;
+		if (deltaTicks == 0)
+		{
+			deltaTicks = 1;
+		}
 		deltaTicks /= 1000;
-		SDL_FillRect(windowSurface_, NULL, 0x000000);
-		SDL_BlitSurface(player.getModel(), &player.getModel()->clip_rect, windowSurface_, &player.getBounds());
-		SDL_UpdateWindowSurface(window_);
+
+		renderer_.RenderAll();
 
 		previousTicks = currentTicks;
-
-		auto playerBounds = player.getBounds();
-		playerBounds.x = player.getX();
-		playerBounds.y = player.getY();
-		player.setBounds(playerBounds);
 	}
 }
 
@@ -61,20 +56,16 @@ void handleKeyPress(SDL_Event e, Player* player, float deltaTicks)
 	switch (e.key.keysym.sym)
 	{
 	case SDLK_LEFT:
-		moveCharacterLeft(player, deltaTicks);
-		break;
+		moveCharacter(player, deltaTicks, -1);
 	case SDLK_RIGHT:
-		moveCharacterRight(player, deltaTicks);
+		moveCharacter(player, deltaTicks, 1);
 		break;
 	}
 }
 
-void moveCharacterLeft(Player* player, float deltaTicks)
+void moveCharacter(Player* player, float deltaTicks, int direction)
 {
-	player->setX(player->getX() - player->getSpeed() + player->getSpeed() * deltaTicks);
-}
-
-void moveCharacterRight(Player* player, float deltaTicks)
-{
-	player->setX(player->getX() + player->getSpeed() + player->getSpeed() * deltaTicks);
+	GameEngine::Vector2D p = player->getPosition();
+	p.SetXY(p.X() + direction * player->getSpeed() * deltaTicks, p.Y());
+	player->setPosition(p);
 }

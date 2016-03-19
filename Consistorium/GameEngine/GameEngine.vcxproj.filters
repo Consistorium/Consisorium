@@ -8,6 +8,12 @@
     <Filter Include="UI">
       <UniqueIdentifier>{297e6482-1a6f-45e5-a80f-59aa9e47cc97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{e9252617-6617-4fb0-bf74-d03de07d9b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contracts">
+      <UniqueIdentifier>{5010618b-415f-46c7-b7d0-ff1cdc7425b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\Button.cpp">
@@ -19,16 +25,39 @@
     <ClCompile Include="UI\Window.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Contracts</Filter>
+    </ClInclude>
     <ClInclude Include="UI\Button.h">
-      <Filter>UI</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIElement.h">
-      <Filter>UI</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI\Window.h">
-      <Filter>UI</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphicsRenderer.h">
+      <Filter>Contracts</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameEngine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -97,6 +97,7 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -160,10 +161,8 @@
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Menu\Menu.h" />
     <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
-    <ClInclude Include="Interfaces\IGraphicsRenderer.h" />
     <ClInclude Include="Interfaces\IMoveable.h" />
     <ClInclude Include="Interfaces\IPositionable.h" />
-    <ClInclude Include="Interfaces\IRenderDescriptor.h" />
     <ClInclude Include="Interfaces\IVisible.h" />
   </ItemGroup>
   <ItemGroup>

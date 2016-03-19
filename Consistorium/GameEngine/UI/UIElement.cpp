@@ -64,7 +64,7 @@ void* UIElement::click(void* args)
 	//delegate as function pointer
 	if (onClick_)
 	{
-		return ((void*(*)(void*)) onClick_)(args); //beautifull
+		return ((void*(*)(void*)) onClick_)(args); //beautiful
 	}
 }
 

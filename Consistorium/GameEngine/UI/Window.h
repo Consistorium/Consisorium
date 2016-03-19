@@ -11,5 +11,6 @@ protected:
 	SDL_Surface* windowSurface_;
 public:
 	Window(SDL_Window* window);
+	~Window();
 	virtual void Run() = 0;
 };

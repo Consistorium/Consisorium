@@ -11,14 +11,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\Window.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IGraphicsRenderer.h" />
+    <ClInclude Include="IRenderable.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UI\Button.h" />
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\Window.h" />
+    <ClInclude Include="Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameEngine.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D254788E-CBBA-4936-9DF0-EC3DFFD761C1}</ProjectGuid>
@@ -27,7 +38,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -61,7 +72,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GAMEENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>

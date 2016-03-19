@@ -35,16 +35,10 @@
     <ClInclude Include="Interfaces\IVisible.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\IGraphicsRenderer.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Interfaces\IMoveable.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Interfaces\IPositionable.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IRenderDescriptor.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Game\Menu\Menu.h">

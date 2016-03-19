@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-SDL_Window * CreateWindow()
+SDL_Window* CreateWindow()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);   // Initialize SDL2
 
