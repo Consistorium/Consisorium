@@ -1,13 +1,15 @@
 #pragma once
 
-#include "Player.h"
-#include "../../Interfaces/IPositionable.h"
-#include "../../Interfaces/IMoveable.h"
-#include "../../Interfaces/IVisible.h"
-#include "../../GameEngine/IRenderable.h"
-#include "Entity.h"
-#include "../../GameEngine/TextureManager.h"
 #include <memory>
+#include <Box2D\Box2D.h>
+#include <IRenderable.h>
+#include <TextureManager.h>
+#include <Interfaces/IPositionable.h>
+#include <Interfaces/IMoveable.h>
+#include <Interfaces/IVisible.h>
+
+#include "Player.h"
+#include "Entity.h"
 
 class Player :
 	public Entity,
@@ -17,14 +19,26 @@ class Player :
 {
 private:
 	char *textureName_;
+	b2Body* body_;
+	b2BodyDef bodyDef_;
 public:
-	Player(GameEngine::Vector2D position, char *modelName);
+	Player(b2Vec2 position, char *modelName);
 	~Player();
 
 	void init(SDL_Renderer *renderer);
 
 	char* getTextureName() override;
 
-	GameEngine::Vector2D getScreenPosition() override;
+	b2Vec2 getScreenPosition() override;
+
+	void setPosition(b2Vec2 position) override;
+
+	b2BodyDef getBodyDef();
+
+	void setBodyDef(b2BodyDef bodyDef);
+
+	b2Body* getBody();
+
+	void setBody(b2Body* body);
 };
 

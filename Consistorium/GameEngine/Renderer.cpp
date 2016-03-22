@@ -1,10 +1,15 @@
 #include "Renderer.h"
+#include <iostream>
+
+const float PIXELS_PER_METER = 100;
 
 namespace GameEngine 
 {
 	Renderer::Renderer(SDL_Window* window)
 		: windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
-		textureManager_(windowRenderer_)
+		textureManager_(windowRenderer_),
+		worldConstraints(SDL_GetWindowSurface(window)->w,
+			SDL_GetWindowSurface(window)->h)
 	{
 		if (this->windowRenderer_ == NULL)
 		{
@@ -49,12 +54,17 @@ namespace GameEngine
 		SDL_Rect boundsRect;
 		for (IRenderable *item : this->renderables_)
 		{
-			GameEngine::Vector2D position = item->getScreenPosition();
+			b2Vec2 position = item->getScreenPosition();
 			SDL_Texture *currentTexture = textureManager_.getTexture(item->getTextureName());
-			boundsRect.x = position.X();
-			boundsRect.y = position.Y();
 			SDL_QueryTexture(currentTexture, NULL, NULL, &boundsRect.w, &boundsRect.h);
+			boundsRect.x = position.x * PIXELS_PER_METER;
+			boundsRect.y = worldConstraints.height - position.y * PIXELS_PER_METER - boundsRect.h;
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, NULL, &boundsRect);
+			std::cout << "RENDERING PLAYER AT: " 
+				<< boundsRect.x << ", " << boundsRect.y 
+				<< " : " 
+				<< boundsRect.w << ", " << boundsRect.h << ";" 
+				<< std::endl;
 		}
 
 		SDL_RenderPresent(this->windowRenderer_);

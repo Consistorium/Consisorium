@@ -2,7 +2,7 @@
 
 #include <SDL/SDL.h>
 #include <memory>
-#include "Vector2D.h"
+#include <Box2D\Box2D.h>
 
 namespace GameEngine {
 	class IRenderable
@@ -12,6 +12,6 @@ namespace GameEngine {
 
 		virtual char* getTextureName() = 0;
 
-		virtual Vector2D getScreenPosition() = 0;
+		virtual b2Vec2 getScreenPosition() = 0;
 	};
 }

@@ -76,11 +76,11 @@
     <LibraryPath>$(SolutionDir)\Dependencies\libs;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)\Resources;$(ReferencePath)</ReferencePath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(SolutionDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(SolutionDir)\Dependencies\libs;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(SolutionDir)\GameEngine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(SolutionDir);$(SolutionDir)\GameEngine;$(IncludePath);$(SolutionDir)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <SourcePath>$(VC_SourcePath);</SourcePath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
@@ -128,7 +128,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
