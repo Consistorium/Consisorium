@@ -12,6 +12,6 @@ namespace GameEngine {
 
 		virtual char* getTextureName() = 0;
 
-		virtual b2Vec2 getScreenPosition() = 0;
+		virtual b2Vec2 getPosition() = 0;
 	};
 }

@@ -9,9 +9,6 @@
 #include "Game.h"
 #include "Entities/Player.h"
 
-void handleKeyPress(SDL_Event e, Player* player, float deltaTicks);
-void moveCharacter(Player* player, float deltaTicks, int direction);
-
 class Game : public Window
 {
 private:

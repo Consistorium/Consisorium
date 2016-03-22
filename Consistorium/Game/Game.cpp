@@ -1,4 +1,10 @@
 #include "Game.h"
+#include <Globals\Constants.h>
+#include "Entities\GameEntity.h"
+
+void handleKeyPress(SDL_Event e, Player* player, float deltaTicks);
+void moveCharacter(GameEntity* entity, int direction);
+void jump(GameEntity* entity);
 
 Game::Game(SDL_Window* window)
 	:Window(window),
@@ -48,7 +54,7 @@ void Game::Run()
 
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 10.0f);
+	bodyDef.position.Set(3.0f, 10.0f);
 	b2Body* body = world_->CreateBody(&bodyDef);
 
 	b2PolygonShape dynamicBox;
@@ -110,16 +116,23 @@ void handleKeyPress(SDL_Event e, Player* player, float deltaTicks)
 	switch (e.key.keysym.sym)
 	{
 	case SDLK_LEFT:
-		moveCharacter(player, deltaTicks, -1);
+		moveCharacter(player, -1);
+		break;
 	case SDLK_RIGHT:
-		moveCharacter(player, deltaTicks, 1);
+		moveCharacter(player, 1);
+		break;
+	case SDLK_UP:
+		jump(player);
 		break;
 	}
 }
 
-void moveCharacter(Player* player, float deltaTicks, int direction)
+void moveCharacter(GameEntity* entity, int direction)
 {
-	b2Vec2 position = player->getPosition();
-	position.Set(position.x + direction * player->getSpeed() * deltaTicks, position.y);
-	player->setPosition(position);
+	entity->getBody()->ApplyForceToCenter(b2Vec2(3 * direction * Globals::PIXELS_PER_METER, 0), true);
+}
+
+void jump(GameEntity* entity)
+{
+	entity->getBody()->ApplyForceToCenter(b2Vec2(0, 1 * Globals::PIXELS_PER_METER * 10), true);
 }

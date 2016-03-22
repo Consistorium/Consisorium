@@ -14,6 +14,12 @@
     <Filter Include="Contracts">
       <UniqueIdentifier>{5010618b-415f-46c7-b7d0-ff1cdc7425b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{8cf2ccd7-fca7-4555-98c8-f27c274af5fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Globals">
+      <UniqueIdentifier>{7e227494-4db4-40f0-9606-d469ce32cd78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\Button.cpp">
@@ -30,9 +36,6 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IRenderable.h">
-      <Filter>Contracts</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -53,6 +56,15 @@
     </ClInclude>
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Constants.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Contracts</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals\Constants.h">
+      <Filter>Globals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
