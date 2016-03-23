@@ -149,12 +149,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Entities\EntityFactory.cpp" />
     <ClCompile Include="Game\Entities\Player.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\main.cpp" />
     <ClCompile Include="Game\Menu\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Entities\EntityFactory.h" />
     <ClInclude Include="Game\Entities\GameEntity.h" />
     <ClInclude Include="Game\Entities\Player.h" />
     <ClInclude Include="Game\Game.h" />

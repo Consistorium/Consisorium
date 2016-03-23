@@ -1,8 +1,11 @@
-#include "Game.h"
 #include <Globals\Constants.h>
-#include "Entities\GameEntity.h"
 
-void handleKeyPress(SDL_Event e, Player* player, float deltaTicks);
+#include "Entities\GameEntity.h"
+#include "Game.h"
+#include "Entities\EntityFactory.h"
+
+void handleKeyPress(SDL_Event e, GameEntity* player);
+void handleKeyRelease(SDL_Event e, GameEntity* player);
 void moveCharacter(GameEntity* entity, int direction);
 void jump(GameEntity* entity);
 
@@ -51,31 +54,11 @@ void Game::Init()
 void Game::Run()
 {
 	Init();
-
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(3.0f, 10.0f);
-	b2Body* body = world_->CreateBody(&bodyDef);
-
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);
-
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
-
-	// Set the box density to be non-zero, so it will be dynamic.
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-
-	body->CreateFixture(&fixtureDef);
-
-	Player player(body->GetPosition(), "mainCharacter.png");
-	player.setBody(body);
-	player.setBodyDef(bodyDef);
-
-	double previousTicks = 0L;
-	double currentTicks = 0L;
-	double deltaTicks = 0.0;
+	EntityFactory entityFactory(world_);
+	b2Vec2 playerPosition;
+	playerPosition.x = 3;
+	playerPosition.y = 4;
+	GameEntity& player = *entityFactory.createPlayer(playerPosition, "mainCharacter.png");
 
 	SDL_Event e;
 
@@ -84,9 +67,16 @@ void Game::Run()
 	while (true) {
 		while (SDL_PollEvent(&e) != 0)
 		{
-			if (e.type == SDL_KEYDOWN)
+			switch (e.type)
 			{
-				handleKeyPress(e, &player, deltaTicks);
+			case SDL_KEYDOWN:
+				handleKeyPress(e, &player);
+				break;
+			case SDL_KEYUP:
+				handleKeyPress(e, &player);
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -96,29 +86,20 @@ void Game::Run()
 		float32 angle = player.getBody()->GetAngle();
 
 		printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
-
-		currentTicks = SDL_GetTicks();
-		deltaTicks = currentTicks - previousTicks;
-		if (deltaTicks == 0)
-		{
-			deltaTicks = 1;
-		}
-		deltaTicks /= 1000;
-
 		renderer_.RenderAll();
-
-		previousTicks = currentTicks;
 	}
 }
 
-void handleKeyPress(SDL_Event e, Player* player, float deltaTicks) 
+void handleKeyPress(SDL_Event e, GameEntity* player) 
 {
 	switch (e.key.keysym.sym)
 	{
 	case SDLK_LEFT:
+		player->setSpeed(-100);
 		moveCharacter(player, -1);
 		break;
 	case SDLK_RIGHT:
+		player->setSpeed(100);
 		moveCharacter(player, 1);
 		break;
 	case SDLK_UP:
@@ -127,12 +108,24 @@ void handleKeyPress(SDL_Event e, Player* player, float deltaTicks)
 	}
 }
 
+void handleKeyRelease(SDL_Event e, GameEntity* player)
+{
+	switch (e.key.keysym.sym)
+	{
+	case SDLK_LEFT:
+	case SDLK_RIGHT:
+		player->setSpeed(0);
+		break;
+	}
+}
+
 void moveCharacter(GameEntity* entity, int direction)
 {
-	entity->getBody()->ApplyForceToCenter(b2Vec2(3 * direction * Globals::PIXELS_PER_METER, 0), true);
+	entity->getBody()->ApplyForceToCenter(b2Vec2(entity->getSpeed(), 0), true);
 }
 
 void jump(GameEntity* entity)
 {
-	entity->getBody()->ApplyForceToCenter(b2Vec2(0, 1 * Globals::PIXELS_PER_METER * 10), true);
+	float impulse = entity->getBody()->GetMass() * 5;
+	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getSpeed() / 2, impulse), entity->getBody()->GetWorldCenter(), true);
 }

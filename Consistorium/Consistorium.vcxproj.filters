@@ -24,6 +24,9 @@
     <ClCompile Include="Game\Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\EntityFactory.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Menu\Menu.h">
@@ -39,6 +42,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Entities\GameEntity.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityFactory.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
