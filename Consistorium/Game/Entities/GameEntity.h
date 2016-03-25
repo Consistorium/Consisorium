@@ -13,11 +13,8 @@ protected:
 	float speed_;
 	float width_;
 	float height_;
+	float jumpPower_;
 public:
-	virtual void setSpeed(float speed) = 0;
-
-	virtual float getSpeed() = 0;	
-
 	virtual b2BodyDef getBodyDef() = 0;
 
 	virtual void setBodyDef(b2BodyDef bodyDef) = 0;
@@ -35,4 +32,12 @@ public:
 	virtual void setHeight(float height) = 0;
 
 	virtual ~GameEntity() { };
+
+	virtual float getJumpPower() = 0;
+
+	virtual void setJumpPower(float power) = 0;
+
+	virtual float getAccelerationImpulse() = 0;
+
+	virtual void setXDirection(int direction) = 0;
 };

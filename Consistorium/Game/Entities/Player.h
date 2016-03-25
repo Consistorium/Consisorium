@@ -7,14 +7,12 @@ class Player : public GameEntity
 {
 private:
 	char *textureName_;
-	
+	const float PLAYER_MAX_SPEED = 0.3;
+	int xDirection_;
 public:
-	Player(b2Vec2 position, char *modelName, float width, float height);
+	//TODO:apply builder pattern
+	Player(b2Vec2 position, char *modelName, float width, float height, float jumpPower);
 	~Player();
-
-	void setSpeed(float speed) override;
-
-	float getSpeed() override;
 
 	void init(SDL_Renderer *renderer);
 
@@ -37,5 +35,13 @@ public:
 	float getHeight() override;
 
 	void setHeight(float height) override;
+
+	float getJumpPower() override;
+
+	void setJumpPower(float power) override;
+
+	void setXDirection(int direction) override;
+
+	float getAccelerationImpulse() override;
 };
 

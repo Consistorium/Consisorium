@@ -1,18 +1,18 @@
 #include <Globals\Constants.h>
 
 #include "Entities\GameEntity.h"
-#include "Game.h"
 #include "Entities\EntityFactory.h"
+#include "Game.h"
 
-void handleKeyPress(SDL_Event e, GameEntity* player);
-void handleKeyRelease(SDL_Event e, GameEntity* player);
+const b2Vec2 GRAVITY(0, -0.1);
+
 void moveCharacter(GameEntity* entity, int direction);
 void jump(GameEntity* entity);
 
 Game::Game(SDL_Window* window)
 	:Window(window),
 	renderer_(window),
-	gravity_(0.0f, -10.0f)
+	gravity_(GRAVITY)
 {	
 }
 
@@ -23,6 +23,8 @@ Game::~Game()
 void Game::Init()
 {
 	world_ = new b2World(gravity_);
+	JumpContactListener listener;
+	contactListener_ = &listener;
 
 	// Define the ground body.
 	b2BodyDef groundBodyDef;
@@ -60,6 +62,13 @@ void Game::Run()
 	playerPosition.y = 4;
 	GameEntity& player = *entityFactory.createPlayer(playerPosition, "mainCharacter.png");
 
+	//prevent jumping in mid air
+	int playerFootContacts = 0;
+	
+	jumpTimer_.Reset();
+	JumpContactListener listener;
+	world_->SetContactListener(&listener);
+
 	SDL_Event e;
 
 	renderer_.AddRenderable(&player);
@@ -70,9 +79,7 @@ void Game::Run()
 			switch (e.type)
 			{
 			case SDL_KEYDOWN:
-				handleKeyPress(e, &player);
-				break;
-			case SDL_KEYUP:
+				
 				handleKeyPress(e, &player);
 				break;
 			default:
@@ -85,47 +92,46 @@ void Game::Run()
 		b2Vec2 position = player.getBody()->GetPosition();
 		float32 angle = player.getBody()->GetAngle();
 
-		printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 		renderer_.RenderAll();
 	}
 }
 
-void handleKeyPress(SDL_Event e, GameEntity* player) 
+void Game::handleKeyPress(SDL_Event e, GameEntity* player) 
 {
 	switch (e.key.keysym.sym)
 	{
 	case SDLK_LEFT:
-		player->setSpeed(-100);
+		player->setXDirection(-1);
 		moveCharacter(player, -1);
 		break;
 	case SDLK_RIGHT:
-		player->setSpeed(100);
+		player->setXDirection(1);
 		moveCharacter(player, 1);
 		break;
 	case SDLK_UP:
-		jump(player);
-		break;
-	}
-}
+		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 500)
+		{
+			std::cout << jumpTimer_.GetMilliseconds() << std::endl;
+			jump(player);
+			jumpTimer_.Reset();
+		}
 
-void handleKeyRelease(SDL_Event e, GameEntity* player)
-{
-	switch (e.key.keysym.sym)
-	{
-	case SDLK_LEFT:
-	case SDLK_RIGHT:
-		player->setSpeed(0);
 		break;
 	}
 }
 
 void moveCharacter(GameEntity* entity, int direction)
 {
-	entity->getBody()->ApplyForceToCenter(b2Vec2(entity->getSpeed(), 0), true);
+	//std::cout << "speed: " << entity->getSpeed() << std::endl; this changes speed quite a bit
+	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getAccelerationImpulse(), 0), entity->getBody()->GetWorldCenter(), true);
 }
 
 void jump(GameEntity* entity)
 {
-	float impulse = entity->getBody()->GetMass() * 5;
-	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getSpeed() / 2, impulse), entity->getBody()->GetWorldCenter(), true);
+	std::cout << GRAVITY.y << std::endl;
+	float impulse = entity->getBody()->GetMass() * (-GRAVITY.y) * entity->getJumpPower();
+	b2Vec2 force;
+	force.x = 0;
+	force.y = impulse;
+	entity->getBody()->ApplyLinearImpulse(force, entity->getBody()->GetWorldCenter(), true);
 }

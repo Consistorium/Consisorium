@@ -10,6 +10,9 @@
     <Filter Include="Game\Entities">
       <UniqueIdentifier>{a5706b7f-09f0-49ec-af28-b76fb9b77ee2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Utils">
+      <UniqueIdentifier>{004c214d-0b95-4949-bb54-3fd2b5ff80c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\main.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="Game\Entities\EntityFactory.cpp">
       <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utils\JumpContactListener.cpp">
+      <Filter>Game\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="Game\Entities\EntityFactory.h">
       <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utils\JumpContactListener.h">
+      <Filter>Game\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

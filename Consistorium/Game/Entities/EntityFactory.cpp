@@ -3,6 +3,8 @@
 #include "EntityFactory.h"
 #include "Player.h"
 
+const float PLAYER_JUMP_POWER = 5.0;
+
 EntityFactory::EntityFactory(b2World* world)
 	:world_(world)
 {
@@ -22,24 +24,26 @@ GameEntity* EntityFactory::createPlayer(b2Vec2 position, char* modelName)
 	fixtureDef.shape = &polygonShape;
 
 	// Set the box density to be non-zero, so it will be dynamic.
+	//density -> mass
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.3f;
 
 	body->CreateFixture(&fixtureDef);
 
-	
-
-	
-
 	//does not work if on stack
 	//calls delete twice
-	Player* player = new Player(body->GetPosition(), modelName, Globals::DEFAULT_PLAYER_WIDTH, Globals::DEFAULT_PLAYER_HEIGHT);
+	Player* player = new Player(
+		body->GetPosition(), 
+		modelName, 
+		Globals::DEFAULT_PLAYER_WIDTH, 
+		Globals::DEFAULT_PLAYER_HEIGHT, 
+		PLAYER_JUMP_POWER);
 	//add foot sensor fixture
 	b2Vec2 footSensorCenter;
 	footSensorCenter.x = position.x + player->getWidth() / 2;
 	footSensorCenter.x = position.y + player->getHeight();
 	
-	polygonShape.SetAsBox(0.3, 0.3, b2Vec2(0, -2), 0);
+	polygonShape.SetAsBox(0.1, 0.1, b2Vec2(0, -2), 0);
 	fixtureDef.isSensor = true;
 	b2Fixture* footSensorFixture = body->CreateFixture(&fixtureDef);
 	footSensorFixture->SetUserData((void*)3);

@@ -8,6 +8,7 @@
 
 #include "Game.h"
 #include "Entities/Player.h"
+#include "Utils\JumpContactListener.h"
 
 class Game : public Window
 {
@@ -19,10 +20,14 @@ private:
 	int32 velocityIterations_;
 	int32 positionIterations_;
 	b2Vec2 gravity_;
+	b2Timer jumpTimer_;
+	JumpContactListener* contactListener_;
 public:
 	Game(SDL_Window* window);
 
 	~Game();
+
+	void handleKeyPress(SDL_Event e, GameEntity* player);
 
 	void Run();
 };
