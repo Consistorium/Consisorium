@@ -16,7 +16,6 @@ namespace GameEngine
 		}
 	}
 
-
 	Renderer::~Renderer()
 	{
 		SDL_DestroyRenderer(this->windowRenderer_);
@@ -54,6 +53,9 @@ namespace GameEngine
 			boundsRect.x = position.X();
 			boundsRect.y = position.Y();
 			SDL_QueryTexture(currentTexture, NULL, NULL, &boundsRect.w, &boundsRect.h);
+
+			SDL_RenderSetScale(this->windowRenderer_, item->getScale().X(), item->getScale().Y());
+
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, NULL, &boundsRect);
 		}
 

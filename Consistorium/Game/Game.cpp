@@ -18,7 +18,7 @@ void Game::Init()
 void Game::Run()
 {
 	GameEngine::Vector2D playerPosition(0, 0);
-	Player player(playerPosition, "mainCharacter.png");
+	Player player(playerPosition, "Idle");
 
 	double previousTicks = 0L;
 	double currentTicks = 0L;
@@ -28,12 +28,15 @@ void Game::Run()
 
 	renderer_.AddRenderable(&player);
 
+	int i = -1;
 	while (true) {
+		i++;
 		while (SDL_PollEvent(&e) != 0)
 		{
 			if (e.type == SDL_KEYDOWN)
 			{
-				handleKeyPress(e, &player, deltaTicks);
+				player.die();
+				//handleKeyPress(e, &player, deltaTicks);
 			}
 		}
 
@@ -46,7 +49,6 @@ void Game::Run()
 		deltaTicks /= 1000;
 
 		renderer_.RenderAll();
-
 		previousTicks = currentTicks;
 	}
 }
@@ -56,7 +58,7 @@ void handleKeyPress(SDL_Event e, Player* player, float deltaTicks)
 	switch (e.key.keysym.sym)
 	{
 	case SDLK_LEFT:
-		moveCharacter(player, deltaTicks, -1);
+		moveCharacter(player, deltaTicks, 1);
 	case SDLK_RIGHT:
 		moveCharacter(player, deltaTicks, 1);
 		break;
@@ -66,6 +68,8 @@ void handleKeyPress(SDL_Event e, Player* player, float deltaTicks)
 void moveCharacter(Player* player, float deltaTicks, int direction)
 {
 	GameEngine::Vector2D p = player->getPosition();
+	printf("Current X(): %f\n", p.X());
+	printf("added coords: %f\n", player->getSpeed() * deltaTicks);
 	p.SetXY(p.X() + direction * player->getSpeed() * deltaTicks, p.Y());
 	player->setPosition(p);
 }

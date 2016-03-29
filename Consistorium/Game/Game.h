@@ -3,6 +3,7 @@
 #include "SDL/SDL.h"
 #include "UI/Window.h"
 #include <../GameEngine/Renderer.h>
+#include <../GameEngine/AnimationManager.h>
 #include <iostream>
 
 #include "Game.h"
