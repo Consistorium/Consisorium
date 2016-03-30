@@ -76,11 +76,11 @@
     <LibraryPath>$(SolutionDir)\Dependencies\libs;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)\Resources;$(ReferencePath)</ReferencePath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(SolutionDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(SolutionDir)\Dependencies\libs;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(SolutionDir)\GameEngine;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\GameEngine;$(SolutionDir)\Dependencies\include;$(SolutionDir);$(SolutionDir)\GameEngine;$(IncludePath);$(SolutionDir)</IncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
     <SourcePath>$(VC_SourcePath);</SourcePath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
@@ -128,7 +128,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -149,21 +149,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game\Entities\Entity.cpp" />
+    <ClCompile Include="Game\Entities\EntityFactory.cpp" />
     <ClCompile Include="Game\Entities\Player.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\main.cpp" />
     <ClCompile Include="Game\Menu\Menu.cpp" />
+    <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game\Entities\Entity.h" />
+    <ClInclude Include="Game\Entities\EntityFactory.h" />
+    <ClInclude Include="Game\Entities\GameEntity.h" />
     <ClInclude Include="Game\Entities\Player.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Menu\Menu.h" />
     <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
-    <ClInclude Include="Interfaces\IMoveable.h" />
-    <ClInclude Include="Interfaces\IPositionable.h" />
-    <ClInclude Include="Interfaces\IVisible.h" />
+    <ClInclude Include="Game\Utils\JumpContactListener.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="GameEngine\GameEngine.vcxproj">

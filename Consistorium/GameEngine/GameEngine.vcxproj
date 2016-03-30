@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UI\Button.cpp" />
@@ -25,8 +26,11 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="IAnimateable.h" />
+    <ClInclude Include="Common\Constants.h" />
+    <ClInclude Include="Globals\Constants.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />
+    <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="UI\Button.h" />

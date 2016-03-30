@@ -2,16 +2,19 @@
 
 const float PLAYER_SPEED = 1000;
 
-Player::Player(GameEngine::Vector2D position, std::string defaultAnimation)
-	: IMoveable(PLAYER_SPEED),
-	IPositionable(position),
-	textureName_(this->getAnimationsFolder() + "/" + defaultAnimation + "001.png"),
+Player::Player(b2Vec2 position, std::string defaultAnimation, float width, float height, float jumpPower)
+	: textureName_(this->getAnimationsFolder() + "/" + defaultAnimation + "001.png"),
 	animationManager_(this, defaultAnimation)
 {
+	width_ = width;
+	height_ = height;
+	jumpPower_ = jumpPower;
+	speed_ = 0;
 }
 
 Player::~Player()
 {
+	body_ = nullptr;
 }
 
 void Player::setFrameTexture(std::string path) 
@@ -19,9 +22,9 @@ void Player::setFrameTexture(std::string path)
 	this->textureName_ = path;
 }
 
-GameEngine::Vector2D Player::getScale()
+b2Vec2 Player::getScale()
 {
-	GameEngine::Vector2D vec(0.2, 0.2);
+	b2Vec2 vec(0.2, 0.2);
 	return vec;
 }
 
@@ -36,9 +39,24 @@ std::string Player::getTextureName()
 	return this->textureName_;
 }
 
-GameEngine::Vector2D Player::getScreenPosition()
+b2Vec2 Player::getPosition()
 {
-	return this->getPosition();
+	return body_->GetPosition();
+}
+
+b2BodyDef Player::getBodyDef()
+{
+	return bodyDef_;
+}
+
+void Player::setBodyDef(b2BodyDef bodyDef)
+{
+	bodyDef_ = bodyDef;
+}
+
+b2Body* Player::getBody()
+{
+	return body_;
 }
 
 std::string Player::getAnimationsFolder()
@@ -49,4 +67,51 @@ std::string Player::getAnimationsFolder()
 double Player::getAnimationSpeed()
 {
 	return 45; // ms
+}
+
+void Player::setBody(b2Body* body)
+{
+	body_ = body;
+}
+
+float Player::getWidth()
+{
+	return width_;
+}
+
+void Player::setWidth(float width)
+{
+	width_ = width;
+}
+
+float Player::getHeight()
+{
+	return height_;
+}
+
+void Player::setHeight(float height)
+{
+	height_ = height;
+}
+
+float Player::getJumpPower()
+{
+	return jumpPower_;
+}
+
+void Player::setJumpPower(float power)
+{
+	jumpPower_ = power;
+}
+
+float Player::getAccelerationImpulse()
+{
+	float xVelocity = body_->GetLinearVelocity().x;
+
+	return (PLAYER_MAX_SPEED - (xVelocity * xDirection_)) * xDirection_;
+}
+
+void Player::setXDirection(int direction)
+{
+	xDirection_ = direction;
 }

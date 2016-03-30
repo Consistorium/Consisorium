@@ -1,28 +1,19 @@
 #pragma once
 
-#include "Player.h"
-#include "../../Interfaces/IPositionable.h"
-#include "../../Interfaces/IMoveable.h"
-#include "../../GameEngine/AnimationManager.h"
-#include "../../Interfaces/IVisible.h"
-#include "../../GameEngine/IRenderable.h"
-#include "../../GameEngine/IAnimateable.h"
-#include "Entity.h"
-#include "../../GameEngine/TextureManager.h"
-#include <memory>
+#include <SDL\SDL.h>
+#include "GameEntity.h"
+#include <AnimationManager.h>
 
-class Player :
-	public Entity,
-	public IMoveable,
-	public IPositionable,
-	public GameEngine::IAnimateable,
-	public GameEngine::IRenderable
+class Player : public GameEntity
 {
 private:
 	std::string textureName_;
 	GameEngine::AnimationManager animationManager_;
+	const float PLAYER_MAX_SPEED = 0.3;
+	int xDirection_;
 public:
-	Player(GameEngine::Vector2D position, std::string animationName);
+	//TODO:apply builder pattern
+	Player(b2Vec2 position, std::string defaultAnimation, float width, float height, float jumpPower);
 
 	~Player();
 
@@ -32,14 +23,38 @@ public:
 
 	std::string getTextureName() override;
 
-	GameEngine::Vector2D getScreenPosition() override;
-
 	std::string getAnimationsFolder() override;
 
 	double getAnimationSpeed() override;
 
-	GameEngine::Vector2D getScale() override;
+	b2Vec2 getScale() override;
 
 	void die();
+
+	b2Vec2 getPosition() override;
+
+	b2BodyDef getBodyDef() override;
+
+	void setBodyDef(b2BodyDef bodyDef) override;
+
+	b2Body* getBody() override;
+
+	void setBody(b2Body* body) override;
+
+	float getWidth() override;
+
+	void setWidth(float width) override;
+
+	float getHeight() override;
+
+	void setHeight(float height) override;
+
+	float getJumpPower() override;
+
+	void setJumpPower(float power) override;
+
+	void setXDirection(int direction) override;
+
+	float getAccelerationImpulse() override;
 };
 

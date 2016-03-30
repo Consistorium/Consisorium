@@ -4,14 +4,14 @@
     <Filter Include="Game">
       <UniqueIdentifier>{a2a4d8eb-91ef-4470-ad1d-3e2cbc002242}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interfaces">
-      <UniqueIdentifier>{c12b6dc2-69f2-48c1-82c7-d7e4a0c857b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Menu">
       <UniqueIdentifier>{b479f201-f7d5-4368-986f-514e55161bfa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Entities">
       <UniqueIdentifier>{a5706b7f-09f0-49ec-af28-b76fb9b77ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Utils">
+      <UniqueIdentifier>{004c214d-0b95-4949-bb54-3fd2b5ff80c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,40 +21,40 @@
     <ClCompile Include="Game\Menu\Menu.cpp">
       <Filter>Game\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Entities\Entity.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Entities\Player.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\EntityFactory.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utils\JumpContactListener.cpp">
+      <Filter>Game\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Interfaces\IVisible.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IMoveable.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IPositionable.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Menu\Menu.h">
       <Filter>Game\Menu</Filter>
     </ClInclude>
     <ClInclude Include="Game\Menu\MouseButtonEnum.h">
       <Filter>Game\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\Entity.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\Player.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\GameEntity.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityFactory.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utils\JumpContactListener.h">
+      <Filter>Game\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

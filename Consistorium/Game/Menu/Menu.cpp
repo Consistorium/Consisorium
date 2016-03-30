@@ -1,9 +1,9 @@
 #include <iostream>
+#include <UI/Button.h>
 
 #include "Menu.h"
 #include "../Game.h"
 #include "MouseButtonEnum.h"
-#include "UI/Button.h"
 
 bool userQuit = false;
 

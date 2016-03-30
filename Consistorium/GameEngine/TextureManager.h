@@ -1,12 +1,12 @@
 #pragma once
 
+#include <stdio.h>
+#include <map>
+#include <memory>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-#include <memory>
 #include "IGraphicsRenderer.h"
-#include <stdio.h>
-#include <map>
 
 class TextureManager
 {

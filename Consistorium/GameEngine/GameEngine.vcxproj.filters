@@ -1,76 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{297e6482-1a6f-45e5-a80f-59aa9e47cc97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{e9252617-6617-4fb0-bf74-d03de07d9b36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contracts">
-      <UniqueIdentifier>{5010618b-415f-46c7-b7d0-ff1cdc7425b4}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="UI\Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\UIElement.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Window.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
-    <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="UI\Button.cpp" />
+    <ClCompile Include="UI\UIElement.cpp" />
+    <ClCompile Include="UI\Window.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IRenderable.h">
-      <Filter>Contracts</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\UIElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IGraphicsRenderer.h">
-      <Filter>Contracts</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="IAnimateable.h" />
+    <ClInclude Include="Common\Constants.h" />
+    <ClInclude Include="Globals\Constants.h" />
+    <ClInclude Include="IGraphicsRenderer.h" />
+    <ClInclude Include="IRenderable.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="UI\Button.h" />
+    <ClInclude Include="UI\UIElement.h" />
+    <ClInclude Include="UI\Window.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="IAnimateable.h">
-      <Filter>Contracts</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="RenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="GameEngine.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="GameEngine.rc" />
   </ItemGroup>
 </Project>

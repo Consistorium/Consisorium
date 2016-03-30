@@ -1,19 +1,17 @@
 #pragma once
 
-#include <../GameEngine/Vector2D.h>
-
 class IPositionable
 {
 private:
-	GameEngine::Vector2D position_;
+	b2Vec2 position_;
 public:
-	IPositionable(GameEngine::Vector2D position)
+	IPositionable(b2Vec2 position)
 		: position_(position)
 	{ }
 
 	virtual ~IPositionable() { }
 
-	virtual GameEngine::Vector2D getPosition() { return this->position_; }
+	virtual b2Vec2 getPosition() { return this->position_; }
 
-	virtual void setPosition(GameEngine::Vector2D p) { this->position_.SetXY(p.X(), p.Y()); }
+	virtual void setPosition(b2Vec2 position) { this->position_.Set(position.x, position.y); }
 };

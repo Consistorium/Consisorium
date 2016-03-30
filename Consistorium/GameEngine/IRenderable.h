@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include "Vector2D.h"
+#include <Box2D\Box2D.h>
 
 namespace GameEngine {
 	class IRenderable
@@ -13,8 +14,8 @@ namespace GameEngine {
 
 		virtual std::string getTextureName() = 0;
 
-		virtual Vector2D getScreenPosition() = 0;
+		virtual b2Vec2 getScale() = 0;
 
-		virtual Vector2D getScale() = 0;
+		virtual b2Vec2 getPosition() = 0;
 	};
 }
