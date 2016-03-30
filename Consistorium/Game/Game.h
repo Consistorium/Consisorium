@@ -10,7 +10,7 @@
 #include <UI/Window.h>
 
 #include "Game.h"
-#include "Entities/Player.h"
+#include "Entities\EntityFactory.h"
 #include "Utils\JumpContactListener.h"
 
 class Game : public Window
@@ -30,7 +30,7 @@ public:
 
 	~Game();
 
-	void handleKeyPress(SDL_Event e, GameEntity* player);
+	void handleKeyPress(SDL_Event e, Entities::DynamicEntity* player);
 
 	void Run();
 };

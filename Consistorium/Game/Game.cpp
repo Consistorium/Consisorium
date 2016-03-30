@@ -1,13 +1,12 @@
 #include <Globals\Constants.h>
-
-#include "Entities\GameEntity.h"
-#include "Entities\EntityFactory.h"
 #include "Game.h"
+
+using namespace Entities;
 
 const b2Vec2 GRAVITY(0, -0.1);
 
-void moveCharacter(GameEntity* entity, int direction);
-void jump(GameEntity* entity);
+void moveCharacter(DynamicEntity* entity, int direction);
+void jump(DynamicEntity* entity);
 
 Game::Game(SDL_Window* window)
 	: renderer_(window),
@@ -28,29 +27,15 @@ void Game::Init()
 
 	// Define the ground body.
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, -10.0f);
-
-	// Call the body factory which allocates memory for the ground body
-	// from a pool and creates the ground box shape (also from a pool).
-	// The body is also added to the world.
-	b2Body* groundBody = world_->CreateBody(&groundBodyDef);
-
-	// Define the ground box shape.
-	b2PolygonShape groundBox;
-
-	// The extents are the half-widths of the box.
-	groundBox.SetAsBox(50.0f, 9.0f);
-
-	// Add the ground fixture to the ground body.
-	groundBody->CreateFixture(&groundBox, 0.0f);
+	groundBodyDef.position.Set(0.0f, 0.0);
 
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
 	// second (60Hz) and 10 iterations. This provides a high quality simulation
 	// in most game scenarios.
 	//The suggested iteration count for Box2D is 8 for velocity and 3 for position.
 	timeStep_ = 1.0f / 60.0f;
-	velocityIterations_ = 8;
-	positionIterations_ = 3;
+	velocityIterations_ = 100;
+	positionIterations_ = 50;
 }
 
 void Game::Run()
@@ -58,7 +43,34 @@ void Game::Run()
 	Init();
 	EntityFactory entityFactory(world_);
 	b2Vec2 playerPosition(3, 4);
-	GameEntity& player = *entityFactory.createPlayer(playerPosition, "Idle");
+	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
+
+	b2Vec2 boxPosition;
+	float boxHeight;
+
+	b2Vec2 blockPosition;
+	blockPosition.x = 0;
+	blockPosition.y = 2 * Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
+	GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
+	renderer_.AddRenderable(&block);
+
+	for (size_t i = 0; i < 6; i++)
+	{
+		b2Vec2 blockPosition;
+		blockPosition.x = i * (Globals::BLOCK_WIDTH) / Globals::PIXELS_PER_METER;
+		blockPosition.y = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
+		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
+		renderer_.AddRenderable(&block);
+	}
+
+	for (size_t i = 6; i < 11; i++)
+	{
+		b2Vec2 blockPosition;
+		blockPosition.x = i * (Globals::BLOCK_WIDTH + 1)/ Globals::PIXELS_PER_METER;
+		blockPosition.y = 2 * Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
+		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
+		renderer_.AddRenderable(&block);
+	}
 
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
@@ -70,6 +82,7 @@ void Game::Run()
 	SDL_Event e;
 
 	renderer_.AddRenderable(&player);
+	
 
 	int i = -1;
 	while (true) {
@@ -88,15 +101,11 @@ void Game::Run()
 		}
 
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
-
-		b2Vec2 position = player.getBody()->GetPosition();
-		float32 angle = player.getBody()->GetAngle();
-
 		renderer_.RenderAll();
 	}
 }
 
-void Game::handleKeyPress(SDL_Event e, GameEntity* player) 
+void Game::handleKeyPress(SDL_Event e, DynamicEntity* player)
 {
 	switch (e.key.keysym.sym)
 	{
@@ -120,15 +129,14 @@ void Game::handleKeyPress(SDL_Event e, GameEntity* player)
 	}
 }
 
-void moveCharacter(GameEntity* entity, int direction)
+void moveCharacter(DynamicEntity* entity, int direction)
 {
-	//std::cout << "speed: " << entity->getSpeed() << std::endl; this changes speed quite a bit
-	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getAccelerationImpulse(), 0), entity->getBody()->GetWorldCenter(), true);
+	float impulse = entity->getAccelerationImpulse();
+	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getAccelerationImpulse(), 0), entity->getBody()->GetLocalCenter(), true);
 }
 
-void jump(GameEntity* entity)
+void jump(DynamicEntity* entity)
 {
-	std::cout << GRAVITY.y << std::endl;
 	float impulse = entity->getBody()->GetMass() * (-GRAVITY.y) * entity->getJumpPower();
 	b2Vec2 force;
 	force.x = 0;

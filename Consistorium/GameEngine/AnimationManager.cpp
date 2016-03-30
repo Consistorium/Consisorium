@@ -1,6 +1,6 @@
 #include "AnimationManager.h"
 
-#include <filesystem/dirent.h>
+#include <filesystem\dirent.h>
 #include "Utils.h"
 #include <stdlib.h>
 #include <vector>

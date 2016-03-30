@@ -1,8 +1,7 @@
 #include "Renderer.h"
 #include <iostream>
 #include "IRenderable.h">
-
-const float PIXELS_PER_METER = 100;
+#include "Globals\Constants.h"
 
 namespace GameEngine 
 {
@@ -55,11 +54,15 @@ namespace GameEngine
 		for (IRenderable *item : this->renderables_)
 		{
 			b2Vec2 position = item->getPosition();
+
+			//1.6 meters character
+			boundsRect.h = item->getHeight() * Globals::PIXELS_PER_METER;
+			boundsRect.w = item->getWidth() * Globals::PIXELS_PER_METER;
+			
 			SDL_Texture *currentTexture = textureManager_.getTexture(item->getTextureName());
-			SDL_QueryTexture(currentTexture, NULL, NULL, &boundsRect.w, &boundsRect.h);
 			SDL_RenderSetScale(this->windowRenderer_, item->getScale().x, item->getScale().y);
-			boundsRect.x = position.x * PIXELS_PER_METER;
-			boundsRect.y = worldConstraints.height - position.y * PIXELS_PER_METER - boundsRect.h;
+			boundsRect.x = position.x * Globals::PIXELS_PER_METER;
+			boundsRect.y = worldConstraints.height - position.y * Globals::PIXELS_PER_METER - boundsRect.h;
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, NULL, &boundsRect);
 		}
 

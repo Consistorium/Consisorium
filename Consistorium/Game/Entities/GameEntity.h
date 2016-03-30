@@ -1,45 +1,58 @@
 #pragma once
 
-#include <SDL/SDL.h>
+#include <string>
 #include <memory>
+#include <SDL/SDL.h>
 #include <Box2D\Box2D.h>
 #include <IRenderable.h>
 #include <IAnimateable.h>
-class GameEntity : 
-	public GameEngine::IRenderable,
-	public GameEngine::IAnimateable
+#include <AnimationManager.h>
+
+namespace Entities
 {
-protected:
-	b2Body* body_;
-	b2BodyDef bodyDef_;
-	float speed_;
-	float width_;
-	float height_;
-	float jumpPower_;
-public:
-	virtual b2BodyDef getBodyDef() = 0;
+	class GameEntity : 
+		public GameEngine::IRenderable,
+		public GameEngine::IAnimateable
+	{
+	protected:
+		b2Body* body_;
+		b2BodyDef bodyDef_;
+		float width_;
+		float height_;
+		std::string textureName_;
+		int animationSpeed_;
+		GameEngine::AnimationManager animationManager_;
+		std::string animationsFolder_;
+	public:
+		GameEntity(std::string textureName, float width, float height);
+		virtual b2BodyDef getBodyDef();
 
-	virtual void setBodyDef(b2BodyDef bodyDef) = 0;
+		virtual b2Body* getBody();
 
-	virtual b2Body* getBody() = 0;
+		virtual void setBody(b2Body* body);
 
-	virtual void setBody(b2Body* body) = 0;
+		virtual float getWidth();
 
-	virtual float getWidth() = 0;
+		virtual void setWidth(float width);
 
-	virtual void setWidth(float width) = 0;
+		virtual float getHeight() override;
 
-	virtual float getHeight() = 0;
+		virtual void setHeight(float height);
 
-	virtual void setHeight(float height) = 0;
+		virtual std::string getTextureName();
 
-	virtual ~GameEntity() { };
+		virtual b2Vec2 getPosition();
 
-	virtual float getJumpPower() = 0;
+		virtual b2Vec2 getScale();
 
-	virtual void setJumpPower(float power) = 0;
+		virtual double getAnimationSpeed();
 
-	virtual float getAccelerationImpulse() = 0;
+		virtual void setFrameTexture(std::string path);
 
-	virtual void setXDirection(int direction) = 0;
-};
+		virtual std::string getAnimationsFolder();
+
+		virtual void setAnimationsFolder(std::string animationsFolder);
+
+		~GameEntity();
+	};
+}

@@ -33,6 +33,15 @@
     <ClCompile Include="Game\Utils\JumpContactListener.cpp">
       <Filter>Game\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\GameEntity.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Entities\DynamicEntity.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Entities\Block.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Menu\Menu.h">
@@ -55,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="Game\Utils\JumpContactListener.h">
       <Filter>Game\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Block.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\DynamicEntity.h">
+      <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
