@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IRenderable.h"
+#include <SDL/SDL.h>
 
 namespace GameEngine {
 	class IGraphicsRenderer

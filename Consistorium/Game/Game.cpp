@@ -52,7 +52,7 @@ void Game::Run()
 	blockPosition.x = 0;
 	blockPosition.y = 2 * Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
 	GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-	renderer_.AddRenderable(&block);
+	renderer_.AddRenderable(block.getRenderableComponent());
 
 	for (size_t i = 0; i < 6; i++)
 	{
@@ -60,7 +60,7 @@ void Game::Run()
 		blockPosition.x = i * (Globals::BLOCK_WIDTH) / Globals::PIXELS_PER_METER;
 		blockPosition.y = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
 		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-		renderer_.AddRenderable(&block);
+		renderer_.AddRenderable(block.getRenderableComponent());
 	}
 
 	for (size_t i = 6; i < 11; i++)
@@ -69,7 +69,7 @@ void Game::Run()
 		blockPosition.x = i * (Globals::BLOCK_WIDTH + 1)/ Globals::PIXELS_PER_METER;
 		blockPosition.y = 2 * Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
 		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-		renderer_.AddRenderable(&block);
+		renderer_.AddRenderable(block.getRenderableComponent());
 	}
 
 	//prevent jumping in mid air
@@ -81,7 +81,7 @@ void Game::Run()
 
 	SDL_Event e;
 
-	renderer_.AddRenderable(&player);
+	renderer_.AddRenderable(player.getRenderableComponent());
 	
 
 	int i = -1;
@@ -102,6 +102,7 @@ void Game::Run()
 
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		renderer_.RenderAll();
+		player.update();
 	}
 }
 
@@ -138,8 +139,6 @@ void moveCharacter(DynamicEntity* entity, int direction)
 void jump(DynamicEntity* entity)
 {
 	float impulse = entity->getBody()->GetMass() * (-GRAVITY.y) * entity->getJumpPower();
-	b2Vec2 force;
-	force.x = 0;
-	force.y = impulse;
+	b2Vec2 force(0, impulse);
 	entity->getBody()->ApplyLinearImpulse(force, entity->getBody()->GetWorldCenter(), true);
 }

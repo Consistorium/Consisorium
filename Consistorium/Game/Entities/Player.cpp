@@ -2,26 +2,14 @@
 
 namespace Entities
 {
-	Player::Player(std::string defaultAnimation, float width, float height, float jumpPower)
-		: DynamicEntity(this->getAnimationsFolder() + "/" + defaultAnimation + "001.png", width, height, jumpPower, PLAYER_MAX_SPEED)
+	Player::Player(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower)
+		: DynamicEntity(rc, ac, jumpPower, PLAYER_MAX_SPEED)
 	{
 	}
-
-	std::string Player::getAnimationsFolder()
-	{
-		return "Models/Game/Player";
-	}
-
-	b2Vec2 Player::getScale()
-	{
-		b2Vec2 vec(0.2, 0.2);
-		return vec;
-	}
-
 
 	void Player::die()
 	{
-		this->animationManager_.setAnimation("Run", false);
+		//this->animationManager_.setAnimation("Run", false);
 	}
 
 	Player::~Player()

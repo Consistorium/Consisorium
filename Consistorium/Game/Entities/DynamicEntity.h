@@ -8,8 +8,10 @@ namespace Entities
 		int xDirection_;
 		float jumpPower_;
 		float maxSpeed_;
+		GameEngine::AnimationComponent animationComponent_;
+		GameEngine::AnimationManager animationManager_;
 	public:
-		DynamicEntity(std::string modelName, float width, float height, float jumpPower, float maxSpeed);
+		DynamicEntity(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower, float maxSpeed);
 
 		virtual float getJumpPower();
 
@@ -17,7 +19,11 @@ namespace Entities
 
 		virtual float getAccelerationImpulse();
 
+		virtual void update();
+
 		virtual void setXDirection(int direction);
+
+		GameEngine::IAnimateable* getAnimateableComponent();
 
 		virtual ~DynamicEntity();
 	};

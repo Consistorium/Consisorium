@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IAnimateable.h"
+#include "AnimationComponent.h"
 #include "Animation.h"
 #include "TextureManager.h"
 #include <string>
@@ -12,8 +12,7 @@ namespace GameEngine {
 	class AnimationManager
 	{
 	private:
-		IAnimateable *animateable_;
-		std::string defaultAnimation_;
+		AnimationComponent animationComponent_;
 		std::map<std::string, Animation*> entityAnimations_;
 		std::stack<Animation*> animationStack_;
 		float totalMillisecondsElapsed_;
@@ -21,7 +20,7 @@ namespace GameEngine {
 
 		void loadEntityAnimations();
 	public:
-		AnimationManager(IAnimateable *animateable, std::string defaultAnimation);
+		AnimationManager(AnimationComponent animationComponent_);
 
 		~AnimationManager();
 

@@ -6,14 +6,13 @@
 #include <vector>
 
 namespace GameEngine {
-	AnimationManager::AnimationManager(IAnimateable *animateable, std::string defaultAnimation)
-		: animateable_(animateable),
-		defaultAnimation_(defaultAnimation),
+	AnimationManager::AnimationManager(AnimationComponent animationComponent)
+		: animationComponent_(animationComponent),
 		totalMillisecondsElapsed_(0),
 		animationTimer_(0)
 	{
 		this->loadEntityAnimations();
-		this->setAnimation(this->defaultAnimation_, true);
+		this->setAnimation(animationComponent.getDefaultAnimation(), true);
 	}
 
 
@@ -24,7 +23,7 @@ namespace GameEngine {
 
 	void AnimationManager::loadEntityAnimations()
 	{
-		std::string folder = this->animateable_->getAnimationsFolder();
+		std::string folder = animationComponent_.getAnimationsFolder();
 
 		std::map<std::string, std::vector<std::string>> animationMap;
 		// read directory
@@ -46,14 +45,14 @@ namespace GameEngine {
 			for (auto file : result)
 			{
 				auto fileParts = Utils::split(file, '_');
-				auto fullName = this->animateable_->getAnimationsFolder() + '/' + file;
+				auto fullName = animationComponent_.getAnimationsFolder() + '/' + file;
 				animationMap[fileParts[0]].push_back(fullName);
 			}
 
 
 			for (auto pair : animationMap)
 			{
-				Animation *animation = new Animation(animateable_, pair.first, pair.second);
+				Animation *animation = new Animation(&animationComponent_, pair.first, pair.second);
 				this->entityAnimations_[animation->getAnimationName()] = animation;
 			}
 		}
@@ -63,7 +62,7 @@ namespace GameEngine {
 	{
 		if (this->entityAnimations_[animationName] == nullptr)
 		{
-			printf("Set Animation: No animation matches this name.");
+			printf("Set Animation: No animation matches this name: %s\n.", animationName.c_str());
 			return;
 		}
 
@@ -106,13 +105,13 @@ namespace GameEngine {
 		}
 
 		totalMillisecondsElapsed_ += deltaTime;
-		if (totalMillisecondsElapsed_ >= this->animateable_->getAnimationSpeed())
+		if (totalMillisecondsElapsed_ >= animationComponent_.getAnimationSpeed())
 		{
 			this->animationStack_.top()->setCurrentFrameIndex(this->animationStack_.top()->getCurrentFrameIndex() + 1);
 			totalMillisecondsElapsed_ = 0;
 		}
 
-		this->animateable_->setFrameTexture(this->animationStack_.top()->getCurrentFrame());
+		animationComponent_.setFrameTexture(this->animationStack_.top()->getCurrentFrame());
 
 		this->animationTimer_ = SDL_GetTicks();
 	}

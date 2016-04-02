@@ -2,17 +2,23 @@
 
 namespace Entities
 {
-	DynamicEntity::DynamicEntity(std::string modelName, float width, float height, float jumpPower, float maxSpeed)
-		:GameEntity(modelName, width, height)
+	DynamicEntity::DynamicEntity(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower, float maxSpeed)
+		: GameEntity(rc),
+		animationComponent_(ac.getAnimationsFolder(), ac.getDefaultAnimation(), ac.getAnimationSpeed(), renderComponent_.getTextureName()),
+		animationManager_(animationComponent_),
+		jumpPower_(jumpPower),
+		maxSpeed_(maxSpeed),
+		xDirection_(0)
 	{
-		animationSpeed_ = 45;
-		xDirection_ = 0;
-		maxSpeed_ = maxSpeed;
-		jumpPower_ = jumpPower;
 	}
 
 	DynamicEntity::~DynamicEntity()
 	{
+	}
+
+	void DynamicEntity::update()
+	{
+		animationManager_.updateAnimation();
 	}
 
 
@@ -36,5 +42,10 @@ namespace Entities
 		float xVelocity = body_->GetLinearVelocity().x;
 
 		return (maxSpeed_ - (xVelocity * xDirection_)) * xDirection_;
+	}
+
+	GameEngine::IAnimateable* DynamicEntity::getAnimateableComponent()
+	{
+		return &animationComponent_;
 	}
 }
