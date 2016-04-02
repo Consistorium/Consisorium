@@ -1,5 +1,8 @@
 #include <iostream>
+#include <vector>
 #include <UI/Button.h>
+#include <Globals\Constants.h>
+#include <SDL\SDL_thread.h>
 
 #include "Menu.h"
 #include "../Game.h"
@@ -7,12 +10,12 @@
 
 bool userQuit = false;
 
-void displayButtonOnScreen(Button &button, SDL_Surface* surface);
+void displayButtonOnScreen(GameEngineUI::Button &button, SDL_Surface* surface);
 void* startButtonClickHandler(SDL_Window*  window);
 void* exitButtonClickHandler();
 
 Menu::Menu(SDL_Window * window)
-	:Window(window)
+	:GameEngineUI::Window(window)
 {
 }
 
@@ -36,17 +39,17 @@ void Menu::handleMouseClick(SDL_Event e)
 
 void Menu::CreateButtons()
 {
-	auto badButton = new Button(0, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
+	auto badButton = new GameEngineUI::Button(0, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
 
 	int middleX = windowSurface_->clip_rect.w / 2;
 	int buttonX = middleX - badButton->getBounds().w / 2;
 
-	auto startButton = new Button(buttonX, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
+	auto startButton = new GameEngineUI::Button(buttonX, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
 	startButton->setOnClick(&startButtonClickHandler);
 
-	auto tutorialButton = new Button(buttonX, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
+	auto tutorialButton = new GameEngineUI::Button(buttonX, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
 
-	auto exitButton = new Button(buttonX, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
+	auto exitButton = new GameEngineUI::Button(buttonX, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
 	exitButton->setOnClick(&exitButtonClickHandler);
 
 	buttons_.push_back(startButton);
@@ -104,8 +107,18 @@ Menu::~Menu()
 {
 }
 
+int playClickSound(void*)
+{
+	GameEngineAudio::AudioEngine audioEngine = GameEngineAudio::AudioEngine::getInstance();
+	GameEngineAudio::SoundEffect click = audioEngine.loadSoundEffect(Globals::AUDIO_FOLDER + "Menu/click.wav");
+	click.play(1);
+
+	return 0;
+}
+
 void* startButtonClickHandler(SDL_Window*  window)
 {
+	playClickSound(NULL);
 	Game game(window);
 	game.Run();
 	return nullptr;
@@ -113,11 +126,12 @@ void* startButtonClickHandler(SDL_Window*  window)
 
 void* exitButtonClickHandler()
 {
+	//playClickSound();
 	userQuit = true;
 	return nullptr;
 }
 
-void displayButtonOnScreen(Button &button, SDL_Surface* surface)
+void displayButtonOnScreen(GameEngineUI::Button &button, SDL_Surface* surface)
 {
 	SDL_BlitSurface(button.getModel(), &button.getModel()->clip_rect, surface, &button.getBounds());
 

@@ -13,7 +13,7 @@
 #include "Entities\EntityFactory.h"
 #include "Utils\JumpContactListener.h"
 
-class Game : public Window
+class Game : public GameEngineUI::Window
 {
 private:
 	GameEngine::Renderer renderer_;

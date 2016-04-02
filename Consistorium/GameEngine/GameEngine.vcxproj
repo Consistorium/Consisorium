@@ -13,6 +13,10 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="Audio\AudioEngine.cpp" />
+    <ClCompile Include="Audio\BengineErrors.cpp" />
+    <ClCompile Include="Audio\Music.cpp" />
+    <ClCompile Include="Audio\SoundEffect.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -25,8 +29,11 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="Audio\AudioEngine.h" />
+    <ClInclude Include="Audio\BengineErrors.h" />
+    <ClInclude Include="Audio\Music.h" />
+    <ClInclude Include="Audio\SoundEffect.h" />
     <ClInclude Include="IAnimateable.h" />
-    <ClInclude Include="Common\Constants.h" />
     <ClInclude Include="Globals\Constants.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />

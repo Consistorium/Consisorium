@@ -1,4 +1,6 @@
 #include <Globals\Constants.h>
+#include <Audio\AudioEngine.h>
+
 #include "Game.h"
 
 using namespace Entities;
@@ -40,7 +42,7 @@ void Game::Init()
 
 void Game::Run()
 {
-	Init();
+	/*Init();
 	EntityFactory entityFactory(world_);
 	b2Vec2 playerPosition(3, 4);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
@@ -102,7 +104,14 @@ void Game::Run()
 
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		renderer_.RenderAll();
-	}
+	}*/
+
+
+	GameEngineAudio::AudioEngine audioEngine;
+	audioEngine.init();
+	GameEngineAudio::Music backgroundMusic = audioEngine.loadMusic(Globals::AUDIO_FOLDER + "Game/do_not_run.ogg");
+	backgroundMusic.play(1);
+	while (true);
 }
 
 void Game::handleKeyPress(SDL_Event e, DynamicEntity* player)

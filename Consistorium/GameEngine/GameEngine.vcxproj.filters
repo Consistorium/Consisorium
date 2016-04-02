@@ -5,31 +5,79 @@
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="UI\Button.cpp" />
-    <ClCompile Include="UI\UIElement.cpp" />
-    <ClCompile Include="UI\Window.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="UI\Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\AudioEngine.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\BengineErrors.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Window.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\SoundEffect.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Music.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="IAnimateable.h" />
-    <ClInclude Include="Common\Constants.h" />
-    <ClInclude Include="Globals\Constants.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="UI\Button.h" />
-    <ClInclude Include="UI\UIElement.h" />
-    <ClInclude Include="UI\Window.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="UI\Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals\Constants.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\AudioEngine.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\BengineErrors.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Window.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\SoundEffect.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Music.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="UI">
+      <UniqueIdentifier>{31399bc3-a087-490a-be7f-946dd32b722d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Globals">
+      <UniqueIdentifier>{e967ee58-134e-402d-b823-0dc2b2cfea00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{4f72196b-bae9-4283-bd20-17e5e44c4e3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
