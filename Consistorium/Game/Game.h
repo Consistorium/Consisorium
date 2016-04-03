@@ -30,7 +30,7 @@ public:
 
 	~Game();
 
-	void handleKeyPress(SDL_Event e, Entities::DynamicEntity* player);
+	void handleKeyPress(SDL_Event e, b2Vec2& cameraPos, Entities::DynamicEntity* player);
 
 	void Run();
 };

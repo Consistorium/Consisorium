@@ -8,6 +8,7 @@ namespace GameEngine
 	Renderer::Renderer(SDL_Window* window)
 		: windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
 		textureManager_(windowRenderer_),
+		window_(window),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
 			SDL_GetWindowSurface(window)->h)
 	{
@@ -47,18 +48,22 @@ namespace GameEngine
 			this->renderables_.end());
 	}
 
-	void Renderer::RenderAll()
+	void Renderer::RenderAll(b2Vec2 cameraPos)
 	{
 		SDL_RenderClear(this->windowRenderer_);
 		SDL_Rect boundsRect;
+
+		int screenWidth, screenHeight;
+		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
+
 		for (IRenderable *item : this->renderables_)
 		{
 			b2Vec2 position = item->getPosition();
 			SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
 			SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
 			SDL_RenderSetScale(this->windowRenderer_, item->getScale().x, item->getScale().y);
-			boundsRect.x = position.x;
-			boundsRect.y = worldConstraints.height - position.y - boundsRect.h;
+			boundsRect.x = position.x + cameraPos.x / item->getScale().x;
+			boundsRect.y = worldConstraints.height - position.y - boundsRect.h + cameraPos.y / item->getScale().y;
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 		}
 

@@ -25,6 +25,7 @@ namespace GameEngine
 	private:
 		SDL_Renderer *windowRenderer_;
 		TextureManager textureManager_;
+		SDL_Window *window_;
 		std::vector<IRenderable*> renderables_;
 		WorldConstraints worldConstraints;
 	public:
@@ -38,6 +39,6 @@ namespace GameEngine
 
 		void RemoveRenderable(IRenderable *renderable) override;
 
-		void RenderAll() override;
+		void RenderAll(b2Vec2 cameraPos) override;
 	};
 }

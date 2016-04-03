@@ -4,6 +4,7 @@
 using namespace Entities;
 
 const b2Vec2 GRAVITY(0, -0.1);
+const int CAMERA_SPEED = 20;
 
 void moveCharacter(DynamicEntity* entity, int direction);
 void jump(DynamicEntity* entity);
@@ -83,7 +84,7 @@ void Game::Run()
 	SDL_Event e;
 
 	renderer_.AddRenderable(player.getRenderableComponent());
-	
+	b2Vec2 cameraPos(0, 0);
 
 	int i = -1;
 	while (true) {
@@ -94,7 +95,7 @@ void Game::Run()
 			{
 			case SDL_KEYDOWN:
 				//player.die();
-				handleKeyPress(e, &player);
+				handleKeyPress(e, cameraPos, &player);
 				break;
 			default:
 				break;
@@ -102,15 +103,27 @@ void Game::Run()
 		}
 
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
-		renderer_.RenderAll();
+		renderer_.RenderAll(cameraPos);
 		player.update();
 	}
 }
 
-void Game::handleKeyPress(SDL_Event e, DynamicEntity* player)
+void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 {
 	switch (e.key.keysym.sym)
 	{
+	case SDLK_w:
+		cameraPos.y += CAMERA_SPEED;
+		break;
+	case SDLK_s:
+		cameraPos.y -= CAMERA_SPEED;
+		break;
+	case SDLK_a:
+		cameraPos.x -= CAMERA_SPEED;
+		break;
+	case SDLK_d:
+		cameraPos.x += CAMERA_SPEED;
+		break;
 	case SDLK_LEFT:
 		player->setXDirection(-1);
 		moveCharacter(player, -1);
