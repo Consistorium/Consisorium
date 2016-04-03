@@ -84,10 +84,9 @@ namespace Entities
 		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
 		footSensorFixture->SetUserData((void*)3);
 
-		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(0.3, 0.3), b2Vec2(0, 0));
+		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(0.1, 0.1), body);
 		GameEngine::AnimationComponent ac("Models/Game/Player", "Idle", 40, rc.getTextureName());
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
-		player->setBody(body);
 		return player;
 	}
 
@@ -97,9 +96,8 @@ namespace Entities
 			blockWidth = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
 
 		b2Body* body = createEntityBody(position, b2_staticBody, blockWidth, blockHeight);
-		GameEngine::RenderComponent rc("Models/Game/Block/Normal__001.png", b2Vec2(1, 1), position);
+		GameEngine::RenderComponent rc("Models/Game/Block/Normal__001.png", b2Vec2(1, 1), body);
 		GameEntity* block = new Block(rc);
-		block->setBody(body);
 		return block;
 	}
 

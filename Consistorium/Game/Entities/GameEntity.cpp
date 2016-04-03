@@ -3,8 +3,8 @@
 namespace Entities
 {
 	GameEntity::GameEntity(GameEngine::RenderComponent& rc)
-		: body_(nullptr),
-		renderComponent_(*rc.getTextureName(), rc.getScale(), rc.getPosition())
+		: body_(rc.getBody()),
+		renderComponent_(*rc.getTextureName(), rc.getScale(), body_)
 	{
 	}
 
@@ -21,12 +21,7 @@ namespace Entities
 
 	b2Body* GameEntity::getBody()
 	{
-		return body_;
-	}
-
-	void GameEntity::setBody(b2Body* body)
-	{
-		body_ = body;
+		return renderComponent_.getBody();
 	}
 
 	GameEngine::IRenderable* GameEntity::getRenderableComponent()

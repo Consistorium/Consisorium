@@ -1,13 +1,7 @@
 #pragma once
 
-#include <string>
-#include <memory>
-#include <SDL/SDL.h>
 #include <Box2D\Box2D.h>
 #include <RenderComponent.h>
-#include <IAnimateable.h>
-#include <AnimationComponent.h>
-#include <AnimationManager.h>
 
 namespace Entities
 {
@@ -27,7 +21,5 @@ namespace Entities
 		virtual b2BodyDef getBodyDef();
 
 		virtual b2Body* getBody();
-		
-		virtual void setBody(b2Body* body);
 	};
 }

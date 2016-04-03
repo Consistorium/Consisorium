@@ -3,18 +3,18 @@
 #include "IRenderable.h"
 
 namespace GameEngine {
-	class RenderComponent : public GameEngine::IRenderable
+	class RenderComponent : public IRenderable
 	{
 	private:
 		std::string *texturePath_;
 		b2Vec2 scale_;
-		b2Vec2 position_;
+		b2Body *body_;
 	public:
-		RenderComponent(std::string texturePath, b2Vec2 scale, b2Vec2 position);
+		RenderComponent(std::string texturePath, b2Vec2 scale, b2Body *body_);
 
 		~RenderComponent();
 
-		void RenderComponent::setTextureName(std::string value);
+		void setTextureName(std::string value);
 		
 		std::string* getTextureName() override;
 
@@ -22,7 +22,9 @@ namespace GameEngine {
 
 		b2Vec2 getScale() override;
 
-		void setPosition(b2Vec2 pos);
+		b2Body* getBody();
+
+		void setPosition(const b2Vec2& pos);
 
 		b2Vec2 getPosition() override;
 	};

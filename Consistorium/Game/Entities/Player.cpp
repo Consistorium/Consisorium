@@ -3,13 +3,12 @@
 namespace Entities
 {
 	Player::Player(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower)
-		: DynamicEntity(rc, ac, jumpPower, PLAYER_MAX_SPEED)
+		: DynamicEntity(rc, ac, 15.0f, 0.5f) // doesnt work with constants wtf
 	{
 	}
 
 	void Player::die()
 	{
-		//this->animationManager_.setAnimation("Run", false);
 	}
 
 	Player::~Player()

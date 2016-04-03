@@ -27,7 +27,7 @@ void Game::Init()
 
 	// Define the ground body.
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, 0.0);
+	groundBodyDef.position.Set(0.0f, 0);
 
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
 	// second (60Hz) and 10 iterations. This provides a high quality simulation
@@ -42,9 +42,9 @@ void Game::Run()
 {
 	Init();
 	EntityFactory entityFactory(world_);
-	b2Vec2 playerPosition(3, 4);
+	b2Vec2 playerPosition(1, 4);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
-
+	
 	b2Vec2 boxPosition;
 	float boxHeight;
 
@@ -66,11 +66,12 @@ void Game::Run()
 	for (size_t i = 6; i < 11; i++)
 	{
 		b2Vec2 blockPosition;
-		blockPosition.x = i * (Globals::BLOCK_WIDTH + 1)/ Globals::PIXELS_PER_METER;
+		blockPosition.x = i * (Globals::BLOCK_WIDTH + 1) / Globals::PIXELS_PER_METER;
 		blockPosition.y = 2 * Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
 		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
 		renderer_.AddRenderable(block.getRenderableComponent());
 	}
+
 
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
@@ -133,7 +134,10 @@ void Game::handleKeyPress(SDL_Event e, DynamicEntity* player)
 void moveCharacter(DynamicEntity* entity, int direction)
 {
 	float impulse = entity->getAccelerationImpulse();
+	printf("float: %f \n", impulse);
+	//printf("\nbefore: %f %f", entity->getBody()->GetPosition().x, entity->getBody()->GetPosition().y);
 	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getAccelerationImpulse(), 0), entity->getBody()->GetLocalCenter(), true);
+	//printf("\nafter: %f %f\n", entity->getBody()->GetPosition().x, entity->getBody()->GetPosition().y);
 }
 
 void jump(DynamicEntity* entity)
