@@ -28,7 +28,6 @@
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="IAnimateable.h" />
-    <ClInclude Include="Common\Constants.h" />
     <ClInclude Include="Globals\Constants.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />

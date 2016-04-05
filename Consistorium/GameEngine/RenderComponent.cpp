@@ -35,7 +35,7 @@ namespace GameEngine {
 
 	b2Vec2 RenderComponent::getScale()
 	{
-		return this->scale_;
+		return scale_;
 	}
 
 	void RenderComponent::setPosition(const b2Vec2& pos)

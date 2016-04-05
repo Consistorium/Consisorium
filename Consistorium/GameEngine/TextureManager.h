@@ -1,18 +1,15 @@
 #pragma once
 
-#include <stdio.h>
 #include <map>
-#include <memory>
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-
-#include "IGraphicsRenderer.h"
+#include <Box2D/Box2D.h>
 
 class TextureManager
 {
 private:
 	SDL_Renderer *renderer_;
 	std::map<std::string, SDL_Texture*> cache_;
+	std::map<std::string, b2Vec2*> sizeCache_;
 
 	SDL_Texture *loadTexture(std::string path);
 public:
@@ -22,6 +19,7 @@ public:
 
 	SDL_Texture* getTexture(std::string name);
 
+	b2Vec2* getTextureSize(std::string name);
+
 	void cacheTexture(std::string path);
 };
-

@@ -119,10 +119,10 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 		cameraPos.y -= CAMERA_SPEED;
 		break;
 	case SDLK_a:
-		cameraPos.x -= CAMERA_SPEED;
+		cameraPos.x += CAMERA_SPEED;
 		break;
 	case SDLK_d:
-		cameraPos.x += CAMERA_SPEED;
+		cameraPos.x -= CAMERA_SPEED;
 		break;
 	case SDLK_LEFT:
 		player->setXDirection(-1);
