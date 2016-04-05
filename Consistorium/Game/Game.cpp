@@ -49,29 +49,33 @@ void Game::Run()
 	b2Vec2 boxPosition;
 	float boxHeight;
 
-	b2Vec2 blockPosition;
-	blockPosition.x = 0;
-	blockPosition.y = 2 * Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
-	GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-	renderer_.AddRenderable(block.getRenderableComponent());
+	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
 
-	for (size_t i = 0; i < 6; i++)
+	/*b2Vec2 blockPosition;
+	blockPosition.x = 0;
+	blockPosition.y = 2 * blockHeight;
+	GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
+	renderer_.AddRenderable(block.getRenderableComponent());*/
+
+	for (size_t i = 1; i < 2; i++)
 	{
 		b2Vec2 blockPosition;
 		blockPosition.x = i * (Globals::BLOCK_WIDTH) / Globals::PIXELS_PER_METER;
-		blockPosition.y = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
+		blockPosition.y = blockHeight / 2;
+		//blockPosition.x = i;
+		//blockPosition.y = 1;
 		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
 		renderer_.AddRenderable(block.getRenderableComponent());
 	}
 
-	for (size_t i = 6; i < 11; i++)
+	/*for (size_t i = 6; i < 11; i++)
 	{
 		b2Vec2 blockPosition;
 		blockPosition.x = i * (Globals::BLOCK_WIDTH + 1) / Globals::PIXELS_PER_METER;
-		blockPosition.y = 2 * Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
+		blockPosition.y = blockHeight;
 		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
 		renderer_.AddRenderable(block.getRenderableComponent());
-	}
+	}*/
 
 
 	//prevent jumping in mid air

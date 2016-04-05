@@ -18,22 +18,21 @@ namespace Entities
 		bodyDef.position.Set(position.x, position.y);
 		b2Body* body = world_->CreateBody(&bodyDef);
 
-		b2PolygonShape boxShape;
-		boxShape.SetAsBox(width / 2.0f, (height - width) / 2.0f);
+		b2ChainShape chainShape;
+		
+		b2Vec2 vertices[8];
+		vertices[0] = b2Vec2(position.x - width / 2 - 0.03, position.y - height / 2 + 0.01); // middle bottom left
+		vertices[1] = b2Vec2(position.x - width / 2 - 0.03, position.y + height / 2 - 0.01); // middle top left
+		vertices[2] = b2Vec2(position.x - width / 2, position.y + height / 2); // top left
+		vertices[3] = b2Vec2(position.x + width / 2, position.y + height / 2); // top right
+		vertices[4] = b2Vec2(position.x + width / 2 + 0.03, position.y + height / 2 - 0.01); // middle top right
+		vertices[5] = b2Vec2(position.x + width / 2 + 0.03, position.y - height / 2 + 0.01); // middle bottom right
+		vertices[6] = b2Vec2(position.x + width / 2, position.y - height / 2); // bottom right
+		vertices[7] = b2Vec2(position.x - width / 2, position.y - height / 2); // bottom left
+		chainShape.CreateLoop(vertices, 8);
 
 		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &boxShape;
-
-		//could work, too sad
-		/*b2ChainShape chainShape;
-		b2Vec2 vertices[6];
-		vertices[0] = b2Vec2(position.x - width / 2, position.y); // middle left
-		vertices[1] = b2Vec2(position.x - width / 2 + 1, position.y + height / 2); // top left
-		vertices[2] = b2Vec2(position.x + width / 2 - 1, position.y + height / 2); // top right
-		vertices[3] = b2Vec2(position.x + width / 2, position.y); // middle right
-		vertices[4] = b2Vec2(position.x + width / 2 - 1, position.y - height / 2); // bottom right
-		vertices[5] = b2Vec2(position.x - width / 2 + 1, position.y - height / 2); // bottom left
-		chainShape.CreateChain(vertices, 6);*/
+		fixtureDef.shape = &chainShape;
 
 		body->CreateFixture(&fixtureDef);
 
@@ -66,7 +65,7 @@ namespace Entities
 		circleDef.density = 5.0f;
 		circleDef.friction = 0.3f;
 
-		b2Vec2 botCirclePos(position.x, position.y - (playerHeight - playerWidth) / 2);
+		//b2Vec2 botCirclePos(position.x, position.y - (playerHeight - playerWidth) / 2);
 
 		// Bottom circle
 		circleShape.m_p.Set(position.x, position.y - (playerHeight - playerWidth) / 2);
@@ -74,7 +73,7 @@ namespace Entities
 		body->CreateFixture(&fixtureDef);
 
 		// Top Circle
-		circleShape.m_p.Set(0.0f, (playerHeight - playerWidth) / 2.0f);
+		circleShape.m_p.Set(position.x, position.y + (playerHeight - playerWidth) / 2.0f);
 		body->CreateFixture(&circleDef);
 
 		// Set the box density to be non-zero, so it will be dynamic.
@@ -85,7 +84,7 @@ namespace Entities
 		//add foot sensor fixture
 		b2Vec2 footSensorCenter;
 		footSensorCenter.x = position.x + playerWidth / 2;
-		footSensorCenter.y = position.y + playerHeight / 2;
+		footSensorCenter.y = position.y - playerHeight / 2;
 
 		b2PolygonShape polygonShape;
 		polygonShape.SetAsBox(0.1, 0.1, b2Vec2(0, -2), 0);
