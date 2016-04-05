@@ -4,7 +4,7 @@ namespace Entities
 {
 	GameEntity::GameEntity(GameEngine::RenderComponent& rc)
 		: body_(rc.getBody()),
-		renderComponent_(*rc.getTextureName(), rc.getScale(), body_)
+		renderComponent_(rc)
 	{
 	}
 

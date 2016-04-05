@@ -8,9 +8,10 @@ namespace GameEngine {
 	private:
 		std::string *texturePath_;
 		b2Vec2 scale_;
+		b2Vec2 size_;
 		b2Body *body_;
 	public:
-		RenderComponent(std::string texturePath, b2Vec2 scale, b2Body *body_);
+		RenderComponent(std::string texturePath, b2Vec2 scale, b2Vec2 size, b2Body *body);
 
 		~RenderComponent();
 
@@ -20,7 +21,9 @@ namespace GameEngine {
 
 		void setScale(b2Vec2 scale);
 
-		b2Vec2 getScale() override;
+		b2Vec2 getScale(SDL_Rect textureSize) override;
+
+		b2Vec2 getSize() override;
 
 		b2Body* getBody();
 

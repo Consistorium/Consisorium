@@ -1,9 +1,10 @@
 #include "RenderComponent.h"
 
 namespace GameEngine {
-	RenderComponent::RenderComponent(std::string texturePath, b2Vec2 scale, b2Body *body)
+	RenderComponent::RenderComponent(std::string texturePath, b2Vec2 scale, b2Vec2 size, b2Body *body)
 		: texturePath_(new std::string(texturePath)),
 		scale_(scale),
+		size_(size),
 		body_(body)
 	{
 	}
@@ -33,14 +34,19 @@ namespace GameEngine {
 		scale_ = scale;
 	}
 
-	b2Vec2 RenderComponent::getScale()
+	b2Vec2 RenderComponent::getScale(SDL_Rect textureSize)
 	{
-		return scale_;
+		return b2Vec2(size_.x / textureSize.w, size_.y / textureSize.h);
 	}
 
 	void RenderComponent::setPosition(const b2Vec2& pos)
 	{
 		//this->position_ = pos;
+	}
+
+	b2Vec2 RenderComponent::getSize()
+	{
+		return size_;
 	}
 
 	b2Vec2 RenderComponent::getPosition()

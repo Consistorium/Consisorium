@@ -61,9 +61,9 @@ namespace GameEngine
 			b2Vec2 position = item->getPosition();
 			SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
 			SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
-			SDL_RenderSetScale(this->windowRenderer_, item->getScale().x, item->getScale().y);
-			boundsRect.x = position.x + cameraPos.x / item->getScale().x;
-			boundsRect.y = worldConstraints.height - position.y - boundsRect.h + cameraPos.y / item->getScale().y;
+			SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
+			boundsRect.x = (position.x * Globals::PIXELS_PER_METER + cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
+			boundsRect.y = (screenHeight - position.y * Globals::PIXELS_PER_METER - item->getSize().y + cameraPos.y) / item->getScale(boundsRect).y;
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 		}
 

@@ -24,6 +24,17 @@ namespace Entities
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &boxShape;
 
+		//could work, too sad
+		/*b2ChainShape chainShape;
+		b2Vec2 vertices[6];
+		vertices[0] = b2Vec2(position.x - width / 2, position.y); // middle left
+		vertices[1] = b2Vec2(position.x - width / 2 + 1, position.y + height / 2); // top left
+		vertices[2] = b2Vec2(position.x + width / 2 - 1, position.y + height / 2); // top right
+		vertices[3] = b2Vec2(position.x + width / 2, position.y); // middle right
+		vertices[4] = b2Vec2(position.x + width / 2 - 1, position.y - height / 2); // bottom right
+		vertices[5] = b2Vec2(position.x - width / 2 + 1, position.y - height / 2); // bottom left
+		chainShape.CreateChain(vertices, 6);*/
+
 		body->CreateFixture(&fixtureDef);
 
 		return body;
@@ -55,8 +66,11 @@ namespace Entities
 		circleDef.density = 5.0f;
 		circleDef.friction = 0.3f;
 
+		b2Vec2 botCirclePos(position.x, position.y - (playerHeight - playerWidth) / 2);
+
 		// Bottom circle
-		circleShape.m_p.Set(0.0f, (-playerHeight + playerWidth) / 2.0f);
+		circleShape.m_p.Set(position.x, position.y - (playerHeight - playerWidth) / 2);
+		//circleShape.m_p.Set(0.0f, (playerWidth - playerHeight) / 2.0f);
 		body->CreateFixture(&fixtureDef);
 
 		// Top Circle
@@ -73,8 +87,6 @@ namespace Entities
 		footSensorCenter.x = position.x + playerWidth / 2;
 		footSensorCenter.y = position.y + playerHeight / 2;
 
-		//TODO:Create a circle body shape
-
 		b2PolygonShape polygonShape;
 		polygonShape.SetAsBox(0.1, 0.1, b2Vec2(0, -2), 0);
 
@@ -84,7 +96,7 @@ namespace Entities
 		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
 		footSensorFixture->SetUserData((void*)3);
 
-		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(Globals::DEFAULT_PLAYER_WIDTH, Globals::DEFAULT_PLAYER_HEIGHT), body);
+		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(1, 1), b2Vec2(Globals::DEFAULT_PLAYER_WIDTH, Globals::DEFAULT_PLAYER_HEIGHT), body);
 		GameEngine::AnimationComponent ac("Models/Game/Player", "Idle", 40, rc.getTextureName());
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
 		return player;
@@ -96,7 +108,7 @@ namespace Entities
 			blockWidth = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
 
 		b2Body* body = createEntityBody(position, b2_staticBody, blockWidth, blockHeight);
-		GameEngine::RenderComponent rc("Models/Game/Block/Normal__001.png", b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
+		GameEngine::RenderComponent rc("Models/Game/Block/Normal__001.png", b2Vec2(1, 1), b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
 		GameEntity* block = new Block(rc);
 		return block;
 	}

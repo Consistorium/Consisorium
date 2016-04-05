@@ -9,7 +9,7 @@ namespace Entities
 	class Player : public DynamicEntity
 	{
 	private:
-		const float PLAYER_MAX_SPEED = 0.3;
+		const float PLAYER_MAX_SPEED = 3;
 	public:
 		//TODO:apply builder pattern
 		Player(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower);
