@@ -13,6 +13,12 @@
     <Filter Include="Game\Utils">
       <UniqueIdentifier>{004c214d-0b95-4949-bb54-3fd2b5ff80c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\WorldGeneration">
+      <UniqueIdentifier>{bfef17e8-502d-4461-859d-090348d480a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\WorldGeneration\Layers">
+      <UniqueIdentifier>{9f280a36-0417-467c-bfc7-48e2df000012}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\main.cpp">
@@ -33,14 +39,17 @@
     <ClCompile Include="Game\Utils\JumpContactListener.cpp">
       <Filter>Game\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Entities\GameEntity.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Entities\DynamicEntity.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Entities\Block.cpp">
       <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldGenerator.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundLayer.cpp">
+      <Filter>Game\WorldGeneration\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="UndergroundLayer.cpp">
+      <Filter>Game\WorldGeneration\Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,9 +65,6 @@
     <ClInclude Include="Game\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\GameEntity.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\EntityFactory.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
@@ -68,8 +74,18 @@
     <ClInclude Include="Game\Entities\Block.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\DynamicEntity.h">
-      <Filter>Game\Entities</Filter>
+    <ClInclude Include="WorldGenerator.h">
+      <Filter>Game\WorldGeneration</Filter>
     </ClInclude>
+    <ClInclude Include="IWorldLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundLayer.h">
+      <Filter>Game\WorldGeneration\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="UndergroundLayer.h">
+      <Filter>Game\WorldGeneration\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Globals\Constants.h" />
   </ItemGroup>
 </Project>

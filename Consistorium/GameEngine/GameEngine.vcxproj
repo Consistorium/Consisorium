@@ -14,6 +14,8 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="DynamicEntity.cpp" />
+    <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -21,14 +23,15 @@
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\Window.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="DynamicEntity.h" />
+    <ClInclude Include="GameEntity.h" />
+    <ClInclude Include="EngineConstants.h" />
     <ClInclude Include="IAnimateable.h" />
-    <ClInclude Include="Globals\Constants.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />
     <ClInclude Include="RenderComponent.h" />
@@ -38,7 +41,6 @@
     <ClInclude Include="UI\UIElement.h" />
     <ClInclude Include="UI\Window.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

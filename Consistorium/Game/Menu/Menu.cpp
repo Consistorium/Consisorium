@@ -1,6 +1,9 @@
 #include <iostream>
 #include <UI/Button.h>
 
+#include "SDL/SDL_ttf.h"
+#include "SDL/SDL_image.h"
+
 #include "Menu.h"
 #include "../Game.h"
 #include "MouseButtonEnum.h"
@@ -18,15 +21,15 @@ Menu::Menu(SDL_Window * window)
 
 void Menu::handleMouseClick(SDL_Event e)
 {
-	if ((MouseButton)e.button.button == MouseButton::Left)
+	if (static_cast<MouseButton>(e.button.button) == MouseButton::Left)
 	{
-		std::cout << "Clicked at: " << e.button.x << " " << e.button.y << std::endl;
 		for (size_t i = 0; i < buttons_.size(); i++)
 		{
 			SDL_Point clickPosition;
 			clickPosition.x = e.button.x;
 			clickPosition.y = e.button.y;
-			if (SDL_PointInRect(&clickPosition, &buttons_[i]->getBounds()))
+			SDL_Rect bounds = buttons_[i]->getBounds();
+			if (SDL_PointInRect(&clickPosition, &bounds))
 			{
 				buttons_[i]->click(window_);
 			}
@@ -98,10 +101,6 @@ void Menu::Run()
 
 		SDL_UpdateWindowSurface(window_);
 	}
-}
-
-Menu::~Menu()
-{
 }
 
 void* startButtonClickHandler(SDL_Window*  window)

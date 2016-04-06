@@ -150,25 +150,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\Entities\Block.cpp" />
-    <ClCompile Include="Game\Entities\DynamicEntity.cpp" />
     <ClCompile Include="Game\Entities\EntityFactory.cpp" />
-    <ClCompile Include="Game\Entities\GameEntity.cpp" />
     <ClCompile Include="Game\Entities\Player.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\main.cpp" />
     <ClCompile Include="Game\Menu\Menu.cpp" />
     <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
+    <ClCompile Include="GroundLayer.cpp" />
+    <ClCompile Include="UndergroundLayer.cpp" />
+    <ClCompile Include="WorldGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Block.h" />
-    <ClInclude Include="Game\Entities\DynamicEntity.h" />
     <ClInclude Include="Game\Entities\EntityFactory.h" />
-    <ClInclude Include="Game\Entities\GameEntity.h" />
     <ClInclude Include="Game\Entities\Player.h" />
     <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\Globals\Constants.h" />
     <ClInclude Include="Game\Menu\Menu.h" />
     <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
     <ClInclude Include="Game\Utils\JumpContactListener.h" />
+    <ClInclude Include="GroundLayer.h" />
+    <ClInclude Include="IWorldLayer.h" />
+    <ClInclude Include="UndergroundLayer.h" />
+    <ClInclude Include="WorldGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="GameEngine\GameEngine.vcxproj">

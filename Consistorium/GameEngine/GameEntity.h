@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Box2D\Box2D.h>
-#include <RenderComponent.h>
+#include "RenderComponent.h"
 
 namespace Entities
 {

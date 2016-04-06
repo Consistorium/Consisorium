@@ -1,4 +1,5 @@
-#include <Globals\Constants.h>
+#include <Game/Globals/Constants.h>
+#include <GameEngine/EngineConstants.h>
 #include "Game.h"
 
 using namespace Entities;

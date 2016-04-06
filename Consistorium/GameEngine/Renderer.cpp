@@ -1,7 +1,7 @@
 #include "Renderer.h"
 #include <iostream>
-#include "IRenderable.h">
-#include "Globals\Constants.h"
+#include "IRenderable.h"
+#include "EngineConstants.h"
 
 namespace GameEngine 
 {

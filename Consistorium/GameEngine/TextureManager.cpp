@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 #include "../Game/Menu/Menu.h"
+#include <SDL/SDL_image.h>
 
 
 TextureManager::TextureManager(SDL_Renderer *renderer)

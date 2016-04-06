@@ -1,6 +1,7 @@
-#include <Globals\Constants.h>
-
 #include "EntityFactory.h"
+
+#include <Game/Globals/Constants.h>
+#include <EngineConstants.h>
 
 namespace Entities
 {

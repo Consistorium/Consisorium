@@ -31,8 +31,8 @@ SDL_Window* CreateWindow()
 		"An SDL2 window",         //    const char* title
 		SDL_WINDOWPOS_UNDEFINED,  //    int x: initial x position
 		SDL_WINDOWPOS_UNDEFINED,  //    int y: initial y position
-		640,                      //    int w: width, in pixels
-		480,                      //    int h: height, in pixels
+		1280,                      //    int w: width, in pixels
+		768,                      //    int h: height, in pixels
 		SDL_WINDOW_SHOWN          //    Uint32 flags: window options, see docs
 		);
 
