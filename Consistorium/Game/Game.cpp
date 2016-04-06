@@ -43,40 +43,35 @@ void Game::Run()
 {
 	Init();
 	EntityFactory entityFactory(world_);
-	b2Vec2 playerPosition(1, 4);
+	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
-	
-	b2Vec2 boxPosition;
-	float boxHeight;
 
-	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
+	float blockHeight = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
+	float blockWidth = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
 
-	/*b2Vec2 blockPosition;
+	b2Vec2 blockPosition;
 	blockPosition.x = 0;
-	blockPosition.y = 2 * blockHeight;
+	blockPosition.y = blockHeight;
 	GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-	renderer_.AddRenderable(block.getRenderableComponent());*/
+	renderer_.AddRenderable(block.getRenderableComponent());
 
-	for (size_t i = 1; i < 2; i++)
+	for (size_t i = 1; i < 5; i++)
 	{
 		b2Vec2 blockPosition;
-		blockPosition.x = i * (Globals::BLOCK_WIDTH) / Globals::PIXELS_PER_METER;
+		blockPosition.x = blockWidth * i;
 		blockPosition.y = blockHeight / 2;
-		//blockPosition.x = i;
-		//blockPosition.y = 1;
 		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
 		renderer_.AddRenderable(block.getRenderableComponent());
 	}
 
-	/*for (size_t i = 6; i < 11; i++)
+	for (size_t i = 5; i < 11; i++)
 	{
 		b2Vec2 blockPosition;
-		blockPosition.x = i * (Globals::BLOCK_WIDTH + 1) / Globals::PIXELS_PER_METER;
+		blockPosition.x = blockWidth * i;
 		blockPosition.y = blockHeight;
 		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
 		renderer_.AddRenderable(block.getRenderableComponent());
-	}*/
-
+	}
 
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
@@ -109,6 +104,8 @@ void Game::Run()
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		renderer_.RenderAll(cameraPos);
 		player.update();
+		//std::cout << "Xb = " << block.getBody()->GetPosition().x << " Yb = " << block.getBody()->GetPosition().y << std::endl;
+		//std::cout << "Xpl = " << player.getBody()->GetPosition().x << " Ypl = " << player.getBody()->GetPosition().y << std::endl;
 	}
 }
 
@@ -151,7 +148,6 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 void moveCharacter(DynamicEntity* entity, int direction)
 {
 	float impulse = entity->getAccelerationImpulse();
-	printf("float: %f \n", impulse);
 	//printf("\nbefore: %f %f", entity->getBody()->GetPosition().x, entity->getBody()->GetPosition().y);
 	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getAccelerationImpulse(), 0), entity->getBody()->GetLocalCenter(), true);
 	//printf("\nafter: %f %f\n", entity->getBody()->GetPosition().x, entity->getBody()->GetPosition().y);

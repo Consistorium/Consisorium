@@ -1,3 +1,4 @@
+#include <vector>
 #include <Globals\Constants.h>
 
 #include "EntityFactory.h"
@@ -19,16 +20,16 @@ namespace Entities
 		b2Body* body = world_->CreateBody(&bodyDef);
 
 		b2ChainShape chainShape;
-		
+
 		b2Vec2 vertices[8];
-		vertices[0] = b2Vec2(position.x - width / 2 - 0.03, position.y - height / 2 + 0.01); // middle bottom left
-		vertices[1] = b2Vec2(position.x - width / 2 - 0.03, position.y + height / 2 - 0.01); // middle top left
-		vertices[2] = b2Vec2(position.x - width / 2, position.y + height / 2); // top left
-		vertices[3] = b2Vec2(position.x + width / 2, position.y + height / 2); // top right
-		vertices[4] = b2Vec2(position.x + width / 2 + 0.03, position.y + height / 2 - 0.01); // middle top right
-		vertices[5] = b2Vec2(position.x + width / 2 + 0.03, position.y - height / 2 + 0.01); // middle bottom right
-		vertices[6] = b2Vec2(position.x + width / 2, position.y - height / 2); // bottom right
-		vertices[7] = b2Vec2(position.x - width / 2, position.y - height / 2); // bottom left
+		vertices[7] = b2Vec2(-width / 2, -height / 2 + 0.01); // middle bottom left
+		vertices[6] = b2Vec2(-width / 2, +height / 2 - 0.01); // middle top left
+		vertices[5] = b2Vec2((-width / 2) + 0.03, +height / 2); // top left
+		vertices[4] = b2Vec2(+ width / 2 - 0.03, +height / 2); // top right
+		vertices[3] = b2Vec2(+ width / 2, +height / 2 - 0.01); // middle top right
+		vertices[2] = b2Vec2(+ width / 2, -height / 2 + 0.01); // middle bottom right
+		vertices[1] = b2Vec2(+ width / 2 - 0.03, -height / 2); // bottom right
+		vertices[0] = b2Vec2((-width / 2) + 0.03, -height / 2); // bottom left
 		chainShape.CreateLoop(vertices, 8);
 
 		b2FixtureDef fixtureDef;
@@ -51,33 +52,51 @@ namespace Entities
 		b2Body* body = world_->CreateBody(&bodyDef);
 
 		b2PolygonShape boxShape;
-		boxShape.SetAsBox(playerWidth / 2.0f, (playerHeight - playerWidth) / 2.0f);
+		boxShape.SetAsBox(playerWidth / 2.0f, playerHeight / 2.0f);
+		//boxShape.SetAsBox(playerWidth / 2.0f, (playerHeight - playerWidth) / 2.0f);
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &boxShape;
 
 		body->CreateFixture(&fixtureDef);
 
-		// Create the circles
-		b2CircleShape circleShape;
-		circleShape.m_radius = playerWidth / 2.0f;
+		float halfHeight = (playerHeight - playerWidth) / 2;
+		const int DIVISIONS = 8;
+		const float RADIUS = playerWidth / 2;
+
+		b2Vec2 vertices[DIVISIONS];
+		b2PolygonShape circleShape;
+
+		//BOTTOM CIRCLE
+		for (int div = 1; div <= DIVISIONS; div++)
+		{
+			float32 angle = M_PI + (M_PI / div);
+			float32 xPos, yPos;
+
+			xPos = RADIUS * cosf(angle);
+			yPos = -halfHeight + RADIUS * sinf(angle);
+			vertices[div - 1] = b2Vec2(xPos, yPos);
+		}
+
+		circleShape.Set(vertices, DIVISIONS);
 		b2FixtureDef circleDef;
 		circleDef.shape = &circleShape;
-		circleDef.density = 5.0f;
-		circleDef.friction = 0.3f;
-
-		//b2Vec2 botCirclePos(position.x, position.y - (playerHeight - playerWidth) / 2);
-
-		// Bottom circle
-		circleShape.m_p.Set(position.x, position.y - (playerHeight - playerWidth) / 2);
-		//circleShape.m_p.Set(0.0f, (playerWidth - playerHeight) / 2.0f);
-		body->CreateFixture(&fixtureDef);
-
-		// Top Circle
-		circleShape.m_p.Set(position.x, position.y + (playerHeight - playerWidth) / 2.0f);
 		body->CreateFixture(&circleDef);
 
-		// Set the box density to be non-zero, so it will be dynamic.
-		//density -> mass
+		//TOP CIRCLE
+		for (int div = 1; div <= DIVISIONS; div++)
+		{
+			float32 angle = M_PI / div;
+			float32 xPos, yPos;
+
+			xPos = RADIUS * cosf(angle);
+			yPos = -halfHeight + RADIUS * sinf(angle);
+			vertices[div - 1] = b2Vec2(xPos, yPos);
+		}
+
+		circleShape.Set(vertices, DIVISIONS);
+		circleDef.shape = &circleShape;
+		body->CreateFixture(&circleDef);
+
 		body->GetFixtureList()->SetDensity(5.0);
 		body->GetFixtureList()->SetFriction(0.3);
 
