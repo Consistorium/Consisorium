@@ -104,8 +104,6 @@ void Game::Run()
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		renderer_.RenderAll(cameraPos);
 		player.update();
-		//std::cout << "Xb = " << block.getBody()->GetPosition().x << " Yb = " << block.getBody()->GetPosition().y << std::endl;
-		//std::cout << "Xpl = " << player.getBody()->GetPosition().x << " Ypl = " << player.getBody()->GetPosition().y << std::endl;
 	}
 }
 
@@ -134,9 +132,9 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 		moveCharacter(player, 1);
 		break;
 	case SDLK_UP:
+		int contacts = contactListener_->getContactsCount();
 		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 500)
 		{
-			std::cout << jumpTimer_.GetMilliseconds() << std::endl;
 			jump(player);
 			jumpTimer_.Reset();
 		}
@@ -148,9 +146,7 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 void moveCharacter(DynamicEntity* entity, int direction)
 {
 	float impulse = entity->getAccelerationImpulse();
-	//printf("\nbefore: %f %f", entity->getBody()->GetPosition().x, entity->getBody()->GetPosition().y);
 	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getAccelerationImpulse(), 0), entity->getBody()->GetLocalCenter(), true);
-	//printf("\nafter: %f %f\n", entity->getBody()->GetPosition().x, entity->getBody()->GetPosition().y);
 }
 
 void jump(DynamicEntity* entity)

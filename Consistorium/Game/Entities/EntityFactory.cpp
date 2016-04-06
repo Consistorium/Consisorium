@@ -1,5 +1,7 @@
 #include <vector>
 #include <Globals\Constants.h>
+#include "Capsule.h"
+#include "EntityIndexesEnum.h"
 
 #include "EntityFactory.h"
 
@@ -45,74 +47,28 @@ namespace Entities
 		float playerWidth = Globals::DEFAULT_PLAYER_WIDTH / Globals::PIXELS_PER_METER,
 			playerHeight = Globals::DEFAULT_PLAYER_HEIGHT / Globals::PIXELS_PER_METER;
 
-		b2BodyDef bodyDef;
-		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(position.x, position.y);
-		bodyDef.fixedRotation = true;
-		b2Body* body = world_->CreateBody(&bodyDef);
-
-		b2PolygonShape boxShape;
-		boxShape.SetAsBox(playerWidth / 2.0f, playerHeight / 2.0f);
-		//boxShape.SetAsBox(playerWidth / 2.0f, (playerHeight - playerWidth) / 2.0f);
-		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &boxShape;
-
-		body->CreateFixture(&fixtureDef);
-
-		float halfHeight = (playerHeight - playerWidth) / 2;
-		const int DIVISIONS = 8;
-		const float RADIUS = playerWidth / 2;
-
-		b2Vec2 vertices[DIVISIONS];
-		b2PolygonShape circleShape;
-
-		//BOTTOM CIRCLE
-		for (int div = 1; div <= DIVISIONS; div++)
-		{
-			float32 angle = M_PI + (M_PI / div);
-			float32 xPos, yPos;
-
-			xPos = RADIUS * cosf(angle);
-			yPos = -halfHeight + RADIUS * sinf(angle);
-			vertices[div - 1] = b2Vec2(xPos, yPos);
-		}
-
-		circleShape.Set(vertices, DIVISIONS);
-		b2FixtureDef circleDef;
-		circleDef.shape = &circleShape;
-		body->CreateFixture(&circleDef);
-
-		//TOP CIRCLE
-		for (int div = 1; div <= DIVISIONS; div++)
-		{
-			float32 angle = M_PI / div;
-			float32 xPos, yPos;
-
-			xPos = RADIUS * cosf(angle);
-			yPos = -halfHeight + RADIUS * sinf(angle);
-			vertices[div - 1] = b2Vec2(xPos, yPos);
-		}
-
-		circleShape.Set(vertices, DIVISIONS);
-		circleDef.shape = &circleShape;
-		body->CreateFixture(&circleDef);
+		b2Body* body = Capsule::create(world_, position, playerWidth, playerHeight);
 
 		body->GetFixtureList()->SetDensity(5.0);
 		body->GetFixtureList()->SetFriction(0.3);
 
-		//add foot sensor fixture
-		b2Vec2 footSensorCenter;
-		footSensorCenter.x = position.x + playerWidth / 2;
-		footSensorCenter.y = position.y - playerHeight / 2;
+		b2Fixture* fixture = body->GetFixtureList();
+		while (fixture != nullptr) {
+			fixture->SetUserData((void*)EntityIndexes::PlayerParts);
+			fixture = fixture->GetNext();
+		}
 
+		//add foot sensor fixture
+		float sensorDim = 0.1;
+		b2Vec2 sensorCentre(0, -playerHeight / 2 - sensorDim / 2);
 		b2PolygonShape polygonShape;
-		polygonShape.SetAsBox(0.1, 0.1, b2Vec2(0, -2), 0);
+		polygonShape.SetAsBox(sensorDim, sensorDim, sensorCentre, 0);
 
 		b2FixtureDef SensorFixtureDef;
 		SensorFixtureDef.shape = &polygonShape;
 		SensorFixtureDef.isSensor = true;
 		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
-		footSensorFixture->SetUserData((void*)3);
+		footSensorFixture->SetUserData((void*)EntityIndexes::FootSensor);
 
 		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(1, 1), b2Vec2(Globals::DEFAULT_PLAYER_WIDTH, Globals::DEFAULT_PLAYER_HEIGHT), body);
 		GameEngine::AnimationComponent ac("Models/Game/Player", "Idle", 40, rc.getTextureName());
@@ -126,8 +82,15 @@ namespace Entities
 			blockWidth = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
 
 		b2Body* body = createEntityBody(position, b2_staticBody, blockWidth, blockHeight);
+		b2Fixture* fixture = body->GetFixtureList();
+		while (fixture != nullptr) {
+			fixture->SetUserData((void*)EntityIndexes::Block);
+			fixture = fixture->GetNext();
+		}
+
 		GameEngine::RenderComponent rc("Models/Game/Block/Normal__001.png", b2Vec2(1, 1), b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
 		GameEntity* block = new Block(rc);
+
 		return block;
 	}
 

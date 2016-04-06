@@ -20,7 +20,6 @@ void Menu::handleMouseClick(SDL_Event e)
 {
 	if ((MouseButton)e.button.button == MouseButton::Left)
 	{
-		std::cout << "Clicked at: " << e.button.x << " " << e.button.y << std::endl;
 		for (size_t i = 0; i < buttons_.size(); i++)
 		{
 			SDL_Point clickPosition;

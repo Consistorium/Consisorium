@@ -40,7 +40,6 @@ namespace Entities
 	float DynamicEntity::getAccelerationImpulse()
 	{
 		float xVelocity = body_->GetLinearVelocity().x;
-		printf("xvel: %f, mspeed: %f, xDir: %d", xVelocity, maxSpeed_, xDirection_);
 		return (maxSpeed_ - (xVelocity * xDirection_)) * xDirection_;
 	}
 

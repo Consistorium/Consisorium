@@ -42,6 +42,9 @@
     <ClCompile Include="Game\Entities\Block.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\Capsule.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Menu\Menu.h">
@@ -69,6 +72,12 @@
       <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Game\Entities\DynamicEntity.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Capsule.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityIndexesEnum.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
