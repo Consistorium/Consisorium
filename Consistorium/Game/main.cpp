@@ -27,12 +27,16 @@ SDL_Window* CreateWindow()
 
 	SDL_Window *window;        // Declare a pointer to an SDL_Window
 							   // Create an application window with the following settings:
+
+	SDL_DisplayMode displayMode;
+	SDL_GetDesktopDisplayMode(0, &displayMode);
+
 	window = SDL_CreateWindow(
 		"An SDL2 window",         //    const char* title
 		SDL_WINDOWPOS_UNDEFINED,  //    int x: initial x position
 		SDL_WINDOWPOS_UNDEFINED,  //    int y: initial y position
-		640,                      //    int w: width, in pixels
-		480,                      //    int h: height, in pixels
+		displayMode.w,                      //    int w: width, in pixels
+		displayMode.h - 100,                      //    int h: height, in pixels
 		SDL_WINDOW_SHOWN          //    Uint32 flags: window options, see docs
 		);
 

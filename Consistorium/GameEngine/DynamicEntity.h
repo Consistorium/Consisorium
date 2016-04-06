@@ -1,5 +1,7 @@
 #include "GameEntity.h"
-#include <AnimationManager.h>
+
+#include "AnimationComponent.h"
+#include "AnimationManager.h"
 
 namespace Entities
 {

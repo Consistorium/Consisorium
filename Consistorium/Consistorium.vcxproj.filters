@@ -1,60 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Game">
-      <UniqueIdentifier>{a2a4d8eb-91ef-4470-ad1d-3e2cbc002242}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Menu">
-      <UniqueIdentifier>{b479f201-f7d5-4368-986f-514e55161bfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Entities">
-      <UniqueIdentifier>{a5706b7f-09f0-49ec-af28-b76fb9b77ee2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Utils">
-      <UniqueIdentifier>{004c214d-0b95-4949-bb54-3fd2b5ff80c6}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Game\main.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Menu\Menu.cpp">
-      <Filter>Game\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Entities\Player.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Entities\EntityFactory.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Utils\JumpContactListener.cpp">
-      <Filter>Game\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Entities\GameEntity.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Entities\DynamicEntity.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
+    <ClCompile Include="Game\main.cpp" />
+    <ClCompile Include="GroundLayer.cpp" />
+    <ClCompile Include="UndergroundLayer.cpp" />
+    <ClCompile Include="WorldGenerator.cpp" />
     <ClCompile Include="Game\Entities\Block.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Game\Entities\Capsule.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\EntityFactory.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Menu\Menu.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Entities\Player.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utils\JumpContactListener.cpp">
+      <Filter>Game\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game\Menu\Menu.h">
-      <Filter>Game\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Menu\MouseButtonEnum.h">
-      <Filter>Game\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Entities\Player.h">
+    <ClInclude Include="GroundLayer.h" />
+    <ClInclude Include="IWorldLayer.h" />
+    <ClInclude Include="UndergroundLayer.h" />
+    <ClInclude Include="WorldGenerator.h" />
+    <ClInclude Include="Game\Entities\Block.h">
       <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Capsule.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityFactory.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityIndexesEnum.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Globals\Constants.h">
+      <Filter>Game\Globals</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game.h">
       <Filter>Game</Filter>
@@ -62,23 +53,34 @@
     <ClInclude Include="Game\Entities\GameEntity.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\EntityFactory.h">
+    <ClInclude Include="Game\Menu\Menu.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Menu\MouseButtonEnum.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Player.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Game\Utils\JumpContactListener.h">
       <Filter>Game\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\Block.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Entities\DynamicEntity.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Entities\Capsule.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Entities\EntityIndexesEnum.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Game">
+      <UniqueIdentifier>{182ebb3d-7c2d-4295-a0b4-87641e67a47a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities">
+      <UniqueIdentifier>{85e4a4ad-fd57-4603-85c3-2a5b331ff0ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Globals">
+      <UniqueIdentifier>{f26250fe-e904-437b-b690-c371b224f1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI">
+      <UniqueIdentifier>{aea5b611-2b5b-4312-be0a-9283d4ee29f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Utils">
+      <UniqueIdentifier>{2af4bcdc-99d4-4be4-829c-0631ed9683c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

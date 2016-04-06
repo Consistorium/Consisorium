@@ -1,5 +1,7 @@
 #include <vector>
-#include <Globals\Constants.h>
+#include <EngineConstants.h>
+#include <Game\Globals\Constants.h>
+
 #include "Capsule.h"
 #include "EntityIndexesEnum.h"
 

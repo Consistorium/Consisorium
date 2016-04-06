@@ -1,4 +1,5 @@
-#include <Globals\Constants.h>
+#include <Game/Globals/Constants.h>
+#include <GameEngine/EngineConstants.h>
 #include "Game.h"
 
 using namespace Entities;
@@ -133,7 +134,7 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 		break;
 	case SDLK_UP:
 		int contacts = contactListener_->getContactsCount();
-		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 500)
+		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 1000)
 		{
 			jump(player);
 			jumpTimer_.Reset();
