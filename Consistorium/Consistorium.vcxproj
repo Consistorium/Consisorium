@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\Entities\Block.cpp" />
+    <ClCompile Include="Game\Entities\Capsule.cpp" />
     <ClCompile Include="Game\Entities\EntityFactory.cpp" />
     <ClCompile Include="Game\Entities\Player.cpp" />
     <ClCompile Include="Game\Game.cpp" />
@@ -162,7 +163,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Block.h" />
+    <ClInclude Include="Game\Entities\Capsule.h" />
     <ClInclude Include="Game\Entities\EntityFactory.h" />
+    <ClInclude Include="Game\Entities\EntityIndexesEnum.h" />
+    <ClInclude Include="Game\Entities\GameEntity.h" />
     <ClInclude Include="Game\Entities\Player.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Globals\Constants.h" />
