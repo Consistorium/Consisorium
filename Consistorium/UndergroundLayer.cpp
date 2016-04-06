@@ -1,5 +1,7 @@
 #include "UndergroundLayer.h"
 
+#include "Game/Globals/Constants.h"
+#include "Game/Entities/EntityFactory.h"
 
 UndergroundLayer::UndergroundLayer()
 {
@@ -11,10 +13,19 @@ UndergroundLayer::~UndergroundLayer()
 
 b2Vec2 UndergroundLayer::GetLayerRange()
 {
-	return b2Vec2(0, 0);
+	return Globals::UNDERGROUND_LAYER_HEIGHT_RANGE;
 }
 
-void UndergroundLayer::Generate()
+void UndergroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *world)
 {
-	
+	Entities::EntityFactory factory(world);
+	Entities::Block *current;
+	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
+	{
+		for (int j = GetLayerRange().x; j >= GetLayerRange().y; j -= Globals::BLOCK_WIDTH)
+		{
+			current = factory.createBlock(b2Vec2(i, j), "Ground");
+			renderer->AddRenderable(current->getRenderableComponent());
+		}
+	}
 }

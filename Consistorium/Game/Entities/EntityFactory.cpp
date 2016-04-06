@@ -16,7 +16,7 @@ namespace Entities
 	{
 		b2BodyDef bodyDef;
 		bodyDef.type = bodyType;
-		bodyDef.position.Set(position.x, position.y);
+		bodyDef.position.Set(position.x / Globals::PIXELS_PER_METER, position.y / Globals::PIXELS_PER_METER);
 		b2Body* body = world_->CreateBody(&bodyDef);
 
 		b2ChainShape chainShape;
@@ -40,7 +40,7 @@ namespace Entities
 		return body;
 	}
 
-	Player* EntityFactory::createPlayer(b2Vec2 position, char* modelName)
+	Player* EntityFactory::createPlayer(b2Vec2 position, std::string modelName)
 	{
 		float playerWidth = Globals::DEFAULT_PLAYER_WIDTH / Globals::PIXELS_PER_METER,
 			playerHeight = Globals::DEFAULT_PLAYER_HEIGHT / Globals::PIXELS_PER_METER;
@@ -102,14 +102,14 @@ namespace Entities
 		return player;
 	}
 
-	GameEntity* EntityFactory::createBlock(b2Vec2 position, char* modelName)
+	Block* EntityFactory::createBlock(b2Vec2 position, std::string modelName)
 	{
 		float blockHeight = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER,
 			blockWidth = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
 
 		b2Body* body = createEntityBody(position, b2_staticBody, blockWidth, blockHeight);
-		GameEngine::RenderComponent rc("Models/Game/Block/Normal__001.png", b2Vec2(1, 1), b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
-		GameEntity* block = new Block(rc);
+		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(1, 1), b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
+		Block* block = new Block(rc);
 		return block;
 	}
 

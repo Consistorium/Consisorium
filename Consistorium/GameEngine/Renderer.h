@@ -28,6 +28,8 @@ namespace GameEngine
 		SDL_Window *window_;
 		std::vector<IRenderable*> renderables_;
 		WorldConstraints worldConstraints;
+
+		SDL_bool Renderer::shouldRender(b2Vec2& renderablePosition, b2Vec2& cameraPosition, int& width, int& height);
 	public:
 		Renderer(SDL_Window* window);
 

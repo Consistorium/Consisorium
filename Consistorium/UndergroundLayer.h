@@ -11,6 +11,6 @@ public:
 
 	b2Vec2 GetLayerRange() override;
 
-	void Generate() override;
+	void Generate(GameEngine::IGraphicsRenderer *renderer, b2World *world) override;
 };
 

@@ -2,10 +2,14 @@
 #include <GameEngine/EngineConstants.h>
 #include "Game.h"
 
+#include "WorldGenerator.h"
+#include "GroundLayer.h"
+#include <UndergroundLayer.h>
+
 using namespace Entities;
 
 const b2Vec2 GRAVITY(0, -0.1);
-const int CAMERA_SPEED = 20;
+const int CAMERA_SPEED = 50;
 
 void moveCharacter(DynamicEntity* entity, int direction);
 void jump(DynamicEntity* entity);
@@ -44,41 +48,22 @@ void Game::Run()
 {
 	Init();
 	EntityFactory entityFactory(world_);
-	b2Vec2 playerPosition(1, 4);
+	b2Vec2 playerPosition(1, 0);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 	
 	b2Vec2 boxPosition;
 	float boxHeight;
 
 	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
+	
+	std::vector<IWorldLayer*> layers;
+	GroundLayer ground;
+	layers.push_back(&ground);
+	UndergroundLayer underground;
+	layers.push_back(&underground);
 
-	/*b2Vec2 blockPosition;
-	blockPosition.x = 0;
-	blockPosition.y = 2 * blockHeight;
-	GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-	renderer_.AddRenderable(block.getRenderableComponent());*/
-
-	for (size_t i = 1; i < 2; i++)
-	{
-		b2Vec2 blockPosition;
-		blockPosition.x = i * (Globals::BLOCK_WIDTH) / Globals::PIXELS_PER_METER;
-		blockPosition.y = blockHeight / 2;
-		//blockPosition.x = i;
-		//blockPosition.y = 1;
-		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-		renderer_.AddRenderable(block.getRenderableComponent());
-	}
-
-	/*for (size_t i = 6; i < 11; i++)
-	{
-		b2Vec2 blockPosition;
-		blockPosition.x = i * (Globals::BLOCK_WIDTH + 1) / Globals::PIXELS_PER_METER;
-		blockPosition.y = blockHeight;
-		GameEntity& block = *entityFactory.createBlock(blockPosition, "Normal");
-		renderer_.AddRenderable(block.getRenderableComponent());
-	}*/
-
-
+	WorldGenerator worldGenerator(&renderer_, world_, layers);
+	worldGenerator.Build();
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
 	
@@ -99,7 +84,7 @@ void Game::Run()
 			switch (e.type)
 			{
 			case SDL_KEYDOWN:
-				//player.die();
+				// player.die();
 				handleKeyPress(e, cameraPos, &player);
 				break;
 			default:

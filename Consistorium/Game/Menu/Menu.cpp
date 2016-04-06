@@ -76,7 +76,6 @@ void Menu::Run()
 
 	SDL_Surface* background = IMG_Load("background.png");
 	SDL_BlitSurface(background, nullptr, windowSurface_, nullptr);
-
 	SDL_Event e;
 
 	while (true)
