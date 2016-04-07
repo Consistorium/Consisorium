@@ -2,6 +2,8 @@
 
 namespace Globals
 {
+	const int SCREEN_WIDTH = 1280;
+	const int SCREEN_HEIGHT = 768;
 	/*
 	 * ENTITY CONSTANTS
 	 */

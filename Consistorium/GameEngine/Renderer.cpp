@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <iostream>
+#include <algorithm>
 #include "IRenderable.h"
 #include "EngineConstants.h"
 
@@ -50,21 +51,13 @@ namespace GameEngine
 
 	void Renderer::RenderAll(b2Vec2 cameraPos)
 	{
+		SDL_SetRenderDrawColor(windowRenderer_, 52, 152, 219, 255);
+
 		SDL_RenderClear(this->windowRenderer_);
 		SDL_Rect boundsRect;
 
-		SDL_SetRenderDrawColor(windowRenderer_, 52, 152, 219, 255);
-		SDL_Rect rectangle;
-
 		int screenWidth, screenHeight;
 		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
-
-		rectangle.x = 0;
-		rectangle.y = 0;
-		rectangle.w = screenWidth;
-		rectangle.h = screenHeight;
-
-		SDL_RenderFillRect(windowRenderer_, &rectangle);
 
 		for (IRenderable *item : this->renderables_)
 		{
@@ -73,7 +66,6 @@ namespace GameEngine
 			{
 				continue;
 			}
-
 			SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
 			SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
 			SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
@@ -84,25 +76,18 @@ namespace GameEngine
 
 		SDL_RenderPresent(this->windowRenderer_);
 	}
-
-	/*
-	 * The camera works in the following manner:
-	 * When going:
-	 *	- up: y++
-	 *  - down: y--
-	 *  - left: x++ !
-	 *  - right: x-- !
-	*/
 	SDL_bool Renderer::shouldRender(b2Vec2& renderablePosition, b2Vec2& cameraPosition, int& width, int& height)
 	{
 		SDL_Point point;
 		point.x = renderablePosition.x * Globals::PIXELS_PER_METER;
 		point.y = renderablePosition.y * Globals::PIXELS_PER_METER;
 		SDL_Rect rect;
-		rect.x = -cameraPosition.x;
+		float renderAdvance = 1.5; // used for renderering a bigger are than the screen, so the player doesnt see the magic happen
+		rect.x = (-cameraPosition.x) - 200;
 		rect.y = cameraPosition.y;
-		rect.h = height * 1.5;
-		rect.w = width * 1.5;
+		
+		rect.h = height * renderAdvance; // wtf why arent you working
+		rect.w = width * renderAdvance;
 
 
 		return SDL_PointInRect(&point, &rect);

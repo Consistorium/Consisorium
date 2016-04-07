@@ -91,6 +91,8 @@ void Game::Run()
 		}
 
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
+		cameraPos.x = -(player.getBody()->GetPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2);
+		cameraPos.y = player.getBody()->GetPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
 		renderer_.RenderAll(cameraPos);
 		player.update();
 	}
@@ -100,18 +102,6 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 {
 	switch (e.key.keysym.sym)
 	{
-	case SDLK_w:
-		cameraPos.y += CAMERA_SPEED;
-		break;
-	case SDLK_s:
-		cameraPos.y -= CAMERA_SPEED;
-		break;
-	case SDLK_a:
-		cameraPos.x += CAMERA_SPEED;
-		break;
-	case SDLK_d:
-		cameraPos.x -= CAMERA_SPEED;
-		break;
 	case SDLK_LEFT:
 		player->setXDirection(-1);
 		moveCharacter(player, -1);

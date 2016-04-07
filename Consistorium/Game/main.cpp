@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "./Menu/Menu.h"
+#include "Game/Globals/Constants.h"
 
 //Creates the default application window
 SDL_Window * CreateWindow();
@@ -33,10 +34,10 @@ SDL_Window* CreateWindow()
 
 	window = SDL_CreateWindow(
 		"An SDL2 window",         //    const char* title
-		SDL_WINDOWPOS_UNDEFINED,  //    int x: initial x position
-		SDL_WINDOWPOS_UNDEFINED,  //    int y: initial y position
-		displayMode.w,                      //    int w: width, in pixels
-		displayMode.h - 100,                      //    int h: height, in pixels
+		SDL_WINDOWPOS_CENTERED,  //    int x: initial x position
+		SDL_WINDOWPOS_CENTERED,  //    int y: initial y position
+		Globals::SCREEN_WIDTH,                      //    int w: width, in pixels
+		Globals::SCREEN_HEIGHT,                      //    int h: height, in pixels
 		SDL_WINDOW_SHOWN          //    Uint32 flags: window options, see docs
 		);
 
