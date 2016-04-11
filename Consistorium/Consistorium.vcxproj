@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="Game\Entities\Block.cpp" />
     <ClCompile Include="Game\Entities\Capsule.cpp" />
+    <ClCompile Include="Game\Entities\Enemies\Skeleton.cpp" />
     <ClCompile Include="Game\Entities\EntityFactory.cpp" />
     <ClCompile Include="Game\Entities\Player.cpp" />
     <ClCompile Include="Game\Game.cpp" />
@@ -164,8 +165,12 @@
   <ItemGroup>
     <ClInclude Include="Game\Entities\Block.h" />
     <ClInclude Include="Game\Entities\Capsule.h" />
+    <ClInclude Include="Game\Entities\Enemies\Skeleton.h" />
+    <ClInclude Include="Game\Entities\EntityComponents.h" />
+    <ClInclude Include="Game\Entities\EntityDescriptor.h" />
     <ClInclude Include="Game\Entities\EntityFactory.h" />
     <ClInclude Include="Game\Entities\EntityIndexesEnum.h" />
+    <ClInclude Include="Game\Entities\EntityNames.h" />
     <ClInclude Include="Game\Entities\GameEntity.h" />
     <ClInclude Include="Game\Entities\Player.h" />
     <ClInclude Include="Game\Game.h" />

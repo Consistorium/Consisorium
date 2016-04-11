@@ -1,5 +1,4 @@
 #include <Game/Globals/Constants.h>
-#include <GameEngine/EngineConstants.h>
 #include "Game.h"
 
 #include "WorldGenerator.h"
@@ -8,14 +7,14 @@
 
 using namespace Entities;
 
-const b2Vec2 GRAVITY(0, -0.1);
+const b2Vec2 GRAVITY(0, -100);
 const int CAMERA_SPEED = 50;
 
 void moveCharacter(DynamicEntity* entity, int direction);
 void jump(DynamicEntity* entity);
 
 Game::Game(SDL_Window* window)
-	: renderer_(window),
+	: renderer_(window, Globals::PIXELS_PER_METER),
 	Window(window),
 	gravity_(GRAVITY)
 {	
@@ -50,6 +49,10 @@ void Game::Run()
 	EntityFactory entityFactory(world_);
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
+
+	b2Vec2 skeletonPosition(3.0f, 4.0f);
+	Skeleton& skeleton = *entityFactory.createSkeleton(skeletonPosition, "Appear");
+	renderer_.AddRenderable(skeleton.getRenderableComponent());
 
 	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
 	

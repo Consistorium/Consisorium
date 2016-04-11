@@ -2,16 +2,18 @@
 
 namespace Globals
 {
+	const int PIXELS_PER_METER = 50;
 	const int SCREEN_WIDTH = 1280;
 	const int SCREEN_HEIGHT = 768;
 	/*
 	 * ENTITY CONSTANTS
 	 */
 
-	const float DEFAULT_PLAYER_WIDTH = 40;
-	const float DEFAULT_PLAYER_HEIGHT = 80;
+	const float DEFAULT_ENTITY_WIDTH = 40;
+	const float DEFAULT_ENTITY_HEIGHT = 80;
 	const float BLOCK_WIDTH = 31;
 	const float BLOCK_HEIGHT = 31;
+	const float ENTITY_JUMP_POWER = 0.2;
 
 	/*
 	 * World Generation

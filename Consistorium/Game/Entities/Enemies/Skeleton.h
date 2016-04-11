@@ -6,14 +6,14 @@
 
 namespace Entities
 {
-	class Player : public DynamicEntity
+	class Skeleton : public DynamicEntity
 	{
 	private:
 		const float PLAYER_MAX_SPEED = 3;
 	public:
-		Player(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower);
+		Skeleton(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower);
 
-		~Player();
+		~Skeleton();
 
 		void init(SDL_Renderer *renderer);
 

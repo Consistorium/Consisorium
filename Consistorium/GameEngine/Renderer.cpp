@@ -2,12 +2,12 @@
 #include <iostream>
 #include <algorithm>
 #include "IRenderable.h"
-#include "EngineConstants.h"
 
 namespace GameEngine 
 {
-	Renderer::Renderer(SDL_Window* window)
-		: windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
+	Renderer::Renderer(SDL_Window* window, int pixelsPerMeter)
+		: pixelsPerMeter_(pixelsPerMeter),
+		windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
 		textureManager_(windowRenderer_),
 		window_(window),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
@@ -69,8 +69,8 @@ namespace GameEngine
 			SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
 			SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
 			SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
-			boundsRect.x = (position.x * Globals::PIXELS_PER_METER + cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
-			boundsRect.y = (screenHeight - position.y * Globals::PIXELS_PER_METER - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
+			boundsRect.x = (position.x * pixelsPerMeter_ + cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
+			boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 		}
 
@@ -79,8 +79,8 @@ namespace GameEngine
 	SDL_bool Renderer::shouldRender(b2Vec2& renderablePosition, b2Vec2& cameraPosition, int& width, int& height)
 	{
 		SDL_Point point;
-		point.x = renderablePosition.x * Globals::PIXELS_PER_METER;
-		point.y = renderablePosition.y * Globals::PIXELS_PER_METER;
+		point.x = renderablePosition.x * pixelsPerMeter_;
+		point.y = renderablePosition.y * pixelsPerMeter_;
 		SDL_Rect rect;
 		float renderAdvance = 1.5; // used for renderering a bigger are than the screen, so the player doesnt see the magic happen
 		rect.x = (-cameraPosition.x) - 200;

@@ -37,7 +37,7 @@ SDL_Window* CreateWindow()
 		SDL_WINDOWPOS_CENTERED,  //    int x: initial x position
 		SDL_WINDOWPOS_CENTERED,  //    int y: initial y position
 		Globals::SCREEN_WIDTH,                      //    int w: width, in pixels
-		Globals::SCREEN_HEIGHT,                      //    int h: height, in pixels
+		Globals::SCREEN_HEIGHT - 200,                      //    int h: height, in pixels
 		SDL_WINDOW_SHOWN          //    Uint32 flags: window options, see docs
 		);
 

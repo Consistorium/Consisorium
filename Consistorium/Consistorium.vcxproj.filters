@@ -26,6 +26,9 @@
     <ClCompile Include="Game\Utils\JumpContactListener.cpp">
       <Filter>Game\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\Enemies\Skeleton.cpp">
+      <Filter>Game\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GroundLayer.h" />
@@ -65,6 +68,18 @@
     <ClInclude Include="Game\Utils\JumpContactListener.h">
       <Filter>Game\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Entities\Enemies\Skeleton.h">
+      <Filter>Game\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityNames.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityDescriptor.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityComponents.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -81,6 +96,9 @@
     </Filter>
     <Filter Include="Game\Utils">
       <UniqueIdentifier>{2af4bcdc-99d4-4be4-829c-0631ed9683c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\Enemies">
+      <UniqueIdentifier>{f52c7d92-0175-4e4a-a0da-6d2e534291c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

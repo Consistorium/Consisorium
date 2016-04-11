@@ -2,7 +2,6 @@
 
 #include "Game/Globals/Constants.h"
 #include "Game/Entities/EntityFactory.h"
-#include <EngineConstants.h>
 #include <algorithm>
 
 GroundLayer::GroundLayer()
