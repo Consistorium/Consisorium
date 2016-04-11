@@ -29,7 +29,7 @@ namespace Entities
 
 		Block* createBlock(b2Vec2 position, std::string modelName);
 
-		EntityComponents createEntityComponents(EntityDescriptor descriptor);
+		EntityComponents createEntityComponents(EntityDescriptor descriptor, int animationSpeed);
 
 		Skeleton* createSkeleton(b2Vec2 position, std::string modelName);
 

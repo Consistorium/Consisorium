@@ -51,7 +51,7 @@ void Game::Run()
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 
 	b2Vec2 skeletonPosition(3.0f, 4.0f);
-	Skeleton& skeleton = *entityFactory.createSkeleton(skeletonPosition, "Appear");
+	Skeleton& skeleton = *entityFactory.createSkeleton(skeletonPosition, "Idle");
 	renderer_.AddRenderable(skeleton.getRenderableComponent());
 
 	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
@@ -101,8 +101,7 @@ void Game::Run()
 		cameraPos.y = player.getBody()->GetPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
 		renderer_.RenderAll(cameraPos);
 		player.update();
-
-		std::cout << player.getBody()->GetPosition().x << " : " << player.getBody()->GetPosition().y << std::endl;
+		skeleton.update();
 	}
 }
 

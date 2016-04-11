@@ -123,7 +123,7 @@ namespace Entities
 		return block;
 	}
 
-	EntityComponents EntityFactory::createEntityComponents(EntityDescriptor descriptor)
+	EntityComponents EntityFactory::createEntityComponents(EntityDescriptor descriptor, int animationSpeed)
 	{
 		b2Body* body = createDynamicEntityBody(
 			descriptor.position,
@@ -137,7 +137,7 @@ namespace Entities
 		GameEngine::AnimationComponent* ac = new GameEngine::AnimationComponent(
 			MODELS_LOCATION + descriptor.entityName,
 			descriptor.animation,
-			40, //default animation speed
+			animationSpeed, //default animation speed
 			rc->getTextureName());
 
 		EntityComponents components;
@@ -151,13 +151,14 @@ namespace Entities
 	Skeleton* EntityFactory::createSkeleton(b2Vec2 position, std::string modelName)
 	{
 		EntityDescriptor descriptor;
-		descriptor.animation = "Appear";
+		descriptor.animation = modelName;
 		descriptor.entityName = "Skeleton";
 		descriptor.modelName = modelName;
 		descriptor.position = position;
 
-		EntityComponents components = createEntityComponents(descriptor);
-		return new Skeleton(*components.renderComponent, *components.animationComponent, Globals::ENTITY_JUMP_POWER);
+		EntityComponents components = createEntityComponents(descriptor, 80);
+		Skeleton *skeleton = new Skeleton(*components.renderComponent, *components.animationComponent, Globals::ENTITY_JUMP_POWER);
+		return skeleton;
 	}
 
 	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)

@@ -3,6 +3,7 @@
 #include "Game/Globals/Constants.h"
 #include "Game/Entities/EntityFactory.h"
 #include <algorithm>
+#include <ctime>
 
 GroundLayer::GroundLayer()
 {
@@ -23,7 +24,7 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 	GameEngine::IRenderable *current;
 	auto min = std::min(GetLayerRange().x, GetLayerRange().y);
 	auto max = std::max(GetLayerRange().x, GetLayerRange().y);
-
+	srand(time(nullptr));
 	for (float i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
 		for (float j = min; j <= max; j += Globals::BLOCK_WIDTH)
@@ -34,8 +35,8 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 		
 		if ((rand() % 3 + 1) == 1)
 		{
-			current = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine")->getRenderableComponent();
-			renderer->AddRenderable(current);
+			//current = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine")->getRenderableComponent();
+			//renderer->AddRenderable(current);
 		}
 	}
 }
