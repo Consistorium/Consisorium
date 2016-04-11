@@ -52,7 +52,6 @@ void Game::Run()
 
 	b2Vec2 skeletonPosition(3.0f, 4.0f);
 	Skeleton& skeleton = *entityFactory.createSkeleton(skeletonPosition, "Idle");
-	renderer_.AddRenderable(skeleton.getRenderableComponent());
 
 	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
 	
@@ -74,6 +73,7 @@ void Game::Run()
 
 	SDL_Event e;
 
+	renderer_.AddRenderable(skeleton.getRenderableComponent());
 	renderer_.AddRenderable(player.getRenderableComponent());
 	b2Vec2 cameraPos(0, 0);
 

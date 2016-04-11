@@ -35,8 +35,9 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 		
 		if ((rand() % 3 + 1) == 1)
 		{
-			//current = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine")->getRenderableComponent();
-			//renderer->AddRenderable(current);
+			Entities::Tree *tree = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine");
+			tree->getBody()->GetFixtureList()->SetSensor(true);
+			renderer->AddRenderable(tree->getRenderableComponent());
 		}
 	}
 }
