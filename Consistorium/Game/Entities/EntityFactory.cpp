@@ -72,7 +72,7 @@ namespace Entities
 		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
 		footSensorFixture->SetUserData((void*)EntityIndexes::FootSensor);
 
-		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(1, 1), b2Vec2(Globals::DEFAULT_PLAYER_WIDTH, Globals::DEFAULT_PLAYER_HEIGHT), body);
+		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(Globals::DEFAULT_PLAYER_WIDTH, Globals::DEFAULT_PLAYER_HEIGHT), body);
 		GameEngine::AnimationComponent ac("Models/Game/Player", "Idle", 40, rc.getTextureName());
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
 		return player;
@@ -90,10 +90,22 @@ namespace Entities
 			fixture = fixture->GetNext();
 		}
 
-		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(1, 1), b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
+		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
 		Block* block = new Block(rc);
 
 		return block;
+	}
+
+	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
+	{
+		float treeHeight = Globals::TREE_HEIGHT,
+			treeWidth = Globals::TREE_WIDTH;
+
+		b2Body* body = createEntityBody(position, b2_staticBody, treeWidth, treeHeight);
+		GameEngine::RenderComponent rc("Models/Game/Tree/" + modelName + "__001.png", b2Vec2(Globals::TREE_WIDTH, Globals::TREE_HEIGHT), body);
+		Tree* tree = new Tree(rc);
+
+		return tree;
 	}
 
 	EntityFactory::~EntityFactory()

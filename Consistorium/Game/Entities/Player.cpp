@@ -7,7 +7,7 @@ namespace Entities
 	{
 	}
 
-	void Player::die()
+	void Player::dig()
 	{
 	}
 

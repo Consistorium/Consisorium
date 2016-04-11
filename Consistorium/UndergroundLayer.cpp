@@ -19,13 +19,13 @@ b2Vec2 UndergroundLayer::GetLayerRange()
 void UndergroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *world)
 {
 	Entities::EntityFactory factory(world);
-	Entities::Block *current;
+	GameEngine::IRenderable *current;
 	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
 		for (int j = GetLayerRange().x; j >= GetLayerRange().y; j -= Globals::BLOCK_WIDTH)
 		{
-			current = factory.createBlock(b2Vec2(i, j), "Ground");
-			renderer->AddRenderable(current->getRenderableComponent());
+			current = factory.createBlock(b2Vec2(i, j), "Ground")->getRenderableComponent();
+			renderer->AddRenderable(current);
 		}
 	}
 }

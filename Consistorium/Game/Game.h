@@ -32,5 +32,7 @@ public:
 
 	void handleKeyPress(SDL_Event e, b2Vec2& cameraPos, Entities::DynamicEntity* player);
 
+	void handleMousePress(SDL_Event e);
+
 	void Run();
 };

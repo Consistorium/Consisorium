@@ -18,6 +18,6 @@ namespace Entities
 
 		void init(SDL_Renderer *renderer);
 
-		void die();
+		void dig();
 	};
 }

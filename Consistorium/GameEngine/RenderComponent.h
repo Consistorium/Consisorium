@@ -11,15 +11,13 @@ namespace GameEngine {
 		b2Vec2 size_;
 		b2Body *body_;
 	public:
-		RenderComponent(std::string texturePath, b2Vec2 scale, b2Vec2 size, b2Body *body);
+		RenderComponent(std::string texturePath, b2Vec2 size, b2Body *body);
 
 		~RenderComponent();
 
 		void setTextureName(std::string value);
 		
 		std::string* getTextureName() override;
-
-		void setScale(b2Vec2 scale);
 
 		b2Vec2 getScale(SDL_Rect textureSize) override;
 

@@ -41,6 +41,8 @@ namespace GameEngine
 
 		void RemoveRenderable(IRenderable *renderable) override;
 
+		void RemoveRenderable(SDL_Point point) override;
+
 		void RenderAll(b2Vec2 cameraPos) override;
 	};
 }

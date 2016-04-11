@@ -85,6 +85,9 @@ void Game::Run()
 				// player.die();
 				handleKeyPress(e, cameraPos, &player);
 				break;
+			case SDL_MOUSEBUTTONDOWN:
+				handleMousePress(e);
+				break;
 			default:
 				break;
 			}
@@ -119,6 +122,16 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 		}
 
 		break;
+	}
+}
+
+void Game::handleMousePress(SDL_Event e)
+{
+	if (e.button.button == SDL_BUTTON_LEFT)
+	{
+		SDL_Point clickPoint;
+		SDL_GetGlobalMouseState(&clickPoint.x, &clickPoint.y);
+		printf("%d %d\n", clickPoint.x, clickPoint.y);
 	}
 }
 

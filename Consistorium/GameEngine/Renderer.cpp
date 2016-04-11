@@ -41,12 +41,32 @@ namespace GameEngine
 
 	void Renderer::RemoveRenderable(IRenderable *renderable)
 	{
-		this->renderables_.erase(
+		renderables_.erase(
 			std::remove(
-				this->renderables_.begin(),
-				this->renderables_.end(),
+				renderables_.begin(),
+				renderables_.end(),
 				renderable),
-			this->renderables_.end());
+			renderables_.end());
+	}
+
+	void Renderer::RemoveRenderable(SDL_Point point)
+	{
+		SDL_Rect rect;
+		for (auto r : renderables_)
+		{
+			auto pos = r->getPosition();
+			
+			rect.x = pos.x * Globals::PIXELS_PER_METER + 796; // This magic constant keeps the whole software industry alive.
+			rect.y = pos.y * Globals::PIXELS_PER_METER + 796; // King of job security.
+			rect.h = r->getSize().y;
+			rect.w = r->getSize().x;
+
+			if (SDL_PointInRect(&point, &rect) == SDL_TRUE)
+			{
+				printf("EXISTS");
+				RemoveRenderable(r);
+			}
+		}
 	}
 
 	void Renderer::RenderAll(b2Vec2 cameraPos)
