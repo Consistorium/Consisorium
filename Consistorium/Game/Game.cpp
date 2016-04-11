@@ -3,7 +3,7 @@
 
 #include "WorldGenerator.h"
 #include "GroundLayer.h"
-#include <UndergroundLayer.h>
+#include "UndergroundLayer.h"
 
 using namespace Entities;
 
@@ -39,8 +39,8 @@ void Game::Init()
 	// in most game scenarios.
 	//The suggested iteration count for Box2D is 8 for velocity and 3 for position.
 	timeStep_ = 1.0f / 60.0f;
-	velocityIterations_ = 100;
-	positionIterations_ = 50;
+	velocityIterations_ = 8;
+	positionIterations_ = 3;
 }
 
 void Game::Run()
@@ -88,6 +88,9 @@ void Game::Run()
 				// player.die();
 				handleKeyPress(e, cameraPos, &player);
 				break;
+			case SDL_MOUSEBUTTONDOWN:
+				handleMousePress(e);
+				break;
 			default:
 				break;
 			}
@@ -98,6 +101,8 @@ void Game::Run()
 		cameraPos.y = player.getBody()->GetPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
 		renderer_.RenderAll(cameraPos);
 		player.update();
+
+		std::cout << player.getBody()->GetPosition().x << " : " << player.getBody()->GetPosition().y << std::endl;
 	}
 }
 
@@ -125,10 +130,21 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 	}
 }
 
+void Game::handleMousePress(SDL_Event e)
+{
+	if (e.button.button == SDL_BUTTON_LEFT)
+	{
+		SDL_Point clickPoint;
+		SDL_GetGlobalMouseState(&clickPoint.x, &clickPoint.y);
+		printf("%d %d\n", clickPoint.x, clickPoint.y);
+	}
+}
+
 void moveCharacter(DynamicEntity* entity, int direction)
 {
 	float impulse = entity->getAccelerationImpulse();
-	entity->getBody()->ApplyLinearImpulse(b2Vec2(entity->getAccelerationImpulse(), 0), entity->getBody()->GetLocalCenter(), true);
+	b2Vec2 force(impulse, 0);
+	entity->getBody()->ApplyLinearImpulse(force, entity->getBody()->GetWorldCenter(), true);
 }
 
 void jump(DynamicEntity* entity)

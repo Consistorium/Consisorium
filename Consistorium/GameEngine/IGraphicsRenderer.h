@@ -15,6 +15,8 @@ namespace GameEngine {
 
 		virtual void RemoveRenderable(IRenderable *renderable) = 0;
 
+		virtual void RemoveRenderable(SDL_Point point) = 0;
+
 		virtual void RenderAll(b2Vec2 cameraPos) = 0;
 	};
 }

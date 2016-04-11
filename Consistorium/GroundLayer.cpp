@@ -20,15 +20,22 @@ b2Vec2 GroundLayer::GetLayerRange()
 void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *world)
 {
 	Entities::EntityFactory factory(world);
-	Entities::Block *current;
+	GameEngine::IRenderable *current;
 	auto min = std::min(GetLayerRange().x, GetLayerRange().y);
 	auto max = std::max(GetLayerRange().x, GetLayerRange().y);
-	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS/2; i < Globals::LAYER_WIDTH_IN_BLOCKS/2; i += Globals::BLOCK_HEIGHT)
+
+	for (float i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
-		for (int j = min; j <= max; j += Globals::BLOCK_WIDTH)
+		for (float j = min; j <= max; j += Globals::BLOCK_WIDTH)
 		{
-			current = factory.createBlock(b2Vec2(i, j), "Grass");
-			renderer->AddRenderable(current->getRenderableComponent());
+			current = factory.createBlock(b2Vec2(i, j), "Grass")->getRenderableComponent();
+			renderer->AddRenderable(current);
+		}
+		
+		if ((rand() % 3 + 1) == 1)
+		{
+			current = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine")->getRenderableComponent();
+			renderer->AddRenderable(current);
 		}
 	}
 }

@@ -13,6 +13,8 @@ namespace Globals
 	const float DEFAULT_ENTITY_HEIGHT = 80;
 	const float BLOCK_WIDTH = 31;
 	const float BLOCK_HEIGHT = 31;
+	const int TREE_WIDTH = 120;
+	const int TREE_HEIGHT = 200;
 	const float ENTITY_JUMP_POWER = 0.2;
 
 	/*

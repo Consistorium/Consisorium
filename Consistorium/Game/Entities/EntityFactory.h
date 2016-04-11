@@ -8,6 +8,7 @@
 #include "EntityIndexesEnum.h"
 #include "EntityDescriptor.h"
 #include "EntityComponents.h"
+#include "Tree.h"
 
 namespace Entities
 {
@@ -31,5 +32,7 @@ namespace Entities
 		EntityComponents createEntityComponents(EntityDescriptor descriptor);
 
 		Skeleton* createSkeleton(b2Vec2 position, std::string modelName);
+
+		Tree* createTree(b2Vec2 position, std::string modelName);
 	};
 }

@@ -99,7 +99,7 @@ namespace Entities
 		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
 		footSensorFixture->SetUserData((void*)EntityIndexes::FootSensor);
 
-		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(1, 1), b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT), body);
+		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT), body);
 		GameEngine::AnimationComponent ac("Models/Game/Player", "Idle", 40, rc.getTextureName());
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
 		return player;
@@ -117,7 +117,7 @@ namespace Entities
 			fixture = fixture->GetNext();
 		}
 
-		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(1, 1), b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
+		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
 		Block* block = new Block(rc);
 
 		return block;
@@ -132,7 +132,6 @@ namespace Entities
 		
 		GameEngine::RenderComponent* rc = new GameEngine::RenderComponent(
 			MODELS_LOCATION + descriptor.entityName + "/" + descriptor.modelName + "__001.png",
-			b2Vec2(1, 1),
 			b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT),
 			body);
 		GameEngine::AnimationComponent* ac = new GameEngine::AnimationComponent(
@@ -159,6 +158,18 @@ namespace Entities
 
 		EntityComponents components = createEntityComponents(descriptor);
 		return new Skeleton(*components.renderComponent, *components.animationComponent, Globals::ENTITY_JUMP_POWER);
+	}
+
+	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
+	{
+		float treeHeight = Globals::TREE_HEIGHT / Globals::PIXELS_PER_METER,
+			treeWidth = Globals::TREE_WIDTH / Globals::PIXELS_PER_METER;
+
+		b2Body* body = createStaticEntityBody(position, treeWidth, treeHeight);
+		GameEngine::RenderComponent rc("Models/Game/Tree/" + modelName + "__001.png", b2Vec2(Globals::TREE_WIDTH, Globals::TREE_HEIGHT), body);
+		Tree* tree = new Tree(rc);
+
+		return tree;
 	}
 
 	EntityFactory::~EntityFactory()

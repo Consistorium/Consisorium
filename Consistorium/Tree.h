@@ -6,9 +6,9 @@
 
 namespace Entities
 {
-	class Block : public GameEntity
+	class Tree : public GameEntity
 	{
 	public:
-		Block::Block(GameEngine::RenderComponent rc);
+		Tree::Tree(GameEngine::RenderComponent rc);
 	};
 }
