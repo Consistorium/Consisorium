@@ -30,7 +30,6 @@
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="GameEntity.h" />
-    <ClInclude Include="EngineConstants.h" />
     <ClInclude Include="IAnimateable.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />

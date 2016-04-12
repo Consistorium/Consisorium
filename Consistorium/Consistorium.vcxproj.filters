@@ -29,6 +29,9 @@
     <ClCompile Include="Game\Entities\Enemies\Skeleton.cpp">
       <Filter>Game\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\Tree.cpp">
+      <Filter>Game\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GroundLayer.h" />
@@ -78,6 +81,9 @@
       <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Game\Entities\EntityComponents.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Tree.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>

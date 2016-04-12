@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 
 #include <SDL/SDL.h>
 #include <UI/Window.h>
@@ -27,6 +28,7 @@ private:
 	b2Vec2 gravity_;
 	b2Timer jumpTimer_;
 	JumpContactListener* contactListener_;
+	std::vector<Entities::GameEntity*> entities_;
 public:
 	Game(SDL_Window* window);
 
@@ -34,7 +36,9 @@ public:
 
 	void handleKeyPress(SDL_Event e, b2Vec2& cameraPos, Entities::DynamicEntity* player);
 
-	void handleMousePress(SDL_Event e);
+	void handleMousePress(SDL_Event e, Entities::DynamicEntity* player);
+
+	b2Vec2 getWorldCoordinates(SDL_Point clickPoint, Entities::DynamicEntity* player);
 
 	void Run();
 };

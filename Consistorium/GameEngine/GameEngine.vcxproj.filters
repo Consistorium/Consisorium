@@ -1,38 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="AnimationManager.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="UI\Button.cpp" />
-    <ClCompile Include="UI\UIElement.cpp" />
-    <ClCompile Include="UI\Window.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="DynamicEntity.cpp" />
-    <ClCompile Include="GameEntity.cpp" />
+    <ClCompile Include="UI\Window.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="IAnimateable.h" />
-    <ClInclude Include="IGraphicsRenderer.h" />
-    <ClInclude Include="IRenderable.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="UI\Button.h" />
-    <ClInclude Include="UI\UIElement.h" />
-    <ClInclude Include="UI\Window.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="DynamicEntity.h" />
-    <ClInclude Include="GameEntity.h" />
-    <ClInclude Include="EngineConstants.h" />
+    <ClInclude Include="UI\Window.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimateable.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphicsRenderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="UI">
+      <UniqueIdentifier>{53f0fec7-a48c-4158-aa5c-86b886ab961e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{c1ec37dc-603d-4b83-a173-a20aa69055fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{7060837d-a816-4f96-890b-f9210aa447e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

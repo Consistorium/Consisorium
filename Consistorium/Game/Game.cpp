@@ -12,6 +12,7 @@ const int CAMERA_SPEED = 50;
 
 void moveCharacter(DynamicEntity* entity, int direction);
 void jump(DynamicEntity* entity);
+b2Vec2 getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player);
 
 Game::Game(SDL_Window* window)
 	: renderer_(window, Globals::PIXELS_PER_METER),
@@ -49,9 +50,11 @@ void Game::Run()
 	EntityFactory entityFactory(world_);
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
+	entities_.push_back(&player);
 
 	b2Vec2 skeletonPosition(3.0f, 4.0f);
 	Skeleton& skeleton = *entityFactory.createSkeleton(skeletonPosition, "Idle");
+	entities_.push_back(&skeleton);
 
 	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
 	
@@ -62,7 +65,7 @@ void Game::Run()
 	layers.push_back(&underground);
 
 	WorldGenerator worldGenerator(&renderer_, world_, layers);
-	worldGenerator.Build();
+	worldGenerator.Build(&entities_);
 
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
@@ -89,7 +92,7 @@ void Game::Run()
 				handleKeyPress(e, cameraPos, &player);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				handleMousePress(e);
+				handleMousePress(e, &player);
 				break;
 			default:
 				break;
@@ -129,14 +132,65 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 	}
 }
 
-void Game::handleMousePress(SDL_Event e)
+void Game::handleMousePress(SDL_Event e, DynamicEntity* player)
 {
+	
 	if (e.button.button == SDL_BUTTON_LEFT)
 	{
 		SDL_Point clickPoint;
-		SDL_GetGlobalMouseState(&clickPoint.x, &clickPoint.y);
-		printf("%d %d\n", clickPoint.x, clickPoint.y);
+		SDL_GetMouseState(&clickPoint.x, &clickPoint.y);
+		b2Vec2 worldCoords = getWorldCoordinates(clickPoint, player);
+
+		for (size_t i = 0; i < entities_.size(); i++)
+		{
+			b2Vec2 entitySize = entities_[i]->getRenderableComponent()->getSize();
+			entitySize.x /= Globals::PIXELS_PER_METER;
+			entitySize.y /= Globals::PIXELS_PER_METER;
+
+			b2Vec2 entityCoords = entities_[i]->getBody()->GetPosition();
+			if ((worldCoords.x > entityCoords.x - entitySize.x / 2)
+				&& (worldCoords.x < entityCoords.x + entitySize.x / 2))
+			{
+				if ((worldCoords.y < entityCoords.y + entitySize.y / 2)
+					&& (worldCoords.y > entityCoords.y - entitySize.y / 2))
+				{
+					renderer_.RemoveRenderable(entities_[i]->getRenderableComponent());
+					world_->DestroyBody(entities_[i]->getBody());
+					entities_.erase(entities_.begin() + i);
+				}
+			}
+		}
 	}
+}
+
+b2Vec2 Game::getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player)
+{
+	b2Vec2 worldCoords;
+	b2Vec2 playerPosition = player->getBody()->GetPosition();
+	playerPosition.x *= Globals::PIXELS_PER_METER;
+	playerPosition.y *= Globals::PIXELS_PER_METER;
+
+	int width, height;
+	SDL_GetWindowSize(window_, &width, &height);
+	
+	b2Vec2 deltaPlayer;
+	deltaPlayer.x = abs(width / 2 - clickPoint.x);
+	deltaPlayer.y = abs(height / 2 - clickPoint.y);
+
+	worldCoords.x = clickPoint.x > width / 2 ?
+		playerPosition.x + deltaPlayer.x :
+		playerPosition.x - deltaPlayer.x;
+
+	worldCoords.y = -(playerPosition.y - deltaPlayer.y) + Globals::DEFAULT_ENTITY_HEIGHT;
+	/*worldCoords.y = clickPoint.y >= height / 2 ?
+		playerPosition.y - deltaPlayer.y :
+		playerPosition.y - deltaPlayer.y;*/
+
+	worldCoords.x /= Globals::PIXELS_PER_METER;
+	worldCoords.y /= Globals::PIXELS_PER_METER;
+	printf("Clicked at world: %f : %f\n", worldCoords.x, worldCoords.y);
+
+	return worldCoords;
 }
 
 void moveCharacter(DynamicEntity* entity, int direction)

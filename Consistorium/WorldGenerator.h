@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <GameEngine/IGraphicsRenderer.h>
+#include <GameEntity.h>
 #include "IWorldLayer.h"
 
 class WorldGenerator
@@ -15,6 +16,6 @@ public:
 
 	~WorldGenerator();
 
-	void Build();
+	void Build(std::vector<Entities::GameEntity*>* entities);
 };
 

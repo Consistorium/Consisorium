@@ -11,10 +11,10 @@ WorldGenerator::~WorldGenerator()
 {
 }
 
-void WorldGenerator::Build()
+void WorldGenerator::Build(std::vector<Entities::GameEntity*>* entities)
 {
 	for (IWorldLayer *layer : layers_)
 	{
-		layer->Generate(renderer_, world_);
+		layer->Generate(renderer_, world_, entities);
 	}
 }
