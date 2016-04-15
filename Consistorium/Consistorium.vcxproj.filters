@@ -56,9 +56,6 @@
     <ClInclude Include="Game\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\GameEntity.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Menu\Menu.h">
       <Filter>Game\UI</Filter>
     </ClInclude>

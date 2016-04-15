@@ -29,4 +29,13 @@ namespace Entities
 		return &renderComponent_;
 	}
 
+	b2Vec2 GameEntity::getPosition()
+	{
+		return body_->GetPosition();
+	}
+
+	b2Vec2 GameEntity::getSize()
+	{
+		return renderComponent_.getSize();
+	}
 }

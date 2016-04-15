@@ -100,11 +100,12 @@ void Game::Run()
 		}
 
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
-		cameraPos.x = -(player.getBody()->GetPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2);
-		cameraPos.y = player.getBody()->GetPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
+		cameraPos.x = player.getPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2;
+		cameraPos.y = player.getPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
 		renderer_.RenderAll(cameraPos);
 		player.update();
 		skeleton.update();
+		
 	}
 }
 
@@ -165,6 +166,10 @@ void Game::handleMousePress(SDL_Event e, DynamicEntity* player)
 
 b2Vec2 Game::getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player)
 {
+	//Each item's position
+//	b2Vec2 playerDrawPosition = (player->getPosition().x * Globals::PIXELS_PER_METER + cameraPos.x - player->getSize().x / 2) / item->getScale(boundsRect).x;
+	//boundsRect.x = (position.x * pixelsPerMeter_ + cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
+	//boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
 	b2Vec2 worldCoords;
 	b2Vec2 playerPosition = player->getBody()->GetPosition();
 	playerPosition.x *= Globals::PIXELS_PER_METER;
@@ -180,7 +185,7 @@ b2Vec2 Game::getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player)
 	worldCoords.x = clickPoint.x > width / 2 ?
 		playerPosition.x + deltaPlayer.x :
 		playerPosition.x - deltaPlayer.x;
-
+	
 	worldCoords.y = -(playerPosition.y - deltaPlayer.y) + Globals::DEFAULT_ENTITY_HEIGHT;
 	/*worldCoords.y = clickPoint.y >= height / 2 ?
 		playerPosition.y - deltaPlayer.y :

@@ -21,5 +21,9 @@ namespace Entities
 		virtual b2BodyDef getBodyDef();
 
 		virtual b2Body* getBody();
+
+		virtual b2Vec2 getPosition();
+
+		virtual b2Vec2 getSize();
 	};
 }

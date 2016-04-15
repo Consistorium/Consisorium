@@ -90,7 +90,7 @@ namespace GameEngine
 			SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
 			SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
 			SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
-			boundsRect.x = (position.x * pixelsPerMeter_ + cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
+			boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
 			boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 		}
@@ -104,7 +104,7 @@ namespace GameEngine
 		point.y = renderablePosition.y * pixelsPerMeter_;
 		SDL_Rect rect;
 		float renderAdvance = 1.5; // used for renderering a bigger are than the screen, so the player doesnt see the magic happen
-		rect.x = (-cameraPosition.x) - 200;
+		rect.x = cameraPosition.x;
 		rect.y = cameraPosition.y;
 		
 		rect.h = height * renderAdvance; // wtf why arent you working
