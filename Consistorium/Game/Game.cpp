@@ -92,7 +92,7 @@ void Game::Run()
 				handleKeyPress(e, cameraPos, &player);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				handleMousePress(e, &player);
+				handleMousePress(e, cameraPos);
 				break;
 			default:
 				break;
@@ -133,22 +133,21 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 	}
 }
 
-void Game::handleMousePress(SDL_Event e, DynamicEntity* player)
+void Game::handleMousePress(SDL_Event e, b2Vec2 camera)
 {
-	
 	if (e.button.button == SDL_BUTTON_LEFT)
 	{
 		SDL_Point clickPoint;
 		SDL_GetMouseState(&clickPoint.x, &clickPoint.y);
-		b2Vec2 worldCoords = getWorldCoordinates(clickPoint, player);
+		b2Vec2 worldCoords = getWorldCoordinates(clickPoint, camera);
 
 		for (size_t i = 0; i < entities_.size(); i++)
 		{
-			b2Vec2 entitySize = entities_[i]->getRenderableComponent()->getSize();
+			b2Vec2 entitySize = entities_[i]->getSize();
 			entitySize.x /= Globals::PIXELS_PER_METER;
 			entitySize.y /= Globals::PIXELS_PER_METER;
 
-			b2Vec2 entityCoords = entities_[i]->getBody()->GetPosition();
+			b2Vec2 entityCoords = entities_[i]->getPosition();
 			if ((worldCoords.x > entityCoords.x - entitySize.x / 2)
 				&& (worldCoords.x < entityCoords.x + entitySize.x / 2))
 			{
@@ -164,35 +163,15 @@ void Game::handleMousePress(SDL_Event e, DynamicEntity* player)
 	}
 }
 
-b2Vec2 Game::getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player)
+b2Vec2 Game::getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera)
 {
-	//Each item's position
-//	b2Vec2 playerDrawPosition = (player->getPosition().x * Globals::PIXELS_PER_METER + cameraPos.x - player->getSize().x / 2) / item->getScale(boundsRect).x;
-	//boundsRect.x = (position.x * pixelsPerMeter_ + cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
-	//boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
+	float clickHeight = Globals::SCREEN_HEIGHT - clickPoint.y;
+	float renderingHeight = 4;
 	b2Vec2 worldCoords;
-	b2Vec2 playerPosition = player->getBody()->GetPosition();
-	playerPosition.x *= Globals::PIXELS_PER_METER;
-	playerPosition.y *= Globals::PIXELS_PER_METER;
+	worldCoords.x = (camera.x + clickPoint.x) / Globals::PIXELS_PER_METER;
+	worldCoords.y = (camera.y + clickHeight) / Globals::PIXELS_PER_METER - renderingHeight;
+	//float playerY = (camera.y + Globals::SCREEN_HEIGHT / 2) / Globals::PIXELS_PER_METER;
 
-	int width, height;
-	SDL_GetWindowSize(window_, &width, &height);
-	
-	b2Vec2 deltaPlayer;
-	deltaPlayer.x = abs(width / 2 - clickPoint.x);
-	deltaPlayer.y = abs(height / 2 - clickPoint.y);
-
-	worldCoords.x = clickPoint.x > width / 2 ?
-		playerPosition.x + deltaPlayer.x :
-		playerPosition.x - deltaPlayer.x;
-	
-	worldCoords.y = -(playerPosition.y - deltaPlayer.y) + Globals::DEFAULT_ENTITY_HEIGHT;
-	/*worldCoords.y = clickPoint.y >= height / 2 ?
-		playerPosition.y - deltaPlayer.y :
-		playerPosition.y - deltaPlayer.y;*/
-
-	worldCoords.x /= Globals::PIXELS_PER_METER;
-	worldCoords.y /= Globals::PIXELS_PER_METER;
 	printf("Clicked at world: %f : %f\n", worldCoords.x, worldCoords.y);
 
 	return worldCoords;

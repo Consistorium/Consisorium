@@ -36,9 +36,9 @@ public:
 
 	void handleKeyPress(SDL_Event e, b2Vec2& cameraPos, Entities::DynamicEntity* player);
 
-	void handleMousePress(SDL_Event e, Entities::DynamicEntity* player);
+	void handleMousePress(SDL_Event e, b2Vec2 camera);
 
-	b2Vec2 getWorldCoordinates(SDL_Point clickPoint, Entities::DynamicEntity* player);
+	b2Vec2 getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera);
 
 	void Run();
 };
