@@ -85,6 +85,11 @@ namespace GameEngine {
 			return;
 		}
 
+		if (animationStack_.top()->getIsLooping() == false)
+		{
+			return;
+		}
+
 		animationStack_.top()->setCurrentFrameIndex(0);
 		animationStack_.pop();
 	}
@@ -97,7 +102,8 @@ namespace GameEngine {
 		{
 			if (!animationStack_.top()->getIsLooping())
 			{
-				revertAnimation();
+				animationStack_.top()->setCurrentFrameIndex(0);
+				animationStack_.pop();
 			}
 
 			animationStack_.top()->setCurrentFrameIndex(0);

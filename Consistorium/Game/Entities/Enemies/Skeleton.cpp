@@ -2,9 +2,18 @@
 
 namespace Entities
 {
-	Skeleton::Skeleton(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower)
-		: DynamicEntity(rc, ac, 0.2f, 10.0f) // doesnt work with constants wtf
+	Skeleton::Skeleton(
+		GameEngine::RenderComponent& rc, 
+		GameEngine::AnimationComponent& ac, 
+		float jumpPower, 
+		float scanRange, 
+		float damage, 
+		float range,
+		float haste)
+		: Enemy(rc, ac, 0.2f, scanRange, damage, range, haste)
 	{
+		animationManager_.setAnimation("Appear", false);
+		setHealth(70);
 	}
 
 	void Skeleton::die()

@@ -43,6 +43,20 @@ namespace Entities
 		return (maxSpeed_ - (xVelocity * xDirection_)) * xDirection_;
 	}
 
+	void DynamicEntity::move()
+	{
+		float impulse = getAccelerationImpulse();
+		b2Vec2 force(impulse, 0);
+		body_->ApplyLinearImpulse(force, body_->GetWorldCenter(), true);
+	}
+
+	void DynamicEntity::jump(b2Vec2 gravity)
+	{
+		float impulse = body_->GetMass() * (-gravity.y) * getJumpPower();
+		b2Vec2 force(0, impulse);
+		body_->ApplyLinearImpulse(force, body_->GetWorldCenter(), true);
+	}
+
 	GameEngine::IAnimateable* DynamicEntity::getAnimateableComponent()
 	{
 		return &animationComponent_;

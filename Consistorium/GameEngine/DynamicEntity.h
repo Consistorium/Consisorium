@@ -26,6 +26,10 @@ namespace Entities
 
 		virtual void update();
 
+		virtual void move();
+
+		virtual void jump(b2Vec2 gravity);
+
 		virtual void setXDirection(int direction);
 
 		GameEngine::IAnimateable* getAnimateableComponent();

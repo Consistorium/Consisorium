@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Box2D/Common/b2Math.h>
 
 namespace Globals
@@ -7,6 +9,7 @@ namespace Globals
 	const int SCREEN_HEIGHT = 768;
 	/*
 	 * ENTITY CONSTANTS
+		-- haste = attacks per second
 	 */
 
 	const float DEFAULT_ENTITY_WIDTH = 40;
@@ -16,7 +19,10 @@ namespace Globals
 	const int TREE_WIDTH = 120;
 	const int TREE_HEIGHT = 200;
 	const float ENTITY_JUMP_POWER = 0.2;
-
+	const float SKELETON_SCAN_RANGE = 10.0;
+	const float SKELETON_DAMAGE = 20;
+	const float SKELETON_RANGE = 1.5;
+	const float SKELETON_HASTE = 0.3;
 	/*
 	 * World Generation
 	 */

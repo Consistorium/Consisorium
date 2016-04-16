@@ -11,6 +11,7 @@ namespace Entities
 		b2Body* body_;
 		GameEngine::RenderComponent renderComponent_;
 		b2BodyDef bodyDef_;
+		float health_;
 	public:
 		GameEntity(GameEngine::RenderComponent& renderComponent);
 
@@ -25,5 +26,11 @@ namespace Entities
 		virtual b2Vec2 getPosition();
 
 		virtual b2Vec2 getSize();
+
+		virtual int getUserData();
+
+		virtual void setHealth(float health);
+
+		virtual float getHealth();
 	};
 }

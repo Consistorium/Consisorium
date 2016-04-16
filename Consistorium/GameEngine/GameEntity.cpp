@@ -34,8 +34,26 @@ namespace Entities
 		return body_->GetPosition();
 	}
 
+	int GameEntity::getUserData()
+	{
+		return (int)body_->GetUserData();
+	}
+
 	b2Vec2 GameEntity::getSize()
 	{
 		return renderComponent_.getSize();
+	}
+
+	void GameEntity::setHealth(float health)
+	{
+		if (health >= 0)
+		{
+			health_ = health;
+		}
+	}
+
+	float GameEntity::getHealth()
+	{
+		return health_;
 	}
 }

@@ -2,16 +2,24 @@
 
 #include <SDL\SDL.h>
 #include <AnimationManager.h>
-#include "DynamicEntity.h"
+#include "Enemy.h"
 
 namespace Entities
 {
-	class Skeleton : public DynamicEntity
+	class Skeleton : public Enemy
 	{
 	private:
-		const float PLAYER_MAX_SPEED = 3;
+		const float ENTITY_MAX_SPEED = 1;
+		
 	public:
-		Skeleton(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower);
+		Skeleton(
+			GameEngine::RenderComponent& rc, 
+			GameEngine::AnimationComponent& ac, 
+			float jumpPower, 
+			float scanRange, 
+			float damage, 
+			float range,
+			float haste);
 
 		~Skeleton();
 

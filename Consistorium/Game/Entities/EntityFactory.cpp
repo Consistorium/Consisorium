@@ -24,7 +24,7 @@ namespace Entities
 
 		b2Fixture* fixture = body->GetFixtureList();
 		while (fixture != nullptr) {
-			fixture->SetUserData((void*)EntityIndexes::PlayerParts);
+			fixture->SetUserData((void*)EntityIndexes::Player);
 			fixture = fixture->GetNext();
 		}
 
@@ -77,13 +77,14 @@ namespace Entities
 			playerHeight = Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER;
 
 		b2Body* body = Capsule::create(world_, position, playerWidth, playerHeight);
+		body->SetUserData((void*)EntityIndexes::Player);
 
 		body->GetFixtureList()->SetDensity(5.0);
 		body->GetFixtureList()->SetFriction(0.3);
 
 		b2Fixture* fixture = body->GetFixtureList();
 		while (fixture != nullptr) {
-			fixture->SetUserData((void*)EntityIndexes::PlayerParts);
+			fixture->SetUserData((void*)EntityIndexes::Player);
 			fixture = fixture->GetNext();
 		}
 
@@ -111,6 +112,7 @@ namespace Entities
 			blockWidth = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
 
 		b2Body* body = createStaticEntityBody(position, blockWidth, blockHeight);
+		body->SetUserData((void*)EntityIndexes::Block);
 		b2Fixture* fixture = body->GetFixtureList();
 		while (fixture != nullptr) {
 			fixture->SetUserData((void*)EntityIndexes::Block);
@@ -148,7 +150,7 @@ namespace Entities
 		return components;
 	}
 
-	Skeleton* EntityFactory::createSkeleton(b2Vec2 position, std::string modelName)
+	Enemy* EntityFactory::createSkeleton(b2Vec2 position, std::string modelName, float scanRange, float damage, float range, float haste)
 	{
 		EntityDescriptor descriptor;
 		descriptor.animation = modelName;
@@ -157,7 +159,15 @@ namespace Entities
 		descriptor.position = position;
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
-		Skeleton *skeleton = new Skeleton(*components.renderComponent, *components.animationComponent, Globals::ENTITY_JUMP_POWER);
+		Enemy *skeleton = new Skeleton(
+			*components.renderComponent,
+			*components.animationComponent,
+			Globals::ENTITY_JUMP_POWER,
+			scanRange,
+			damage,
+			range,
+			haste);
+
 		return skeleton;
 	}
 
