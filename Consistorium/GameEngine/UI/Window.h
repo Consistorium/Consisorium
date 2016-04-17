@@ -2,17 +2,20 @@
 
 #include <SDL/SDL.h>
 
-class Window
+namespace GameEngine
 {
-private:
-	virtual void Init() = 0;
-protected:
-	SDL_Window* window_;
-	SDL_Surface* windowSurface_;
-public:
-	Window(SDL_Window* window);
-	
-	virtual ~Window();
+	class Window
+	{
+	private:
+		virtual void Init() = 0;
+	protected:
+		SDL_Window* window_;
+		SDL_Surface* windowSurface_;
+	public:
+		Window(SDL_Window* window);
 
-	virtual void Run() = 0;
-};
+		virtual ~Window();
+
+		virtual void Run() = 0;
+	};
+}

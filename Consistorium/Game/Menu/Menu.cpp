@@ -10,7 +10,7 @@
 
 bool userQuit = false;
 
-void displayButtonOnScreen(Button &button, SDL_Surface* surface);
+void displayButtonOnScreen(GameEngine::Button &button, SDL_Surface* surface);
 void* startButtonClickHandler(SDL_Window*  window);
 void* exitButtonClickHandler();
 
@@ -39,17 +39,17 @@ void Menu::handleMouseClick(SDL_Event e)
 
 void Menu::CreateButtons()
 {
-	auto badButton = new Button(0, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
+	auto badButton = new GameEngine::Button(0, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
 
 	int middleX = windowSurface_->clip_rect.w / 2;
 	int buttonX = middleX - badButton->getBounds().w / 2;
 
-	auto startButton = new Button(buttonX, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
+	auto startButton = new GameEngine::Button(buttonX, 150, DEFAULT_BTN_MODEL_NAME, "Start Game");
 	startButton->setOnClick(&startButtonClickHandler);
 
-	auto tutorialButton = new Button(buttonX, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
+	auto tutorialButton = new GameEngine::Button(buttonX, 250, DEFAULT_BTN_MODEL_NAME, "Tutorial");
 
-	auto exitButton = new Button(buttonX, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
+	auto exitButton = new GameEngine::Button(buttonX, 350, DEFAULT_BTN_MODEL_NAME, "Exit");
 	exitButton->setOnClick(&exitButtonClickHandler);
 
 	buttons_.push_back(startButton);
@@ -115,7 +115,7 @@ void* exitButtonClickHandler()
 	return nullptr;
 }
 
-void displayButtonOnScreen(Button &button, SDL_Surface* surface)
+void displayButtonOnScreen(GameEngine::Button &button, SDL_Surface* surface)
 {
 	SDL_BlitSurface(button.getModel(), &button.getModel()->clip_rect, surface, &button.getBounds());
 

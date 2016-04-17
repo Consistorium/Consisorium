@@ -1,11 +1,14 @@
 #include "Window.h"
 
-Window::Window(SDL_Window * window)
-	: window_(window)
+namespace GameEngine
 {
-	windowSurface_ = SDL_GetWindowSurface(window_);
-}
+	Window::Window(SDL_Window * window)
+		: window_(window)
+	{
+		windowSurface_ = SDL_GetWindowSurface(window_);
+	}
 
-Window::~Window()
-{
+	Window::~Window()
+	{
+	}
 }

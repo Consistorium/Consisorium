@@ -17,9 +17,6 @@
     <ClCompile Include="Game\Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Menu\Menu.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Entities\Player.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
@@ -34,6 +31,12 @@
     </ClCompile>
     <ClCompile Include="Game\Entities\Enemies\Enemy.cpp">
       <Filter>Game\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Menu\Menu.cpp">
+      <Filter>Game\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\UI\InterfaceManager.cpp">
+      <Filter>Game\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,12 +62,6 @@
     <ClInclude Include="Game\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Menu\Menu.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Menu\MouseButtonEnum.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\Player.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
@@ -89,6 +86,15 @@
     <ClInclude Include="Game\Entities\Enemies\Enemy.h">
       <Filter>Game\Entities\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Menu\Menu.h">
+      <Filter>Game\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Menu\MouseButtonEnum.h">
+      <Filter>Game\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\UI\InterfaceManager.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -100,14 +106,17 @@
     <Filter Include="Game\Globals">
       <UniqueIdentifier>{f26250fe-e904-437b-b690-c371b224f1a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\UI">
-      <UniqueIdentifier>{aea5b611-2b5b-4312-be0a-9283d4ee29f0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Utils">
       <UniqueIdentifier>{2af4bcdc-99d4-4be4-829c-0631ed9683c2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Entities\Enemies">
       <UniqueIdentifier>{f52c7d92-0175-4e4a-a0da-6d2e534291c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Menu">
+      <UniqueIdentifier>{5f7c7bbd-498a-441e-8335-0b892c92e5e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI">
+      <UniqueIdentifier>{554a29a5-0db4-4321-a7a2-5740dda4c397}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

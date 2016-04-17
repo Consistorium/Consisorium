@@ -159,6 +159,7 @@
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\main.cpp" />
     <ClCompile Include="Game\Menu\Menu.cpp" />
+    <ClCompile Include="Game\UI\InterfaceManager.cpp" />
     <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
     <ClCompile Include="GroundLayer.cpp" />
     <ClCompile Include="UndergroundLayer.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Game\Globals\Constants.h" />
     <ClInclude Include="Game\Menu\Menu.h" />
     <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
+    <ClInclude Include="Game\UI\InterfaceManager.h" />
     <ClInclude Include="Game\Utils\JumpContactListener.h" />
     <ClInclude Include="GroundLayer.h" />
     <ClInclude Include="IWorldLayer.h" />

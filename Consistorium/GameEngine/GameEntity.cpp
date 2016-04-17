@@ -56,4 +56,17 @@ namespace Entities
 	{
 		return health_;
 	}
+
+	float GameEntity::getMaxHealth()
+	{
+		return maxHealth_;
+	}
+
+	void GameEntity::setMaxHealth(float value)
+	{
+		if (value > 0)
+		{
+			maxHealth_ = 0;
+		}
+	}
 }
