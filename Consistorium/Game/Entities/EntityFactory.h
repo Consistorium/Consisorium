@@ -26,7 +26,7 @@ namespace Entities
 
 		b2Body* createDynamicEntityBody(b2Vec2 position, float width, float height);
 
-		Player* createPlayer(b2Vec2 position, std::string modelName);
+		Player* createPlayer(b2Vec2 position, std::string modelName, float health = Globals::INITIAL_PLAYER_HEALTH);
 
 		Block* createBlock(b2Vec2 position, std::string modelName);
 

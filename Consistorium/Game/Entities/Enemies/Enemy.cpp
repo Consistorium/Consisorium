@@ -40,7 +40,12 @@ namespace Entities
 
 	int locatedEnemy(b2Vec2 position, b2Vec2 enemyPosition, float range)
 	{
-		return abs(position.x - enemyPosition.x) < range;
+		if (abs(position.y - enemyPosition.y) <= 1)
+		{
+			return abs(position.x - enemyPosition.x) < range;
+		}
+
+		return 0;
 	}
 
 	int  Enemy::scan(DynamicEntity& player)
@@ -66,7 +71,7 @@ namespace Entities
 	{
 		float deltaX = ceil(getPosition().x - player.getPosition().x),
 			deltaY = ceil(getPosition().y - player.getPosition().y);
-		if (deltaX < range_ || deltaY < range_)
+		if (deltaX < range_ && deltaY < range_)
 		{
 			if (attackTimer_.GetMilliseconds()  > 1000 / haste_ )
 			{

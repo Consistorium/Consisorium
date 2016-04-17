@@ -12,8 +12,9 @@ namespace Entities
 		GameEngine::RenderComponent renderComponent_;
 		b2BodyDef bodyDef_;
 		float health_;
+		float maxHealth_;
 	public:
-		GameEntity(GameEngine::RenderComponent& renderComponent);
+		GameEntity(GameEngine::RenderComponent& rc);
 
 		virtual ~GameEntity();
 
@@ -32,5 +33,9 @@ namespace Entities
 		virtual void setHealth(float health);
 
 		virtual float getHealth();
+
+		virtual float getMaxHealth();
+
+		virtual void setMaxHealth(float health);
 	};
 }

@@ -4,6 +4,7 @@
 #include "WorldGenerator.h"
 #include "GroundLayer.h"
 #include "UndergroundLayer.h"
+#include "UI\InterfaceManager.h"
 
 using namespace Entities;
 
@@ -47,10 +48,15 @@ void Game::Init()
 void Game::Run()
 {
 	Init();
+	UI::InterfaceManager interfaceManager(windowSurface_);
+
 	EntityFactory entityFactory(world_);
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 	entities_.push_back(&player);
+	SDL_Rect playerHealthPos;
+	playerHealthPos.x = 500;
+	playerHealthPos.y = 500;
 
 	b2Vec2 skeletonPosition(3.0f, 4.0f);
 	Enemy& skeleton = *entityFactory.createSkeleton(skeletonPosition, "Idle");
@@ -107,6 +113,9 @@ void Game::Run()
 		player.update();
 		skeleton.iterateAI(player);
 		skeleton.update();
+
+		interfaceManager.showHealth(playerHealthPos, "health", player.getHealth(), player.getHealth());
+
 		if (timer.GetMilliseconds() > Globals::DAY_DURATION)
 		{
 			if (isDay)
@@ -122,6 +131,7 @@ void Game::Run()
 
 			timer.Reset();
 		}
+	
 	}
 }
 

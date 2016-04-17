@@ -9,7 +9,6 @@
 namespace Entities
 {
 	const float PLAYER_JUMP_POWER = 5.0;
-	const std::string MODELS_LOCATION = "Models/Game/";
 
 	EntityFactory::EntityFactory(b2World* world)
 		:world_(world)
@@ -71,7 +70,7 @@ namespace Entities
 		return body;
 	}
 
-	Player* EntityFactory::createPlayer(b2Vec2 position, std::string modelName)
+	Player* EntityFactory::createPlayer(b2Vec2 position, std::string modelName, float health)
 	{
 		float playerWidth = Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER,
 			playerHeight = Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER;
@@ -103,6 +102,8 @@ namespace Entities
 		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT), body);
 		GameEngine::AnimationComponent ac("Models/Game/Player", "Idle", 40, rc.getTextureName());
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
+		player->setHealth(health);
+		player->setMaxHealth(health);
 		return player;
 	}
 
@@ -133,11 +134,11 @@ namespace Entities
 			Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER);
 		
 		GameEngine::RenderComponent* rc = new GameEngine::RenderComponent(
-			MODELS_LOCATION + descriptor.entityName + "/" + descriptor.modelName + "__001.png",
+			Globals::MODELS_LOCATION + descriptor.entityName + "/" + descriptor.modelName + "__001.png",
 			b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT),
 			body);
 		GameEngine::AnimationComponent* ac = new GameEngine::AnimationComponent(
-			MODELS_LOCATION + descriptor.entityName,
+			Globals::MODELS_LOCATION + descriptor.entityName,
 			descriptor.animation,
 			animationSpeed, //default animation speed
 			rc->getTextureName());
