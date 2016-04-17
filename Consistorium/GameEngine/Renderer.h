@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <algorithm>
-
+#include "Color.h"
 #include "IGraphicsRenderer.h"
 #include "TextureManager.h"
 
@@ -29,6 +29,7 @@ namespace GameEngine
 		std::vector<IRenderable*> renderables_;
 		WorldConstraints worldConstraints;
 		int pixelsPerMeter_;
+		Color renderColor_;
 
 		SDL_bool Renderer::shouldRender(b2Vec2& renderablePosition, b2Vec2& cameraPosition, int& width, int& height);
 	public:
@@ -45,5 +46,7 @@ namespace GameEngine
 		void RemoveRenderable(SDL_Point point) override;
 
 		void RenderAll(b2Vec2 cameraPos) override;
+
+		void SetRenderColor(Color color) override;
 	};
 }

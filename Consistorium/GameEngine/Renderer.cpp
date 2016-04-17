@@ -71,7 +71,7 @@ namespace GameEngine
 
 	void Renderer::RenderAll(b2Vec2 cameraPos)
 	{
-		SDL_SetRenderDrawColor(windowRenderer_, 52, 152, 219, 255);
+		SDL_SetRenderDrawColor(windowRenderer_, renderColor_.r, renderColor_.g, renderColor_.b, renderColor_.a);
 
 		SDL_RenderClear(this->windowRenderer_);
 		SDL_Rect boundsRect;
@@ -97,6 +97,12 @@ namespace GameEngine
 
 		SDL_RenderPresent(this->windowRenderer_);
 	}
+
+	void Renderer::SetRenderColor(Color color)
+	{
+		renderColor_ = color;
+	}
+
 	SDL_bool Renderer::shouldRender(b2Vec2& renderablePosition, b2Vec2& cameraPosition, int& width, int& height)
 	{
 		SDL_Point point;

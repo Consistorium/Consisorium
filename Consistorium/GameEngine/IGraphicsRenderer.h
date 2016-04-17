@@ -2,6 +2,7 @@
 
 #include "IRenderable.h"
 #include <SDL/SDL.h>
+#include "Color.h"
 
 namespace GameEngine {
 	class IGraphicsRenderer
@@ -18,5 +19,7 @@ namespace GameEngine {
 		virtual void RemoveRenderable(SDL_Point point) = 0;
 
 		virtual void RenderAll(b2Vec2 cameraPos) = 0;
+
+		virtual void SetRenderColor(Color color) = 0;
 	};
 }

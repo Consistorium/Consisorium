@@ -80,6 +80,7 @@
     <ClInclude Include="AnimationComponent.h">
       <Filter>Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="Color.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

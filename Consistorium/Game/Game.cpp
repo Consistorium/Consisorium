@@ -80,9 +80,10 @@ void Game::Run()
 	renderer_.AddRenderable(player.getRenderableComponent());
 	b2Vec2 cameraPos(0, 0);
 
-	int i = -1;
+	b2Timer timer;
+	bool isDay = true;
+	renderer_.SetRenderColor(Globals::DAY_COLOR);
 	while (true) {
-		i++;
 		while (SDL_PollEvent(&e) != 0)
 		{
 			switch (e.type)
@@ -106,7 +107,21 @@ void Game::Run()
 		player.update();
 		skeleton.iterateAI(player);
 		skeleton.update();
-		
+		if (timer.GetMilliseconds() > Globals::DAY_DURATION)
+		{
+			if (isDay)
+			{
+				isDay = false;
+				renderer_.SetRenderColor(Globals::DAY_COLOR);
+			}
+			else
+			{
+				isDay = true;
+				renderer_.SetRenderColor(Globals::NIGHT_COLOR);
+			}
+
+			timer.Reset();
+		}
 	}
 }
 

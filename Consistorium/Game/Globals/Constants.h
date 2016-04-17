@@ -1,9 +1,13 @@
 #pragma once
 
 #include <Box2D/Common/b2Math.h>
-
+#include "Color.h"
 namespace Globals
 {
+	const Color DAY_COLOR = { 52, 152, 219, 255 };
+	const Color NIGHT_COLOR = { 44, 62, 80, 255 };
+	const int DAY_DURATION = 15 * 1000;
+
 	const int PIXELS_PER_METER = 50;
 	const int SCREEN_WIDTH = 1280;
 	const int SCREEN_HEIGHT = 768;
@@ -35,5 +39,5 @@ namespace Globals
 
 	// X-axis - inclusive values
 
-	const int LAYER_WIDTH_IN_BLOCKS = 100 * BLOCK_WIDTH;
+	const int LAYER_WIDTH_IN_BLOCKS = 500 * BLOCK_WIDTH;
 }
