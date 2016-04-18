@@ -27,6 +27,14 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 	auto min = std::min(GetLayerRange().x, GetLayerRange().y);
 	auto max = std::max(GetLayerRange().x, GetLayerRange().y);
 	srand(time(nullptr));
+	bool circle[5][5] =
+	{
+		{ false, true, true, true, false },
+		{ true, true, true, true, true },
+		{ true, true, true, true, true },
+		{ false, true, true, true, false },
+		{ false, false, true, false, false },
+	}; 
 	for (float i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
 		for (float j = min; j <= max; j += Globals::BLOCK_WIDTH)
@@ -43,6 +51,23 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 			tree->getBody()->GetFixtureList()->SetSensor(true);
 			renderer->AddRenderable(tree->getRenderableComponent());
 			entities->push_back(tree);
+		}
+		else if (rand() % 5 + 1 == 1)
+		{
+			b2Vec2 center(2 * Globals::BLOCK_WIDTH, 2 * Globals::BLOCK_WIDTH);
+			for (int k = 0; k < 5; k++)
+			{
+				for (int l = 0; l < 5; l++)
+				{
+					if (circle[k][l])
+					{
+						Entities::Block* block = factory.createBlock(b2Vec2(i - center.x + k * Globals::BLOCK_WIDTH, max - center.y + l *Globals::BLOCK_WIDTH), "Ground");
+						current = block->getRenderableComponent();
+						renderer->AddRenderable(current);
+						entities->push_back(block);
+					}
+				}
+			}
 		}
 	}
 }
