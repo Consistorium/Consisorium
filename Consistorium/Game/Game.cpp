@@ -57,10 +57,7 @@ void Game::Run()
 	SDL_Rect playerHealthPos;
 	playerHealthPos.x = 500;
 	playerHealthPos.y = 500;
-
-	b2Vec2 skeletonPosition(3.0f, 4.0f);
-	Enemy& skeleton = *entityFactory.createSkeleton(skeletonPosition, "Idle");
-	entities_.push_back(&skeleton);
+	std::vector<Enemy*> enemies;
 
 	float blockHeight = (Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER);
 	
@@ -82,7 +79,7 @@ void Game::Run()
 
 	SDL_Event e;
 
-	renderer_.AddRenderable(skeleton.getRenderableComponent());
+	
 	renderer_.AddRenderable(player.getRenderableComponent());
 	b2Vec2 cameraPos(0, 0);
 
@@ -111,8 +108,11 @@ void Game::Run()
 		cameraPos.y = player.getPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
 		renderer_.RenderAll(cameraPos);
 		player.update();
-		skeleton.iterateAI(player);
-		skeleton.update();
+		for (size_t i = 0; i < enemies.size(); i++)
+		{
+			enemies[i]->iterateAI(player);
+			enemies[i]->update();
+		}
 
 		interfaceManager.showHealth(playerHealthPos, "health", player.getHealth(), player.getHealth());
 
@@ -122,11 +122,19 @@ void Game::Run()
 			{
 				isDay = false;
 				renderer_.SetRenderColor(Globals::DAY_COLOR);
+				for (size_t i = 0; i < enemies.size(); i++)
+				{
+					renderer_.RemoveRenderable(enemies[i]->getRenderableComponent());
+					world_->DestroyBody(enemies[i]->getBody());
+				}
+
+				enemies.clear();
 			}
 			else
 			{
 				isDay = true;
 				renderer_.SetRenderColor(Globals::NIGHT_COLOR);
+				addEnemies(&entityFactory, &enemies);
 			}
 
 			timer.Reset();
@@ -191,11 +199,12 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera)
 			b2Vec2 entityCoords = entities_[i]->getPosition();
 			if (clickedOnEntity(worldCoords, entityCoords, entitySize))
 			{
-				if (entities_[i]->getUserData() == (int)EntityIndexes::Block)
+				if (entities_[i]->getUserData() != (int)EntityIndexes::Player)
 				{
 					renderer_.RemoveRenderable(entities_[i]->getRenderableComponent());
 					world_->DestroyBody(entities_[i]->getBody());
 					entities_.erase(entities_.begin() + i);
+					break;
 				}
 			}
 		}
@@ -213,4 +222,26 @@ b2Vec2 Game::getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera)
 	printf("Clicked at world: %f : %f\n", worldCoords.x, worldCoords.y);
 
 	return worldCoords;
+}
+
+void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* enemies) {
+	for (size_t i = 0; i < 5; i++)
+	{
+		int x = rand() % 100 + 1;
+		b2Vec2 skeletonPosition(x, 6.0f);
+		Enemy* skeleton = factory->createSkeleton(skeletonPosition, "Idle");
+		enemies->push_back(skeleton);
+		entities_.push_back(skeleton);
+		renderer_.AddRenderable(skeleton->getRenderableComponent());
+	}
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		int x = rand() % 100 + 1;
+		b2Vec2 skeletonPosition(-x, 6.0f);
+		Enemy* skeleton = factory->createSkeleton(skeletonPosition, "Idle");
+		enemies->push_back(skeleton);
+		entities_.push_back(skeleton);
+		renderer_.AddRenderable(skeleton->getRenderableComponent());
+	}
 }

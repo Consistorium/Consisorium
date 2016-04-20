@@ -40,5 +40,7 @@ public:
 
 	b2Vec2 getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera);
 
+	void addEnemies(Entities::EntityFactory* factory, std::vector<Entities::Enemy*>* enemies);
+
 	void Run();
 };
