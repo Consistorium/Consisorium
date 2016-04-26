@@ -34,7 +34,7 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 		{ true, true, true, true, true },
 		{ false, true, true, true, false },
 		{ false, false, true, false, false },
-	}; 
+	};
 	for (float i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
 		for (float j = min; j <= max; j += Globals::BLOCK_WIDTH)
