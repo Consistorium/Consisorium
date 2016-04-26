@@ -10,8 +10,10 @@ namespace Entities
 {
 	const float PLAYER_JUMP_POWER = 5.0;
 
-	EntityFactory::EntityFactory(b2World* world)
-		:world_(world)
+	EntityFactory::EntityFactory(b2World* world, GameEngine::IGraphicsRenderer *renderer, std::vector<Entities::GameEntity*>& entities)
+		:world_(world),
+		renderer_(renderer),
+		entities_(entities)
 	{
 	}
 
@@ -104,6 +106,9 @@ namespace Entities
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
 		player->setHealth(health);
 		player->setMaxHealth(health);
+
+		addToWorld(player);
+		
 		return player;
 	}
 
@@ -122,6 +127,8 @@ namespace Entities
 
 		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
 		Block* block = new Block(rc);
+
+		addToWorld(block);
 
 		return block;
 	}
@@ -169,6 +176,8 @@ namespace Entities
 			range,
 			haste);
 
+		addToWorld(skeleton);
+
 		return skeleton;
 	}
 
@@ -181,7 +190,16 @@ namespace Entities
 		GameEngine::RenderComponent rc("Models/Game/Tree/" + modelName + "__001.png", b2Vec2(Globals::TREE_WIDTH, Globals::TREE_HEIGHT), body);
 		Tree* tree = new Tree(rc);
 
+		addToWorld(tree);
+
 		return tree;
+	}
+
+	void EntityFactory::addToWorld(GameEntity* e)
+	{
+		renderer_->AddRenderable(e->getRenderableComponent());
+		entities_.push_back(e);
+
 	}
 
 	EntityFactory::~EntityFactory()

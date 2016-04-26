@@ -162,6 +162,7 @@
     <ClCompile Include="Game\UI\InterfaceManager.cpp" />
     <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
     <ClCompile Include="GroundLayer.cpp" />
+    <ClCompile Include="SpecialPlacesManager.cpp" />
     <ClCompile Include="UndergroundLayer.cpp" />
     <ClCompile Include="WorldGenerator.cpp" />
   </ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="Game\Utils\JumpContactListener.h" />
     <ClInclude Include="GroundLayer.h" />
     <ClInclude Include="IWorldLayer.h" />
+    <ClInclude Include="SpecialPlacesManager.h" />
     <ClInclude Include="UndergroundLayer.h" />
     <ClInclude Include="WorldGenerator.h" />
   </ItemGroup>

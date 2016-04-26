@@ -22,7 +22,7 @@ b2Vec2 GroundLayer::GetLayerRange()
 
 void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *world, std::vector<Entities::GameEntity*>* entities)
 {
-	Entities::EntityFactory factory(world);
+	Entities::EntityFactory factory(world, renderer, *entities);
 	GameEngine::IRenderable *current;
 	auto min = std::min(GetLayerRange().x, GetLayerRange().y);
 	auto max = std::max(GetLayerRange().x, GetLayerRange().y);
@@ -39,18 +39,13 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 	{
 		for (float j = min; j <= max; j += Globals::BLOCK_WIDTH)
 		{
-			Entities::Block* block = factory.createBlock(b2Vec2(i, j), "Grass");
-			current = block->getRenderableComponent();
-			renderer->AddRenderable(current);
-			entities->push_back(block);
+			factory.createBlock(b2Vec2(i, j), "Grass");
 		}
 		
 		if ((rand() % 3 + 1) == 1)
 		{
 			Entities::Tree *tree = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine");
 			tree->getBody()->GetFixtureList()->SetSensor(true);
-			renderer->AddRenderable(tree->getRenderableComponent());
-			entities->push_back(tree);
 		}
 		else if (rand() % 5 + 1 == 1)
 		{
@@ -61,10 +56,7 @@ void GroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *wor
 				{
 					if (circle[k][l])
 					{
-						Entities::Block* block = factory.createBlock(b2Vec2(i - center.x + k * Globals::BLOCK_WIDTH, max - center.y + l *Globals::BLOCK_WIDTH), "Ground");
-						current = block->getRenderableComponent();
-						renderer->AddRenderable(current);
-						entities->push_back(block);
+						factory.createBlock(b2Vec2(i - center.x + k * Globals::BLOCK_WIDTH, max - center.y + l *Globals::BLOCK_WIDTH), "Ground");
 					}
 				}
 			}

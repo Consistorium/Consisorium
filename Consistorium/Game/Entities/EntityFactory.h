@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Block.h"
 #include "Enemies\Skeleton.h"
-#include "EntityIndexesEnum.h"
+#include <GameEngine/IGraphicsRenderer.h>
 #include "EntityDescriptor.h"
 #include "EntityComponents.h"
 #include "Tree.h"
@@ -17,8 +17,12 @@ namespace Entities
 	{
 	private:
 		b2World* world_;
+		GameEngine::IGraphicsRenderer *renderer_;
+		std::vector<GameEntity*>& entities_;
+
+		void addToWorld(GameEntity *e);
 	public:
-		EntityFactory(b2World* world);
+		EntityFactory(b2World* world, GameEngine::IGraphicsRenderer *renderer, std::vector<GameEntity*>& entities);
 
 		~EntityFactory();
 

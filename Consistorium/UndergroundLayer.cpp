@@ -18,16 +18,17 @@ b2Vec2 UndergroundLayer::GetLayerRange()
 
 void UndergroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *world, std::vector<Entities::GameEntity*>* entities)
 {
-	Entities::EntityFactory factory(world);
+	Entities::EntityFactory factory(world, renderer, *entities);
 	GameEngine::IRenderable *current;
 	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
 		for (int j = GetLayerRange().x; j >= GetLayerRange().y; j -= Globals::BLOCK_WIDTH)
 		{
-			Entities::Block* block = factory.createBlock(b2Vec2(i, j), "Ground");
+			factory.createBlock(b2Vec2(i, j), "Ground");
+			/*Entities::Block* block = factory.createBlock(b2Vec2(i, j), "Ground");
 			current = block->getRenderableComponent();
 			entities->push_back(block);
-			renderer->AddRenderable(current);
+			renderer->AddRenderable(current);*/
 		}
 	}
 }

@@ -5,6 +5,7 @@
 #include "GroundLayer.h"
 #include "UndergroundLayer.h"
 #include "UI\InterfaceManager.h"
+#include "Entities/EntityIndexesEnum.h"
 
 using namespace Entities;
 
@@ -51,7 +52,7 @@ void Game::Run()
 	Init();
 	UI::InterfaceManager interfaceManager(windowSurface_);
 
-	EntityFactory entityFactory(world_);
+	EntityFactory entityFactory(world_, &renderer_, entities_);
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 	entities_.push_back(&player);
@@ -80,8 +81,6 @@ void Game::Run()
 
 	SDL_Event e;
 
-	
-	renderer_.AddRenderable(player.getRenderableComponent());
 	b2Vec2 cameraPos(0, 0);
 
 	b2Timer timer;
@@ -194,15 +193,13 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 		if (e.button.button == SDL_BUTTON_RIGHT)
 		{
 			b2Vec2 a(worldCoords.x * Globals::PIXELS_PER_METER, worldCoords.y * Globals::PIXELS_PER_METER);
-			Block *block = entityFactory.createBlock(a, "Grass");
-			renderer_.AddRenderable(block->getRenderableComponent());
-			entities_.push_back(block);
+			entityFactory.createBlock(a, "Grass");
 			return;
 		}
 		for (size_t i = 0; i < entities_.size(); i++)
 		{
 			b2Vec2 entitySize = entities_[i]->getSize();
-			entitySize.x /= Globals::PIXELS_PER_METER;
+			entitySize.x /= Globals::PIXELS_PER_METER;\
 			entitySize.y /= Globals::PIXELS_PER_METER;
 
 			b2Vec2 entityCoords = entities_[i]->getPosition();
