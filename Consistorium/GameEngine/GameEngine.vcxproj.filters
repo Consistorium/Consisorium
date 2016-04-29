@@ -35,6 +35,7 @@
     <ClCompile Include="AnimationManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="KeyboardHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utils.h" />
@@ -81,6 +82,7 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Color.h" />
+    <ClInclude Include="KeyboardHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

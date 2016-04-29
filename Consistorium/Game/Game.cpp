@@ -1,5 +1,7 @@
-#include <Game/Globals/Constants.h>
 #include "Game.h"
+
+#include <Game/Globals/Constants.h>
+#include <KeyboardHandler.h>
 
 #include "WorldGenerator.h"
 #include "GroundLayer.h"
@@ -19,8 +21,10 @@ b2Vec2 getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player);
 Game::Game(SDL_Window* window)
 	: renderer_(window, Globals::PIXELS_PER_METER),
 	Window(window),
-	gravity_(GRAVITY)
-{	
+	gravity_(GRAVITY),
+	keyboardHandler_(new KeyboardHandler()),
+	contactListener_(new JumpContactListener())
+{
 }
 
 Game::~Game()
@@ -30,8 +34,6 @@ Game::~Game()
 void Game::Init()
 {
 	world_ = new b2World(gravity_);
-	JumpContactListener listener;
-	contactListener_ = &listener;
 
 	// Define the ground body.
 	b2BodyDef groundBodyDef;
@@ -51,8 +53,8 @@ void Game::Run()
 {
 	Init();
 	UI::InterfaceManager interfaceManager(windowSurface_);
-
 	EntityFactory entityFactory(world_, &renderer_, entities_);
+
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 	entities_.push_back(&player);
@@ -74,15 +76,11 @@ void Game::Run()
 
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
-	
 	jumpTimer_.Reset();
-	JumpContactListener listener;
-	world_->SetContactListener(&listener);
+	world_->SetContactListener(contactListener_.get());
 
 	SDL_Event e;
-
 	b2Vec2 cameraPos(0, 0);
-
 	b2Timer timer;
 	bool isDay = true;
 	renderer_.SetRenderColor(Globals::DAY_COLOR);
@@ -92,16 +90,16 @@ void Game::Run()
 			switch (e.type)
 			{
 			case SDL_KEYDOWN:
-				// player.die();
-				handleKeyPress(e, cameraPos, &player);
+			case SDL_KEYUP:
+				keyboardHandler_->handleKeyPress(e, e.key.keysym.sym);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 				handleMousePress(e, cameraPos, entityFactory);
 				break;
-			default:
-				break;
 			}
 		}
+
+		handleKeyPress(&player);
 
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		cameraPos.x = player.getPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2;
@@ -143,27 +141,30 @@ void Game::Run()
 	}
 }
 
-void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
+void Game::handleKeyPress(DynamicEntity* player)
 {
-	switch (e.key.keysym.sym)
+	if (keyboardHandler_->isPressed(SDLK_LEFT))
 	{
-	case SDLK_LEFT:
 		player->setXDirection(-1);
 		player->move();
-		break;
-	case SDLK_RIGHT:
+	}
+
+	if (keyboardHandler_->isPressed(SDLK_RIGHT))
+	{
+		printf("GOING RIGHT \n");
 		player->setXDirection(1);
 		player->move();
-		break;
-	case SDLK_UP:
+	}
+
+	if (keyboardHandler_->isPressed(SDLK_UP))
+	{
 		int contacts = contactListener_->getContactsCount();
-		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 1000)
+		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 700)
 		{
+			printf("Jumping\n");
 			player->jump(gravity_);
 			jumpTimer_.Reset();
 		}
-
-		break;
 	}
 }
 

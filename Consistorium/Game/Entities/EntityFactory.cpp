@@ -17,21 +17,19 @@ namespace Entities
 	{
 	}
 
-	b2Body* EntityFactory::createDynamicEntityBody(b2Vec2 position, float width, float height) {
+	b2Body* EntityFactory::createDynamicEntityBody(b2Vec2 position, float width, float height, float friction) {
 		b2Body* body = Capsule::create(world_, position, width, height);
-
-		body->GetFixtureList()->SetDensity(5.0);
-		body->GetFixtureList()->SetFriction(0.3);
 
 		b2Fixture* fixture = body->GetFixtureList();
 		while (fixture != nullptr) {
-			fixture->SetUserData((void*)EntityIndexes::Player);
+			fixture->SetFriction(friction);
+			fixture->SetDensity(1.0);
 			fixture = fixture->GetNext();
 		}
 
 		//add foot sensor fixture
 		float sensorDim = 0.1;
-		b2Vec2 sensorCentre(0, --height / 2 - sensorDim / 2);
+		b2Vec2 sensorCentre(0, -height / 2 - sensorDim / 2);
 		b2PolygonShape polygonShape;
 		polygonShape.SetAsBox(sensorDim, sensorDim, sensorCentre, 0);
 
@@ -57,10 +55,10 @@ namespace Entities
 		vertices[7] = b2Vec2(-width / 2, -height / 2 + 0.01); // middle bottom left
 		vertices[6] = b2Vec2(-width / 2, +height / 2 - 0.01); // middle top left
 		vertices[5] = b2Vec2((-width / 2) + 0.03, +height / 2); // top left
-		vertices[4] = b2Vec2(+ width / 2 - 0.03, +height / 2); // top right
-		vertices[3] = b2Vec2(+ width / 2, +height / 2 - 0.01); // middle top right
-		vertices[2] = b2Vec2(+ width / 2, -height / 2 + 0.01); // middle bottom right
-		vertices[1] = b2Vec2(+ width / 2 - 0.03, -height / 2); // bottom right
+		vertices[4] = b2Vec2(+width / 2 - 0.03, +height / 2); // top right
+		vertices[3] = b2Vec2(+width / 2, +height / 2 - 0.01); // middle top right
+		vertices[2] = b2Vec2(+width / 2, -height / 2 + 0.01); // middle bottom right
+		vertices[1] = b2Vec2(+width / 2 - 0.03, -height / 2); // bottom right
 		vertices[0] = b2Vec2((-width / 2) + 0.03, -height / 2); // bottom left
 		chainShape.CreateLoop(vertices, 8);
 
@@ -77,32 +75,13 @@ namespace Entities
 		float playerWidth = Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER,
 			playerHeight = Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER;
 
-		b2Body* body = Capsule::create(world_, position, playerWidth, playerHeight);
+		b2Body* body = createDynamicEntityBody(position, playerWidth, playerHeight);
 		body->SetUserData((void*)EntityIndexes::Player);
 
-		body->GetFixtureList()->SetDensity(5.0);
-		body->GetFixtureList()->SetFriction(0.3);
-
 		b2Fixture* fixture = body->GetFixtureList();
-		while (fixture != nullptr) {
-			fixture->SetUserData((void*)EntityIndexes::Player);
-			fixture = fixture->GetNext();
-		}
 
-		//add foot sensor fixture
-		float sensorDim = 0.1;
-		b2Vec2 sensorCentre(0, -playerHeight / 2 - sensorDim / 2);
-		b2PolygonShape polygonShape;
-		polygonShape.SetAsBox(sensorDim, sensorDim, sensorCentre, 0);
-
-		b2FixtureDef SensorFixtureDef;
-		SensorFixtureDef.shape = &polygonShape;
-		SensorFixtureDef.isSensor = true;
-		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
-		footSensorFixture->SetUserData((void*)EntityIndexes::FootSensor);
-
-		GameEngine::RenderComponent rc("Models/Game/Player/Idle__001.png", b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT), body);
-		GameEngine::AnimationComponent ac("Models/Game/Player", "Idle", 40, rc.getTextureName());
+		GameEngine::RenderComponent rc(Globals::MODELS_LOCATION + "Player/Idle__001.png", b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT), body);
+		GameEngine::AnimationComponent ac(Globals::MODELS_LOCATION + "Player", "Idle", 40, rc.getTextureName());
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
 		player->setHealth(health);
 		player->setMaxHealth(health);
@@ -122,10 +101,11 @@ namespace Entities
 		b2Fixture* fixture = body->GetFixtureList();
 		while (fixture != nullptr) {
 			fixture->SetUserData((void*)EntityIndexes::Block);
+			fixture->SetFriction(1.0);
 			fixture = fixture->GetNext();
 		}
 
-		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
+		GameEngine::RenderComponent rc(Globals::MODELS_LOCATION + "Block/" + modelName + "__001.png", b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
 		Block* block = new Block(rc);
 
 		addToWorld(block);
@@ -187,7 +167,7 @@ namespace Entities
 			treeWidth = Globals::TREE_WIDTH / Globals::PIXELS_PER_METER;
 
 		b2Body* body = createStaticEntityBody(position, treeWidth, treeHeight);
-		GameEngine::RenderComponent rc("Models/Game/Tree/" + modelName + "__001.png", b2Vec2(Globals::TREE_WIDTH, Globals::TREE_HEIGHT), body);
+		GameEngine::RenderComponent rc(Globals::MODELS_LOCATION + "Tree/" + modelName + "__001.png", b2Vec2(Globals::TREE_WIDTH, Globals::TREE_HEIGHT), body);
 		Tree* tree = new Tree(rc);
 
 		addToWorld(tree);
