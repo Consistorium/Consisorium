@@ -34,7 +34,11 @@
     <ClCompile Include="AnimationManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="EntityManager.cpp" />
+=======
+    <ClCompile Include="KeyboardHandler.cpp" />
+>>>>>>> b925e2553798a95a432f5f159b502b1385636fca
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utils.h" />
@@ -81,7 +85,11 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Color.h" />
+<<<<<<< HEAD
     <ClInclude Include="EntityManager.h" />
+=======
+    <ClInclude Include="KeyboardHandler.h" />
+>>>>>>> b925e2553798a95a432f5f159b502b1385636fca
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

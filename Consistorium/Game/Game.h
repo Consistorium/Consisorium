@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 
 #include <SDL/SDL.h>
 #include <UI/Window.h>
@@ -11,6 +12,7 @@
 #include <SDL/SDL.h>
 #include <Renderer.h>
 #include <UI/Window.h>
+#include <KeyboardHandler.h>
 
 #include "Game.h"
 #include "Entities\EntityFactory.h"
@@ -28,14 +30,15 @@ private:
 	int32 positionIterations_;
 	b2Vec2 gravity_;
 	b2Timer jumpTimer_;
-	JumpContactListener* contactListener_;
+	std::unique_ptr<JumpContactListener> contactListener_;
 	std::vector<Entities::GameEntity*> entities_;
+	std::unique_ptr<KeyboardHandler> keyboardHandler_;
 public:
 	Game(SDL_Window* window);
 
 	~Game();
 
-	void handleKeyPress(SDL_Event e, b2Vec2& cameraPos, Entities::DynamicEntity* player);
+	void handleKeyPress(Entities::DynamicEntity* player);
 
 	void handleMousePress(SDL_Event e, b2Vec2 camera, Entities::EntityFactory entityFactory, EntityManager& eManager);
 

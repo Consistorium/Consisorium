@@ -17,6 +17,7 @@
     <ClCompile Include="DynamicEntity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
+    <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="IAnimateable.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />
+    <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="TextureManager.h" />

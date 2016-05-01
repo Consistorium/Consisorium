@@ -52,9 +52,10 @@ namespace Entities
 
 	void DynamicEntity::jump(b2Vec2 gravity)
 	{
-		float impulse = body_->GetMass() * (-gravity.y) * getJumpPower();
-		b2Vec2 force(0, impulse);
-		body_->ApplyLinearImpulse(force, body_->GetWorldCenter(), true);
+		b2Vec2 oldVelocity = body_->GetLinearVelocity();
+		float jumpForce = body_->GetMass() * getJumpPower() * (-gravity.y);
+		b2Vec2 impulse(0, jumpForce);
+		body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 	}
 
 	GameEngine::IAnimateable* DynamicEntity::getAnimateableComponent()
