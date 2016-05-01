@@ -2,8 +2,8 @@
 
 namespace Entities
 {
-	GameEntity::GameEntity(GameEngine::RenderComponent& rc)
-		: body_(rc.getBody()),
+	GameEntity::GameEntity(b2Body* body, GameEngine::RenderComponent* rc)
+		: body_(body),
 		renderComponent_(rc)
 	{
 	}
@@ -19,14 +19,9 @@ namespace Entities
 		return bodyDef_;
 	}
 
-	b2Body* GameEntity::getBody()
-	{
-		return renderComponent_.getBody();
-	}
-
 	GameEngine::IRenderable* GameEntity::getRenderableComponent()
 	{
-		return &renderComponent_;
+		return renderComponent_;
 	}
 
 	b2Vec2 GameEntity::getPosition()
@@ -41,7 +36,7 @@ namespace Entities
 
 	b2Vec2 GameEntity::getSize()
 	{
-		return renderComponent_.getSize();
+		return renderComponent_->getSize();
 	}
 
 	void GameEntity::setHealth(float health)
@@ -68,5 +63,10 @@ namespace Entities
 		{
 			maxHealth_ = 0;
 		}
+	}
+
+	b2Body* GameEntity::getBody()
+	{
+		return body_;
 	}
 }

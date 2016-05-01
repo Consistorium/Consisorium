@@ -6,14 +6,15 @@
 namespace Entities
 {
 	Enemy::Enemy(
-		GameEngine::RenderComponent& rc,
-		GameEngine::AnimationComponent& ac,
+		b2Body* body,
+		GameEngine::RenderComponent* rc,
+		GameEngine::AnimationComponent* ac,
 		float jumpPower,
 		float scanRange,
 		float damage,
 		float range,
 		float haste)
-		:DynamicEntity(rc, ac, jumpPower, 8.0f),
+		:DynamicEntity(body, rc, ac, jumpPower, 8.0f),
 		scanRange_(scanRange),
 		damage_(damage),
 		range_(range),

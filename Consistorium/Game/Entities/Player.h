@@ -11,7 +11,7 @@ namespace Entities
 	private:
 		const float PLAYER_MAX_SPEED = 3;
 	public:
-		Player(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower);
+		Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac, float jumpPower);
 
 		~Player();
 

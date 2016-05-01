@@ -2,9 +2,9 @@
 
 namespace Entities
 {
-	DynamicEntity::DynamicEntity(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower, float maxSpeed)
-		: GameEntity(rc),
-		animationComponent_(ac.getAnimationsFolder(), ac.getDefaultAnimation(), ac.getAnimationSpeed(), renderComponent_.getTextureName()),
+	DynamicEntity::DynamicEntity(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac, float jumpPower, float maxSpeed)
+		: GameEntity(body, rc),
+		animationComponent_(ac),
 		animationManager_(animationComponent_),
 		jumpPower_(jumpPower),
 		maxSpeed_(maxSpeed),
@@ -60,6 +60,6 @@ namespace Entities
 
 	GameEngine::IAnimateable* DynamicEntity::getAnimateableComponent()
 	{
-		return &animationComponent_;
+		return animationComponent_;
 	}
 }

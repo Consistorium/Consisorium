@@ -9,4 +9,7 @@ struct EntityDescriptor
 	std::string modelName;
 	std::string entityName;
 	b2Vec2 position;
+	double width;
+	double height;
+	b2BodyType bodyType;
 };

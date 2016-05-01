@@ -9,6 +9,6 @@ namespace Entities
 	class Tree : public GameEntity
 	{
 	public:
-		Tree::Tree(GameEngine::RenderComponent rc);
+		Tree::Tree(b2Body* body, GameEngine::RenderComponent* rc);
 	};
 }

@@ -2,8 +2,8 @@
 
 namespace Entities
 {
-	Block::Block(GameEngine::RenderComponent rc)
-		: GameEntity(rc)
+	Block::Block(b2Body* body, GameEngine::RenderComponent* rc)
+		: GameEntity(body, rc)
 	{
 	}
 }

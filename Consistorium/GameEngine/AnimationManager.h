@@ -12,7 +12,7 @@ namespace GameEngine {
 	class AnimationManager
 	{
 	private:
-		AnimationComponent animationComponent_;
+		AnimationComponent* animationComponent_;
 		std::map<std::string, Animation*> entityAnimations_;
 		std::stack<Animation*> animationStack_;
 		float totalMillisecondsElapsed_;
@@ -20,7 +20,7 @@ namespace GameEngine {
 
 		void loadEntityAnimations();
 	public:
-		AnimationManager(AnimationComponent animationComponent_);
+		AnimationManager(AnimationComponent* animationComponent_);
 
 		~AnimationManager();
 

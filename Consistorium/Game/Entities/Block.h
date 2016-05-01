@@ -9,6 +9,6 @@ namespace Entities
 	class Block : public GameEntity
 	{
 	public:
-		Block::Block(GameEngine::RenderComponent rc);
+		Block::Block(b2Body* body, GameEngine::RenderComponent* rc);
 	};
 }

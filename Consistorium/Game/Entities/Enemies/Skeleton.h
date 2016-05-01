@@ -13,8 +13,9 @@ namespace Entities
 		
 	public:
 		Skeleton(
-			GameEngine::RenderComponent& rc, 
-			GameEngine::AnimationComponent& ac, 
+			b2Body* body,
+			GameEngine::RenderComponent* rc, 
+			GameEngine::AnimationComponent* ac, 
 			float jumpPower, 
 			float scanRange, 
 			float damage, 

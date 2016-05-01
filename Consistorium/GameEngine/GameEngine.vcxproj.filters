@@ -1,20 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="UI\Window.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\UIElement.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
+    <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="UI\Button.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="DynamicEntity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
     <ClCompile Include="GameEntity.cpp">
       <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIElement.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Window.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Rendering</Filter>
@@ -25,45 +29,57 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationComponent.cpp">
+    <ClCompile Include="Animation.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
+    <ClCompile Include="AnimationComponent.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
     <ClCompile Include="AnimationManager.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="EntityManager.cpp" />
-=======
-    <ClCompile Include="KeyboardHandler.cpp" />
->>>>>>> b925e2553798a95a432f5f159b502b1385636fca
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="UI\Window.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\UIElement.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="DynamicEntity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="GameEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Rendering</Filter>
+    <ClInclude Include="UI\Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIElement.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Window.h">
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager.h">
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="IAnimateable.h">
@@ -75,34 +91,22 @@
     <ClInclude Include="IRenderable.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationManager.h">
-      <Filter>Rendering</Filter>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationComponent.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h" />
-<<<<<<< HEAD
-    <ClInclude Include="EntityManager.h" />
-=======
-    <ClInclude Include="KeyboardHandler.h" />
->>>>>>> b925e2553798a95a432f5f159b502b1385636fca
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UI">
-      <UniqueIdentifier>{53f0fec7-a48c-4158-aa5c-86b886ab961e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities">
-      <UniqueIdentifier>{c1ec37dc-603d-4b83-a173-a20aa69055fb}</UniqueIdentifier>
+      <UniqueIdentifier>{062f8c42-9ad2-489a-a7f9-b008f479624e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Rendering">
-      <UniqueIdentifier>{7060837d-a816-4f96-890b-f9210aa447e0}</UniqueIdentifier>
+      <UniqueIdentifier>{4d639e9d-bd17-42f9-b0da-fcb3790dbcb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{2f0a1c48-ea26-48f8-a0a7-2d1090d15f6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

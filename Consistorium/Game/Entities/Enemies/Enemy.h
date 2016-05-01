@@ -15,8 +15,9 @@ namespace Entities
 		float haste_;
 	public:
 		Enemy(
-			GameEngine::RenderComponent& rc,
-			GameEngine::AnimationComponent& ac,
+			b2Body* body,
+			GameEngine::RenderComponent* rc,
+			GameEngine::AnimationComponent* ac,
 			float jumpPower,
 			float scanRange,
 			float damage,
