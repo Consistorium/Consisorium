@@ -15,6 +15,7 @@
 #include "Game.h"
 #include "Entities\EntityFactory.h"
 #include "Utils\JumpContactListener.h"
+#include <EntityManager.h>
 
 class Game : public GameEngine::Window
 {
@@ -36,9 +37,7 @@ public:
 
 	void handleKeyPress(SDL_Event e, b2Vec2& cameraPos, Entities::DynamicEntity* player);
 
-	void handleMousePress(SDL_Event e, b2Vec2 camera, Entities::EntityFactory entityFactory);
-
-	b2Vec2 getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera);
+	void handleMousePress(SDL_Event e, b2Vec2 camera, Entities::EntityFactory entityFactory, EntityManager& eManager);
 
 	void addEnemies(Entities::EntityFactory* factory, std::vector<Entities::Enemy*>* enemies);
 

@@ -26,35 +26,19 @@ namespace GameEngine {
 		std::string folder = animationComponent_.getAnimationsFolder();
 
 		std::map<std::string, std::vector<std::string>> animationMap;
-		// read directory
-		DIR *directory;
-		struct dirent *dir;
-		directory = opendir(folder.c_str());
-		if (directory)
+		std::vector<std::string> result = Utils::getDirectoryContents(folder);
+
+		for (auto file : result)
 		{
-			std::vector<std::string> result;
+			auto fileParts = Utils::split(file, '_');
+			auto fullName = animationComponent_.getAnimationsFolder() + '/' + file;
+			animationMap[fileParts[0]].push_back(fullName);
+		}
 
-			while ((dir = readdir(directory)) != nullptr)
-			{
-				std::string s(dir->d_name);
-				result.push_back(s);
-			}
-
-			closedir(directory);
-
-			for (auto file : result)
-			{
-				auto fileParts = Utils::split(file, '_');
-				auto fullName = animationComponent_.getAnimationsFolder() + '/' + file;
-				animationMap[fileParts[0]].push_back(fullName);
-			}
-
-
-			for (auto pair : animationMap)
-			{
-				Animation *animation = new Animation(&animationComponent_, pair.first, pair.second);
-				entityAnimations_[animation->getAnimationName()] = animation;
-			}
+		for (auto pair : animationMap)
+		{
+			Animation *animation = new Animation(&animationComponent_, pair.first, pair.second);
+			entityAnimations_[animation->getAnimationName()] = animation;
 		}
 	}
 

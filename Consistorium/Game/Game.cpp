@@ -6,6 +6,8 @@
 #include "UndergroundLayer.h"
 #include "UI\InterfaceManager.h"
 #include "Entities/EntityIndexesEnum.h"
+#include <SpecialPlacesManager.h>
+#include <ctime>
 
 using namespace Entities;
 
@@ -44,7 +46,7 @@ void Game::Init()
 	timeStep_ = 1.0f / 60.0f;
 	velocityIterations_ = 8;
 	positionIterations_ = 3;
-
+	srand(time(nullptr));
 }
 
 void Game::Run()
@@ -52,7 +54,8 @@ void Game::Run()
 	Init();
 	UI::InterfaceManager interfaceManager(windowSurface_);
 
-	EntityFactory entityFactory(world_, &renderer_, entities_);
+	EntityManager entityManager_(world_, &renderer_, entities_);
+	EntityFactory entityFactory(entityManager_);
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 	entities_.push_back(&player);
@@ -68,10 +71,8 @@ void Game::Run()
 	layers.push_back(&ground);
 	UndergroundLayer underground;
 	layers.push_back(&underground);
-
-	WorldGenerator worldGenerator(&renderer_, world_, layers);
+	WorldGenerator worldGenerator(entityManager_, layers);
 	worldGenerator.Build(&entities_);
-
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
 	
@@ -86,6 +87,7 @@ void Game::Run()
 	b2Timer timer;
 	bool isDay = true;
 	renderer_.SetRenderColor(Globals::DAY_COLOR);
+
 	while (true) {
 		while (SDL_PollEvent(&e) != 0)
 		{
@@ -96,7 +98,7 @@ void Game::Run()
 				handleKeyPress(e, cameraPos, &player);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				handleMousePress(e, cameraPos, entityFactory);
+				handleMousePress(e, cameraPos, entityFactory, entityManager_);
 				break;
 			default:
 				break;
@@ -167,70 +169,35 @@ void Game::handleKeyPress(SDL_Event e, b2Vec2& cameraPos, DynamicEntity* player)
 	}
 }
 
-int clickedOnEntity(b2Vec2 clickPoint, b2Vec2 entityPosition, b2Vec2 entitySize)
+void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFactory, EntityManager& eManager)
 {
-	if ((clickPoint.x > entityPosition.x - entitySize.x / 2)
-		&& (clickPoint.x < entityPosition.x + entitySize.x / 2))
+	SDL_Point clickPoint;
+	SDL_GetMouseState(&clickPoint.x, &clickPoint.y);
+	b2Vec2 worldCoords = eManager.getWorldCoordinates(clickPoint, camera);
+	if (e.button.button == SDL_BUTTON_RIGHT)
 	{
-		if ((clickPoint.y < entityPosition.y + entitySize.y / 2)
-			&& (clickPoint.y > entityPosition.y - entitySize.y / 2))
-		{
-			return 1;
-		}
+		float endX = worldCoords.x * Globals::PIXELS_PER_METER - (((int)worldCoords.x * Globals::PIXELS_PER_METER) % (int)Globals::BLOCK_WIDTH);
+		float endY = worldCoords.y * Globals::PIXELS_PER_METER - (((int)worldCoords.y * Globals::PIXELS_PER_METER) % (int)Globals::BLOCK_HEIGHT);
+		endX += Globals::BLOCK_WIDTH / 2;
+		endY += Globals::BLOCK_HEIGHT/ 2;
+		b2Vec2 a(endX, endY);
+		entityFactory.createBlock(a, "Grass");
+		return;
 	}
+	
+	int entityIndex = -1;
+	GameEntity* entity = eManager.getClickedEntity(worldCoords, &entityIndex);
 
-	return 0;
-}
-
-void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFactory)
-{
-	if (e.button.button == SDL_BUTTON_LEFT ||
-		e.button.button == SDL_BUTTON_RIGHT)
+	if (entity != nullptr)
 	{
-		SDL_Point clickPoint;
-		SDL_GetMouseState(&clickPoint.x, &clickPoint.y);
-		b2Vec2 worldCoords = getWorldCoordinates(clickPoint, camera);
-		if (e.button.button == SDL_BUTTON_RIGHT)
+		if (e.button.button == SDL_BUTTON_LEFT)
 		{
-			b2Vec2 a(worldCoords.x * Globals::PIXELS_PER_METER, worldCoords.y * Globals::PIXELS_PER_METER);
-			entityFactory.createBlock(a, "Grass");
-			return;
-		}
-		for (size_t i = 0; i < entities_.size(); i++)
-		{
-			b2Vec2 entitySize = entities_[i]->getSize();
-			entitySize.x /= Globals::PIXELS_PER_METER;\
-			entitySize.y /= Globals::PIXELS_PER_METER;
-
-			b2Vec2 entityCoords = entities_[i]->getPosition();
-			if (clickedOnEntity(worldCoords, entityCoords, entitySize))
+			if (entity->getUserData() != (int)EntityIndexes::Player)
 			{
-				if (e.button.button == SDL_BUTTON_LEFT)
-				{
-					if (entities_[i]->getUserData() != (int)EntityIndexes::Player)
-					{
-						renderer_.RemoveRenderable(entities_[i]->getRenderableComponent());
-						world_->DestroyBody(entities_[i]->getBody());
-						entities_.erase(entities_.begin() + i);
-						break;
-					}
-				}
+				
 			}
 		}
 	}
-}
-
-b2Vec2 Game::getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera)
-{
-	float clickHeight = Globals::SCREEN_HEIGHT - clickPoint.y;
-	float renderingHeight = 4;
-	b2Vec2 worldCoords;
-	worldCoords.x = (camera.x + clickPoint.x) / Globals::PIXELS_PER_METER;
-	worldCoords.y = (camera.y + clickHeight) / Globals::PIXELS_PER_METER - renderingHeight;
-
-	//printf("Clicked at world: %f : %f\n", worldCoords.x, worldCoords.y);
-
-	return worldCoords;
 }
 
 void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* enemies) {
@@ -240,8 +207,6 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 		b2Vec2 skeletonPosition(x, 6.0f);
 		Enemy* skeleton = factory->createSkeleton(skeletonPosition, "Idle");
 		enemies->push_back(skeleton);
-		entities_.push_back(skeleton);
-		renderer_.AddRenderable(skeleton->getRenderableComponent());
 	}
 
 	for (size_t i = 0; i < 5; i++)
@@ -250,7 +215,5 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 		b2Vec2 skeletonPosition(-x, 6.0f);
 		Enemy* skeleton = factory->createSkeleton(skeletonPosition, "Idle");
 		enemies->push_back(skeleton);
-		entities_.push_back(skeleton);
-		renderer_.AddRenderable(skeleton->getRenderableComponent());
 	}
 }

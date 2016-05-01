@@ -16,9 +16,9 @@ b2Vec2 UndergroundLayer::GetLayerRange()
 	return Globals::UNDERGROUND_LAYER_HEIGHT_RANGE;
 }
 
-void UndergroundLayer::Generate(GameEngine::IGraphicsRenderer *renderer, b2World *world, std::vector<Entities::GameEntity*>* entities)
+void UndergroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& placesManager)
 {
-	Entities::EntityFactory factory(world, renderer, *entities);
+	Entities::EntityFactory factory(entityManager);
 	GameEngine::IRenderable *current;
 	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{

@@ -10,19 +10,16 @@
 #include "EntityDescriptor.h"
 #include "EntityComponents.h"
 #include "Tree.h"
+#include <EntityManager.h>
 
 namespace Entities
 {
 	class EntityFactory
 	{
 	private:
-		b2World* world_;
-		GameEngine::IGraphicsRenderer *renderer_;
-		std::vector<GameEntity*>& entities_;
-
-		void addToWorld(GameEntity *e);
+		EntityManager& entityManager_;
 	public:
-		EntityFactory(b2World* world, GameEngine::IGraphicsRenderer *renderer, std::vector<GameEntity*>& entities);
+		EntityFactory(EntityManager& entityManager);
 
 		~EntityFactory();
 
@@ -33,6 +30,8 @@ namespace Entities
 		Player* createPlayer(b2Vec2 position, std::string modelName, float health = Globals::INITIAL_PLAYER_HEALTH);
 
 		Block* createBlock(b2Vec2 position, std::string modelName);
+
+		GameEntity* createFromName(b2Vec2 position, std::string name);
 
 		EntityComponents createEntityComponents(EntityDescriptor descriptor, int animationSpeed);
 

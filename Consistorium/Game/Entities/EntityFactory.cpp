@@ -10,15 +10,13 @@ namespace Entities
 {
 	const float PLAYER_JUMP_POWER = 5.0;
 
-	EntityFactory::EntityFactory(b2World* world, GameEngine::IGraphicsRenderer *renderer, std::vector<Entities::GameEntity*>& entities)
-		:world_(world),
-		renderer_(renderer),
-		entities_(entities)
+	EntityFactory::EntityFactory(EntityManager& entityManager)
+		: entityManager_(entityManager)
 	{
 	}
 
 	b2Body* EntityFactory::createDynamicEntityBody(b2Vec2 position, float width, float height) {
-		b2Body* body = Capsule::create(world_, position, width, height);
+		b2Body* body = Capsule::create(entityManager_.getWorld(), position, width, height);
 
 		body->GetFixtureList()->SetDensity(5.0);
 		body->GetFixtureList()->SetFriction(0.3);
@@ -49,7 +47,7 @@ namespace Entities
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_staticBody;
 		bodyDef.position.Set(position.x / Globals::PIXELS_PER_METER, position.y / Globals::PIXELS_PER_METER);
-		b2Body* body = world_->CreateBody(&bodyDef);
+		b2Body* body = entityManager_.getWorld()->CreateBody(&bodyDef);
 
 		b2ChainShape chainShape;
 
@@ -77,7 +75,7 @@ namespace Entities
 		float playerWidth = Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER,
 			playerHeight = Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER;
 
-		b2Body* body = Capsule::create(world_, position, playerWidth, playerHeight);
+		b2Body* body = Capsule::create(entityManager_.getWorld(), position, playerWidth, playerHeight);
 		body->SetUserData((void*)EntityIndexes::Player);
 
 		body->GetFixtureList()->SetDensity(5.0);
@@ -107,7 +105,7 @@ namespace Entities
 		player->setHealth(health);
 		player->setMaxHealth(health);
 
-		addToWorld(player);
+		entityManager_.addToWorld(player);
 		
 		return player;
 	}
@@ -128,9 +126,20 @@ namespace Entities
 		GameEngine::RenderComponent rc("Models/Game/Block/" + modelName + "__001.png", b2Vec2(Globals::BLOCK_WIDTH, Globals::BLOCK_HEIGHT), body);
 		Block* block = new Block(rc);
 
-		addToWorld(block);
+		entityManager_.addToWorld(block);
 
 		return block;
+	}
+
+	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name)
+	{
+		GameEntity *result = nullptr;
+		if (name.compare("grass") == 0)
+		{
+			result = createBlock(position, "Ground");
+		}
+
+		return result;
 	}
 
 	EntityComponents EntityFactory::createEntityComponents(EntityDescriptor descriptor, int animationSpeed)
@@ -167,6 +176,7 @@ namespace Entities
 		descriptor.position = position;
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
+
 		Enemy *skeleton = new Skeleton(
 			*components.renderComponent,
 			*components.animationComponent,
@@ -176,7 +186,7 @@ namespace Entities
 			range,
 			haste);
 
-		addToWorld(skeleton);
+		entityManager_.addToWorld(skeleton);
 
 		return skeleton;
 	}
@@ -190,19 +200,13 @@ namespace Entities
 		GameEngine::RenderComponent rc("Models/Game/Tree/" + modelName + "__001.png", b2Vec2(Globals::TREE_WIDTH, Globals::TREE_HEIGHT), body);
 		Tree* tree = new Tree(rc);
 
-		addToWorld(tree);
+		entityManager_.addToWorld(tree);
 
 		return tree;
 	}
 
-	void EntityFactory::addToWorld(GameEntity* e)
-	{
-		renderer_->AddRenderable(e->getRenderableComponent());
-		entities_.push_back(e);
-
-	}
-
 	EntityFactory::~EntityFactory()
 	{
+
 	}
 }

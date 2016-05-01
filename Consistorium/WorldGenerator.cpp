@@ -1,8 +1,7 @@
 #include "WorldGenerator.h"
 
-WorldGenerator::WorldGenerator(GameEngine::IGraphicsRenderer* renderer, b2World* world, std::vector<IWorldLayer*> layers)
-	: renderer_(renderer),
-	world_(world),
+WorldGenerator::WorldGenerator(EntityManager& entityManager, std::vector<IWorldLayer*> layers)
+	: entityManager_(entityManager),
 	layers_(layers)
 {
 }
@@ -15,6 +14,6 @@ void WorldGenerator::Build(std::vector<Entities::GameEntity*>* entities)
 {
 	for (IWorldLayer *layer : layers_)
 	{
-		layer->Generate(renderer_, world_, entities);
+		layer->Generate(entityManager_, placesManager_);
 	}
 }

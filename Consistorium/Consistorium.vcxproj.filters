@@ -39,6 +39,7 @@
       <Filter>Game\UI</Filter>
     </ClCompile>
     <ClCompile Include="SpecialPlacesManager.cpp" />
+    <ClCompile Include="SpecialPlace.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GroundLayer.h" />
@@ -97,6 +98,7 @@
       <Filter>Game\UI</Filter>
     </ClInclude>
     <ClInclude Include="SpecialPlacesManager.h" />
+    <ClInclude Include="SpecialPlace.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

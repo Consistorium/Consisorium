@@ -4,15 +4,16 @@
 #include <GameEngine/IGraphicsRenderer.h>
 #include <GameEntity.h>
 #include "IWorldLayer.h"
+#include <SpecialPlacesManager.h>
 
 class WorldGenerator
 {
 private:
-	GameEngine::IGraphicsRenderer *renderer_;
 	std::vector<IWorldLayer*> layers_;
-	b2World *world_;
+	EntityManager& entityManager_;
+	SpecialPlacesManager placesManager_;
 public:
-	WorldGenerator(GameEngine::IGraphicsRenderer *renderer, b2World *world, std::vector<IWorldLayer*> layers);
+	WorldGenerator(EntityManager& entityManager, std::vector<IWorldLayer*> layers);
 
 	~WorldGenerator();
 

@@ -15,6 +15,7 @@
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="DynamicEntity.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -22,7 +23,6 @@
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
     <ClCompile Include="UI\Window.cpp" />
-    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -30,6 +30,7 @@
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DynamicEntity.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="IAnimateable.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
