@@ -73,7 +73,7 @@ namespace Entities
 
 		GameEngine::RenderComponent* rc = new GameEngine::RenderComponent(
 			Globals::MODELS_LOCATION + descriptor.entityName + "/" + descriptor.modelName + "__001.png",
-			b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT));
+			b2Vec2(descriptor.width * Globals::PIXELS_PER_METER, descriptor.height * Globals::PIXELS_PER_METER));
 
 		GameEngine::AnimationComponent* ac = new GameEngine::AnimationComponent(
 			Globals::MODELS_LOCATION + descriptor.entityName,
@@ -143,8 +143,8 @@ namespace Entities
 		descriptor.modelName = modelName;
 		descriptor.position = position;
 		descriptor.bodyType = b2_staticBody;
-		descriptor.width = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
-		descriptor.height = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
+		descriptor.width = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
+		descriptor.height = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
 		components.body->SetUserData((void*)EntityIndexes::Block);
@@ -198,8 +198,8 @@ namespace Entities
 		descriptor.modelName = modelName;
 		descriptor.position = position;
 		descriptor.bodyType = b2_staticBody;
-		descriptor.width = Globals::TREE_HEIGHT / Globals::PIXELS_PER_METER;
-		descriptor.height = Globals::TREE_WIDTH / Globals::PIXELS_PER_METER;
+		descriptor.width = Globals::TREE_WIDTH / Globals::PIXELS_PER_METER;
+		descriptor.height = Globals::TREE_HEIGHT / Globals::PIXELS_PER_METER;
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
 

@@ -87,6 +87,7 @@ void Game::Run()
 	renderer_.SetRenderColor(Globals::DAY_COLOR);
 
 	while (true) {
+		printf("%f\n", player.getPosition().y);
 		while (SDL_PollEvent(&e) != 0)
 		{
 			switch (e.type)
