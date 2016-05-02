@@ -13,14 +13,16 @@ namespace Entities
 		int xDirection_;
 		float jumpPower_;
 		float maxSpeed_;
-		GameEngine::AnimationComponent animationComponent_;
+		float scanRange_;
+		float range_;
+		float damage_;
+		float haste_;
+		GameEngine::AnimationComponent* animationComponent_;
 		GameEngine::AnimationManager animationManager_;
 	public:
-		DynamicEntity(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower, float maxSpeed);
+		DynamicEntity(b2Body*, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac);
 
 		virtual float getJumpPower();
-
-		virtual void setJumpPower(float power);
 
 		virtual float getAccelerationImpulse();
 

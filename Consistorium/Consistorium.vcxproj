@@ -94,7 +94,7 @@
       </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;C:\Users\radostin\Desktop\Consistorium\Consistorium\Dependencies\dlls;$(SolutionDir)\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -127,7 +127,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;C:\Users\radostin\Desktop\Consistorium\Consistorium\Dependencies\dlls;$(SolutionDir)\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -177,6 +177,7 @@
     <ClInclude Include="Game\Entities\EntityFactory.h" />
     <ClInclude Include="Game\Entities\EntityIndexesEnum.h" />
     <ClInclude Include="Game\Entities\EntityNames.h" />
+    <ClInclude Include="Game\Entities\Header.h" />
     <ClInclude Include="Game\Entities\Player.h" />
     <ClInclude Include="Game\Entities\Tree.h" />
     <ClInclude Include="Game\Game.h" />

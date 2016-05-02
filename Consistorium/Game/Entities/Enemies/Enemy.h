@@ -1,32 +1,24 @@
 #pragma once
 
 #include <vector>
-#include <DynamicEntity.h>
+#include <GameEngine\FluentEntity.h>
 
 namespace Entities
 {
-	class Enemy : public DynamicEntity
+	class Enemy : public FluentEntity
 	{
 	private:
-		float scanRange_;
-		float range_;
-		float damage_;
 		b2Timer attackTimer_;
-		float haste_;
 	public:
 		Enemy(
-			GameEngine::RenderComponent& rc,
-			GameEngine::AnimationComponent& ac,
-			float jumpPower,
-			float scanRange,
-			float damage,
-			float range,
-			float haste);
+			b2Body* body,
+			GameEngine::RenderComponent* rc,
+			GameEngine::AnimationComponent* ac);
 
-		virtual void iterateAI(DynamicEntity& player);
+		virtual void iterateAI(FluentEntity& player);
 
-		virtual int scan(DynamicEntity& player);
+		virtual int scan(FluentEntity& player);
 
-		virtual void tryAttack(DynamicEntity& player);
+		virtual void tryAttack(FluentEntity& player);
 	};
 }

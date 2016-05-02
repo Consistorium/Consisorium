@@ -6,23 +6,15 @@
 namespace Entities
 {
 	Enemy::Enemy(
-		GameEngine::RenderComponent& rc,
-		GameEngine::AnimationComponent& ac,
-		float jumpPower,
-		float scanRange,
-		float damage,
-		float range,
-		float haste)
-		:DynamicEntity(rc, ac, jumpPower, 8.0f),
-		scanRange_(scanRange),
-		damage_(damage),
-		range_(range),
-		haste_(haste)
+		b2Body* body,
+		GameEngine::RenderComponent* rc,
+		GameEngine::AnimationComponent* ac)
+		: FluentEntity(body, rc, ac)
 	{
 		attackTimer_.Reset();
 	}
 
-	void Enemy::iterateAI(DynamicEntity& player)
+	void Enemy::iterateAI(FluentEntity& player)
 	{
 		setXDirection(scan(player));
 		if (xDirection_ != 0)
@@ -48,7 +40,7 @@ namespace Entities
 		return 0;
 	}
 
-	int  Enemy::scan(DynamicEntity& player)
+	int  Enemy::scan(FluentEntity& player)
 	{
 		if (locatedEnemy(getPosition(), player.getPosition(), scanRange_) &&
 			(int)player.getUserData() == (int)EntityIndexes::Player)
@@ -67,7 +59,7 @@ namespace Entities
 		return 0;
 	}
 
-	void Enemy::tryAttack(DynamicEntity& player)
+	void Enemy::tryAttack(FluentEntity& player)
 	{
 		float deltaX = ceil(getPosition().x - player.getPosition().x),
 			deltaY = ceil(getPosition().y - player.getPosition().y);

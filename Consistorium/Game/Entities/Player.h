@@ -2,16 +2,16 @@
 
 #include <SDL\SDL.h>
 #include <AnimationManager.h>
-#include "DynamicEntity.h"
+#include <GameEngine\FluentEntity.h>
 
 namespace Entities
 {
-	class Player : public DynamicEntity
+	class Player : public FluentEntity
 	{
 	private:
 		const float PLAYER_MAX_SPEED = 3;
 	public:
-		Player(GameEngine::RenderComponent& rc, GameEngine::AnimationComponent& ac, float jumpPower);
+		Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac);
 
 		~Player();
 

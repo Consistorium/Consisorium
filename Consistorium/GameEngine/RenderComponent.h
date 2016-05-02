@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IRenderable.h"
+#include "Entity.h"
 
 namespace GameEngine {
 	class RenderComponent : public IRenderable
@@ -9,25 +10,25 @@ namespace GameEngine {
 		std::string *texturePath_;
 		b2Vec2 scale_;
 		b2Vec2 size_;
-		b2Body *body_;
+		Entities::Entity* entity_;
 	public:
-		RenderComponent(std::string texturePath, b2Vec2 size, b2Body *body);
+		RenderComponent(std::string texturePath, b2Vec2 size, Entities::Entity* entity_ = nullptr);
 
 		~RenderComponent();
 
 		void setTextureName(std::string value);
-		
+
 		std::string* getTextureName() override;
 
 		b2Vec2 getScale(SDL_Rect textureSize) override;
 
 		b2Vec2 getSize() override;
 
-		b2Body* getBody();
-
 		void setPosition(const b2Vec2& pos);
 
 		b2Vec2 getPosition() override;
+
+		void forEntity(Entities::Entity* entity);
 	};
 }
 

@@ -6,13 +6,13 @@
 #include <vector>
 
 namespace GameEngine {
-	AnimationManager::AnimationManager(AnimationComponent animationComponent)
+	AnimationManager::AnimationManager(AnimationComponent* animationComponent)
 		: animationComponent_(animationComponent),
 		totalMillisecondsElapsed_(0),
 		animationTimer_(0)
 	{
 		loadEntityAnimations();
-		setAnimation(animationComponent.getDefaultAnimation(), true);
+		setAnimation(animationComponent->getDefaultAnimation(), true);
 	}
 
 
@@ -23,7 +23,7 @@ namespace GameEngine {
 
 	void AnimationManager::loadEntityAnimations()
 	{
-		std::string folder = animationComponent_.getAnimationsFolder();
+		std::string folder = animationComponent_->getAnimationsFolder();
 
 		std::map<std::string, std::vector<std::string>> animationMap;
 		std::vector<std::string> result = Utils::getDirectoryContents(folder);
@@ -31,13 +31,13 @@ namespace GameEngine {
 		for (auto file : result)
 		{
 			auto fileParts = Utils::split(file, '_');
-			auto fullName = animationComponent_.getAnimationsFolder() + '/' + file;
+			auto fullName = animationComponent_->getAnimationsFolder() + '/' + file;
 			animationMap[fileParts[0]].push_back(fullName);
 		}
 
 		for (auto pair : animationMap)
 		{
-			Animation *animation = new Animation(&animationComponent_, pair.first, pair.second);
+			Animation *animation = new Animation(animationComponent_, pair.first, pair.second);
 			entityAnimations_[animation->getAnimationName()] = animation;
 		}
 	}
@@ -95,13 +95,13 @@ namespace GameEngine {
 		}
 
 		totalMillisecondsElapsed_ += deltaTime;
-		if (totalMillisecondsElapsed_ >= animationComponent_.getAnimationSpeed())
+		if (totalMillisecondsElapsed_ >= animationComponent_->getAnimationSpeed())
 		{
 			animationStack_.top()->setCurrentFrameIndex(animationStack_.top()->getCurrentFrameIndex() + 1);
 			totalMillisecondsElapsed_ = 0;
 		}
 
-		animationComponent_.setFrameTexture(animationStack_.top()->getCurrentFrame());
+		animationComponent_->setFrameTexture(animationStack_.top()->getCurrentFrame());
 
 		animationTimer_ = SDL_GetTicks();
 	}

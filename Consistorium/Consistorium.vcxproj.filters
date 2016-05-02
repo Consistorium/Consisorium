@@ -99,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="SpecialPlacesManager.h" />
     <ClInclude Include="SpecialPlace.h" />
+    <ClInclude Include="Game\Entities\Header.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

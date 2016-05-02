@@ -5,16 +5,16 @@
 
 namespace Entities
 {
-	class GameEntity
+	class GameEntity : public Entity
 	{
 	protected:
 		b2Body* body_;
-		GameEngine::RenderComponent renderComponent_;
+		GameEngine::RenderComponent* renderComponent_;
 		b2BodyDef bodyDef_;
 		float health_;
 		float maxHealth_;
 	public:
-		GameEntity(GameEngine::RenderComponent& rc);
+		GameEntity(b2Body* body, GameEngine::RenderComponent* rc);
 
 		virtual ~GameEntity();
 
@@ -30,12 +30,8 @@ namespace Entities
 
 		virtual int getUserData();
 
-		virtual void setHealth(float health);
-
 		virtual float getHealth();
 
 		virtual float getMaxHealth();
-
-		virtual void setMaxHealth(float health);
 	};
 }

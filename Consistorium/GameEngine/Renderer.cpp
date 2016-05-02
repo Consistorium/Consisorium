@@ -93,6 +93,10 @@ namespace GameEngine
 			boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
 			boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
 			SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
+			if (boundsRect.h > 64)
+			{
+				int a = 5;
+			}
 		}
 
 		SDL_RenderPresent(this->windowRenderer_);

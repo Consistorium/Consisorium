@@ -153,7 +153,6 @@ void Game::handleKeyPress(DynamicEntity* player)
 
 	if (keyboardHandler_->isPressed(SDLK_RIGHT))
 	{
-		printf("GOING RIGHT \n");
 		player->setXDirection(1);
 		player->move();
 	}
@@ -163,7 +162,6 @@ void Game::handleKeyPress(DynamicEntity* player)
 		int contacts = contactListener_->getContactsCount();
 		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 700)
 		{
-			printf("Jumping\n");
 			player->jump(gravity_);
 			jumpTimer_.Reset();
 		}
