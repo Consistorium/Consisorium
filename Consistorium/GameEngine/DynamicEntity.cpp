@@ -2,12 +2,10 @@
 
 namespace Entities
 {
-	DynamicEntity::DynamicEntity(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac, float jumpPower, float maxSpeed)
+	DynamicEntity::DynamicEntity(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac)
 		: GameEntity(body, rc),
 		animationComponent_(ac),
 		animationManager_(animationComponent_),
-		jumpPower_(jumpPower),
-		maxSpeed_(maxSpeed),
 		xDirection_(0)
 	{
 	}
@@ -25,11 +23,6 @@ namespace Entities
 	void DynamicEntity::setXDirection(int direction)
 	{
 		xDirection_ = direction;
-	}
-
-	void DynamicEntity::setJumpPower(float power)
-	{
-		jumpPower_ = power;
 	}
 
 	float DynamicEntity::getJumpPower()

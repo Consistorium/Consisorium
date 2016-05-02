@@ -41,6 +41,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="FluentEntity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
@@ -92,6 +95,9 @@
       <Filter>Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="FluentEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

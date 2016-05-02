@@ -113,22 +113,25 @@ namespace Entities
 
 	Player* EntityFactory::createPlayer(b2Vec2 position, std::string modelName, float health)
 	{
-		EntityDescriptor descriptor;
-		descriptor.animation = modelName;
-		descriptor.entityName = "Player";
-		descriptor.modelName = modelName;
-		descriptor.position = position;
-		descriptor.bodyType = b2_dynamicBody;
-		descriptor.width = Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER;
-		descriptor.height = Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER;
+		EntityDescriptor descriptor = EntityDescriptor()
+			.withAnimation(modelName)
+			.withEntityName("Player")
+			.withModelName(modelName)
+			.withPosition(position)
+			.withBodyType(b2_dynamicBody)
+			.withWidth(Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER)
+			.withHeight(Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER)
+			.create();
 
 		EntityComponents components = createEntityComponents(descriptor, 40);
 
 		components.body->SetUserData((void*)EntityIndexes::Player);
 
-		Player* player = new Player(components.body, components.renderComponent, components.animationComponent, PLAYER_JUMP_POWER);
-		player->setHealth(health);
-		player->setMaxHealth(health);
+		Player* player = new Player(components.body, components.renderComponent, components.animationComponent);
+		player->setJumpPower(0.2f)
+			->setMaxSpeed(10.0f)
+			->setMaxHealth(health)
+			->setHealth(health);
 
 		entityManager_.addToWorld(player);
 		components.renderComponent->forEntity(player);
@@ -137,14 +140,15 @@ namespace Entities
 
 	Block* EntityFactory::createBlock(b2Vec2 position, std::string modelName)
 	{
-		EntityDescriptor descriptor;
-		descriptor.animation = modelName;
-		descriptor.entityName = "Block";
-		descriptor.modelName = modelName;
-		descriptor.position = position;
-		descriptor.bodyType = b2_staticBody;
-		descriptor.width = Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER;
-		descriptor.height = Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER;
+		EntityDescriptor descriptor = EntityDescriptor()
+			.withAnimation(modelName)
+			.withEntityName("Block")
+			.withModelName(modelName)
+			.withPosition(position)
+			.withBodyType(b2_staticBody)
+			.withWidth(Globals::BLOCK_WIDTH / Globals::PIXELS_PER_METER)
+			.withHeight(Globals::BLOCK_HEIGHT / Globals::PIXELS_PER_METER)
+			.create();
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
 		components.body->SetUserData((void*)EntityIndexes::Block);
@@ -165,25 +169,23 @@ namespace Entities
 
 	Enemy* EntityFactory::createSkeleton(b2Vec2 position, std::string modelName, float scanRange, float damage, float range, float haste)
 	{
-		EntityDescriptor descriptor;
-		descriptor.animation = modelName;
-		descriptor.entityName = "Skeleton";
-		descriptor.modelName = modelName;
-		descriptor.position = position;
-		descriptor.bodyType = b2_dynamicBody;
-		descriptor.width = Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER;
-		descriptor.height = Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER;
+		EntityDescriptor descriptor = EntityDescriptor()
+			.withAnimation(modelName)
+			.withEntityName("Skeleton")
+			.withModelName(modelName)
+			.withPosition(position)
+			.withBodyType(b2_dynamicBody)
+			.withWidth(Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER)
+			.withHeight(Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER)
+			.create();
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
-		Enemy* skeleton = new Skeleton(
-			components.body,
-			components.renderComponent,
-			components.animationComponent,
-			Globals::ENTITY_JUMP_POWER,
-			scanRange,
-			damage,
-			range,
-			haste);
+		Enemy* skeleton = new Skeleton(components.body, components.renderComponent, components.animationComponent);
+		skeleton->setJumpPower(Globals::ENTITY_JUMP_POWER)
+			->setScanRange(scanRange)
+			->setDamage(damage)
+			->setRange(range)
+			->setHaste(haste);
 
 		entityManager_.addToWorld(skeleton);
 		components.renderComponent->forEntity(skeleton);
@@ -192,17 +194,17 @@ namespace Entities
 
 	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
 	{
-		EntityDescriptor descriptor;
-		descriptor.animation = modelName;
-		descriptor.entityName = "Tree";
-		descriptor.modelName = modelName;
-		descriptor.position = position;
-		descriptor.bodyType = b2_staticBody;
-		descriptor.width = Globals::TREE_WIDTH / Globals::PIXELS_PER_METER;
-		descriptor.height = Globals::TREE_HEIGHT / Globals::PIXELS_PER_METER;
+		EntityDescriptor descriptor = EntityDescriptor()
+			.withAnimation(modelName)
+			.withEntityName("Tree")
+			.withModelName(modelName)
+			.withPosition(position)
+			.withBodyType(b2_staticBody)
+			.withWidth(Globals::TREE_WIDTH / Globals::PIXELS_PER_METER)
+			.withHeight(Globals::TREE_HEIGHT / Globals::PIXELS_PER_METER)
+			.create();
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
-
 		Tree* tree = new Tree(components.body, components.renderComponent);
 
 		entityManager_.addToWorld(tree);

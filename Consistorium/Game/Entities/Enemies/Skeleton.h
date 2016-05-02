@@ -15,12 +15,7 @@ namespace Entities
 		Skeleton(
 			b2Body* body,
 			GameEngine::RenderComponent* rc, 
-			GameEngine::AnimationComponent* ac, 
-			float jumpPower, 
-			float scanRange, 
-			float damage, 
-			float range,
-			float haste);
+			GameEngine::AnimationComponent* ac);
 
 		~Skeleton();
 

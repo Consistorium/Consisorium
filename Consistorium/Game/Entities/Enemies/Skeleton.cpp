@@ -5,13 +5,8 @@ namespace Entities
 	Skeleton::Skeleton(
 		b2Body* body,
 		GameEngine::RenderComponent* rc, 
-		GameEngine::AnimationComponent* ac, 
-		float jumpPower, 
-		float scanRange, 
-		float damage, 
-		float range,
-		float haste)
-		: Enemy(body, rc, ac, 0.2f, scanRange, damage, range, haste)
+		GameEngine::AnimationComponent* ac)
+		: Enemy(body, rc, ac)
 	{
 		animationManager_.setAnimation("Appear", false);
 		setHealth(70);

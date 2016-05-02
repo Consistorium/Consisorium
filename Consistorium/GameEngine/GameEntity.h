@@ -30,12 +30,8 @@ namespace Entities
 
 		virtual int getUserData();
 
-		virtual void setHealth(float health);
-
 		virtual float getHealth();
 
 		virtual float getMaxHealth();
-
-		virtual void setMaxHealth(float health);
 	};
 }

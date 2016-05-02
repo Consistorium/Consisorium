@@ -39,14 +39,6 @@ namespace Entities
 		return renderComponent_->getSize();
 	}
 
-	void GameEntity::setHealth(float health)
-	{
-		if (health >= 0)
-		{
-			health_ = health;
-		}
-	}
-
 	float GameEntity::getHealth()
 	{
 		return health_;
@@ -55,14 +47,6 @@ namespace Entities
 	float GameEntity::getMaxHealth()
 	{
 		return maxHealth_;
-	}
-
-	void GameEntity::setMaxHealth(float value)
-	{
-		if (value > 0)
-		{
-			maxHealth_ = 0;
-		}
 	}
 
 	b2Body* GameEntity::getBody()
