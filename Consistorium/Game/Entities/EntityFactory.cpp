@@ -78,7 +78,7 @@ namespace Entities
 		b2Fixture* fixture = body->GetFixtureList();
 
 		GameEngine::RenderComponent rc(Globals::MODELS_LOCATION + "Player/Idle__001.png", b2Vec2(Globals::DEFAULT_ENTITY_WIDTH, Globals::DEFAULT_ENTITY_HEIGHT), body);
-		GameEngine::AnimationComponent ac(Globals::MODELS_LOCATION + "Player", "Idle", 40, rc.getTextureName());
+		GameEngine::AnimationComponent ac(Globals::MODELS_LOCATION + "Player", "Idle", 100, rc.getTextureName());
 		Player* player = new Player(rc, ac, PLAYER_JUMP_POWER);
 		player->setHealth(health);
 		player->setMaxHealth(health);
@@ -114,6 +114,10 @@ namespace Entities
 	{
 		GameEntity *result = nullptr;
 		if (name.compare("grass") == 0)
+		{
+			result = createBlock(position, "Grass");
+		}
+		else if (name.compare("ground") == 0) 
 		{
 			result = createBlock(position, "Ground");
 		}

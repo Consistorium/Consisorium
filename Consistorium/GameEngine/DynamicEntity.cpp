@@ -45,6 +45,7 @@ namespace Entities
 
 	void DynamicEntity::move()
 	{
+		animationManager_.setAnimation("Run", false);
 		float impulse = getAccelerationImpulse();
 		b2Vec2 force(impulse, 0);
 		body_->ApplyLinearImpulse(force, body_->GetWorldCenter(), true);
@@ -52,6 +53,7 @@ namespace Entities
 
 	void DynamicEntity::jump(b2Vec2 gravity)
 	{
+		animationManager_.setAnimation("Jump", false);
 		b2Vec2 oldVelocity = body_->GetLinearVelocity();
 		float jumpForce = body_->GetMass() * getJumpPower() * (-gravity.y);
 		b2Vec2 impulse(0, jumpForce);

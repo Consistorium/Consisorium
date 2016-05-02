@@ -41,7 +41,7 @@ std::unique_ptr<b2Vec2> SpecialPlace::getCenter()
 				if (elements_[i][j].compare("center") == 0)
 				{
 					center_ = std::make_unique<b2Vec2>(b2Vec2(i, j));
-					break;
+					return std::move(center_);
 				}
 			}
 		}
