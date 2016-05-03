@@ -114,7 +114,7 @@ void Game::Run()
 			enemies[i]->update();
 		}
 
-		interfaceManager.showHealth(playerHealthPos, "health", player.getHealth(), player.getHealth());
+//		interfaceManager.showHealth(playerHealthPos, "health", player.getHealth(), player.getHealth());
 
 		if (timer.GetMilliseconds() > Globals::DAY_DURATION)
 		{

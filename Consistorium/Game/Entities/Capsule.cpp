@@ -12,56 +12,27 @@ namespace Entities
 
 		b2PolygonShape boxShape;
 		boxShape.SetAsBox(width / 2.0f, (height - width) / 2.0f);
+
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &boxShape;
 		fixtureDef.density = 1.0;
 		body->CreateFixture(&fixtureDef);
 
-		float halfHeight = (height - width) / 2;
-		const int DIVISIONS = b2_maxPolygonVertices;
-		const float RADIUS = width / 2;
+		// Create the circles
+		b2CircleShape circleShape;
+		circleShape.m_radius = width / 2.0f;
 
-		b2Vec2 vertices[DIVISIONS];
-		b2PolygonShape circleShape;
+		b2FixtureDef circleDef;
+		circleDef.shape = &circleShape;
+		circleDef.density = 1;
 
-		//BOTTOM CIRCLE
-		for (int i = 1; i <= 4; i++)
-		{	
-			b2FixtureDef bottomCircleDef;
-			bottomCircleDef.density = 1;
-			float endAngle = b2_pi / 4 * i;
+		// Bottom circle
+		circleShape.m_p.Set(0.0f, (-height + width) / 2.0f);
+		body->CreateFixture(&circleDef);
 
-			for (int div = 1; div <= DIVISIONS; div++)
-			{
-				float32 angle = b2_pi + (endAngle / div);
-				float32 xPos, yPos;
-
-				xPos = RADIUS * cosf(angle);
-				yPos = -halfHeight + RADIUS * sinf(angle);
-				vertices[div - 1] = b2Vec2(xPos, yPos);
-			}
-
-			circleShape.Set(vertices, DIVISIONS);
-			bottomCircleDef.shape = &circleShape;
-			body->CreateFixture(&bottomCircleDef);
-		}
-
-		//TOP CIRCLE
-		b2FixtureDef topCircleDef;
-		topCircleDef.density = 1;
-		for (int div = 1; div <= DIVISIONS; div++)
-		{
-			float32 angle = b2_pi / div;
-			float32 xPos, yPos;
-
-			xPos = RADIUS * cosf(angle);
-			yPos = -halfHeight + RADIUS * sinf(angle);
-			vertices[div - 1] = b2Vec2(xPos, yPos);
-		}
-
-		circleShape.Set(vertices, DIVISIONS);
-		topCircleDef.shape = &circleShape;
-		body->CreateFixture(&topCircleDef);
+		// Top Circle
+		circleShape.m_p.Set(0.0f, (height - width) / 2.0f);
+		body->CreateFixture(&circleDef);
 
 		return body;
 	}

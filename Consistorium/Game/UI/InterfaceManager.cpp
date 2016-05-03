@@ -17,13 +17,8 @@ namespace UI
 		
 	}
 
-	void InterfaceManager::showHealth(SDL_Rect position, std::string bar, float maxValue, float value)
+	void InterfaceManager::showHealth(float maxValue, float value)
 	{
-		float denominator = maxValue / 20;
-		int textureNumber = ceil(value / denominator);
-		std::string texture = Globals::MODELS_LOCATION + "Common/Bars/" + bar + "_" + std::to_string(textureNumber) + ".png";
-		SDL_Surface* barSurface = IMG_Load(texture.c_str());
-		SDL_BlitSurface(barSurface, &barSurface->clip_rect, surface_, &position);
 	}
 
 	void InterfaceManager::showActionBar()

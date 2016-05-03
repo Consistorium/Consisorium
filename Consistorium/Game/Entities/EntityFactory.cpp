@@ -44,24 +44,16 @@ namespace Entities
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_staticBody;
 		bodyDef.position.Set(position.x / Globals::PIXELS_PER_METER, position.y / Globals::PIXELS_PER_METER);
+		bodyDef.fixedRotation = true;
 		b2Body* body = entityManager_.getWorld()->CreateBody(&bodyDef);
 
-		b2ChainShape chainShape;
-
-		b2Vec2 vertices[8];
-		vertices[7] = b2Vec2(-width / 2, -height / 2 + 0.01); // middle bottom left
-		vertices[6] = b2Vec2(-width / 2, +height / 2 - 0.01); // middle top left
-		vertices[5] = b2Vec2((-width / 2) + 0.03, +height / 2); // top left
-		vertices[4] = b2Vec2(+width / 2 - 0.03, +height / 2); // top right
-		vertices[3] = b2Vec2(+width / 2, +height / 2 - 0.01); // middle top right
-		vertices[2] = b2Vec2(+width / 2, -height / 2 + 0.01); // middle bottom right
-		vertices[1] = b2Vec2(+width / 2 - 0.03, -height / 2); // bottom right
-		vertices[0] = b2Vec2((-width / 2) + 0.03, -height / 2); // bottom left
-		chainShape.CreateLoop(vertices, 8);
+		b2PolygonShape boxShape;
+		boxShape.SetAsBox(width / 2.0f, height / 2.0f);
 
 		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &chainShape;
-
+		fixtureDef.shape = &boxShape;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.3f;
 		body->CreateFixture(&fixtureDef);
 
 		return body;

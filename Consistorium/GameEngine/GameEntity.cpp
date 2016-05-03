@@ -53,4 +53,16 @@ namespace Entities
 	{
 		return body_;
 	}
+
+	GameEntity* GameEntity::setHealth(float value)
+	{
+		health_ = value;
+		return this;
+	}
+
+	GameEntity* GameEntity::setMaxHealth(float value)
+	{
+		maxHealth_ = value;
+		return this;
+	}
 }

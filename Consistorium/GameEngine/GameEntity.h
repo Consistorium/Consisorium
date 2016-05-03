@@ -33,5 +33,9 @@ namespace Entities
 		virtual float getHealth();
 
 		virtual float getMaxHealth();
+
+		virtual GameEntity* setHealth(float value);
+
+		virtual GameEntity* setMaxHealth(float value);
 	};
 }
