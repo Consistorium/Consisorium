@@ -97,6 +97,10 @@ namespace Entities
 		GameEntity *result = nullptr;
 		if (name.compare("grass") == 0)
 		{
+			result = createBlock(position, "Grass");
+		}
+		else if (name.compare("ground") == 0) 
+		{
 			result = createBlock(position, "Ground");
 		}
 
