@@ -27,6 +27,7 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 	auto min = std::min(GetLayerRange().x, GetLayerRange().y);
 	auto max = std::max(GetLayerRange().x, GetLayerRange().y);
 
+	int skipLength = 0; // used so specials places don't spawn inside each other
 	for (float i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
 		for (float j = min; j <= max; j += Globals::BLOCK_WIDTH)
@@ -34,15 +35,22 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 			factory.createBlock(b2Vec2(i, j), "Grass");
 		}
 
+		if (skipLength > 0)
+		{
+			skipLength--;
+			continue;
+		}
+
 		std::shared_ptr<SpecialPlace> place = placesManager.getRandomPlace("Ground");
-//		Entities::Tree *tree = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine");
-//		tree->getBody()->GetFixtureList()->SetSensor(true);
+
 		if (rand() % *place->getFrequency() == 1)
 		{
 			std::shared_ptr<b2Vec2> center = place->getCenter();
 			for (int k = 0; k < place->getElements().size(); k++)
 			{
-				for (int l = 0; l < place->getElements()[k].size(); l++)
+				int innerSize = place->getElements()[k].size();
+				skipLength = std::max(skipLength, innerSize);
+				for (int l = 0; l < innerSize; l++)
 				{
 					factory.createFromName(b2Vec2(i + (center->y + l)* Globals::BLOCK_WIDTH, max + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l]);
 				}
