@@ -3,12 +3,12 @@
 #include <Game/Globals/Constants.h>
 #include <KeyboardHandler.h>
 
-#include "WorldGenerator.h"
-#include "GroundLayer.h"
-#include "UndergroundLayer.h"
+#include "WorldGeneration\WorldGenerator.h"
+#include "WorldGeneration\GroundLayer.h"
+#include "WorldGeneration\UndergroundLayer.h"
 #include "UI\InterfaceManager.h"
 #include "Entities/EntityIndexesEnum.h"
-#include <SpecialPlacesManager.h>
+#include <Game\WorldGeneration\SpecialPlacesManager.h>
 #include <ctime>
 
 using namespace Entities;

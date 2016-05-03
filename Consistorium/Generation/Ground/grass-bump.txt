@@ -1,3 +1,4 @@
+-[pineTree]----
 -[grass][grass]---
 [grass][grass][grass][grass][grass]
 --[center]---

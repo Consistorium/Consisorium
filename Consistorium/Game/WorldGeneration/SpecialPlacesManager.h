@@ -2,7 +2,7 @@
 
 #include <map>
 #include <vector>
-#include <SpecialPlace.h>
+#include <Game\WorldGeneration\SpecialPlace.h>
 #include <memory>
 
 class SpecialPlacesManager

@@ -11,13 +11,6 @@ SpecialPlacesManager::SpecialPlacesManager()
 
 SpecialPlacesManager::~SpecialPlacesManager()
 {
-	//for(auto m : places_)
-	//{
-	//	while (!places_[m.first].empty()) 
-	//	{
-	//		delete places_[m.first].back(), places_[m.first].pop_back();
-	//	}
-	//}
 }
 
 void SpecialPlacesManager::populatePlaces()

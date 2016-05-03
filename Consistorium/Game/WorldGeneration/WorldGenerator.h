@@ -4,7 +4,7 @@
 #include <GameEngine/IGraphicsRenderer.h>
 #include <GameEntity.h>
 #include "IWorldLayer.h"
-#include <SpecialPlacesManager.h>
+#include <Game\WorldGeneration\SpecialPlacesManager.h>
 
 class WorldGenerator
 {

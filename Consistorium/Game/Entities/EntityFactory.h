@@ -4,12 +4,12 @@
 
 #include "../Globals/Constants.h"
 #include "Player.h"
-#include "Block.h"
+#include "Objects\Block.h"
 #include "Enemies\Skeleton.h"
 #include <GameEngine/IGraphicsRenderer.h>
 #include "EntityDescriptor.h"
 #include "EntityComponents.h"
-#include "Tree.h"
+#include "Objects\Tree.h"
 #include <EntityManager.h>
 
 namespace Entities

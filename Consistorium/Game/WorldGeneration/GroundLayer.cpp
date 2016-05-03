@@ -42,7 +42,6 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 			std::shared_ptr<b2Vec2> center = place->getCenter();
 			for (int k = 0; k < place->getElements().size(); k++)
 			{
-				//printf("elements size: %d\nc->x: %f\nc->y: %f\n\n", place->getElements().size(), center->x, center->y);
 				for (int l = 0; l < place->getElements()[k].size(); l++)
 				{
 					factory.createFromName(b2Vec2(i + (center->y + l)* Globals::BLOCK_WIDTH, max + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l]);

@@ -2,7 +2,7 @@
 
 #include <Box2D/Common/b2Math.h>
 #include <EntityManager.h>
-#include <SpecialPlacesManager.h>
+#include <Game\WorldGeneration\SpecialPlacesManager.h>
 
 class IWorldLayer
 {

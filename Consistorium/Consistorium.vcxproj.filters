@@ -2,12 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Game\main.cpp" />
-    <ClCompile Include="GroundLayer.cpp" />
-    <ClCompile Include="UndergroundLayer.cpp" />
-    <ClCompile Include="WorldGenerator.cpp" />
-    <ClCompile Include="Game\Entities\Block.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Entities\Capsule.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
@@ -26,9 +20,6 @@
     <ClCompile Include="Game\Entities\Enemies\Skeleton.cpp">
       <Filter>Game\Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Entities\Tree.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Entities\Enemies\Enemy.cpp">
       <Filter>Game\Entities\Enemies</Filter>
     </ClCompile>
@@ -38,17 +29,29 @@
     <ClCompile Include="Game\UI\InterfaceManager.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SpecialPlacesManager.cpp" />
-    <ClCompile Include="SpecialPlace.cpp" />
+    <ClCompile Include="Game\WorldGeneration\GroundLayer.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\WorldGeneration\SpecialPlace.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\WorldGeneration\SpecialPlacesManager.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\WorldGeneration\UndergroundLayer.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\WorldGeneration\WorldGenerator.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Entities\Objects\Block.cpp">
+      <Filter>Game\Entities\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Entities\Objects\Tree.cpp">
+      <Filter>Game\Entities\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GroundLayer.h" />
-    <ClInclude Include="IWorldLayer.h" />
-    <ClInclude Include="UndergroundLayer.h" />
-    <ClInclude Include="WorldGenerator.h" />
-    <ClInclude Include="Game\Entities\Block.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\Capsule.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
@@ -79,9 +82,6 @@
     <ClInclude Include="Game\Entities\EntityComponents.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\Tree.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\Enemies\Enemy.h">
       <Filter>Game\Entities\Enemies</Filter>
     </ClInclude>
@@ -94,10 +94,32 @@
     <ClInclude Include="Game\UI\InterfaceManager.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SpecialPlacesManager.h" />
-    <ClInclude Include="SpecialPlace.h" />
     <ClInclude Include="Game\Entities\FluentEntity.h">
       <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\WorldGeneration\GroundLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\WorldGeneration\IWorldLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\WorldGeneration\SpecialPlace.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\WorldGeneration\SpecialPlacesManager.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\WorldGeneration\UndergroundLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\WorldGeneration\WorldGenerator.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Objects\Block.h">
+      <Filter>Game\Entities\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Objects\Tree.h">
+      <Filter>Game\Entities\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +143,12 @@
     </Filter>
     <Filter Include="Game\UI">
       <UniqueIdentifier>{554a29a5-0db4-4321-a7a2-5740dda4c397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\Objects">
+      <UniqueIdentifier>{2c91a283-f154-4947-b5d9-b8cab580bed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\WorldGeneration">
+      <UniqueIdentifier>{a4bf0b19-9266-4226-906e-985258dced40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
