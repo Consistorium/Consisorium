@@ -8,7 +8,7 @@
 class SpecialPlacesManager
 {
 private:
-	std::map<std::string, std::vector<SpecialPlace*>> places_;
+	std::map<std::string, std::vector<std::shared_ptr<SpecialPlace>>> places_;
 
 	void populatePlaces();
 	
@@ -18,7 +18,7 @@ public:
 
 	~SpecialPlacesManager();
 
-	SpecialPlace* getPlace(std::string layerName, std::string name);
+	std::shared_ptr<SpecialPlace> getPlace(std::string layerName, std::string name);
 
-	SpecialPlace* getRandomPlace(std::string layerName);
+	std::shared_ptr<SpecialPlace> getRandomPlace(std::string layerName);
 };

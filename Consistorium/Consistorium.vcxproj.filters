@@ -73,9 +73,6 @@
     <ClInclude Include="Game\Entities\Enemies\Skeleton.h">
       <Filter>Game\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\EntityNames.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\EntityDescriptor.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
@@ -99,7 +96,7 @@
     </ClInclude>
     <ClInclude Include="SpecialPlacesManager.h" />
     <ClInclude Include="SpecialPlace.h" />
-    <ClInclude Include="Game\Entities\Header.h">
+    <ClInclude Include="Game\Entities\FluentEntity.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>

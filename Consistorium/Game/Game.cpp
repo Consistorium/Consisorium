@@ -193,14 +193,14 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 		{
 			if (entity->getUserData() != (int)EntityIndexes::Player)
 			{
-				
+				eManager.removeFromWorld(entity);
 			}
 		}
 	}
 }
 
 void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* enemies) {
-	for (size_t i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(x, 6.0f);
@@ -208,7 +208,7 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 		enemies->push_back(skeleton);
 	}
 
-	for (size_t i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(-x, 6.0f);

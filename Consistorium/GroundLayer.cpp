@@ -33,16 +33,13 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 		{
 			factory.createBlock(b2Vec2(i, j), "Grass");
 		}
-		
-		if ((rand() % 3 + 1) == 1)
+
+		std::shared_ptr<SpecialPlace> place = placesManager.getRandomPlace("Ground");
+//		Entities::Tree *tree = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine");
+//		tree->getBody()->GetFixtureList()->SetSensor(true);
+		if (rand() % *place->getFrequency() == 1)
 		{
-			Entities::Tree *tree = factory.createTree(b2Vec2(i, max + Globals::TREE_HEIGHT / 2 + Globals::BLOCK_HEIGHT / 2), "Pine");
-			tree->getBody()->GetFixtureList()->SetSensor(true);
-		}
-		else if (rand() % 9 == 1)
-		{
-			SpecialPlace *place = placesManager.getRandomPlace("Ground");
-			std::unique_ptr<b2Vec2> center = place->getCenter();
+			std::shared_ptr<b2Vec2> center = place->getCenter();
 			for (int k = 0; k < place->getElements().size(); k++)
 			{
 				//printf("elements size: %d\nc->x: %f\nc->y: %f\n\n", place->getElements().size(), center->x, center->y);
