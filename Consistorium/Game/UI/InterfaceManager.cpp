@@ -10,6 +10,7 @@ namespace UI
 	const int ITEM_HOLDER_MARGIN = 10;
 	const int ITEM_HOLDER_COUNT = 8;
 	const int UI_Z_INDEX = 100;
+	const int SLOT_PADDING = std::ceil((1.0 / 8.0) * 50.0);
 
 	InterfaceManager::InterfaceManager(GameEngine::Renderer* renderer, SDL_Window* window)
 		:renderer_(renderer),
@@ -33,13 +34,16 @@ namespace UI
 		{
 			if (actionbarSlots_[i]->isEmpty())
 			{
+				b2Vec2 itemPosition(
+					actionbarSlots_[i]->getPosition().x + SLOT_PADDING + 2,
+					actionbarSlots_[i]->getPosition().y + SLOT_PADDING - 1);
 				actionbarSlots_[i]->add(count, texture);
 				Entities::Entity* item = new Entities::Entity();
 				//TODO: Change to get item render position
-				item->setPosition(actionbarSlots_[i]->getPosition());
+				item->setPosition(itemPosition);
 				GameEngine::RenderComponent* rc = new GameEngine::RenderComponent(
 					texture,
-					b2Vec2(SLOT_ITEM_DIM, SLOT_ITEM_DIM),
+					b2Vec2(ITEM_HOLDER_DIM - 2 * SLOT_PADDING, ITEM_HOLDER_DIM - 2 * SLOT_PADDING),
 					item);
 
 				rc->setAlwaysRender(true);

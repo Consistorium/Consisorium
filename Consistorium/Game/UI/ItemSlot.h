@@ -6,8 +6,7 @@
 
 namespace UI
 {
-	const int SLOT_ITEM_DIM = 15;
-
+	//TODO: should contain logic for when the player accesses items
 	class ItemSlot : public Entities::Entity
 	{
 	private:

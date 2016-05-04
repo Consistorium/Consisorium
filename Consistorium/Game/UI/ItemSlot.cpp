@@ -22,6 +22,7 @@ namespace UI
 
 	void ItemSlot::add(int count, std::string itemTexture)
 	{
+		//TODO: should use entity index rather than texture
 		if (!isEmpty() && itemTexture != itemTexture_)
 		{
 			throw new std::invalid_argument("Adding item to an occupied slot.");
