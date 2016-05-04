@@ -13,6 +13,7 @@ namespace Entities
 		b2BodyDef bodyDef_;
 		float health_;
 		float maxHealth_;
+		int zIndex_;
 	public:
 		GameEntity(b2Body* body, GameEngine::RenderComponent* rc);
 
@@ -37,5 +38,9 @@ namespace Entities
 		virtual GameEntity* setHealth(float value);
 
 		virtual GameEntity* setMaxHealth(float value);
+
+		GameEntity* setZIndex(int index);
+
+		int getZIndex();
 	};
 }

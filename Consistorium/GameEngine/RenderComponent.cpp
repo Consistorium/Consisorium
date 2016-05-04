@@ -52,4 +52,16 @@ namespace GameEngine {
 
 		return entity_->getPosition();
 	}
+
+	void RenderComponent::setAlwaysRender(bool value)
+	{
+		alwaysRender_ = value;
+	}
+
+	bool RenderComponent::alwaysRender()
+	{
+		return alwaysRender_;
+	}
+
+	int RenderComponent::getZIndex() { return zIndex_; }
 }

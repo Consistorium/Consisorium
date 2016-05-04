@@ -34,25 +34,25 @@ namespace GameEngine
 		return this->windowRenderer_;
 	}
 
-	void Renderer::AddRenderable(IRenderable *renderable)
+	void Renderer::AddRenderable(int zIndex, IRenderable *renderable)
 	{
-		this->renderables_.push_back(renderable);
+		this->renderables_[zIndex].push_back(renderable);
 	}
 
-	void Renderer::RemoveRenderable(IRenderable *renderable)
+	void Renderer::RemoveRenderable(int zIndex, IRenderable *renderable)
 	{
-		renderables_.erase(
+		renderables_[zIndex].erase(
 			std::remove(
-				renderables_.begin(),
-				renderables_.end(),
+				renderables_[zIndex].begin(),
+				renderables_[zIndex].end(),
 				renderable),
-			renderables_.end());
+			renderables_[zIndex].end());
 	}
 
-	void Renderer::RemoveRenderable(SDL_Point point)
+	void Renderer::RemoveRenderable(int zIndex, SDL_Point point)
 	{
 		SDL_Rect rect;
-		for (auto r : renderables_)
+		for (auto r : renderables_[zIndex])
 		{
 			auto pos = r->getPosition();
 			
@@ -64,7 +64,7 @@ namespace GameEngine
 			if (SDL_PointInRect(&point, &rect) == SDL_TRUE)
 			{
 				printf("EXISTS");
-				RemoveRenderable(r);
+				RemoveRenderable(zIndex, r);
 			}
 		}
 	}
@@ -79,25 +79,32 @@ namespace GameEngine
 		int screenWidth, screenHeight;
 		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
 
-		for (IRenderable *item : this->renderables_)
+		for (std::map<int, std::vector<IRenderable*>>::iterator it = renderables_.begin(); it != renderables_.end(); ++it)
 		{
-			b2Vec2 position = item->getPosition();
-			if (shouldRender(position, cameraPos, screenWidth, screenHeight) == SDL_FALSE)
+			for (IRenderable *item : this->renderables_[it->first])
 			{
-				continue;
-			}
+				if (item->alwaysRender())
+				{
+					RenderUI(item);
+					continue;
+				}
 
-			SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
-			SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
-			SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
-			boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
-			boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
-			SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
-			if (boundsRect.h > 64)
-			{
-				int a = 5;
+				b2Vec2 position = item->getPosition();
+				if (shouldRender(position, cameraPos, screenWidth, screenHeight) == SDL_FALSE)
+				{
+					continue;
+				}
+
+				SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
+				SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
+				b2Vec2 scale = item->getScale(boundsRect);
+				SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
+				boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
+				boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
+				SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 			}
 		}
+		
 
 		SDL_RenderPresent(this->windowRenderer_);
 	}
@@ -122,5 +129,22 @@ namespace GameEngine
 
 
 		return SDL_PointInRect(&point, &rect);
+	}
+
+	void Renderer::RenderUI(IRenderable *item)
+	{
+		SDL_Rect boundsRect;
+
+		int screenWidth, screenHeight;
+		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
+
+		b2Vec2 position = item->getPosition();
+		SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
+		SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
+		b2Vec2 scale = item->getScale(boundsRect);
+		SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
+		boundsRect.x = position.x / item->getScale(boundsRect).x;
+		boundsRect.y = position.y / item->getScale(boundsRect).y;
+		SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 	}
 }

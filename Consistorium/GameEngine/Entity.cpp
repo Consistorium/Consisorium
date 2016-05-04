@@ -2,8 +2,11 @@
 
 namespace Entities
 {
-	b2Vec2 Entity::getPosition()
+	b2Vec2 Entity::getPosition() { return position_; }
+	
+	Entity* Entity::setPosition(b2Vec2 value) 
 	{
-		return position_;
-	}
+		position_ = value;
+		return this;
+	};
 }

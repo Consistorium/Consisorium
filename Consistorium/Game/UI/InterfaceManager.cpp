@@ -1,15 +1,21 @@
 #include "InterfaceManager.h"
 
 #include <string>
-#include <vector>
-#include <SDL\SDL_image.h>
+#include <GameEngine\RenderComponent.h>
 #include <Game\Globals\Constants.h>
 
 namespace UI
 {
-	InterfaceManager::InterfaceManager(SDL_Surface* surface)
-		:surface_(surface)
+	const int ITEM_HOLDER_DIM = 50;
+	const int ITEM_HOLDER_MARGIN = 10;
+	const int ITEM_HOLDER_COUNT = 8;
+	const int UI_Z_INDEX = 100;
+
+	InterfaceManager::InterfaceManager(GameEngine::Renderer* renderer, SDL_Window* window)
+		:renderer_(renderer),
+		window_(window)
 	{
+
 	}
 
 	void InterfaceManager::showHud()
@@ -23,7 +29,27 @@ namespace UI
 
 	void InterfaceManager::showActionBar()
 	{
+		int totalSpace = ITEM_HOLDER_COUNT * ITEM_HOLDER_DIM + (ITEM_HOLDER_COUNT - 1) * ITEM_HOLDER_MARGIN;
+		int singleHolderSpace = ITEM_HOLDER_DIM + ITEM_HOLDER_MARGIN;
+		int windowX, windowY;
+		SDL_GetWindowSize(window_, &windowX, &windowY);
+		int x = (windowX - totalSpace) / 2;
+		for (size_t i = 0; i < ITEM_HOLDER_COUNT; i++)
+		{
+			Entities::Entity* item = new Entities::Entity();
+			item->setPosition(b2Vec2(x + i * singleHolderSpace, windowY - ITEM_HOLDER_DIM));
+			GameEngine::RenderComponent* rc = new GameEngine::RenderComponent(
+				Globals::MODELS_LOCATION + "Common/ItemHolder__001.png",
+				b2Vec2(ITEM_HOLDER_DIM, ITEM_HOLDER_DIM),
+				item);
 
+			rc->setAlwaysRender(true);
+			rc->forEntity(item);
+
+			std::pair<std::string, GameEngine::RenderComponent*> pair("ItemHolder", rc);
+			cache_.insert(pair);
+			renderer_->AddRenderable(UI_Z_INDEX, rc);
+		}
 	}
 
 	void InterfaceManager::showInventory()

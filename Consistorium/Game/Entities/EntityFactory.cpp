@@ -9,6 +9,8 @@
 namespace Entities
 {
 	const float PLAYER_JUMP_POWER = 5.0;
+	const int ENTITY_Z_INDEX = 0;
+	const int TREE_Z_INDEX = -1;
 
 	EntityFactory::EntityFactory(EntityManager& entityManager)
 		: entityManager_(entityManager)
@@ -98,12 +100,15 @@ namespace Entities
 		if (name.compare("grass") == 0)
 		{
 			result = createBlock(position, "Grass");
+			result->setZIndex(ENTITY_Z_INDEX);
 		}
 		else if (name.compare("ground") == 0) 
 		{
 			result = createBlock(position, "Ground");
+			result->setZIndex(ENTITY_Z_INDEX);
 		}
-
+		
+		//WHY IS THERE A MOMENT WHEN A NULL ENTITY IS CREATED?
 		return result;
 	}
 
@@ -127,7 +132,8 @@ namespace Entities
 		player->setJumpPower(0.2f)
 			->setMaxSpeed(10.0f)
 			->setMaxHealth(health)
-			->setHealth(health);
+			->setHealth(health)
+			->setZIndex(ENTITY_Z_INDEX);
 
 		entityManager_.addToWorld(player);
 		components.renderComponent->forEntity(player);
@@ -156,10 +162,10 @@ namespace Entities
 		}
 
 		Block* block = new Block(components.body, components.renderComponent);
-
-
+		block->setZIndex(ENTITY_Z_INDEX);
 		entityManager_.addToWorld(block);
 		components.renderComponent->forEntity(block);
+
 		return block;
 	}
 
@@ -181,7 +187,8 @@ namespace Entities
 			->setScanRange(scanRange)
 			->setDamage(damage)
 			->setRange(range)
-			->setHaste(haste);
+			->setHaste(haste)
+			->setZIndex(ENTITY_Z_INDEX);
 
 		entityManager_.addToWorld(skeleton);
 		components.renderComponent->forEntity(skeleton);
@@ -202,7 +209,7 @@ namespace Entities
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
 		Tree* tree = new Tree(components.body, components.renderComponent);
-
+		tree->setZIndex(TREE_Z_INDEX);
 		entityManager_.addToWorld(tree);
 		components.renderComponent->forEntity(tree);
 		return tree;

@@ -6,12 +6,10 @@ EntityManager::EntityManager(b2World* world, GameEngine::IGraphicsRenderer* rend
 	renderer_(renderer),
 	entities_(entities)
 {
-
 }
 
 EntityManager::~EntityManager()
 {
-
 }
 
 bool EntityManager::clickedOnEntity(b2Vec2 clickPoint, b2Vec2 entityPosition, b2Vec2 entitySize)
@@ -66,13 +64,13 @@ b2World* EntityManager::getWorld()
 
 void EntityManager::addToWorld(Entities::GameEntity* e)
 {
-	renderer_->AddRenderable(e->getRenderableComponent());
+	renderer_->AddRenderable(e->getZIndex(), e->getRenderableComponent());
 	entities_.push_back(e);
 }
 
 void EntityManager::removeFromWorld(Entities::GameEntity* entity)
 {
-	renderer_->RemoveRenderable(entity->getRenderableComponent());
+	renderer_->RemoveRenderable(entity->getZIndex(), entity->getRenderableComponent());
 	world_->DestroyBody(entity->getBody());
 	entities_.erase(std::remove(entities_.begin(), entities_.end(), entity));
 }
