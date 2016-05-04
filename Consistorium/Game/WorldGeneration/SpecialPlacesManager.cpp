@@ -11,13 +11,6 @@ SpecialPlacesManager::SpecialPlacesManager()
 
 SpecialPlacesManager::~SpecialPlacesManager()
 {
-	for(auto m : places_)
-	{
-		while (!places_[m.first].empty()) 
-		{
-			delete places_[m.first].back(), places_[m.first].pop_back();
-		}
-	}
 }
 
 void SpecialPlacesManager::populatePlaces()
@@ -42,7 +35,7 @@ void SpecialPlacesManager::populatePlaces()
 			for (int i = 0; i < fileContents.size(); i++)
 			{
 				std::smatch m_res;
-				std::regex expr("[a-zA-Z]+|-");
+				std::regex expr("[a-zA-Z]+|-|[0-9]+");
 				elements.push_back(std::vector<std::string>());
 				while (std::regex_search(fileContents[i], m_res, expr)) {
 					for (auto x : m_res) 
@@ -54,12 +47,12 @@ void SpecialPlacesManager::populatePlaces()
 				}
 			}
 
-			places_[dir].push_back(new SpecialPlace(dir, place, elements));
+			places_[dir].emplace_back(new SpecialPlace(dir, place, elements));
 		}
 	}
 }
 
-SpecialPlace* SpecialPlacesManager::getPlace(std::string layerName, std::string name)
+std::shared_ptr<SpecialPlace> SpecialPlacesManager::getPlace(std::string layerName, std::string name)
 {
 	std::vector<std::string> result;
 	for (int i = 0; i < places_[layerName].size(); i++)
@@ -73,7 +66,7 @@ SpecialPlace* SpecialPlacesManager::getPlace(std::string layerName, std::string 
 	return nullptr;
 }
 
-SpecialPlace* SpecialPlacesManager::getRandomPlace(std::string layerName)
+std::shared_ptr<SpecialPlace> SpecialPlacesManager::getRandomPlace(std::string layerName)
 {
 	int index = rand() % places_[layerName].size();
 	return places_[layerName][index];

@@ -2,12 +2,14 @@
 
 #include <unordered_map>
 #include <string>
-#include <SDL\SDL.h>
+#include <vector>
 #include <memory>
 
+#include <SDL\SDL.h>
 #include <GameEngine\Entity.h>
 #include <GameEngine\Renderer.h>
 #include <GameEngine\RenderComponent.h>
+#include "ItemSlot.h"
 
 namespace UI
 {
@@ -18,6 +20,7 @@ namespace UI
 		std::unique_ptr<GameEngine::Renderer> renderer_;
 		b2Vec2 windowSize_;
 		SDL_Window* window_;
+		std::vector<ItemSlot*> actionbarSlots_;
 	public:
 		InterfaceManager(GameEngine::Renderer* renderer, SDL_Window* window);
 
@@ -28,6 +31,8 @@ namespace UI
 		void showActionBar();
 
 		void showInventory();
+
+		void addToActionbar(std::string texture, int count);
 
 		~InterfaceManager();
 	};

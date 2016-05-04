@@ -6,6 +6,7 @@ SpecialPlace::SpecialPlace(std::string parentLayer, std::string name, std::vecto
 	: id_(IdGiver++),
 	parentLayer_(parentLayer),
 	center_(nullptr),
+	frequency_(nullptr),
 	name_(name),
 	elements_(elements)
 {
@@ -30,7 +31,7 @@ std::vector<std::vector<std::string>> SpecialPlace::getElements()
 	return elements_;
 }
 
-std::unique_ptr<b2Vec2> SpecialPlace::getCenter()
+std::shared_ptr<b2Vec2> SpecialPlace::getCenter()
 {
 	if (center_ == nullptr)
 	{
@@ -40,14 +41,26 @@ std::unique_ptr<b2Vec2> SpecialPlace::getCenter()
 			{
 				if (elements_[i][j].compare("center") == 0)
 				{
-					center_ = std::make_unique<b2Vec2>(b2Vec2(i, j));
-					return std::move(center_);
+					center_ = std::make_shared<b2Vec2>(b2Vec2(i, j));
+					return center_;
 				}
 			}
 		}
 	}
 
-	return std::move(center_);
+	return center_;
+}
+
+std::shared_ptr<int> SpecialPlace::getFrequency()
+{
+	if (frequency_ == nullptr)
+	{
+		int last = elements_.size() - 1;
+		frequency_ = std::make_shared<int>(std::stoi(elements_[last][elements_[last].size() - 1]));
+		return frequency_;
+	}
+
+	return frequency_;
 }
 
 int SpecialPlace::getId()

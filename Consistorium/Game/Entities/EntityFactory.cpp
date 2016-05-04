@@ -108,6 +108,12 @@ namespace Entities
 			result->setZIndex(ENTITY_Z_INDEX);
 		}
 		
+		else if (name.compare("pineTree") == 0)
+		{
+			result = createTree(position, "Pine");
+			result->getBody()->GetFixtureList()->SetSensor(true);
+		}
+
 		//WHY IS THERE A MOMENT WHEN A NULL ENTITY IS CREATED?
 		return result;
 	}
@@ -197,6 +203,9 @@ namespace Entities
 
 	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
 	{
+		position.y += Globals::TREE_HEIGHT / 2;
+		position.y -= Globals::BLOCK_HEIGHT / 2;
+
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
 			.withEntityName("Tree")

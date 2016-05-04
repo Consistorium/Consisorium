@@ -13,7 +13,8 @@ private:
 	std::vector<std::vector<std::string>> elements_;
 	std::string parentLayer_;
 	std::string name_;
-	std::unique_ptr<b2Vec2> center_;
+	std::shared_ptr<int> frequency_;
+	std::shared_ptr<b2Vec2> center_;
 public:
 	SpecialPlace(std::string parentLayer, std::string name, std::vector<std::vector<std::string>> elements);
 
@@ -25,7 +26,9 @@ public:
 
 	std::vector<std::vector<std::string>> getElements();
 
-	std::unique_ptr<b2Vec2> getCenter();
+	std::shared_ptr<b2Vec2> getCenter();
+
+	std::shared_ptr<int> getFrequency();
 
 	int getId();
 };

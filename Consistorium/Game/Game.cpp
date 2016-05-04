@@ -3,12 +3,12 @@
 #include <Game/Globals/Constants.h>
 #include <KeyboardHandler.h>
 
-#include "WorldGenerator.h"
-#include "GroundLayer.h"
-#include "UndergroundLayer.h"
+#include "WorldGeneration\WorldGenerator.h"
+#include "WorldGeneration\GroundLayer.h"
+#include "WorldGeneration\UndergroundLayer.h"
 #include "UI\InterfaceManager.h"
 #include "Entities/EntityIndexesEnum.h"
-#include <SpecialPlacesManager.h>
+#include <Game\WorldGeneration\SpecialPlacesManager.h>
 #include <ctime>
 
 using namespace Entities;
@@ -55,8 +55,8 @@ void Game::Run()
 {
 	Init();
 	b2Vec2 cameraPos(0, 0);
-	UI::InterfaceManager interfaceManager(&renderer_, window_);
-	interfaceManager.showActionBar();
+	interfaceManager_.reset(new UI::InterfaceManager(&renderer_, window_));
+	interfaceManager_->showActionBar();
 	
 	renderer_.RenderAll(cameraPos);
 
@@ -194,14 +194,15 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 		{
 			if (entity->getUserData() != (int)EntityIndexes::Player)
 			{
-				
+				interfaceManager_->addToActionbar(*entity->getRenderableComponent()->getTextureName(), 1);
+				eManager.removeFromWorld(entity);
 			}
 		}
 	}
 }
 
 void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* enemies) {
-	for (size_t i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(x, 6.0f);
@@ -209,7 +210,7 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 		enemies->push_back(skeleton);
 	}
 
-	for (size_t i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(-x, 6.0f);
