@@ -54,7 +54,11 @@ void Game::Init()
 void Game::Run()
 {
 	Init();
-	UI::InterfaceManager interfaceManager(windowSurface_);
+	b2Vec2 cameraPos(0, 0);
+	interfaceManager_.reset(new UI::InterfaceManager(&renderer_, window_));
+	interfaceManager_->showActionBar();
+	
+	renderer_.RenderAll(cameraPos);
 
 	EntityManager entityManager_(world_, &renderer_, entities_);
 	EntityFactory entityFactory(entityManager_);
@@ -81,7 +85,6 @@ void Game::Run()
 	world_->SetContactListener(contactListener_.get());
 
 	SDL_Event e;
-	b2Vec2 cameraPos(0, 0);
 	b2Timer timer;
 	bool isDay = true;
 	renderer_.SetRenderColor(Globals::DAY_COLOR);
@@ -114,8 +117,6 @@ void Game::Run()
 			enemies[i]->update();
 		}
 
-//		interfaceManager.showHealth(playerHealthPos, "health", player.getHealth(), player.getHealth());
-
 		if (timer.GetMilliseconds() > Globals::DAY_DURATION)
 		{
 			if (isDay)
@@ -124,7 +125,7 @@ void Game::Run()
 				renderer_.SetRenderColor(Globals::DAY_COLOR);
 				for (size_t i = 0; i < enemies.size(); i++)
 				{
-					renderer_.RemoveRenderable(enemies[i]->getRenderableComponent());
+					renderer_.RemoveRenderable(enemies[i]->getZIndex(), enemies[i]->getRenderableComponent());
 					world_->DestroyBody(enemies[i]->getBody());
 				}
 
@@ -193,6 +194,7 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 		{
 			if (entity->getUserData() != (int)EntityIndexes::Player)
 			{
+				interfaceManager_->addToActionbar(*entity->getRenderableComponent()->getTextureName(), 1);
 				eManager.removeFromWorld(entity);
 			}
 		}

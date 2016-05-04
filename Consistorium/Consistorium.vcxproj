@@ -94,7 +94,7 @@
       </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;C:\Users\radostin\Desktop\Consistorium\Consistorium\Dependencies\dlls;$(SolutionDir)\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;$(SolutionDir)\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -127,7 +127,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;C:\Users\radostin\Desktop\Consistorium\Consistorium\Dependencies\dlls;$(SolutionDir)\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls;$(SolutionDir)\Dependencies\dlls;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -160,6 +160,7 @@
     <ClCompile Include="Game\main.cpp" />
     <ClCompile Include="Game\Menu\Menu.cpp" />
     <ClCompile Include="Game\UI\InterfaceManager.cpp" />
+    <ClCompile Include="Game\UI\ItemSlot.cpp" />
     <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
     <ClCompile Include="Game\WorldGeneration\GroundLayer.cpp" />
     <ClCompile Include="Game\WorldGeneration\SpecialPlace.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Game\Menu\Menu.h" />
     <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
     <ClInclude Include="Game\UI\InterfaceManager.h" />
+    <ClInclude Include="Game\UI\ItemSlot.h" />
     <ClInclude Include="Game\Utils\JumpContactListener.h" />
     <ClInclude Include="Game\WorldGeneration\GroundLayer.h" />
     <ClInclude Include="Game\WorldGeneration\IWorldLayer.h" />

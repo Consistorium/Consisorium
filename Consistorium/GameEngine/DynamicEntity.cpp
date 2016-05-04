@@ -38,7 +38,7 @@ namespace Entities
 
 	void DynamicEntity::move()
 	{
-		animationManager_.setAnimation("Run", false);
+		animationManager_.setAnimation("Walk", false);
 		float impulse = getAccelerationImpulse();
 		b2Vec2 force(impulse, 0);
 		body_->ApplyLinearImpulse(force, body_->GetWorldCenter(), true);

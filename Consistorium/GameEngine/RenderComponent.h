@@ -11,6 +11,8 @@ namespace GameEngine {
 		b2Vec2 scale_;
 		b2Vec2 size_;
 		Entities::Entity* entity_;
+		bool alwaysRender_;
+		int zIndex_;
 	public:
 		RenderComponent(std::string texturePath, b2Vec2 size, Entities::Entity* entity_ = nullptr);
 
@@ -29,6 +31,12 @@ namespace GameEngine {
 		b2Vec2 getPosition() override;
 
 		void forEntity(Entities::Entity* entity);
+
+		bool alwaysRender();
+
+		void RenderComponent::setAlwaysRender(bool value);
+
+		int getZIndex();
 	};
 }
 

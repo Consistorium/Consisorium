@@ -5,19 +5,17 @@
 #include <memory>
 
 #include <SDL/SDL.h>
-#include <UI/Window.h>
-#include <../GameEngine/Renderer.h>
-#include <../GameEngine/AnimationManager.h>
 #include <Box2D\Box2D.h>
-#include <SDL/SDL.h>
+#include <UI\Window.h>
 #include <Renderer.h>
-#include <UI/Window.h>
+#include <AnimationManager.h>
 #include <KeyboardHandler.h>
+#include <EntityManager.h>
 
 #include "Game.h"
 #include "Entities\EntityFactory.h"
 #include "Utils\JumpContactListener.h"
-#include <EntityManager.h>
+#include "UI\InterfaceManager.h"
 
 class Game : public GameEngine::Window
 {
@@ -33,6 +31,7 @@ private:
 	std::unique_ptr<JumpContactListener> contactListener_;
 	std::vector<Entities::GameEntity*> entities_;
 	std::unique_ptr<KeyboardHandler> keyboardHandler_;
+	std::unique_ptr<UI::InterfaceManager> interfaceManager_;
 public:
 	Game(SDL_Window* window);
 

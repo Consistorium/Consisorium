@@ -65,4 +65,15 @@ namespace Entities
 		maxHealth_ = value;
 		return this;
 	}
+
+	GameEntity* GameEntity::setZIndex(int index)
+	{
+		zIndex_ = index;
+		return this;
+	}
+
+	int GameEntity::getZIndex()
+	{
+		return zIndex_;
+	}
 }

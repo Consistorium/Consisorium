@@ -50,6 +50,9 @@
     <ClCompile Include="Game\Entities\Objects\Tree.cpp">
       <Filter>Game\Entities\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Game\UI\ItemSlot.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Capsule.h">
@@ -120,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="Game\Entities\Objects\Tree.h">
       <Filter>Game\Entities\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\UI\ItemSlot.h">
+      <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
