@@ -26,5 +26,7 @@ public:
 	void addToWorld(Entities::GameEntity *e);
 
 	void removeFromWorld(Entities::GameEntity *entity);
+
+	void removeFromWorld(int index);
 };
 

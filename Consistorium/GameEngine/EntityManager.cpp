@@ -76,3 +76,10 @@ void EntityManager::removeFromWorld(Entities::GameEntity* entity)
 	world_->DestroyBody(entity->getBody());
 	entities_.erase(std::remove(entities_.begin(), entities_.end(), entity));
 }
+
+void EntityManager::removeFromWorld(int index)
+{
+	renderer_->RemoveRenderable(entities_[index]->getRenderableComponent());
+	world_->DestroyBody(entities_[index]->getBody());
+	entities_.erase(entities_.begin() + index);
+}

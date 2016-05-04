@@ -57,7 +57,6 @@ std::shared_ptr<int> SpecialPlace::getFrequency()
 	{
 		int last = elements_.size() - 1;
 		frequency_ = std::make_shared<int>(std::stoi(elements_[last][elements_[last].size() - 1]));
-		return frequency_;
 	}
 
 	return frequency_;

@@ -108,6 +108,15 @@ namespace Entities
 			result = createTree(position, "Pine");
 			result->getBody()->GetFixtureList()->SetSensor(true);
 		}
+		else if (name.compare("delete") == 0)
+		{
+			int index = 0;
+			result = entityManager_.getClickedEntity(position, &index);
+			if (result != nullptr) 
+			{
+				entityManager_.removeFromWorld(index);
+			}
+		}
 
 		return result;
 	}
@@ -141,6 +150,7 @@ namespace Entities
 
 	Block* EntityFactory::createBlock(b2Vec2 position, std::string modelName)
 	{
+		position.y += Globals::BLOCK_HEIGHT / 2;
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
 			.withEntityName("Block")
@@ -196,7 +206,6 @@ namespace Entities
 	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
 	{
 		position.y += Globals::TREE_HEIGHT / 2;
-		position.y -= Globals::BLOCK_HEIGHT / 2;
 
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)

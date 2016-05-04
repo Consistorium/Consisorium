@@ -27,7 +27,7 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 	auto min = std::min(GetLayerRange().x, GetLayerRange().y);
 	auto max = std::max(GetLayerRange().x, GetLayerRange().y);
 
-	int skipLength = 0; // used so specials places don't spawn inside each other
+	int skipLength = 0; // Used so special places don't spawn inside each other.
 	for (float i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
 		for (float j = min; j <= max; j += Globals::BLOCK_WIDTH)
@@ -52,7 +52,7 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 				skipLength = std::max(skipLength, innerSize);
 				for (int l = 0; l < innerSize; l++)
 				{
-					factory.createFromName(b2Vec2(i + (center->y + l)* Globals::BLOCK_WIDTH, max + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l]);
+					factory.createFromName(b2Vec2(i + (center->y + l) * Globals::BLOCK_WIDTH, max + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l]);
 				}
 			}
 		}
