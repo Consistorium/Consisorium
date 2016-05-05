@@ -32,7 +32,7 @@ namespace UI
 
 		void showInventory();
 
-		void addToActionbar(std::string texture, int count);
+		void addToActionbar(std::string& texture, int count);
 
 		~InterfaceManager();
 	};

@@ -28,7 +28,7 @@ namespace UI
 	{
 	}
 
-	void InterfaceManager::addToActionbar(std::string texture, int count)
+	void InterfaceManager::addToActionbar(std::string& texture, int count)
 	{
 		for (size_t i = 0; i < actionbarSlots_.size(); i++)
 		{

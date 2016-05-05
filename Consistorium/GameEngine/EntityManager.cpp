@@ -29,6 +29,9 @@ bool EntityManager::clickedOnEntity(b2Vec2 clickPoint, b2Vec2 entityPosition, b2
 
 Entities::GameEntity* EntityManager::getClickedEntity(b2Vec2 worldCoords, int* entityIndex)
 {
+	worldCoords.x /= Globals::PIXELS_PER_METER;
+	worldCoords.y /= Globals::PIXELS_PER_METER;
+
 	for (int i = entities_.size() - 1; i >= 0; i--)
 	{
 		b2Vec2 entitySize = entities_[i]->getSize();
@@ -51,8 +54,8 @@ b2Vec2 EntityManager::getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera)
 	float clickHeight = Globals::SCREEN_HEIGHT - clickPoint.y;
 	float renderingHeight = 4;
 	b2Vec2 worldCoords;
-	worldCoords.x = (camera.x + clickPoint.x) / Globals::PIXELS_PER_METER;
-	worldCoords.y = (camera.y + clickHeight) / Globals::PIXELS_PER_METER - renderingHeight;
+	worldCoords.x = (camera.x + clickPoint.x);
+	worldCoords.y = (camera.y + clickHeight) - renderingHeight * Globals::PIXELS_PER_METER;
 
 	return worldCoords;
 }
@@ -77,7 +80,7 @@ void EntityManager::removeFromWorld(Entities::GameEntity* entity)
 
 void EntityManager::removeFromWorld(int index)
 {
-	renderer_->RemoveRenderable(entities_[index]->getRenderableComponent());
+	renderer_->RemoveRenderable(entities_[index]->getZIndex(),entities_[index]->getRenderableComponent());
 	world_->DestroyBody(entities_[index]->getBody());
 	entities_.erase(entities_.begin() + index);
 }

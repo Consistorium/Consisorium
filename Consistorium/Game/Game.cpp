@@ -151,8 +151,7 @@ void Game::handleKeyPress(DynamicEntity* player)
 		player->setXDirection(-1);
 		player->move();
 	}
-
-	if (keyboardHandler_->isPressed(SDLK_RIGHT))
+	else if (keyboardHandler_->isPressed(SDLK_RIGHT))
 	{
 		player->setXDirection(1);
 		player->move();
@@ -176,12 +175,7 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 	b2Vec2 worldCoords = eManager.getWorldCoordinates(clickPoint, camera);
 	if (e.button.button == SDL_BUTTON_RIGHT)
 	{
-		float endX = worldCoords.x * Globals::PIXELS_PER_METER - (((int)worldCoords.x * Globals::PIXELS_PER_METER) % (int)Globals::BLOCK_WIDTH);
-		float endY = worldCoords.y * Globals::PIXELS_PER_METER - (((int)worldCoords.y * Globals::PIXELS_PER_METER) % (int)Globals::BLOCK_HEIGHT);
-		endX += Globals::BLOCK_WIDTH / 2;
-		endY += Globals::BLOCK_HEIGHT/ 2;
-		b2Vec2 a(endX, endY);
-		entityFactory.createBlock(a, "Grass");
+		entityFactory.createBlock(worldCoords, "Grass");
 		return;
 	}
 	
