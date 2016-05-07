@@ -1,9 +1,9 @@
 ---[delete][delete]---
 --[delete][delete][delete][delete]--
 -[delete][delete][delete][delete][delete][delete]-
-[delete][delete][delete][center][delete][delete][delete][delete][delete]
+[delete][delete][delete][centerdelete][delete][delete][delete][delete][delete][delete]
 [delete][delete][delete][delete][delete][delete][delete][delete]
 -[delete][delete][delete][delete][delete][delete]-
 --[delete][delete][delete][delete]--
 ---[delete][delete]---
-20
+25

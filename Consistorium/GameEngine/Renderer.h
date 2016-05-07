@@ -26,7 +26,7 @@ namespace GameEngine
 		SDL_Renderer *windowRenderer_;
 		TextureManager textureManager_;
 		SDL_Window *window_;
-		std::map<int, std::vector<IRenderable*>> renderables_;
+		std::map<int, std::map<int, IRenderable*>> renderables_;
 		WorldConstraints worldConstraints;
 		int pixelsPerMeter_;
 		Color renderColor_;

@@ -27,6 +27,8 @@ namespace GameEngine {
 		b2Vec2 getSize() override;
 
 		void setPosition(const b2Vec2& pos);
+		
+		int getId() override;
 
 		b2Vec2 getPosition() override;
 

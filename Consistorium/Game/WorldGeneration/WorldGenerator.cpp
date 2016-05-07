@@ -10,7 +10,7 @@ WorldGenerator::~WorldGenerator()
 {
 }
 
-void WorldGenerator::Build(std::vector<Entities::GameEntity*>* entities)
+void WorldGenerator::Build(std::map<int, Entities::GameEntity*>* entities)
 {
 	for (IWorldLayer *layer : layers_)
 	{

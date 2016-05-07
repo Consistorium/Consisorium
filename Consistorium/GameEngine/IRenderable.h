@@ -21,5 +21,7 @@ namespace GameEngine {
 		virtual bool alwaysRender() = 0;
 
 		virtual int getZIndex() = 0;
+
+		virtual int getId() = 0;
 	};
 }

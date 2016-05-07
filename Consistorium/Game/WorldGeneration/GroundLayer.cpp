@@ -45,16 +45,12 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 
 		if (rand() % *place->getFrequency() == 1)
 		{
-			std::shared_ptr<b2Vec2> center = place->getCenter();
-			for (int k = 0; k < place->getElements().size(); k++)
-			{
-				int innerSize = place->getElements()[k].size();
-				skipLength = std::max(skipLength, innerSize);
-				for (int l = 0; l < innerSize; l++)
-				{
-					factory.createFromName(b2Vec2(i + (center->y + l) * Globals::BLOCK_WIDTH, max + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l]);
-				}
-			}
+			placesManager.spawnPlace(b2Vec2(i, max), place, factory);
+			skipLength = place->getWidth();
+		}
+		else if (skipLength == 0 && rand() % 5 == 1)
+		{
+			factory.createTree(b2Vec2(i, max), "Pine");
 		}
 	}
 }

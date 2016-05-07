@@ -63,8 +63,8 @@ void Game::Run()
 	EntityManager entityManager_(world_, &renderer_, entities_);
 	EntityFactory entityFactory(entityManager_);
 	b2Vec2 playerPosition(1.0f, 4.0f);
-	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
-	entities_.push_back(&player);
+	Player player = *entityFactory.createPlayer(playerPosition, "Idle");
+	entities_[player.getId()] = &player;
 	SDL_Rect playerHealthPos;
 	playerHealthPos.x = 500;
 	playerHealthPos.y = 500;

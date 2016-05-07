@@ -17,6 +17,6 @@ public:
 
 	~WorldGenerator();
 
-	void Build(std::vector<Entities::GameEntity*>* entities);
+	void Build(std::map<int, Entities::GameEntity*>* entities);
 };
 
