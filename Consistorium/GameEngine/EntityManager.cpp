@@ -1,7 +1,7 @@
 #include "EntityManager.h"
 #include "../Game/Globals/Constants.h"
 
-EntityManager::EntityManager(b2World* world, GameEngine::IGraphicsRenderer* renderer, std::vector<Entities::GameEntity*>& entities)
+EntityManager::EntityManager(b2World* world, GameEngine::IGraphicsRenderer* renderer, std::map<int, Entities::GameEntity*>& entities)
 	: world_(world),
 	renderer_(renderer),
 	entities_(entities)
@@ -32,17 +32,17 @@ Entities::GameEntity* EntityManager::getClickedEntity(b2Vec2 worldCoords, int* e
 	worldCoords.x /= Globals::PIXELS_PER_METER;
 	worldCoords.y /= Globals::PIXELS_PER_METER;
 
-	for (int i = entities_.size() - 1; i >= 0; i--)
+	for (auto x : entities_)
 	{
-		b2Vec2 entitySize = entities_[i]->getSize();
+		auto item = x.second;
+		b2Vec2 entitySize = item->getSize();
 		entitySize.x /= Globals::PIXELS_PER_METER;
 		entitySize.y /= Globals::PIXELS_PER_METER;
 
-		b2Vec2 entityCoords = entities_[i]->getPosition();
+		b2Vec2 entityCoords = item->getPosition();
 		if (clickedOnEntity(worldCoords, entityCoords, entitySize))
 		{
-			*entityIndex = i;
-			return entities_[i];
+			return item;
 		}
 	}
 
@@ -68,19 +68,19 @@ b2World* EntityManager::getWorld()
 void EntityManager::addToWorld(Entities::GameEntity* e)
 {
 	renderer_->AddRenderable(e->getZIndex(), e->getRenderableComponent());
-	entities_.push_back(e);
+	entities_[e->getId()] = e;
 }
 
 void EntityManager::removeFromWorld(Entities::GameEntity* entity)
 {
 	renderer_->RemoveRenderable(entity->getZIndex(), entity->getRenderableComponent());
 	world_->DestroyBody(entity->getBody());
-	entities_.erase(std::remove(entities_.begin(), entities_.end(), entity));
+	entities_.erase(entity->getId());
 }
 
 void EntityManager::removeFromWorld(int index)
 {
 	renderer_->RemoveRenderable(entities_[index]->getZIndex(),entities_[index]->getRenderableComponent());
 	world_->DestroyBody(entities_[index]->getBody());
-	entities_.erase(entities_.begin() + index);
+	entities_.erase(index);
 }

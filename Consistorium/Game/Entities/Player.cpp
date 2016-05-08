@@ -49,5 +49,6 @@ namespace Entities
 
 	Player::~Player()
 	{
+		actionbar_.clear();
 	}
 }

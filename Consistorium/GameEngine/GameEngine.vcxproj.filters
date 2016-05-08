@@ -100,7 +100,6 @@
     <ClInclude Include="FluentEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="IndexedPriorityQueue.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

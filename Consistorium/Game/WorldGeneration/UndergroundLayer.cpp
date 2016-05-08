@@ -25,10 +25,28 @@ void UndergroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManag
 		for (int j = GetLayerRange().x; j >= GetLayerRange().y; j -= Globals::BLOCK_WIDTH)
 		{
 			factory.createBlock(b2Vec2(i, j), "Ground");
-			/*Entities::Block* block = factory.createBlock(b2Vec2(i, j), "Ground");
-			current = block->getRenderableComponent();
-			entities->push_back(block);
-			renderer->AddRenderable(current);*/
+		}
+	}
+	int skipX = 0,
+		skipY = 0;
+	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
+	{
+		for (int j = GetLayerRange().x; j >= GetLayerRange().y; j -= Globals::BLOCK_WIDTH)
+		{
+			if (skipX > 0) 
+			{ 
+				skipX--; 
+				continue;
+			}
+			std::shared_ptr<SpecialPlace> place = placesManager.getRandomPlace("Underground");
+
+			auto center = place->getCenter();
+			if (false)//rand() % *place->getFrequency() == 1)
+			{
+				placesManager.spawnPlace(b2Vec2(i, j), place, factory);
+				skipX = place->getWidth() * 10;
+				skipY = place->getHeight() * 10;
+			}
 		}
 	}
 }

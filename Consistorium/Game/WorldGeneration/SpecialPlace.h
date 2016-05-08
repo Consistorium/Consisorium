@@ -13,6 +13,8 @@ private:
 	std::vector<std::vector<std::string>> elements_;
 	std::string parentLayer_;
 	std::string name_;
+	int height_;
+	int width_;
 	std::shared_ptr<int> frequency_;
 	std::shared_ptr<b2Vec2> center_;
 public:
@@ -27,6 +29,10 @@ public:
 	std::vector<std::vector<std::string>> getElements();
 
 	std::shared_ptr<b2Vec2> getCenter();
+
+	int getHeight();
+
+	int getWidth();
 
 	std::shared_ptr<int> getFrequency();
 

@@ -1,8 +1,8 @@
---[grass][grass][grass]---
---[grass][ground][ground][pineTree]--
+--[grass][grass][grass][pineTree]--
+--[grass][ground][ground][grass]-
 -[pineTree][ground][ground][ground][ground][grass]-
 -[grass][ground][ground][ground][ground][ground][grass]
 [grass][ground][ground][ground][ground][ground][ground][grass]
 [grass][ground][ground][ground][ground][ground][ground][ground][ground][pineTree]
 ----[center]------
-15
+13

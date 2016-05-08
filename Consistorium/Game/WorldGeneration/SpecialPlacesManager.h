@@ -4,6 +4,7 @@
 #include <vector>
 #include <Game\WorldGeneration\SpecialPlace.h>
 #include <memory>
+#include "../Entities/EntityFactory.h"
 
 class SpecialPlacesManager
 {
@@ -21,4 +22,6 @@ public:
 	std::shared_ptr<SpecialPlace> getPlace(std::string layerName, std::string name);
 
 	std::shared_ptr<SpecialPlace> getRandomPlace(std::string layerName);
+
+	void spawnPlace(b2Vec2 pos, std::shared_ptr<SpecialPlace> place, Entities::EntityFactory& factory);
 };

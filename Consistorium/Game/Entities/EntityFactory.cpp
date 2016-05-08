@@ -113,13 +113,12 @@ namespace Entities
 		else if (name.compare("pineTree") == 0)
 		{
 			result = createTree(position, "Pine");
-			result->getBody()->GetFixtureList()->SetSensor(true);
 		}
 		else if (name.compare("delete") == 0)
 		{
-			int index = 0;
+			int index = -1;
 			result = entityManager_.getClickedEntity(position, &index);
-			if (result != nullptr) 
+			if (index != -1)
 			{
 				entityManager_.removeFromWorld(index);
 			}
@@ -231,6 +230,7 @@ namespace Entities
 		tree->setZIndex(TREE_Z_INDEX);
 		entityManager_.addToWorld(tree);
 		components.renderComponent->forEntity(tree);
+		tree->getBody()->GetFixtureList()->SetSensor(true);
 		return tree;
 	}
 

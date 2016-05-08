@@ -39,7 +39,6 @@
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="IAnimateable.h" />
     <ClInclude Include="IGraphicsRenderer.h" />
-    <ClInclude Include="IndexedPriorityQueue.h" />
     <ClInclude Include="IRenderable.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="RenderComponent.h" />

@@ -40,7 +40,7 @@ namespace UI
 		for (size_t i = 0; i < player_->ACTIONBAR_SIZE; i++)
 		{
 			b2Vec2 slotPosition(x + i * singleHolderSpace, windowY - ITEM_HOLDER_DIM);
-			b2Vec2 itemPosition(slotPosition.x + SLOT_PADDING, slotPosition.y + SLOT_PADDING);
+			b2Vec2 itemPosition(slotPosition.x + SLOT_PADDING + 1, slotPosition.y + SLOT_PADDING - 1);
 
 			auto slot = new Entities::Entity();
 			slot->setPosition(slotPosition);
@@ -104,6 +104,7 @@ namespace UI
 
 	InterfaceManager::~InterfaceManager()
 	{
-
+		actionbar_.clear();
+		abItems_.clear();
 	}
 }

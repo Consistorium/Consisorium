@@ -7,6 +7,7 @@ namespace Entities
 	class Entity
 	{
 	private:
+		static int IdGen;
 		b2Vec2 position_;
 		int type_;
 	public:
@@ -17,5 +18,7 @@ namespace Entities
 		virtual int getType();
 
 		virtual Entity* setType(int type);
+
+		int getId();
 	};
 }

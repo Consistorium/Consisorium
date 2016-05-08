@@ -59,6 +59,11 @@ namespace GameEngine {
 		alwaysRender_ = value;
 	}
 
+	int RenderComponent::getId()
+	{
+		return entity_->getId();
+	}
+
 	bool RenderComponent::alwaysRender()
 	{
 		return alwaysRender_;

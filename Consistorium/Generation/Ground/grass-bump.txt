@@ -2,4 +2,4 @@
 -[grass][grass]---
 [grass][grass][grass][grass][grass]
 --[center]---
-5
+3

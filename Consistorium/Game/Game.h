@@ -29,7 +29,7 @@ private:
 	b2Vec2 gravity_;
 	b2Timer jumpTimer_;
 	std::unique_ptr<JumpContactListener> contactListener_;
-	std::vector<Entities::GameEntity*> entities_;
+	std::map<int, Entities::GameEntity*> entities_;
 	std::unique_ptr<KeyboardHandler> keyboardHandler_;
 	UI::InterfaceManager* interfaceManager_;
 public:

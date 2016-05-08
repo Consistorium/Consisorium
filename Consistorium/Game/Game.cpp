@@ -62,9 +62,8 @@ void Game::Run()
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 	interfaceManager_= new UI::InterfaceManager(&renderer_, window_, &player);
-	int a = 5;
 	interfaceManager_->showActionBar();
-	entities_.push_back(&player);
+	entities_[player.getId()] = &player;
 	SDL_Rect playerHealthPos;
 	playerHealthPos.x = 500;
 	playerHealthPos.y = 500;

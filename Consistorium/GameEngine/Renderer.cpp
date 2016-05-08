@@ -36,37 +36,16 @@ namespace GameEngine
 
 	void Renderer::AddRenderable(int zIndex, IRenderable *renderable)
 	{
-		this->renderables_[zIndex].push_back(renderable);
+		this->renderables_[zIndex][renderable->getId()] = renderable;
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, IRenderable *renderable)
 	{
-		renderables_[zIndex].erase(
-			std::remove(
-				renderables_[zIndex].begin(),
-				renderables_[zIndex].end(),
-				renderable),
-			renderables_[zIndex].end());
+		this->renderables_[zIndex].erase(renderable->getId());
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, SDL_Point point)
 	{
-		SDL_Rect rect;
-		for (auto r : renderables_[zIndex])
-		{
-			auto pos = r->getPosition();
-			
-			rect.x = pos.x * pixelsPerMeter_ + 796; // This magic constant keeps the whole software industry alive.
-			rect.y = pos.y * pixelsPerMeter_ + 796; // King of job security.
-			rect.h = r->getSize().y;
-			rect.w = r->getSize().x;
-
-			if (SDL_PointInRect(&point, &rect) == SDL_TRUE)
-			{
-				printf("EXISTS");
-				RemoveRenderable(zIndex, r);
-			}
-		}
 	}
 
 	void Renderer::RenderAll(b2Vec2 cameraPos)
@@ -78,29 +57,29 @@ namespace GameEngine
 
 		int screenWidth, screenHeight;
 		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
-
-		for (std::map<int, std::vector<IRenderable*>>::iterator it = renderables_.begin(); it != renderables_.end(); ++it)
+		
+		for (auto it = renderables_.begin(); it != renderables_.end(); ++it)
 		{
-			for (IRenderable *item : this->renderables_[it->first])
+			for (auto item : renderables_[it->first])
 			{
-				if (item->alwaysRender())
+				if (item.second->alwaysRender())
 				{
-					RenderUI(item);
+					RenderUI(item.second);
 					continue;
 				}
 
-				b2Vec2 position = item->getPosition();
+				b2Vec2 position = item.second->getPosition();
 				if (shouldRender(position, cameraPos, screenWidth, screenHeight) == SDL_FALSE)
 				{
 					continue;
 				}
 
-				SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
+				SDL_Texture *currentTexture = textureManager_.getTexture(*item.second->getTextureName());
 				SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
-				b2Vec2 scale = item->getScale(boundsRect);
-				SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
-				boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
-				boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
+				b2Vec2 scale = item.second->getScale(boundsRect);
+				SDL_RenderSetScale(this->windowRenderer_, item.second->getScale(boundsRect).x, item.second->getScale(boundsRect).y);
+				boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item.second->getSize().x / 2) / item.second->getScale(boundsRect).x;
+				boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item.second->getSize().y / 2 + cameraPos.y) / item.second->getScale(boundsRect).y;
 				SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 			}
 		}
