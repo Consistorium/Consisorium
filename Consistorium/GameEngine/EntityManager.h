@@ -17,7 +17,7 @@ public:
 
 	~EntityManager();
 
-	Entities::GameEntity* getClickedEntity(b2Vec2 worldCoords, int *entityIndex);
+	Entities::GameEntity* getClickedEntity(b2Vec2 worldCoords);
 
 	b2Vec2 getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera);
 

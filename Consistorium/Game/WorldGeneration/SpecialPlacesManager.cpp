@@ -79,6 +79,19 @@ void SpecialPlacesManager::spawnPlace(b2Vec2 pos, std::shared_ptr<SpecialPlace> 
 	}
 }
 
+void SpecialPlacesManager::spawnPlace(b2Vec2 pos, std::shared_ptr<SpecialPlace> place, Entities::EntityFactory& factory, std::vector<std::vector<Entities::GameEntity*>>& cache, b2Vec2 indexes)
+{
+	std::shared_ptr<b2Vec2> center = place->getCenter();
+	for (int k = 0; k < place->getElements().size(); k++)
+	{
+		int innerSize = place->getElements()[k].size();
+		for (int l = 0; l < innerSize; l++)
+		{
+			factory.createFromName(b2Vec2(pos.x + (-center->y + l) * Globals::BLOCK_WIDTH, pos.y + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l], cache, indexes);
+		}
+	}
+}
+
 std::shared_ptr<SpecialPlace> SpecialPlacesManager::getRandomPlace(std::string layerName)
 {
 	int index = rand() % places_[layerName].size();

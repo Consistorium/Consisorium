@@ -50,7 +50,7 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 		}
 		else if (skipLength == 0 && rand() % 5 == 1)
 		{
-			factory.createTree(b2Vec2(i, max), "Pine");
+			factory.createTree(b2Vec2(i, max + Globals::BLOCK_HEIGHT), "Pine");
 		}
 	}
 }

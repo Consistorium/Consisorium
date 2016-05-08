@@ -35,6 +35,8 @@ namespace Entities
 
 		GameEntity* createFromName(b2Vec2 position, std::string name);
 
+		GameEntity* createFromName(b2Vec2 position, std::string name, std::vector<std::vector<Entities::GameEntity*>>& cache, b2Vec2 indexes);
+
 		EntityComponents createEntityComponents(EntityDescriptor descriptor, int animationSpeed);
 
 		Enemy* createSkeleton(

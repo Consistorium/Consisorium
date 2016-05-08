@@ -20,32 +20,29 @@ void UndergroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManag
 {
 	Entities::EntityFactory factory(entityManager);
 	GameEngine::IRenderable *current;
+
+	std::vector<std::vector<Entities::GameEntity*>> cache;
 	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
 	{
+		cache.push_back(std::vector<Entities::GameEntity*>());
 		for (int j = GetLayerRange().x; j >= GetLayerRange().y; j -= Globals::BLOCK_WIDTH)
 		{
-			factory.createBlock(b2Vec2(i, j), "Ground");
+			Entities::Block* block = factory.createBlock(b2Vec2(i, j), "Ground");
+			cache[cache.size() - 1].emplace_back(block);
 		}
 	}
-	int skipX = 0,
-		skipY = 0;
-	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; i += Globals::BLOCK_HEIGHT)
+
+	for (int i = -Globals::LAYER_WIDTH_IN_BLOCKS / 2, ii = 0; i < Globals::LAYER_WIDTH_IN_BLOCKS / 2; ii++, i += Globals::BLOCK_HEIGHT)
 	{
-		for (int j = GetLayerRange().x; j >= GetLayerRange().y; j -= Globals::BLOCK_WIDTH)
+		for (int j = GetLayerRange().x, jj = 0; j >= GetLayerRange().y; jj++, j -= Globals::BLOCK_WIDTH)
 		{
-			if (skipX > 0) 
-			{ 
-				skipX--; 
-				continue;
-			}
 			std::shared_ptr<SpecialPlace> place = placesManager.getRandomPlace("Underground");
 
-			auto center = place->getCenter();
-			if (false)//rand() % *place->getFrequency() == 1)
+			if (rand() % *place->getFrequency() == 1)
 			{
-				placesManager.spawnPlace(b2Vec2(i, j), place, factory);
-				skipX = place->getWidth() * 10;
-				skipY = place->getHeight() * 10;
+				int x = (GetLayerRange().x - j) / Globals::BLOCK_WIDTH;
+				int y = (i + Globals::LAYER_WIDTH_IN_BLOCKS / 2) / Globals::BLOCK_HEIGHT;
+				placesManager.spawnPlace(b2Vec2(i, j), place, factory, cache, b2Vec2(x, y));
 			}
 		}
 	}

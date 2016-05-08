@@ -27,7 +27,7 @@ bool EntityManager::clickedOnEntity(b2Vec2 clickPoint, b2Vec2 entityPosition, b2
 	return false;
 }
 
-Entities::GameEntity* EntityManager::getClickedEntity(b2Vec2 worldCoords, int* entityIndex)
+Entities::GameEntity* EntityManager::getClickedEntity(b2Vec2 worldCoords)
 {
 	worldCoords.x /= Globals::PIXELS_PER_METER;
 	worldCoords.y /= Globals::PIXELS_PER_METER;

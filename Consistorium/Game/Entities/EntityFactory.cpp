@@ -114,17 +114,27 @@ namespace Entities
 		{
 			result = createTree(position, "Pine");
 		}
-		else if (name.compare("delete") == 0)
-		{
-			int index = -1;
-			result = entityManager_.getClickedEntity(position, &index);
-			if (index != -1)
-			{
-				entityManager_.removeFromWorld(index);
-			}
-		}
+		else 
 
 		return result;
+	}
+
+	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name, std::vector<std::vector<Entities::GameEntity*>>& cache, b2Vec2 indexes)
+	{
+		GameEntity *result = nullptr;
+		if (name.compare("delete") == 0)
+		{
+			result = cache[indexes.y][indexes.x];
+			if (result != nullptr)
+			{
+				entityManager_.removeFromWorld(result);
+				cache[indexes.y][indexes.x] = nullptr;
+			}
+
+			return result;
+		}
+
+		return createFromName(position, name);
 	}
 
 	Player* EntityFactory::createPlayer(b2Vec2 position, std::string modelName, float health)

@@ -27,7 +27,7 @@ namespace Entities
 
 	bool Player::addToInventory(Entities::GameEntity* entity)
 	{
-		if (inventory_.size() >= INVENTORY_SIZE)
+		if (inventory_.size() >= INVENTORY_SIZE * 100)
 		{
 			std::cout << "Inventory is full!" << std::endl;
 			return false;

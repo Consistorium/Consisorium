@@ -177,8 +177,7 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 		return;
 	}
 	
-	int entityIndex = -1;
-	GameEntity* entity = eManager.getClickedEntity(worldCoords, &entityIndex);
+	GameEntity* entity = eManager.getClickedEntity(worldCoords);
 
 	if (entity != nullptr)
 	{
