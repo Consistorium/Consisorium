@@ -2,7 +2,7 @@
 #include <Game\Globals\Constants.h>
 
 #include "Capsule.h"
-#include "EntityIndexesEnum.h"
+#include "EntityTypes.h"
 
 #include "EntityFactory.h"
 
@@ -36,7 +36,7 @@ namespace Entities
 		SensorFixtureDef.shape = &polygonShape;
 		SensorFixtureDef.isSensor = true;
 		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
-		footSensorFixture->SetUserData((void*)EntityIndexes::FootSensor);
+		footSensorFixture->SetUserData((void*)EntityTypes::FootSensor);
 
 		return body;
 	}
@@ -67,12 +67,14 @@ namespace Entities
 
 		GameEngine::RenderComponent* rc = new GameEngine::RenderComponent(
 			Globals::MODELS_LOCATION + descriptor.entityName + "/" + descriptor.modelName + "__001.png",
-			b2Vec2(descriptor.width * Globals::PIXELS_PER_METER, descriptor.height * Globals::PIXELS_PER_METER));
+			b2Vec2(descriptor.width * Globals::PIXELS_PER_METER, descriptor.height * Globals::PIXELS_PER_METER),
+			nullptr,
+			false);
 
 		GameEngine::AnimationComponent* ac = new GameEngine::AnimationComponent(
 			Globals::MODELS_LOCATION + descriptor.entityName,
 			descriptor.animation,
-			animationSpeed, //default animation speed
+			animationSpeed,
 			rc->getTextureName());
 
 		EntityComponents components;
@@ -123,7 +125,6 @@ namespace Entities
 			}
 		}
 
-		//WHY IS THERE A MOMENT WHEN A NULL ENTITY IS CREATED?
 		return result;
 	}
 
@@ -141,7 +142,7 @@ namespace Entities
 
 		EntityComponents components = createEntityComponents(descriptor, 40);
 
-		components.body->SetUserData((void*)EntityIndexes::Player);
+		components.body->SetUserData((void*)EntityTypes::Player);
 
 		Player* player = new Player(components.body, components.renderComponent, components.animationComponent);
 		player->setJumpPower(0.2f)
@@ -169,10 +170,10 @@ namespace Entities
 			.create();
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
-		components.body->SetUserData((void*)EntityIndexes::Block);
+		components.body->SetUserData((void*)EntityTypes::Block);
 		b2Fixture* fixture = components.body->GetFixtureList();
 		while (fixture != nullptr) {
-			fixture->SetUserData((void*)EntityIndexes::Block);
+			fixture->SetUserData((void*)EntityTypes::Block);
 			fixture->SetFriction(1.0);
 			fixture = fixture->GetNext();
 		}

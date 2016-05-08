@@ -7,7 +7,7 @@
 #include "WorldGeneration\GroundLayer.h"
 #include "WorldGeneration\UndergroundLayer.h"
 #include "UI\InterfaceManager.h"
-#include "Entities/EntityIndexesEnum.h"
+#include "Entities/EntityTypes.h"
 #include <Game\WorldGeneration\SpecialPlacesManager.h>
 #include <ctime>
 
@@ -55,15 +55,15 @@ void Game::Run()
 {
 	Init();
 	b2Vec2 cameraPos(0, 0);
-	interfaceManager_.reset(new UI::InterfaceManager(&renderer_, window_));
-	interfaceManager_->showActionBar();
-	
 	renderer_.RenderAll(cameraPos);
 
 	EntityManager entityManager_(world_, &renderer_, entities_);
 	EntityFactory entityFactory(entityManager_);
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
+	interfaceManager_= new UI::InterfaceManager(&renderer_, window_, &player);
+	int a = 5;
+	interfaceManager_->showActionBar();
 	entities_.push_back(&player);
 	SDL_Rect playerHealthPos;
 	playerHealthPos.x = 500;
@@ -99,7 +99,7 @@ void Game::Run()
 				keyboardHandler_->handleKeyPress(e, e.key.keysym.sym);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				handleMousePress(e, cameraPos, entityFactory, entityManager_);
+				handleMousePress(e, cameraPos, entityFactory, entityManager_, player);
 				break;
 			}
 		}
@@ -140,7 +140,6 @@ void Game::Run()
 
 			timer.Reset();
 		}
-	
 	}
 }
 
@@ -168,7 +167,7 @@ void Game::handleKeyPress(DynamicEntity* player)
 	}
 }
 
-void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFactory, EntityManager& eManager)
+void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFactory, EntityManager& eManager, Player& player)
 {
 	SDL_Point clickPoint;
 	SDL_GetMouseState(&clickPoint.x, &clickPoint.y);
@@ -186,10 +185,13 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 	{
 		if (e.button.button == SDL_BUTTON_LEFT)
 		{
-			if (entity->getUserData() != (int)EntityIndexes::Player)
+			if (entity->getUserData() != (int)EntityTypes::Player)
 			{
-				interfaceManager_->addToActionbar(*entity->getRenderableComponent()->getTextureName(), 1);
-				eManager.removeFromWorld(entity);
+				if (player.addToActionbar(entity))
+				{
+					interfaceManager_->updateAtionbar();
+					world_->DestroyBody(entity->getBody());
+				}
 			}
 		}
 	}

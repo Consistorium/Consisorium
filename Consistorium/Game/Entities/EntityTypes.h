@@ -1,6 +1,6 @@
 #pragma once
 
-enum class EntityIndexes
+enum class EntityTypes
 {
 	FootSensor = 0,
 	Player = 1,

@@ -1,10 +1,11 @@
 #include "RenderComponent.h"
 
 namespace GameEngine {
-	RenderComponent::RenderComponent(std::string texturePath, b2Vec2 size, Entities::Entity* entity)
+	RenderComponent::RenderComponent(std::string texturePath, b2Vec2 size, Entities::Entity* entity, bool alwaysRender)
 		: texturePath_(new std::string(texturePath)),
 		size_(size),
-		entity_(entity)
+		entity_(entity),
+		alwaysRender_(alwaysRender)
 	{
 	}
 
@@ -47,7 +48,7 @@ namespace GameEngine {
 	{
 		if (entity_ == nullptr || !entity_ || entity_ == NULL)
 		{
-			throw std::invalid_argument("Invalid entity pointer. \"getPosition\" should be used on a specific entity. Did you forget to call \"forEntity()\"?");
+			throw new std::invalid_argument("Invalid entity pointer. \"getPosition\" should be used on a specific entity. Did you forget to call \"forEntity()\"?");
 		}
 
 		return entity_->getPosition();

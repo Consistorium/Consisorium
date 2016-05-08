@@ -31,7 +31,7 @@ private:
 	std::unique_ptr<JumpContactListener> contactListener_;
 	std::vector<Entities::GameEntity*> entities_;
 	std::unique_ptr<KeyboardHandler> keyboardHandler_;
-	std::unique_ptr<UI::InterfaceManager> interfaceManager_;
+	UI::InterfaceManager* interfaceManager_;
 public:
 	Game(SDL_Window* window);
 
@@ -39,7 +39,7 @@ public:
 
 	void handleKeyPress(Entities::DynamicEntity* player);
 
-	void handleMousePress(SDL_Event e, b2Vec2 camera, Entities::EntityFactory entityFactory, EntityManager& eManager);
+	void handleMousePress(SDL_Event e, b2Vec2 camera, Entities::EntityFactory entityFactory, EntityManager& eManager, Entities::Player& player);
 
 	void addEnemies(Entities::EntityFactory* factory, std::vector<Entities::Enemy*>* enemies);
 

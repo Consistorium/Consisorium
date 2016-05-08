@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 #include <Game\Globals\Constants.h>
-#include "../EntityIndexesEnum.h"
+#include "../EntityTypes.h"
 
 namespace Entities
 {
@@ -43,7 +43,7 @@ namespace Entities
 	int  Enemy::scan(FluentEntity& player)
 	{
 		if (locatedEnemy(getPosition(), player.getPosition(), scanRange_) &&
-			(int)player.getUserData() == (int)EntityIndexes::Player)
+			(int)player.getUserData() == (int)EntityTypes::Player)
 		{
 			float delta = ceil((getSize().x / 2 + player.getSize().x / 2) / Globals::PIXELS_PER_METER);
 			if (getPosition().x - player.getPosition().x > delta)

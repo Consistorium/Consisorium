@@ -1,4 +1,4 @@
-#include "../Entities/EntityIndexesEnum.h"
+#include "../Entities/EntityTypes.h"
 
 #include "JumpContactListener.h"
 
@@ -11,8 +11,8 @@ void JumpContactListener::EndContact(b2Contact* contact) {
 	//checks if each fixture is the player foot sensor
 	void* fixtureAUserData = contact->GetFixtureA()->GetUserData();
 	void* fixtureBUserData = contact->GetFixtureB()->GetUserData();
-	if (((int)fixtureAUserData == (int)EntityIndexes::FootSensor && (int)fixtureBUserData != (int)EntityIndexes::Player)
-		|| ((int)fixtureBUserData == (int)EntityIndexes::FootSensor && (int)fixtureAUserData != (int)EntityIndexes::Player))
+	if (((int)fixtureAUserData == (int)EntityTypes::FootSensor && (int)fixtureBUserData != (int)EntityTypes::Player)
+		|| ((int)fixtureBUserData == (int)EntityTypes::FootSensor && (int)fixtureAUserData != (int)EntityTypes::Player))
 	{
 		footContactsCount_--;
 	}
@@ -22,8 +22,8 @@ void JumpContactListener::BeginContact(b2Contact* contact) {
 	//checks if each fixture is the player foot sensor
 	void* fixtureAUserData = contact->GetFixtureA()->GetUserData();
 	void* fixtureBUserData = contact->GetFixtureB()->GetUserData();
-	if (((int)fixtureAUserData == (int)EntityIndexes::FootSensor && (int)fixtureBUserData != (int)EntityIndexes::Player)
-		|| ((int)fixtureBUserData == (int)EntityIndexes::FootSensor && (int)fixtureAUserData != (int)EntityIndexes::Player))
+	if (((int)fixtureAUserData == (int)EntityTypes::FootSensor && (int)fixtureBUserData != (int)EntityTypes::Player)
+		|| ((int)fixtureBUserData == (int)EntityTypes::FootSensor && (int)fixtureAUserData != (int)EntityTypes::Player))
 	{
 		footContactsCount_++;
 	}

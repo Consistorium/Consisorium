@@ -9,4 +9,15 @@ namespace Entities
 		position_ = value;
 		return this;
 	};
+
+	int Entity::getType()
+	{
+		return type_;
+	}
+
+	Entity* Entity::setType(int type)
+	{
+		type_ = type;
+		return this;
+	}
 }

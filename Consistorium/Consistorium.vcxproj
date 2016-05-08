@@ -175,7 +175,7 @@
     <ClInclude Include="Game\Entities\EntityComponents.h" />
     <ClInclude Include="Game\Entities\EntityDescriptor.h" />
     <ClInclude Include="Game\Entities\EntityFactory.h" />
-    <ClInclude Include="Game\Entities\EntityIndexesEnum.h" />
+    <ClInclude Include="Game\Entities\EntityTypes.h" />
     <ClInclude Include="Game\Entities\FluentEntity.h" />
     <ClInclude Include="Game\Entities\Objects\Block.h" />
     <ClInclude Include="Game\Entities\Objects\Tree.h" />

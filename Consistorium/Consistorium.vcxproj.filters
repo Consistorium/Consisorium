@@ -61,9 +61,6 @@
     <ClInclude Include="Game\Entities\EntityFactory.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\EntityIndexesEnum.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Globals\Constants.h">
       <Filter>Game\Globals</Filter>
     </ClInclude>
@@ -126,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="Game\UI\ItemSlot.h">
       <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityTypes.h">
+      <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

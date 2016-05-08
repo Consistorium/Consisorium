@@ -14,7 +14,7 @@ namespace GameEngine {
 		bool alwaysRender_;
 		int zIndex_;
 	public:
-		RenderComponent(std::string texturePath, b2Vec2 size, Entities::Entity* entity_ = nullptr);
+		RenderComponent(std::string texturePath, b2Vec2 size, Entities::Entity* entity, bool alwaysRender);
 
 		~RenderComponent();
 
