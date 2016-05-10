@@ -124,6 +124,11 @@ namespace Entities
 		GameEntity *result = nullptr;
 		if (name.compare("delete") == 0)
 		{
+			if (indexes.y < 0 || indexes.y >= cache.size() ||
+				indexes.x < 0 || indexes.x >= cache[indexes.y].size()) 
+			{
+				return nullptr;
+			}
 			result = cache[indexes.y][indexes.x];
 			if (result != nullptr)
 			{
