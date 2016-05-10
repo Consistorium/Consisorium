@@ -12,6 +12,7 @@
 #include <GameEngine\Renderer.h>
 #include <GameEngine\RenderComponent.h>
 #include "ItemSlot.h"
+#include "Actionbar.h"
 
 namespace UI
 {
@@ -23,15 +24,7 @@ namespace UI
 		std::shared_ptr<GameEngine::Renderer> renderer_;
 		b2Vec2 windowSize_;
 		SDL_Window* window_;
-		std::vector<
-			std::pair<
-				Entities::Entity*,
-				GameEngine::RenderComponent*>*> actionbar_;
-
-		std::vector<
-			std::pair<
-				Entities::Entity*,
-				GameEngine::RenderComponent*> *> abItems_;
+		std::unique_ptr<Actionbar> actionbar_;
 		void createActionbar();
 	public:
 		InterfaceManager(GameEngine::Renderer*, SDL_Window*, Entities::Player*);
@@ -42,7 +35,7 @@ namespace UI
 
 		void showActionBar();
 
-		void updateAtionbar();
+		//void updateAtionbar();
 
 		void showInventory();
 

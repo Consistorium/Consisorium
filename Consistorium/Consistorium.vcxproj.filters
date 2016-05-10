@@ -53,6 +53,9 @@
     <ClCompile Include="Game\UI\ItemSlot.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Game\UI\Actionbar.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Capsule.h">
@@ -126,6 +129,9 @@
     </ClInclude>
     <ClInclude Include="Game\Entities\EntityTypes.h">
       <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\UI\Actionbar.h">
+      <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -187,7 +187,7 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 			{
 				if (player.addToActionbar(entity))
 				{
-					interfaceManager_->updateAtionbar();
+					//interfaceManager_->updateAtionbar();
 					world_->DestroyBody(entity->getBody());
 				}
 			}
