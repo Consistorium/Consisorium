@@ -17,9 +17,9 @@ BackgroundManager::BackgroundManager(GameEngine::IGraphicsRenderer *renderer)
 
 void BackgroundManager::update(float dt, b2Vec2 playerPos)
 {
-	float yAxis = playerPos.y;
+	float yAxis = playerPos.y * Globals::BLOCK_HEIGHT;
 	timeElapsed_ += dt;
-	if (timeElapsed_ > 15000)
+	if (timeElapsed_ > 5000)
 	{
 		timeElapsed_ = 0;
 		isDay_ = !isDay_;
