@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="Game\Entities\Capsule.cpp" />
     <ClCompile Include="Game\Entities\Enemies\Enemy.cpp" />
     <ClCompile Include="Game\Entities\Enemies\Skeleton.cpp" />
@@ -167,8 +168,10 @@
     <ClCompile Include="Game\WorldGeneration\SpecialPlacesManager.cpp" />
     <ClCompile Include="Game\WorldGeneration\UndergroundLayer.cpp" />
     <ClCompile Include="Game\WorldGeneration\WorldGenerator.cpp" />
+    <ClCompile Include="GameUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="Game\Entities\Capsule.h" />
     <ClInclude Include="Game\Entities\Enemies\Enemy.h" />
     <ClInclude Include="Game\Entities\Enemies\Skeleton.h" />
@@ -193,6 +196,8 @@
     <ClInclude Include="Game\WorldGeneration\SpecialPlacesManager.h" />
     <ClInclude Include="Game\WorldGeneration\UndergroundLayer.h" />
     <ClInclude Include="Game\WorldGeneration\WorldGenerator.h" />
+    <ClInclude Include="GameUtils.h" />
+    <ClInclude Include="EventIds.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="GameEngine\GameEngine.vcxproj">

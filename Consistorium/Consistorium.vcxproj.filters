@@ -53,6 +53,8 @@
     <ClCompile Include="Game\UI\ItemSlot.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundManager.cpp" />
+    <ClCompile Include="GameUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Capsule.h">
@@ -126,6 +128,11 @@
     </ClInclude>
     <ClInclude Include="Game\Entities\EntityTypes.h">
       <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundManager.h" />
+    <ClInclude Include="GameUtils.h" />
+    <ClInclude Include="EventIds.h">
+      <Filter>Game\Globals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -44,6 +44,12 @@
     <ClCompile Include="FluentEntity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Event System</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Event System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
@@ -100,6 +106,12 @@
     <ClInclude Include="FluentEntity.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />
@@ -113,6 +125,9 @@
     </Filter>
     <Filter Include="Entities">
       <UniqueIdentifier>{2f0a1c48-ea26-48f8-a0a7-2d1090d15f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event System">
+      <UniqueIdentifier>{55bd3679-793a-4fdc-babf-2a22c8915ebc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
