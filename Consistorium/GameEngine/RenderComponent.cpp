@@ -44,6 +44,11 @@ namespace GameEngine {
 		entity_ = entity;
 	}
 
+	int RenderComponent::getOrientation()
+	{
+		return entity_->getXDirection();
+	}
+
 	b2Vec2 RenderComponent::getPosition()
 	{
 		if (entity_ == nullptr || !entity_ || entity_ == NULL)

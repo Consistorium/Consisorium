@@ -9,6 +9,7 @@ namespace Entities
 	private:
 		static int IdGen;
 		b2Vec2 position_;
+		int xDirection_ = 0;
 		int type_;
 	public:
 		virtual b2Vec2 getPosition();
@@ -18,6 +19,10 @@ namespace Entities
 		virtual int getType();
 
 		virtual Entity* setType(int type);
+
+		virtual void setXDirection(int direction);
+
+		virtual int getXDirection();
 
 		int getId();
 	};

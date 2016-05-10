@@ -18,6 +18,8 @@ namespace GameEngine {
 
 		virtual b2Vec2 getPosition() = 0;
 
+		virtual int getOrientation() = 0;
+
 		virtual bool alwaysRender() = 0;
 
 		virtual int getZIndex() = 0;

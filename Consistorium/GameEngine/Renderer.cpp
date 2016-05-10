@@ -80,7 +80,8 @@ namespace GameEngine
 				SDL_RenderSetScale(this->windowRenderer_, item.second->getScale(boundsRect).x, item.second->getScale(boundsRect).y);
 				boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item.second->getSize().x / 2) / item.second->getScale(boundsRect).x;
 				boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item.second->getSize().y / 2 + cameraPos.y) / item.second->getScale(boundsRect).y;
-				SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
+				SDL_RendererFlip flip = ((item.second->getOrientation() == -1) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+				SDL_RenderCopyEx(this->windowRenderer_, currentTexture, nullptr, &boundsRect, 0, nullptr, flip);
 			}
 		}
 		

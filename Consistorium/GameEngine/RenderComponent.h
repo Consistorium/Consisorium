@@ -32,6 +32,8 @@ namespace GameEngine {
 
 		b2Vec2 getPosition() override;
 
+		int getOrientation() override;
+
 		void forEntity(Entities::Entity* entity);
 
 		bool alwaysRender();

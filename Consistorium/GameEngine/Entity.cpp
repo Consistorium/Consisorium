@@ -16,6 +16,10 @@ namespace Entities
 
 	int Entity::getType() { return type_; }
 
+	void Entity::setXDirection(int direction) { xDirection_ = direction; }
+
+	int Entity::getXDirection() { return xDirection_; }
+
 	Entity* Entity::setType(int type)
 	{
 		type_ = type;

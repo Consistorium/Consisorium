@@ -27,7 +27,6 @@ void BackgroundManager::update(float dt, b2Vec2 playerPos)
 	}
 
 	Color newColor;
-	printf("player y: %f; undergroundlayer start: %f end: %f\n", yAxis, Globals::UNDERGROUND_LAYER_HEIGHT_RANGE.x, Globals::UNDERGROUND_LAYER_HEIGHT_RANGE.y);
 	if (GameUtils::isInInterval(yAxis, Globals::GROUND_LAYER_HEIGHT_RANGE) ||
 		GameUtils::isInInterval(yAxis, Globals::AIR_LAYER_HEIGHT_RANGE))
 	{

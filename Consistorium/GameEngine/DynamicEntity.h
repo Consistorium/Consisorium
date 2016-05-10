@@ -10,7 +10,6 @@ namespace Entities
 	class DynamicEntity : public GameEntity
 	{
 	protected:
-		int xDirection_;
 		float jumpPower_;
 		float maxSpeed_;
 		float scanRange_;
@@ -31,8 +30,6 @@ namespace Entities
 		virtual void move();
 
 		virtual void jump(b2Vec2 gravity);
-
-		virtual void setXDirection(int direction);
 
 		GameEngine::IAnimateable* getAnimateableComponent();
 
