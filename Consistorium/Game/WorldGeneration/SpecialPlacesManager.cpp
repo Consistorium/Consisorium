@@ -86,13 +86,12 @@ void SpecialPlacesManager::spawnPlace(b2Vec2 pos, std::shared_ptr<SpecialPlace> 
 	for (int k = 0; k < place->getElements().size(); k++)
 	{
 		int innerSize = place->getElements()[k].size();
+		dynIndexes.y = indexes.y + center->y - k;
 		for (int l = 0; l < innerSize; l++)
 		{
-			factory.createFromName(b2Vec2(pos.x + (-center->y + l) * Globals::BLOCK_WIDTH, pos.y + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l], cache, dynIndexes);
 			dynIndexes.x = indexes.x - center->y + l;
+			factory.createFromName(b2Vec2(pos.x + (l - center->y) * Globals::BLOCK_WIDTH, pos.y + (center->x - k) * Globals::BLOCK_WIDTH), place->getElements()[k][l], cache, dynIndexes);
 		}
-
-		dynIndexes.y = indexes.y + center->y - k;
 	}
 }
 

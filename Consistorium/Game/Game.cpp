@@ -3,11 +3,12 @@
 #include <Game/Globals/Constants.h>
 #include <KeyboardHandler.h>
 
-#include <BackgroundManager.h>
-#include <EventIds.h>
+#include <Game\BackgroundManager.h>
+#include <Game\EventIds.h>
 #include "WorldGeneration\WorldGenerator.h"
 #include "WorldGeneration\GroundLayer.h"
 #include "WorldGeneration\UndergroundLayer.h"
+#include "WorldGeneration\RuinLayer.h"
 #include "UI\InterfaceManager.h"
 #include "Entities/EntityTypes.h"
 #include <Game\WorldGeneration\SpecialPlacesManager.h>
@@ -78,6 +79,8 @@ void Game::Run()
 	layers.push_back(&ground);
 	UndergroundLayer underground;
 	layers.push_back(&underground);
+	RuinLayer ruins;
+	layers.push_back(&ruins);
 	WorldGenerator worldGenerator(entityManager_, layers);
 	worldGenerator.Build(&entities_);
 	//prevent jumping in mid air

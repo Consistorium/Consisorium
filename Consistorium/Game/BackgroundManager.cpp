@@ -1,9 +1,9 @@
 #include "BackgroundManager.h"
 
 #include <Game\Globals\Constants.h>
-#include <GameUtils.h>
+#include "GameUtils.h"
 #include <Color.h>
-#include <EventIds.h>
+#include "EventIds.h"
 #include <EventManager.h>
 
 BackgroundManager::BackgroundManager(GameEngine::IGraphicsRenderer *renderer)
@@ -19,7 +19,7 @@ void BackgroundManager::update(float dt, b2Vec2 playerPos)
 {
 	float yAxis = playerPos.y * Globals::BLOCK_HEIGHT;
 	timeElapsed_ += dt;
-	if (timeElapsed_ > 5000)
+	if (timeElapsed_ > 15000)
 	{
 		timeElapsed_ = 0;
 		isDay_ = !isDay_;

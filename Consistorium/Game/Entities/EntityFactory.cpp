@@ -109,12 +109,14 @@ namespace Entities
 			result = createBlock(position, "Ground");
 			result->setZIndex(ENTITY_Z_INDEX);
 		}
-		
 		else if (name.compare("pineTree") == 0)
 		{
 			result = createTree(position, "Pine");
 		}
-		else 
+		else if (name.compare("ruin") == 0)
+		{
+			result = createBlock(position, "Ruin");
+		}
 
 		return result;
 	}
@@ -122,6 +124,7 @@ namespace Entities
 	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name, std::vector<std::vector<Entities::GameEntity*>>& cache, b2Vec2 indexes)
 	{
 		GameEntity *result = nullptr;
+
 		if (name.compare("delete") == 0)
 		{
 			if (indexes.y < 0 || indexes.y >= cache.size() ||
@@ -172,7 +175,6 @@ namespace Entities
 
 	Block* EntityFactory::createBlock(b2Vec2 position, std::string modelName)
 	{
-		position.y += Globals::BLOCK_HEIGHT / 2;
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
 			.withEntityName("Block")
@@ -229,7 +231,7 @@ namespace Entities
 	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
 	{
 		position.y += Globals::TREE_HEIGHT / 2;
-
+		position.y -= Globals::BLOCK_HEIGHT / 2;
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
 			.withEntityName("Tree")

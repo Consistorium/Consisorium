@@ -53,8 +53,15 @@
     <ClCompile Include="Game\UI\ItemSlot.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
-    <ClCompile Include="BackgroundManager.cpp" />
-    <ClCompile Include="GameUtils.cpp" />
+    <ClCompile Include="RuinLayer.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\BackgroundManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameUtils.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Capsule.h">
@@ -129,10 +136,20 @@
     <ClInclude Include="Game\Entities\EntityTypes.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="BackgroundManager.h" />
-    <ClInclude Include="GameUtils.h" />
     <ClInclude Include="EventIds.h">
       <Filter>Game\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="RuinLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameUtils.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\BackgroundManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\EventIds.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
