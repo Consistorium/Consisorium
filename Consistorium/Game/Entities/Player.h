@@ -11,7 +11,7 @@ namespace Entities
 	class Player : public FluentEntity
 	{
 	private:
-		const float PLAYER_MAX_SPEED = 3;	
+		const float PLAYER_MAX_SPEED = 3;
 		std::vector<std::shared_ptr<Entities::GameEntity>> actionbar_;
 		std::vector<std::shared_ptr<Entities::GameEntity>> inventory_;
 	public:

@@ -169,6 +169,7 @@
     <ClCompile Include="Game\WorldGeneration\SpecialPlacesManager.cpp" />
     <ClCompile Include="Game\WorldGeneration\UndergroundLayer.cpp" />
     <ClCompile Include="Game\WorldGeneration\WorldGenerator.cpp" />
+    <ClCompile Include="HellLayer.cpp" />
     <ClCompile Include="RuinLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,7 +200,7 @@
     <ClInclude Include="Game\WorldGeneration\SpecialPlacesManager.h" />
     <ClInclude Include="Game\WorldGeneration\UndergroundLayer.h" />
     <ClInclude Include="Game\WorldGeneration\WorldGenerator.h" />
-    <ClInclude Include="EventIds.h" />
+    <ClInclude Include="HellLayer.h" />
     <ClInclude Include="RuinLayer.h" />
   </ItemGroup>
   <ItemGroup>

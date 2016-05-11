@@ -62,6 +62,9 @@
     <ClCompile Include="Game\GameUtils.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="HellLayer.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Capsule.h">
@@ -136,9 +139,6 @@
     <ClInclude Include="Game\Entities\EntityTypes.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="EventIds.h">
-      <Filter>Game\Globals</Filter>
-    </ClInclude>
     <ClInclude Include="RuinLayer.h">
       <Filter>Game\WorldGeneration</Filter>
     </ClInclude>
@@ -150,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="Game\EventIds.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="HellLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,12 @@ namespace Entities
 	
 	int Entity::IdGen = 0;
 
-	int Entity::getId() { return ++IdGen; }
+	int Entity::getId() { return id_; }
+
+	Entity::Entity()
+		: id_(++IdGen)
+	{
+	}
 
 	Entity* Entity::setPosition(b2Vec2 value) 
 	{

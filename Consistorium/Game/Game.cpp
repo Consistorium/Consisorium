@@ -8,6 +8,7 @@
 #include "WorldGeneration\WorldGenerator.h"
 #include "WorldGeneration\GroundLayer.h"
 #include "WorldGeneration\UndergroundLayer.h"
+#include <HellLayer.h>
 #include "WorldGeneration\RuinLayer.h"
 #include "UI\InterfaceManager.h"
 #include "Entities/EntityTypes.h"
@@ -81,6 +82,8 @@ void Game::Run()
 	layers.push_back(&underground);
 	RuinLayer ruins;
 	layers.push_back(&ruins);
+	HellLayer hell;
+	layers.push_back(&hell);
 	WorldGenerator worldGenerator(entityManager_, layers);
 	worldGenerator.Build(&entities_);
 	//prevent jumping in mid air

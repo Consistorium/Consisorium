@@ -62,6 +62,14 @@ namespace GameEngine {
 		animationStack_.push(entityAnimations_[animationName]);
 	}
 
+	void AnimationManager::revertAll()
+	{
+		while (animationStack_.size() > 1)
+		{
+			revertAnimation();
+		}
+	}
+
 	void AnimationManager::revertAnimation()
 	{
 		if (animationStack_.size() == 1)
