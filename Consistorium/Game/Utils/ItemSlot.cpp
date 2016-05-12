@@ -54,7 +54,8 @@ namespace Utils
 			throw new std::invalid_argument("Trying to add nothing to the slot.");
 		}
 
-		if ((!isEmpty() && item_.first->getType() != entity->getType()) ||
+		if ((!isEmpty() && 
+			(item_.first->getType() != entity->getType())) ||
 			(itemCount_ + count > maxItemCount_))
 		{
 			return false;
