@@ -44,6 +44,16 @@ namespace GameEngine {
 		entity_ = entity;
 	}
 
+	bool RenderComponent::isStatic()
+	{
+		return isStatic_;
+	}
+
+	void RenderComponent::setStatic(bool flag)
+	{
+		isStatic_ = flag;
+	}
+
 	int RenderComponent::getOrientation()
 	{
 		return entity_->getXDirection();

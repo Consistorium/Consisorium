@@ -112,6 +112,7 @@
     <ClInclude Include="Event.h">
       <Filter>Event System</Filter>
     </ClInclude>
+    <ClInclude Include="BST.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

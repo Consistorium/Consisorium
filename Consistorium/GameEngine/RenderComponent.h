@@ -11,6 +11,7 @@ namespace GameEngine {
 		b2Vec2 scale_;
 		b2Vec2 size_;
 		Entities::Entity* entity_;
+		bool isStatic_;
 		bool alwaysRender_;
 		int zIndex_;
 	public:
@@ -33,6 +34,10 @@ namespace GameEngine {
 		b2Vec2 getPosition() override;
 
 		int getOrientation() override;
+
+		bool isStatic() override;
+
+		void setStatic(bool flag) override;
 
 		void forEntity(Entities::Entity* entity);
 
