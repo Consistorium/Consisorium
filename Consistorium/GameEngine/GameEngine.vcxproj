@@ -17,6 +17,8 @@
     <ClCompile Include="DynamicEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FluentEntity.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
@@ -35,6 +37,8 @@
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="FluentEntity.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="IAnimateable.h" />

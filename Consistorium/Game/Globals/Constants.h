@@ -5,8 +5,6 @@
 #include "Color.h"
 namespace Globals
 {
-	const Color DAY_COLOR = { 52, 152, 219, 255 };
-	const Color NIGHT_COLOR = { 44, 62, 80, 255 };
 	const int DAY_DURATION = 15 * 1000;
 
 	const int PIXELS_PER_METER = 50;

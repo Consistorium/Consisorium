@@ -56,6 +56,11 @@
     <ClCompile Include="Game\UI\Actionbar.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundManager.cpp" />
+    <ClCompile Include="GameUtils.cpp" />
+    <ClCompile Include="Game\UI\Inventory.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\Capsule.h">
@@ -131,6 +136,14 @@
       <Filter>Game\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Game\UI\Actionbar.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundManager.h" />
+    <ClInclude Include="GameUtils.h" />
+    <ClInclude Include="EventIds.h">
+      <Filter>Game\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\UI\Inventory.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>

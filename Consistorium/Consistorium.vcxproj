@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundManager.cpp" />
     <ClCompile Include="Game\Entities\Capsule.cpp" />
     <ClCompile Include="Game\Entities\Enemies\Enemy.cpp" />
     <ClCompile Include="Game\Entities\Enemies\Skeleton.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Game\Menu\Menu.cpp" />
     <ClCompile Include="Game\UI\Actionbar.cpp" />
     <ClCompile Include="Game\UI\InterfaceManager.cpp" />
+    <ClCompile Include="Game\UI\Inventory.cpp" />
     <ClCompile Include="Game\UI\ItemSlot.cpp" />
     <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
     <ClCompile Include="Game\WorldGeneration\GroundLayer.cpp" />
@@ -168,8 +170,10 @@
     <ClCompile Include="Game\WorldGeneration\SpecialPlacesManager.cpp" />
     <ClCompile Include="Game\WorldGeneration\UndergroundLayer.cpp" />
     <ClCompile Include="Game\WorldGeneration\WorldGenerator.cpp" />
+    <ClCompile Include="GameUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundManager.h" />
     <ClInclude Include="Game\Entities\Capsule.h" />
     <ClInclude Include="Game\Entities\Enemies\Enemy.h" />
     <ClInclude Include="Game\Entities\Enemies\Skeleton.h" />
@@ -187,6 +191,7 @@
     <ClInclude Include="Game\Menu\MouseButtonEnum.h" />
     <ClInclude Include="Game\UI\Actionbar.h" />
     <ClInclude Include="Game\UI\InterfaceManager.h" />
+    <ClInclude Include="Game\UI\Inventory.h" />
     <ClInclude Include="Game\UI\ItemSlot.h" />
     <ClInclude Include="Game\Utils\JumpContactListener.h" />
     <ClInclude Include="Game\WorldGeneration\GroundLayer.h" />
@@ -195,6 +200,8 @@
     <ClInclude Include="Game\WorldGeneration\SpecialPlacesManager.h" />
     <ClInclude Include="Game\WorldGeneration\UndergroundLayer.h" />
     <ClInclude Include="Game\WorldGeneration\WorldGenerator.h" />
+    <ClInclude Include="GameUtils.h" />
+    <ClInclude Include="EventIds.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="GameEngine\GameEngine.vcxproj">

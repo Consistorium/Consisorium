@@ -165,8 +165,8 @@ namespace Entities
 			->setHealth(health)
 			->setZIndex(ENTITY_Z_INDEX);
 
-		entityManager_.addToWorld(player);
 		components.renderComponent->forEntity(player);
+		entityManager_.addToWorld(player);
 		return player;
 	}
 
@@ -194,9 +194,9 @@ namespace Entities
 
 		Block* block = new Block(components.body, components.renderComponent);
 		block->setZIndex(ENTITY_Z_INDEX);
-		entityManager_.addToWorld(block);
+		
 		components.renderComponent->forEntity(block);
-
+		entityManager_.addToWorld(block);
 		return block;
 	}
 
@@ -221,8 +221,8 @@ namespace Entities
 			->setHaste(haste)
 			->setZIndex(ENTITY_Z_INDEX);
 
-		entityManager_.addToWorld(skeleton);
 		components.renderComponent->forEntity(skeleton);
+		entityManager_.addToWorld(skeleton);
 		return skeleton;
 	}
 
@@ -243,8 +243,8 @@ namespace Entities
 		EntityComponents components = createEntityComponents(descriptor, 80);
 		Tree* tree = new Tree(components.body, components.renderComponent);
 		tree->setZIndex(TREE_Z_INDEX);
-		entityManager_.addToWorld(tree);
 		components.renderComponent->forEntity(tree);
+		entityManager_.addToWorld(tree);
 		tree->getBody()->GetFixtureList()->SetSensor(true);
 		return tree;
 	}

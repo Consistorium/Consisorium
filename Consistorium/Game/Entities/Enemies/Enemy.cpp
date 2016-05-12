@@ -17,7 +17,7 @@ namespace Entities
 	void Enemy::iterateAI(FluentEntity& player)
 	{
 		setXDirection(scan(player));
-		if (xDirection_ != 0)
+		if (getXDirection() != 0)
 		{
 			animationManager_.setAnimation("Walk", true);
 			move();

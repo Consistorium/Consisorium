@@ -24,6 +24,8 @@ namespace GameEngine {
 
 		b2Vec2 getScale(SDL_Rect textureSize) override;
 
+		void setScale(b2Vec2) override;
+
 		b2Vec2 getSize() override;
 
 		void setPosition(const b2Vec2& pos);
@@ -31,6 +33,8 @@ namespace GameEngine {
 		int getId() override;
 
 		b2Vec2 getPosition() override;
+
+		int getOrientation() override;
 
 		void forEntity(Entities::Entity* entity);
 

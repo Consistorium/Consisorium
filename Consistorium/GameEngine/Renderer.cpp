@@ -80,7 +80,8 @@ namespace GameEngine
 				SDL_RenderSetScale(this->windowRenderer_, item.second->getScale(boundsRect).x, item.second->getScale(boundsRect).y);
 				boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item.second->getSize().x / 2) / item.second->getScale(boundsRect).x;
 				boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item.second->getSize().y / 2 + cameraPos.y) / item.second->getScale(boundsRect).y;
-				SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
+				SDL_RendererFlip flip = ((item.second->getOrientation() == -1) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+				SDL_RenderCopyEx(this->windowRenderer_, currentTexture, nullptr, &boundsRect, 0, nullptr, flip);
 			}
 		}
 		
@@ -116,14 +117,16 @@ namespace GameEngine
 
 		int screenWidth, screenHeight;
 		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
-
-		b2Vec2 position = item->getPosition();
 		SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
 		SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
+
 		b2Vec2 scale = item->getScale(boundsRect);
 		SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
+
+		b2Vec2 position = item->getPosition();
 		boundsRect.x = position.x / item->getScale(boundsRect).x;
 		boundsRect.y = position.y / item->getScale(boundsRect).y;
+
 		SDL_RenderCopy(this->windowRenderer_, currentTexture, nullptr, &boundsRect);
 	}
 }

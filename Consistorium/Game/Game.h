@@ -27,7 +27,8 @@ private:
 	int32 velocityIterations_;
 	int32 positionIterations_;
 	b2Vec2 gravity_;
-	b2Timer jumpTimer_;
+	b2Timer jumpTimer_,
+		inventoryTimer_;
 	std::unique_ptr<JumpContactListener> contactListener_;
 	std::map<int, Entities::GameEntity*> entities_;
 	std::unique_ptr<KeyboardHandler> keyboardHandler_;

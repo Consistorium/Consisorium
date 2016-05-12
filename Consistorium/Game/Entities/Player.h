@@ -14,9 +14,10 @@ namespace Entities
 		const float PLAYER_MAX_SPEED = 3;	
 		std::vector<std::shared_ptr<Entities::GameEntity>> actionbar_;
 		std::vector<std::shared_ptr<Entities::GameEntity>> inventory_;
+		int actionbarSelected_;
 	public:
 		const float ACTIONBAR_SIZE = 8;
-		const float INVENTORY_SIZE = 16;
+		const float INVENTORY_SIZE = 18;
 
 		Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac);
 

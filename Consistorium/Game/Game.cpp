@@ -3,6 +3,8 @@
 #include <Game/Globals/Constants.h>
 #include <KeyboardHandler.h>
 
+#include <BackgroundManager.h>
+#include <EventIds.h>
 #include "WorldGeneration\WorldGenerator.h"
 #include "WorldGeneration\GroundLayer.h"
 #include "WorldGeneration\UndergroundLayer.h"
@@ -49,6 +51,7 @@ void Game::Init()
 	velocityIterations_ = 8;
 	positionIterations_ = 3;
 	srand(time(nullptr));
+	inventoryTimer_.Reset();
 }
 
 void Game::Run()
@@ -56,14 +59,15 @@ void Game::Run()
 	Init();
 	b2Vec2 cameraPos(0, 0);
 	renderer_.RenderAll(cameraPos);
-
 	EntityManager entityManager_(world_, &renderer_, entities_);
 	EntityFactory entityFactory(entityManager_);
+
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
 	interfaceManager_= new UI::InterfaceManager(&renderer_, window_, &player);
 	interfaceManager_->showActionBar();
 	entities_[player.getId()] = &player;
+
 	SDL_Rect playerHealthPos;
 	playerHealthPos.x = 500;
 	playerHealthPos.y = 500;
@@ -86,9 +90,24 @@ void Game::Run()
 	SDL_Event e;
 	b2Timer timer;
 	bool isDay = true;
-	renderer_.SetRenderColor(Globals::DAY_COLOR);
 
+	EventManager::get().add(ON_BECOME_DAY, [&]() {
+		for (size_t i = 0; i < enemies.size(); i++)
+		{
+			renderer_.RemoveRenderable(enemies[i]->getZIndex(), enemies[i]->getRenderableComponent());
+			world_->DestroyBody(enemies[i]->getBody());
+		}
+		enemies.clear();
+	});
+
+	EventManager::get().add(ON_BECOME_NIGHT, [&]() {
+		addEnemies(&entityFactory, &enemies);
+	});
+
+	BackgroundManager backgroundManager(&renderer_);
 	while (true) {
+		float dt = timer.GetMilliseconds();
+		timer.Reset();
 		while (SDL_PollEvent(&e) != 0)
 		{
 			switch (e.type)
@@ -116,29 +135,7 @@ void Game::Run()
 			enemies[i]->update();
 		}
 
-		if (timer.GetMilliseconds() > Globals::DAY_DURATION)
-		{
-			if (isDay)
-			{
-				isDay = false;
-				renderer_.SetRenderColor(Globals::DAY_COLOR);
-				for (size_t i = 0; i < enemies.size(); i++)
-				{
-					renderer_.RemoveRenderable(enemies[i]->getZIndex(), enemies[i]->getRenderableComponent());
-					world_->DestroyBody(enemies[i]->getBody());
-				}
-
-				enemies.clear();
-			}
-			else
-			{
-				isDay = true;
-				renderer_.SetRenderColor(Globals::NIGHT_COLOR);
-				addEnemies(&entityFactory, &enemies);
-			}
-
-			timer.Reset();
-		}
+		backgroundManager.update(dt, player.getBody()->GetPosition());
 	}
 }
 
@@ -153,6 +150,14 @@ void Game::handleKeyPress(DynamicEntity* player)
 	{
 		player->setXDirection(1);
 		player->move();
+	}
+	else if (keyboardHandler_->isPressed(SDLK_b))
+	{
+		if (inventoryTimer_.GetMilliseconds() >= 300)
+		{
+			interfaceManager_->toggleInventory();
+			inventoryTimer_.Reset();
+		}
 	}
 
 	if (keyboardHandler_->isPressed(SDLK_UP))
@@ -178,7 +183,7 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 	}
 	
 	GameEntity* entity = eManager.getClickedEntity(worldCoords);
-
+	
 	if (entity != nullptr)
 	{
 		if (e.button.button == SDL_BUTTON_LEFT)
@@ -187,7 +192,7 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 			{
 				if (player.addToActionbar(entity))
 				{
-					//interfaceManager_->updateAtionbar();
+					interfaceManager_->update();
 					world_->DestroyBody(entity->getBody());
 				}
 			}

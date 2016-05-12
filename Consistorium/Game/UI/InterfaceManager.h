@@ -13,6 +13,7 @@
 #include <GameEngine\RenderComponent.h>
 #include "ItemSlot.h"
 #include "Actionbar.h"
+#include "Inventory.h"
 
 namespace UI
 {
@@ -25,19 +26,25 @@ namespace UI
 		b2Vec2 windowSize_;
 		SDL_Window* window_;
 		std::unique_ptr<Actionbar> actionbar_;
+		std::unique_ptr<Inventory> inventory_;
+		std::pair<
+			Entities::Entity*,
+			GameEngine::RenderComponent*> inventoryPage_;
 		void createActionbar();
 	public:
 		InterfaceManager(GameEngine::Renderer*, SDL_Window*, Entities::Player*);
 
 		void showHud();
 
+		void toggleInventory();
+
 		void showHealth(float maxValue, float value);
 
 		void showActionBar();
 
-		//void updateAtionbar();
+		void update();
 
-		void showInventory();
+		void closeInventory();
 
 		~InterfaceManager();
 	};

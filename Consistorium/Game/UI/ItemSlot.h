@@ -3,6 +3,7 @@
 #include <string>
 #include <Box2D\Box2D.h>
 #include <GameEngine\Entity.h>
+#include <GameEngine\RenderComponent.h>
 
 namespace UI
 {
@@ -11,25 +12,26 @@ namespace UI
 	{
 	private:
 		int itemCount_;
-		std::string itemTexture_;
-		b2Vec2 position_;
+		std::pair<
+			Entities::Entity*,
+			GameEngine::RenderComponent*> item_;
 	public:
-		ItemSlot(b2Vec2 position);
+		ItemSlot(b2Vec2 itemSize, b2Vec2 itemPos);
+
+		std::pair<
+			Entities::Entity*,
+			GameEngine::RenderComponent*> getItem();
 
 		bool isEmpty();
 
-		void add(int count, std::string itemTexture);
+		void add(int count, Entities::Entity*, GameEngine::RenderComponent* rc);
 
 		void remove(int count);
 
 		void empty();
 
-		std::string getItemTexture();
-
-		void setTexture(std::string texture);
+		void setTexture(std::string);
 
 		~ItemSlot();
-
-		b2Vec2 getPosition();
 	};
 }

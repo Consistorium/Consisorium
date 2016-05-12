@@ -5,8 +5,7 @@ namespace Entities
 	DynamicEntity::DynamicEntity(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac)
 		: GameEntity(body, rc),
 		animationComponent_(ac),
-		animationManager_(animationComponent_),
-		xDirection_(0)
+		animationManager_(animationComponent_)
 	{
 	}
 
@@ -19,12 +18,6 @@ namespace Entities
 		animationManager_.updateAnimation();
 	}
 
-
-	void DynamicEntity::setXDirection(int direction)
-	{
-		xDirection_ = direction;
-	}
-
 	float DynamicEntity::getJumpPower()
 	{
 		return jumpPower_;
@@ -33,7 +26,7 @@ namespace Entities
 	float DynamicEntity::getAccelerationImpulse()
 	{
 		float xVelocity = body_->GetLinearVelocity().x;
-		return (maxSpeed_ - (xVelocity * xDirection_)) * xDirection_;
+		return (maxSpeed_ - (xVelocity * getXDirection())) * getXDirection();
 	}
 
 	void DynamicEntity::move()

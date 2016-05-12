@@ -1,13 +1,25 @@
 #include "ItemSlot.h"
 
 #include <stdexcept>
+#include "../Entities/EntityTypes.h"
+#include "../Globals/Constants.h"
 
 namespace UI
 {
-	ItemSlot::ItemSlot(b2Vec2 position)
+	ItemSlot::ItemSlot(b2Vec2 itemSize, b2Vec2 itemPos)
+		: itemCount_(0)
 	{
-		position_ = position;
-		itemCount_ = 0;
+		auto item = new Entities::Entity();
+		item->setPosition(itemPos);
+		item->setType((int)EntityTypes::PositionEntity);
+
+		auto itemRenderComp = new GameEngine::RenderComponent(
+			Globals::MODELS_LOCATION + "Common/empty__001.png",
+			itemSize,
+			item,
+			true);
+
+		item_ = std::pair<Entities::Entity*, GameEngine::RenderComponent*>(item, itemRenderComp);
 	}
 
 	bool ItemSlot::isEmpty()
@@ -15,22 +27,41 @@ namespace UI
 		return itemCount_ == 0;
 	}
 
+	void ItemSlot::setTexture(std::string texture)
+	{
+		item_.second->setTextureName(texture);
+	}
+
 	void ItemSlot::empty()
 	{
 		itemCount_ = 0;
+		delete item_.first;
+		delete item_.second;
 	}
 
-	void ItemSlot::add(int count, std::string itemTexture)
+	std::pair<
+		Entities::Entity*,
+		GameEngine::RenderComponent*> ItemSlot::getItem()
 	{
-		//TODO: should use entity index rather than texture
-		if (!isEmpty() && itemTexture != itemTexture_)
+		return item_;
+	}
+
+	void ItemSlot::add(int count, Entities::Entity* entity, GameEngine::RenderComponent* rc)
+	{
+		if (count <= 0)
+		{
+			throw new std::invalid_argument("Trying to add nothing to the slot.");
+		}
+
+		if (!isEmpty() && item_.first->getType() != entity->getType())
 		{
 			throw new std::invalid_argument("Adding item to an occupied slot.");
 		}
 
 		if (isEmpty())
 		{
-			itemTexture_ = itemTexture;
+			item_.first = entity;
+			item_.second = rc;
 		}
 
 		itemCount_ += count;
@@ -50,21 +81,6 @@ namespace UI
 		{
 			empty();
 		}
-	}
-
-	std::string ItemSlot::getItemTexture()
-	{
-		return itemTexture_;
-	}
-
-	void ItemSlot::setTexture(std::string texture)
-	{
-		itemTexture_ = texture;
-	}
-
-	b2Vec2 ItemSlot::getPosition()
-	{
-		return position_;
 	}
 
 	ItemSlot::~ItemSlot()

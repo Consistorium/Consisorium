@@ -5,7 +5,8 @@
 namespace Entities
 {
 	Player::Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac)
-		: FluentEntity(body, rc, ac) // doesnt work with constants wtf
+		: FluentEntity(body, rc, ac),
+		actionbarSelected_(0)
 	{
 		setHealth(100);
 	}
@@ -27,7 +28,7 @@ namespace Entities
 
 	bool Player::addToInventory(Entities::GameEntity* entity)
 	{
-		if (inventory_.size() >= INVENTORY_SIZE * 100)
+		if (inventory_.size() >= INVENTORY_SIZE)
 		{
 			std::cout << "Inventory is full!" << std::endl;
 			return false;

@@ -5,7 +5,8 @@ namespace GameEngine {
 		: texturePath_(new std::string(texturePath)),
 		size_(size),
 		entity_(entity),
-		alwaysRender_(alwaysRender)
+		alwaysRender_(alwaysRender),
+		scale_(1, 1)
 	{
 	}
 
@@ -24,9 +25,14 @@ namespace GameEngine {
 		return texturePath_;
 	}
 
+	void RenderComponent::setScale(b2Vec2 scale)
+	{
+		scale_ = scale;
+	}
+
 	b2Vec2 RenderComponent::getScale(SDL_Rect textureSize)
 	{
-		return b2Vec2(size_.x / textureSize.w, size_.y / textureSize.h);
+		return b2Vec2(size_.x / textureSize.w * scale_.x, size_.y / textureSize.h * scale_.y);
 	}
 
 	void RenderComponent::setPosition(const b2Vec2& pos)
@@ -42,6 +48,11 @@ namespace GameEngine {
 	void RenderComponent::forEntity(Entities::Entity* entity)
 	{
 		entity_ = entity;
+	}
+
+	int RenderComponent::getOrientation()
+	{
+		return entity_->getXDirection();
 	}
 
 	b2Vec2 RenderComponent::getPosition()

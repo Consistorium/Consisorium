@@ -7,7 +7,8 @@ namespace Entities
 	class FluentEntity : public DynamicEntity
 	{
 	public:
-		FluentEntity(b2Body* body,
+		FluentEntity(
+			b2Body* body,
 			GameEngine::RenderComponent* rc,
 			GameEngine::AnimationComponent* ac);
 
