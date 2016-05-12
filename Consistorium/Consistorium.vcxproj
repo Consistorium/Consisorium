@@ -163,7 +163,7 @@
     <ClCompile Include="Game\UI\Actionbar.cpp" />
     <ClCompile Include="Game\UI\InterfaceManager.cpp" />
     <ClCompile Include="Game\UI\Inventory.cpp" />
-    <ClCompile Include="Game\UI\ItemSlot.cpp" />
+    <ClCompile Include="Game\Utils\ItemSlot.cpp" />
     <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
     <ClCompile Include="Game\WorldGeneration\GroundLayer.cpp" />
     <ClCompile Include="Game\WorldGeneration\SpecialPlace.cpp" />
@@ -192,7 +192,7 @@
     <ClInclude Include="Game\UI\Actionbar.h" />
     <ClInclude Include="Game\UI\InterfaceManager.h" />
     <ClInclude Include="Game\UI\Inventory.h" />
-    <ClInclude Include="Game\UI\ItemSlot.h" />
+    <ClInclude Include="Game\Utils\ItemSlot.h" />
     <ClInclude Include="Game\Utils\JumpContactListener.h" />
     <ClInclude Include="Game\WorldGeneration\GroundLayer.h" />
     <ClInclude Include="Game\WorldGeneration\IWorldLayer.h" />

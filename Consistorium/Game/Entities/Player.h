@@ -5,6 +5,7 @@
 #include <SDL\SDL.h>
 #include <AnimationManager.h>
 #include <GameEngine\FluentEntity.h>
+#include "../Utils/ItemSlot.h"
 
 namespace Entities
 {
@@ -12,8 +13,8 @@ namespace Entities
 	{
 	private:
 		const float PLAYER_MAX_SPEED = 3;	
-		std::vector<std::shared_ptr<Entities::GameEntity>> actionbar_;
-		std::vector<std::shared_ptr<Entities::GameEntity>> inventory_;
+		std::vector<std::shared_ptr<Utils::ItemSlot>> actionbar_;
+		std::vector<std::shared_ptr<Utils::ItemSlot>> inventory_;
 		int actionbarSelected_;
 	public:
 		const float ACTIONBAR_SIZE = 8;
@@ -31,8 +32,8 @@ namespace Entities
 
 		bool addToInventory(Entities::GameEntity*);
 
-		std::vector<std::shared_ptr<Entities::GameEntity>> getInventory();
+		std::vector<std::shared_ptr<Utils::ItemSlot>> getInventory();
 
-		std::vector<std::shared_ptr<Entities::GameEntity>> getActionbar();
+		std::vector<std::shared_ptr<Utils::ItemSlot>> getActionbar();
 	};
 }

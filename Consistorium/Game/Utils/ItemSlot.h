@@ -5,18 +5,20 @@
 #include <GameEngine\Entity.h>
 #include <GameEngine\RenderComponent.h>
 
-namespace UI
+namespace Utils
 {
 	//TODO: should contain logic for when the player accesses items
 	class ItemSlot : public Entities::Entity
 	{
 	private:
-		int itemCount_;
+		const int MAX_ITEM_COUNT = 10;
+		int itemCount_,
+			maxItemCount_;
 		std::pair<
 			Entities::Entity*,
 			GameEngine::RenderComponent*> item_;
 	public:
-		ItemSlot(b2Vec2 itemSize, b2Vec2 itemPos);
+		ItemSlot(b2Vec2 itemSize, b2Vec2 itemPos, int count = 0);
 
 		std::pair<
 			Entities::Entity*,
@@ -24,7 +26,7 @@ namespace UI
 
 		bool isEmpty();
 
-		void add(int count, Entities::Entity*, GameEngine::RenderComponent* rc);
+		bool tryAdd(int count, Entities::Entity*, GameEngine::RenderComponent* rc);
 
 		void remove(int count);
 

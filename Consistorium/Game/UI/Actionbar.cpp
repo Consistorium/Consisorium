@@ -35,7 +35,7 @@ namespace UI
 				slot,
 				renderComp);
 
-			auto itemSlot = new ItemSlot(b2Vec2(slotDim - 2 * padding, slotDim - 2 * padding), itemPosition);
+			auto itemSlot = new Utils::ItemSlot(b2Vec2(slotDim - 2 * padding, slotDim - 2 * padding), itemPosition);
 
 			items_.push_back(itemSlot);
 			slots_.push_back(slotPair);
@@ -54,7 +54,7 @@ namespace UI
 		return slots_;
 	}
 
-	std::vector<ItemSlot*> Actionbar::getItems()
+	std::vector<Utils::ItemSlot*> Actionbar::getItems()
 	{
 		return items_;
 	}

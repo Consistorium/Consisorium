@@ -11,7 +11,6 @@
 #include <GameEngine\GameEntity.h>
 #include <GameEngine\Renderer.h>
 #include <GameEngine\RenderComponent.h>
-#include "ItemSlot.h"
 #include "Actionbar.h"
 #include "Inventory.h"
 

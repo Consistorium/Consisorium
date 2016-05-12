@@ -50,9 +50,6 @@
     <ClCompile Include="Game\Entities\Objects\Tree.cpp">
       <Filter>Game\Entities\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Game\UI\ItemSlot.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Game\UI\Actionbar.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     <ClCompile Include="GameUtils.cpp" />
     <ClCompile Include="Game\UI\Inventory.cpp">
       <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Utils\ItemSlot.cpp">
+      <Filter>Game\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +129,6 @@
     <ClInclude Include="Game\Entities\Objects\Tree.h">
       <Filter>Game\Entities\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Game\UI\ItemSlot.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\EntityTypes.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
@@ -145,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="Game\UI\Inventory.h">
       <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utils\ItemSlot.h">
+      <Filter>Game\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

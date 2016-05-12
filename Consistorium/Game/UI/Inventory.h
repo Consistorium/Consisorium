@@ -5,7 +5,7 @@
 #include <GameEngine\Entity.h>
 #include <GameEngine\RenderComponent.h>
 #include <GameEngine\Renderer.h>
-#include "ItemSlot.h"
+#include "../Utils/ItemSlot.h"
 
 namespace UI
 {
@@ -19,7 +19,7 @@ namespace UI
 			Entities::Entity*,
 			GameEngine::RenderComponent*> inventoryPage_;
 
-		std::vector<ItemSlot*> items_;
+		std::vector<Utils::ItemSlot*> items_;
 	public:
 		Inventory(int slotCount);
 
@@ -31,7 +31,7 @@ namespace UI
 			Entities::Entity*,
 			GameEngine::RenderComponent*>* getPage();
 
-		std::vector<ItemSlot*> getItems();
+		std::vector<Utils::ItemSlot*> getItems();
 
 		~Inventory();
 

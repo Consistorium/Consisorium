@@ -3,7 +3,7 @@
 #include <vector>
 #include <GameEngine\Entity.h>
 #include <GameEngine\RenderComponent.h>
-#include "ItemSlot.h"
+#include "../Utils/ItemSlot.h"
 
 namespace UI
 {
@@ -15,7 +15,7 @@ namespace UI
 			Entities::Entity*,
 			GameEngine::RenderComponent*>*> slots_;
 
-		std::vector<ItemSlot*> items_;
+		std::vector<Utils::ItemSlot*> items_;
 
 		b2Vec2 position_;
 		b2Vec2 size_;
@@ -29,7 +29,7 @@ namespace UI
 			Entities::Entity*,
 			GameEngine::RenderComponent*> *> getSlots();
 
-		std::vector<ItemSlot*> getItems();
+		std::vector<Utils::ItemSlot*> getItems();
 
 		int getSlotCount();
 

@@ -4,10 +4,11 @@
 #include "../Entities/EntityTypes.h"
 #include "../Globals/Constants.h"
 
-namespace UI
+namespace Utils
 {
-	ItemSlot::ItemSlot(b2Vec2 itemSize, b2Vec2 itemPos)
-		: itemCount_(0)
+	ItemSlot::ItemSlot(b2Vec2 itemSize, b2Vec2 itemPos, int count)
+		: itemCount_(count),
+		maxItemCount_(MAX_ITEM_COUNT)
 	{
 		auto item = new Entities::Entity();
 		item->setPosition(itemPos);
@@ -46,25 +47,27 @@ namespace UI
 		return item_;
 	}
 
-	void ItemSlot::add(int count, Entities::Entity* entity, GameEngine::RenderComponent* rc)
+	bool  ItemSlot::tryAdd(int count, Entities::Entity* entity, GameEngine::RenderComponent* rc)
 	{
 		if (count <= 0)
 		{
 			throw new std::invalid_argument("Trying to add nothing to the slot.");
 		}
 
-		if (!isEmpty() && item_.first->getType() != entity->getType())
+		if ((!isEmpty() && item_.first->getType() != entity->getType()) ||
+			(itemCount_ + count > maxItemCount_))
 		{
-			throw new std::invalid_argument("Adding item to an occupied slot.");
+			return false;
 		}
 
 		if (isEmpty())
 		{
-			item_.first = entity;
-			item_.second = rc;
+			item_.first->setType(entity->getType());
+			item_.second->setTextureName(*rc->getTextureName());
 		}
 
 		itemCount_ += count;
+		return true;
 	}
 
 	void ItemSlot::remove(int count)

@@ -71,11 +71,11 @@ namespace UI
 
 		for (size_t i = 0; i < player_->getActionbar().size(); i++)
 		{
-			int zIndex = player_->getActionbar()[i]->getZIndex();
-
-			GameEngine::IRenderable* rc = 
+			GameEngine::IRenderable* rc =
 				player_->getActionbar()[i]
-				->getRenderableComponent();
+				->getItem().second;
+
+			int zIndex = rc->getZIndex();
 
 			actionbar_
 				->getItems()[i]
@@ -88,11 +88,11 @@ namespace UI
 
 		for (size_t i = 0; i < player_->getInventory().size(); i++)
 		{
-			int zIndex = player_->getInventory()[i]->getZIndex();
-
 			GameEngine::IRenderable* rc = player_
 				->getInventory()[i]
-				->getRenderableComponent();
+				->getItem().second;
+
+			int zIndex = rc->getZIndex();
 
 			inventory_
 				->getItems()[i]

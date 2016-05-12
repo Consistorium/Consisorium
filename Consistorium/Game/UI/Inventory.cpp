@@ -41,7 +41,7 @@ namespace UI
 				pos.x + (i % slotsPerLine_) * slotDim.x + (i > 1 && (i % slotsPerLine_) != 0 ? margin : 0),
 				pos.y + i / slotsPerLine_ * slotDim.y);
 
-			auto itemSlot = new ItemSlot(b2Vec2(slotDim.x - 2, slotDim.y - 2), itemPosition);
+			auto itemSlot = new Utils::ItemSlot(b2Vec2(slotDim.x - 2, slotDim.y - 2), itemPosition);
 			items_.push_back(itemSlot);
 		}
 	}
@@ -97,7 +97,7 @@ namespace UI
 		return &inventoryPage_;
 	}
 
-	std::vector<ItemSlot*> Inventory::getItems()
+	std::vector<Utils::ItemSlot*> Inventory::getItems()
 	{
 		return items_;
 	}

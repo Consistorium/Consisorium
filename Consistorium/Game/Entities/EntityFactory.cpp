@@ -102,17 +102,20 @@ namespace Entities
 		if (name.compare("grass") == 0)
 		{
 			result = createBlock(position, "Grass");
-			result->setZIndex(ENTITY_Z_INDEX);
+			result->setZIndex(ENTITY_Z_INDEX)
+				->setType((int)EntityTypes::Grass);
 		}
 		else if (name.compare("ground") == 0) 
 		{
 			result = createBlock(position, "Ground");
-			result->setZIndex(ENTITY_Z_INDEX);
+			result->setZIndex(ENTITY_Z_INDEX)
+				->setType((int)EntityTypes::Rock);
 		}
 		
 		else if (name.compare("pineTree") == 0)
 		{
 			result = createTree(position, "Pine");
+			result->setType((int)EntityTypes::Tree);
 		}
 		else 
 
@@ -163,7 +166,8 @@ namespace Entities
 			->setMaxSpeed(10.0f)
 			->setMaxHealth(health)
 			->setHealth(health)
-			->setZIndex(ENTITY_Z_INDEX);
+			->setZIndex(ENTITY_Z_INDEX)
+			->setType((int)EntityTypes::Player);
 
 		components.renderComponent->forEntity(player);
 		entityManager_.addToWorld(player);
@@ -193,7 +197,8 @@ namespace Entities
 		}
 
 		Block* block = new Block(components.body, components.renderComponent);
-		block->setZIndex(ENTITY_Z_INDEX);
+		block->setZIndex(ENTITY_Z_INDEX)
+			->setType((int)EntityTypes::Block);
 		
 		components.renderComponent->forEntity(block);
 		entityManager_.addToWorld(block);
@@ -219,7 +224,8 @@ namespace Entities
 			->setDamage(damage)
 			->setRange(range)
 			->setHaste(haste)
-			->setZIndex(ENTITY_Z_INDEX);
+			->setZIndex(ENTITY_Z_INDEX)
+			->setType((int)EntityTypes::Skeleton);
 
 		components.renderComponent->forEntity(skeleton);
 		entityManager_.addToWorld(skeleton);
@@ -242,7 +248,8 @@ namespace Entities
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
 		Tree* tree = new Tree(components.body, components.renderComponent);
-		tree->setZIndex(TREE_Z_INDEX);
+		tree->setZIndex(TREE_Z_INDEX)
+			->setType((int)EntityTypes::Tree);
 		components.renderComponent->forEntity(tree);
 		entityManager_.addToWorld(tree);
 		tree->getBody()->GetFixtureList()->SetSensor(true);

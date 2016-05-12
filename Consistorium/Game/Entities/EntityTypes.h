@@ -6,5 +6,8 @@ enum class EntityTypes
 	FootSensor,
 	Player,
 	Block,
+	Grass,
+	Rock,
+	Tree,
 	Skeleton,
 };
