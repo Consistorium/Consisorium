@@ -12,7 +12,8 @@ public:
 		Rock,
 		Ruin,
 		Hell,
-		PineTree,
+		Pine,
+		Bush,
 		Last
 	};
 };

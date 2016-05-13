@@ -80,6 +80,9 @@
     <ClCompile Include="Game\Input\InputHandler.cpp">
       <Filter>Game\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Bush.cpp">
+      <Filter>Game\Entities\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\EntityFactory.h">
@@ -189,6 +192,9 @@
     </ClInclude>
     <ClInclude Include="Game\Input\InputHandler.h">
       <Filter>Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Bush.h">
+      <Filter>Game\Entities\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

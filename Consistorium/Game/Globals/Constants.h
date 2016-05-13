@@ -22,6 +22,8 @@ namespace Globals
 	const float BLOCK_HEIGHT = 31;
 	const int TREE_WIDTH = 120;
 	const int TREE_HEIGHT = 200;
+	const int BUSH_WIDTH = 70;
+	const int BUSH_HEIGHT = 100;
 	const float ENTITY_JUMP_POWER = 0.2;
 	const float SKELETON_SCAN_RANGE = 5.0;
 	const float SKELETON_DAMAGE = 20;
@@ -44,5 +46,5 @@ namespace Globals
 
 	// X-axis - inclusive values
 
-	const int LAYER_WIDTH_IN_BLOCKS = 500 * BLOCK_WIDTH;
+	const int LAYER_WIDTH_IN_BLOCKS = 200 * BLOCK_WIDTH;
 }

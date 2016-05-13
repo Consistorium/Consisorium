@@ -50,7 +50,11 @@ void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& p
 		}
 		else if (skipLength == 0 && rand() % 5 == 1)
 		{
-			factory.createFromName(b2Vec2(i, maxY + Globals::BLOCK_HEIGHT), "PineTree");
+			factory.createFromName(b2Vec2(i, maxY + Globals::BLOCK_HEIGHT), "pineTree");
+		}
+		else if (skipLength == 0 && rand() % 3 == 1)
+		{
+			factory.createFromName(b2Vec2(i, maxY + Globals::BLOCK_HEIGHT), "bush");
 		}
 	}
 }

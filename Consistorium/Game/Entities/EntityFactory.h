@@ -11,6 +11,7 @@
 #include "EntityComponents.h"
 #include "Objects\Tree.h"
 #include <EntityManager.h>
+#include <Bush.h>
 
 namespace Entities
 {
@@ -30,6 +31,8 @@ namespace Entities
 		Player* createPlayer(b2Vec2 position, std::string modelName, float health = Globals::INITIAL_PLAYER_HEALTH);
 
 		Block* createBlock(b2Vec2 position, std::string modelName);
+
+		Bush* createBush(b2Vec2 position, std::string modelName);
 
 		GameEntity* createFromName(b2Vec2 position, std::string name);
 

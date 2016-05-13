@@ -81,10 +81,15 @@ namespace Entities
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Rock);
 		}
-		else if (name.compare("pineTree") == 0)
+		else if (name.compare("pinetree") == 0)
 		{
 			result = createTree(position, "Pine");
-			result->setType((int)EntityTypes::PineTree);
+			result->setType((int)EntityTypes::Pine);
+		}
+		else if (name.compare("bush") == 0)
+		{
+			result = createBush(position, "Bush");
+			result->setType((int)EntityTypes::Bush);
 		}
 		else if (name.compare("ruin") == 0)
 		{
@@ -155,8 +160,6 @@ namespace Entities
 		b2PolygonShape polygonShape;
 		b2FixtureDef sensorFixtureDef;
 		sensorFixtureDef.isSensor = true;
-
-		
 
 		b2Vec2 sensorDim = b2Vec2(playerSize.x, 0.3);
 		b2Vec2 sensorCentre(0, -playerSize.y / 2);
@@ -260,12 +263,37 @@ namespace Entities
 		EntityComponents components = createEntityComponents(descriptor, 80);
 		Tree* tree = new Tree(components.body, components.renderComponent);
 		tree->setZIndex(TREE_Z_INDEX)
-			->setType((int)EntityTypes::PineTree);
+			->setType((int)EntityTypes::Pine);
 		components.renderComponent->forEntity(tree);
 		entityManager_.addToWorld(tree);
 		tree->getBody()->GetFixtureList()->SetSensor(true);
 
 		return tree;
+	}
+
+	Bush* EntityFactory::createBush(b2Vec2 position, std::string modelName)
+	{
+		position.y += Globals::BUSH_HEIGHT / 2;
+		position.y -= Globals::BLOCK_HEIGHT / 2;
+		EntityDescriptor descriptor = EntityDescriptor()
+			.withAnimation(modelName)
+			.withEntityName("Bush")
+			.withModelName(modelName)
+			.withPosition(position)
+			.withBodyType(b2_staticBody)
+			.withWidth(Globals::BUSH_WIDTH / Globals::PIXELS_PER_METER)
+			.withHeight(Globals::BUSH_HEIGHT / Globals::PIXELS_PER_METER)
+			.create();
+
+		EntityComponents components = createEntityComponents(descriptor, 80);
+		Bush* bush = new Bush(components.body, components.renderComponent);
+		bush->setZIndex(TREE_Z_INDEX)
+			->setType((int)EntityTypes::Bush);
+		components.renderComponent->forEntity(bush);
+		entityManager_.addToWorld(bush);
+		bush->getBody()->GetFixtureList()->SetSensor(true);
+
+		return bush;
 	}
 
 	EntityFactory::~EntityFactory()
