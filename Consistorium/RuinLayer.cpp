@@ -16,9 +16,8 @@ b2Vec2 RuinLayer::GetLayerRange()
 	return Globals::RUIN_LAYER_HEIGHT_RANGE;
 }
 
-void RuinLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& placesManager)
+void RuinLayer::Generate(Entities::EntityFactory& factory, SpecialPlacesManager& placesManager)
 {
-	Entities::EntityFactory factory(entityManager);
 	GameEngine::IRenderable *current;
 
 	std::vector<std::vector<Entities::GameEntity*>> cache;

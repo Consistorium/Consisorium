@@ -10,6 +10,6 @@ public:
 
 	b2Vec2 GetLayerRange() override;
 
-	void Generate(EntityManager& entityManager, SpecialPlacesManager& placesManager) override;
+	void Generate(Entities::EntityFactory& factory, SpecialPlacesManager& placesManager) override;
 };
 

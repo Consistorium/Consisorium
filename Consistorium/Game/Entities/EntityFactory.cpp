@@ -13,8 +13,9 @@ namespace Entities
 	const int ENTITY_Z_INDEX = 0;
 	const int TREE_Z_INDEX = -1;
 
-	EntityFactory::EntityFactory(EntityManager& entityManager)
-		: entityManager_(entityManager)
+	EntityFactory::EntityFactory(EntityManager& entityManager, std::vector<Enemy*>& permantentlyLivingEnemies)
+		: entityManager_(entityManager),
+		permantentlyLivingEnemies_(permantentlyLivingEnemies)
 	{
 	}
 
@@ -80,11 +81,23 @@ namespace Entities
 			result = createBlock(position, "Ground");
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Rock);
+		} 
+		else if (name.compare("skeleton") == 0)
+		{
+			position.x /= Globals::PIXELS_PER_METER;
+			position.y /= Globals::PIXELS_PER_METER;
+			result = createSkeleton(position, "Idle");
+			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
 		else if (name.compare("pinetree") == 0)
 		{
 			result = createTree(position, "Pine");
 			result->setType((int)EntityTypes::Pine);
+		}
+		if (name.compare("purgatory") == 0)
+		{
+			result = createBlock(position, "Purgatory");
+			result->setType((int)EntityTypes::PurgatoryBlock);
 		}
 		else if (name.compare("bush") == 0)
 		{

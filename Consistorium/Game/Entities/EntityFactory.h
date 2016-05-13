@@ -19,8 +19,10 @@ namespace Entities
 	{
 	private:
 		EntityManager& entityManager_;
+		std::vector<Enemy*>& permantentlyLivingEnemies_;
 	public:
-		EntityFactory(EntityManager& entityManager);
+		EntityFactory(EntityManager& entityManager,
+			std::vector<Enemy*>& permantentlyLivingEnemies);
 
 		~EntityFactory();
 

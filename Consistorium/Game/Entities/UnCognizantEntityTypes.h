@@ -11,6 +11,7 @@ public:
 		Grass,
 		Rock,
 		Ruin,
+		PurgatoryBlock,
 		Hell,
 		Pine,
 		Bush,

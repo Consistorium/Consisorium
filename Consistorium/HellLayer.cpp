@@ -16,9 +16,8 @@ b2Vec2 HellLayer::GetLayerRange()
 	return Globals::HELL_LAYER_HEIGHT_RANGE;
 }
 
-void HellLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& placesManager)
+void HellLayer::Generate(Entities::EntityFactory& factory, SpecialPlacesManager& placesManager)
 {
-	Entities::EntityFactory factory(entityManager);
 	GameEngine::IRenderable *current;
 
 	std::vector<std::vector<Entities::GameEntity*>> cache;

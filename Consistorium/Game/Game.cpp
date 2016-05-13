@@ -66,7 +66,8 @@ void Game::Run()
 	b2Vec2 cameraPos(0, 0);
 	renderer_.RenderAll(cameraPos);
 	EntityManager entityManager_(world_, &renderer_, entities_);
-	EntityFactory entityFactory(entityManager_);
+	std::vector<Enemy*> permantentlyLivingEnemies;
+	EntityFactory entityFactory(entityManager_, permantentlyLivingEnemies);
 
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
@@ -92,8 +93,8 @@ void Game::Run()
 	layers.push_back(&hell);
 	PurgatoryLayer purgatory;
 	layers.push_back(&purgatory);
-	WorldGenerator worldGenerator(entityManager_, layers);
-	worldGenerator.Build(&entities_);
+	WorldGenerator worldGenerator(entityFactory, layers);
+	worldGenerator.Build();
 	//prevent jumping in mid air
 	int playerFootContacts = 0;
 	jumpTimer_.Reset();
@@ -147,6 +148,11 @@ void Game::Run()
 		{
 			enemies[i]->iterateAI(player);
 			enemies[i]->update();
+		}
+		for (int i = 0; i < permantentlyLivingEnemies.size(); i++)
+		{
+			permantentlyLivingEnemies[i]->iterateAI(player);
+			permantentlyLivingEnemies[i]->update();
 		}
 
 		backgroundManager.update(dt, player.getBody()->GetPosition());

@@ -20,9 +20,8 @@ b2Vec2 GroundLayer::GetLayerRange()
 	return Globals::GROUND_LAYER_HEIGHT_RANGE;
 }
 
-void GroundLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& placesManager)
+void GroundLayer::Generate(Entities::EntityFactory& factory, SpecialPlacesManager& placesManager)
 {
-	Entities::EntityFactory factory(entityManager);
 	GameEngine::IRenderable *current;
 	auto minY = std::min(GetLayerRange().x, GetLayerRange().y);
 	auto maxY = std::max(GetLayerRange().x, GetLayerRange().y);

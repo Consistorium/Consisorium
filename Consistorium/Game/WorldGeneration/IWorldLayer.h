@@ -11,5 +11,5 @@ public:
 	
 	virtual b2Vec2 GetLayerRange() = 0;
 
-	virtual void Generate(EntityManager& entityManager, SpecialPlacesManager& placesManager) = 0;
+	virtual void Generate(Entities::EntityFactory& factory, SpecialPlacesManager& placesManager) = 0;
 };

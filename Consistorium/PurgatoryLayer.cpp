@@ -16,9 +16,8 @@ b2Vec2 PurgatoryLayer::GetLayerRange()
 	return Globals::PURGATORY_LAYER_HEIGHT_RANGE;
 }
 
-void PurgatoryLayer::Generate(EntityManager& entityManager, SpecialPlacesManager& placesManager)
+void PurgatoryLayer::Generate(Entities::EntityFactory& factory, SpecialPlacesManager& placesManager)
 {
-	Entities::EntityFactory factory(entityManager);
 	GameEngine::IRenderable *current;
 
 	std::vector<std::vector<Entities::GameEntity*>> cache;
@@ -28,7 +27,7 @@ void PurgatoryLayer::Generate(EntityManager& entityManager, SpecialPlacesManager
 		cache.push_back(std::vector<Entities::GameEntity*>());
 		for (int j = -Globals::LAYER_WIDTH_IN_BLOCKS / 2; j < Globals::LAYER_WIDTH_IN_BLOCKS / 2; j += Globals::BLOCK_WIDTH)
 		{
-			std::string current = "Purgatory";
+			std::string current = "purgatory";
 			currentPosition.x = j;
 			currentPosition.y = i;
 			Entities::GameEntity* block = factory.createFromName(currentPosition, current);
