@@ -7,6 +7,7 @@ namespace Entities
 		animationComponent_(ac),
 		animationManager_(animationComponent_)
 	{
+		renderComponent_->setStatic(false);
 	}
 
 	DynamicEntity::~DynamicEntity()

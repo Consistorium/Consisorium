@@ -53,13 +53,26 @@
     <ClCompile Include="Game\UI\Actionbar.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
-    <ClCompile Include="BackgroundManager.cpp" />
-    <ClCompile Include="GameUtils.cpp" />
     <ClCompile Include="Game\UI\Inventory.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
     <ClCompile Include="Game\Utils\ItemSlot.cpp">
       <Filter>Game\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="RuinLayer.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\BackgroundManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameUtils.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="HellLayer.cpp">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="PurgatoryLayer.cpp">
+      <Filter>Game\WorldGeneration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,22 +142,41 @@
     <ClInclude Include="Game\Entities\Objects\Tree.h">
       <Filter>Game\Entities\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\EntityTypes.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\UI\Actionbar.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="BackgroundManager.h" />
-    <ClInclude Include="GameUtils.h" />
-    <ClInclude Include="EventIds.h">
-      <Filter>Game\Globals</Filter>
+    <ClInclude Include="RuinLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameUtils.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\BackgroundManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\EventIds.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="HellLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="PurgatoryLayer.h">
+      <Filter>Game\WorldGeneration</Filter>
     </ClInclude>
     <ClInclude Include="Game\UI\Inventory.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
     <ClInclude Include="Game\Utils\ItemSlot.h">
       <Filter>Game\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utils\SlotDescriptor.h">
+      <Filter>Game\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\UnCognizantEntityTypes.h">
+      <Filter>Game\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\EntityTypes.h">
+      <Filter>Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -28,6 +28,8 @@ namespace GameEngine {
 
 		void revertAnimation();
 
+		void revertAll();
+
 		void updateAnimation();
 	};
 }

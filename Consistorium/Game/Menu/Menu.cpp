@@ -1,8 +1,8 @@
 #include <iostream>
 #include <UI/Button.h>
 
-#include "SDL/SDL_ttf.h"
-#include "SDL/SDL_image.h"
+#include <SDL\SDL_ttf.h>
+#include <SDL\SDL_image.h>
 
 #include "Menu.h"
 #include "../Game.h"

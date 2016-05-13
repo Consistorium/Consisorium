@@ -22,6 +22,10 @@ namespace GameEngine {
 
 		virtual int getOrientation() = 0;
 
+		virtual bool isStatic() = 0;
+
+		virtual void setStatic(bool flag) = 0;
+
 		virtual bool alwaysRender() = 0;
 
 		virtual int getZIndex() = 0;

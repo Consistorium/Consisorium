@@ -15,11 +15,11 @@ namespace Entities
 	{
 	}
 
-	bool Player::addToActionbar(Entities::GameEntity* entity)
+	int Player::addToActionbar(Entities::GameEntity* entity)
 	{
 		if (actionbar_.size() >= ACTIONBAR_SIZE)
 		{
-			return addToInventory(entity);
+			return -1;
 		}
 
 		for (int i = 0; i < actionbar_.size(); i++)
@@ -27,7 +27,7 @@ namespace Entities
 			auto rc = dynamic_cast<GameEngine::RenderComponent*>(entity->getRenderableComponent());
 			if (actionbar_[i]->tryAdd(1, entity, rc))
 			{
-				return true;
+				return i;
 			}
 		}
 
@@ -36,10 +36,10 @@ namespace Entities
 		itemSlot->getItem().second->setTextureName(*entity->getRenderableComponent()->getTextureName());
 
 		actionbar_.push_back(std::shared_ptr<Utils::ItemSlot>(itemSlot));
-		return true;
+		return actionbar_.size() - 1;
 	}
 
-	bool Player::addToInventory(Entities::GameEntity* entity)
+	int Player::addToInventory(Entities::GameEntity* entity)
 	{
 		auto itemSlot = new Utils::ItemSlot(entity->getSize(), entity->getPosition());
 		for (int i = 0; i < inventory_.size(); i++)
@@ -49,7 +49,7 @@ namespace Entities
 				auto rc = dynamic_cast<GameEngine::RenderComponent*>(entity->getRenderableComponent());
 				if (inventory_[i]->tryAdd(1, entity, rc))
 				{
-					return true;
+					return i;
 				}
 			}
 		}
@@ -57,11 +57,11 @@ namespace Entities
 		if (inventory_.size() >= INVENTORY_SIZE)
 		{
 			std::cout << "Inventory is full!" << std::endl;
-			return false;
+			return -1;
 		}
 
 		inventory_.push_back(std::shared_ptr<Utils::ItemSlot>(itemSlot));
-		return true;
+		return inventory_.size() - 1;
 	}
 
 	std::vector<std::shared_ptr<Utils::ItemSlot>> Player::getInventory()

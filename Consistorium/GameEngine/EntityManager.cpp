@@ -76,6 +76,7 @@ void EntityManager::removeFromWorld(Entities::GameEntity* entity)
 	renderer_->RemoveRenderable(entity->getZIndex(), entity->getRenderableComponent());
 	world_->DestroyBody(entity->getBody());
 	entities_.erase(entity->getId());
+	delete entity;
 }
 
 void EntityManager::removeFromWorld(int index)

@@ -1,13 +1,18 @@
 #pragma once
 
-enum class EntityTypes
+#include "UnCognizantEntityTypes.h"
+
+class EntityTypes : public UnCognizantEntityTypes
 {
-	PositionEntity,
-	FootSensor,
-	Player,
-	Block,
-	Grass,
-	Rock,
-	Tree,
-	Skeleton,
+public:
+	enum
+	{
+		Player = UnCognizantEntityTypes::Last,
+		Skeleton,
+	};
+
+	static bool isCognizant(int type)
+	{
+		return type >= UnCognizantEntityTypes::Last;
+	};
 };

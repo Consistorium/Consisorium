@@ -26,7 +26,7 @@ namespace Utils
 
 		bool isEmpty();
 
-		bool tryAdd(int count, Entities::Entity*, GameEngine::RenderComponent* rc);
+		bool tryAdd(int count, Entities::Entity*, GameEngine::IRenderable* rc);
 
 		void remove(int count);
 

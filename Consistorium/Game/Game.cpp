@@ -1,17 +1,20 @@
 #include "Game.h"
 
-#include <Game/Globals/Constants.h>
-#include <KeyboardHandler.h>
-
-#include <BackgroundManager.h>
-#include <EventIds.h>
-#include "WorldGeneration\WorldGenerator.h"
-#include "WorldGeneration\GroundLayer.h"
-#include "WorldGeneration\UndergroundLayer.h"
-#include "UI\InterfaceManager.h"
-#include "Entities/EntityTypes.h"
-#include <Game\WorldGeneration\SpecialPlacesManager.h>
 #include <ctime>
+#include <KeyboardHandler.h>
+#include <Game/Globals/Constants.h>
+#include <Game\BackgroundManager.h>
+#include <Game\EventIds.h>
+#include <Game\WorldGeneration\WorldGenerator.h>
+#include <Game\WorldGeneration\GroundLayer.h>
+#include <Game\WorldGeneration\UndergroundLayer.h>
+#include <Game\WorldGeneration\RuinLayer.h>
+#include <Game\UI\InterfaceManager.h>
+#include <Game\Entities\EntityTypes.h>
+#include <Game\WorldGeneration\SpecialPlacesManager.h>
+#include <Game\Utils\SlotDescriptor.h>
+#include <HellLayer.h>
+#include <PurgatoryLayer.h>
 
 using namespace Entities;
 
@@ -64,7 +67,7 @@ void Game::Run()
 
 	b2Vec2 playerPosition(1.0f, 4.0f);
 	Player& player = *entityFactory.createPlayer(playerPosition, "Idle");
-	interfaceManager_= new UI::InterfaceManager(&renderer_, window_, &player);
+	interfaceManager_= new UI::InterfaceManager(&renderer_, window_, &player, EventManager::get());
 	interfaceManager_->showActionBar();
 	entities_[player.getId()] = &player;
 
@@ -80,6 +83,12 @@ void Game::Run()
 	layers.push_back(&ground);
 	UndergroundLayer underground;
 	layers.push_back(&underground);
+	RuinLayer ruins;
+	layers.push_back(&ruins);
+	HellLayer hell;
+	layers.push_back(&hell);
+	PurgatoryLayer purgatory;
+	layers.push_back(&purgatory);
 	WorldGenerator worldGenerator(entityManager_, layers);
 	worldGenerator.Build(&entities_);
 	//prevent jumping in mid air
@@ -97,6 +106,7 @@ void Game::Run()
 			renderer_.RemoveRenderable(enemies[i]->getZIndex(), enemies[i]->getRenderableComponent());
 			world_->DestroyBody(enemies[i]->getBody());
 		}
+
 		enemies.clear();
 	});
 
@@ -188,12 +198,23 @@ void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFact
 	{
 		if (e.button.button == SDL_BUTTON_LEFT)
 		{
-			if (entity->getUserData() != (int)EntityTypes::Player)
+			if (!EntityTypes::isCognizant(entity->getType()))
 			{
-				if (player.addToActionbar(entity))
+				int index;
+				SlotDescriptor sd;
+				sd.entity = entity;
+				sd.rc = entity->getRenderableComponent();
+				if ((index = player.addToActionbar(entity)) > -1)
 				{
-					interfaceManager_->update();
-					world_->DestroyBody(entity->getBody());
+					sd.index = index;
+					EventManager::get().signal(ON_ACTIONBAR_ADD, &sd);
+					eManager.removeFromWorld(entity);
+				}
+				else if ((index = player.addToInventory(entity)) > -1)
+				{
+					sd.index = index;
+					EventManager::get().signal(ON_ACTIONBAR_ADD, &sd);
+					eManager.removeFromWorld(entity);
 				}
 			}
 		}

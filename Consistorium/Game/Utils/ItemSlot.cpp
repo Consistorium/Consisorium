@@ -47,7 +47,7 @@ namespace Utils
 		return item_;
 	}
 
-	bool  ItemSlot::tryAdd(int count, Entities::Entity* entity, GameEngine::RenderComponent* rc)
+	bool  ItemSlot::tryAdd(int count, Entities::Entity* entity, GameEngine::IRenderable* rc)
 	{
 		if (count <= 0)
 		{
@@ -55,7 +55,7 @@ namespace Utils
 		}
 
 		if ((!isEmpty() && 
-			(item_.first->getType() != entity->getType())) ||
+			item_.first->getType() != entity->getType()) ||
 			(itemCount_ + count > maxItemCount_))
 		{
 			return false;

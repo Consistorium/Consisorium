@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "IRenderable.h"
 
-namespace GameEngine 
+namespace GameEngine
 {
 	Renderer::Renderer(SDL_Window* window, int pixelsPerMeter)
 		: pixelsPerMeter_(pixelsPerMeter),
@@ -11,7 +11,7 @@ namespace GameEngine
 		textureManager_(windowRenderer_),
 		window_(window),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
-			SDL_GetWindowSurface(window)->h)
+		SDL_GetWindowSurface(window)->h)
 	{
 		if (this->windowRenderer_ == NULL)
 		{
@@ -36,12 +36,26 @@ namespace GameEngine
 
 	void Renderer::AddRenderable(int zIndex, IRenderable *renderable)
 	{
-		this->renderables_[zIndex][renderable->getId()] = renderable;
+		if(!renderable->isStatic())
+		{
+			this->dynamicRenderables_[zIndex][renderable->getId()] = renderable;
+		}
+		else
+		{
+			this->dynamicRenderables_[zIndex][renderable->getId()] = renderable;
+		}
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, IRenderable *renderable)
 	{
-		this->renderables_[zIndex].erase(renderable->getId());
+		if (!renderable->isStatic())
+		{
+			this->dynamicRenderables_[zIndex].erase(renderable->getId());
+		}
+		else
+		{
+			this->dynamicRenderables_[zIndex].erase(renderable->getId());
+		}
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, SDL_Point point)
@@ -58,9 +72,9 @@ namespace GameEngine
 		int screenWidth, screenHeight;
 		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
 		
-		for (auto it = renderables_.begin(); it != renderables_.end(); ++it)
+		for (auto it = dynamicRenderables_.begin(); it != dynamicRenderables_.end(); ++it)
 		{
-			for (auto item : renderables_[it->first])
+			for (auto item : dynamicRenderables_[it->first])
 			{
 				if (item.second->alwaysRender())
 				{

@@ -1,0 +1,6 @@
+[ground]---[ground]
+-[ground]-[ground]-
+--[centerground]--
+-[ground]-[ground]-
+[ground]---[ground]
+125

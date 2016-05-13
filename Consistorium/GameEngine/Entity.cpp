@@ -5,8 +5,8 @@ namespace Entities
 	static int IdGen = 0;
 
 	Entity::Entity()
+		: id_(++IdGen)
 	{
-		id_ = ++IdGen;
 	}
 
 	int Entity::getId() { return id_; }

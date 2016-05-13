@@ -16,7 +16,11 @@ public:
 
 	void add(int id, std::function<void()> callback);
 
+	void addWithParams(int id, std::function<void*(void*)> callback);
+
 	void signal(int id);
+
+	void* signal(int id, void* param);
 
 	static EventManager& get()
 	{

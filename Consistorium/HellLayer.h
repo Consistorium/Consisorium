@@ -1,13 +1,12 @@
 #pragma once
 
-#include "IWorldLayer.h"
+#include "Game\WorldGeneration\IWorldLayer.h"
 
-class UndergroundLayer : public IWorldLayer
+class HellLayer : public IWorldLayer
 {
 public:
-	UndergroundLayer();
-
-	~UndergroundLayer();
+	HellLayer();
+	~HellLayer();
 
 	b2Vec2 GetLayerRange() override;
 

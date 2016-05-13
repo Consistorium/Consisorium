@@ -3,13 +3,11 @@
 #include <string>
 #include <GameEngine\RenderComponent.h>
 #include <Game\Globals\Constants.h>
+#include <Game\EventIds.h>
 
 namespace UI
 {
-	
-	const int UI_Z_INDEX = 100;
-
-	InterfaceManager::InterfaceManager(GameEngine::Renderer* renderer, SDL_Window* window, Entities::Player* player)
+	InterfaceManager::InterfaceManager(GameEngine::Renderer* renderer, SDL_Window* window, Entities::Player* player, EventManager& eManager)
 		:renderer_(renderer),
 		window_(window),
 		player_(std::shared_ptr<Entities::Player>(player)),
@@ -17,6 +15,17 @@ namespace UI
 	{
 		createActionbar();
 		inventoryPage_;
+		eManager.addWithParams(ON_ACTIONBAR_ADD, [&](void* param) {
+			auto sd = (SlotDescriptor*)(param);
+			actionbar_->getItems()[sd->index]->tryAdd(1, sd->entity, sd->rc);
+			return nullptr;
+		});
+
+		eManager.addWithParams(ON_INVENTORY_ADD, [&](void* param) {
+			auto sd = (SlotDescriptor*)(param);
+			inventory_->getItems()[sd->index]->tryAdd(1, sd->entity, sd->rc);
+			return nullptr;
+		});
 	}
 
 	void InterfaceManager::showHud()
@@ -28,7 +37,7 @@ namespace UI
 	{
 		if (inventory_->isVisible())
 		{
-			inventory_->hide(renderer_.get(), UI_Z_INDEX);
+			inventory_->hide(renderer_.get(), Globals::UI_Z_INDEX);
 		}
 		else
 		{
@@ -36,7 +45,7 @@ namespace UI
 			SDL_GetWindowSize(window_, &windowX, &windowY);
 			b2Vec2 size = b2Vec2(windowX / 6, windowY / 6),
 				pos = b2Vec2(windowX - size.x - 20, windowY - size.y - actionbar_->getSize().y * 2);
-			inventory_->show(pos, size, renderer_.get(), UI_Z_INDEX);
+			inventory_->show(pos, size, renderer_.get(), Globals::UI_Z_INDEX);
 		}
 	}
 
@@ -60,12 +69,12 @@ namespace UI
 	{
 		for (int i = 0; i < actionbar_->getSlotCount(); i++)
 		{
-			renderer_->AddRenderable(UI_Z_INDEX, actionbar_->getSlots()[i]->second);
-			renderer_->AddRenderable(UI_Z_INDEX + 1, actionbar_->getItems()[i]->getItem().second);
+			renderer_->AddRenderable(Globals::UI_Z_INDEX, actionbar_->getSlots()[i]->second);
+			renderer_->AddRenderable(Globals::UI_Z_INDEX + 1, actionbar_->getItems()[i]->getItem().second);
 		}
 	}
 
-	void InterfaceManager::update()
+	/*void InterfaceManager::update()
 	{
 		b2Vec2 newScale(0, 0);
 
@@ -102,6 +111,16 @@ namespace UI
 
 			renderer_->RemoveRenderable(zIndex, rc);
 		}
+	}*/
+
+	Actionbar* InterfaceManager::getActionbar()
+	{
+		return actionbar_.get();
+	}
+
+	Inventory* InterfaceManager::getInventory()
+	{
+		return inventory_.get();
 	}
 
 	InterfaceManager::~InterfaceManager()

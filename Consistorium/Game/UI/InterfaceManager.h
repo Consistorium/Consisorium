@@ -13,6 +13,8 @@
 #include <GameEngine\RenderComponent.h>
 #include "Actionbar.h"
 #include "Inventory.h"
+#include <Game\Utils\SlotDescriptor.h>
+#include <EventManager.h>
 
 namespace UI
 {
@@ -31,7 +33,7 @@ namespace UI
 			GameEngine::RenderComponent*> inventoryPage_;
 		void createActionbar();
 	public:
-		InterfaceManager(GameEngine::Renderer*, SDL_Window*, Entities::Player*);
+		InterfaceManager(GameEngine::Renderer*, SDL_Window*, Entities::Player*, EventManager& eManager);
 
 		void showHud();
 
@@ -41,7 +43,11 @@ namespace UI
 
 		void showActionBar();
 
-		void update();
+		//void update();
+
+		Actionbar* getActionbar();
+
+		Inventory* getInventory();
 
 		void closeInventory();
 

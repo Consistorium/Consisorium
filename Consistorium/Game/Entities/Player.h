@@ -28,9 +28,9 @@ namespace Entities
 
 		void dig();
 
-		bool addToActionbar(Entities::GameEntity*);
+		int addToActionbar(Entities::GameEntity*);
 
-		bool addToInventory(Entities::GameEntity*);
+		int addToInventory(Entities::GameEntity*);
 
 		std::vector<std::shared_ptr<Utils::ItemSlot>> getInventory();
 

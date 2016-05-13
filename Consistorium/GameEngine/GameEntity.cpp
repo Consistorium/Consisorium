@@ -6,6 +6,7 @@ namespace Entities
 		: body_(body),
 		renderComponent_(rc)
 	{
+		renderComponent_->setStatic(true);
 	}
 
 

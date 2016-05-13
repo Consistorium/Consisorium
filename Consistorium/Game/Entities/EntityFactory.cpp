@@ -99,25 +99,33 @@ namespace Entities
 	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name)
 	{
 		GameEntity *result = nullptr;
-		if (name.compare("grass") == 0)
+		if (name.compare("Grass") == 0)
 		{
 			result = createBlock(position, "Grass");
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Grass);
 		}
-		else if (name.compare("ground") == 0) 
+		else if (name.compare("Ground") == 0) 
 		{
 			result = createBlock(position, "Ground");
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Rock);
 		}
-		
-		else if (name.compare("pineTree") == 0)
+		else if (name.compare("PineTree") == 0)
 		{
 			result = createTree(position, "Pine");
 			result->setType((int)EntityTypes::Tree);
 		}
-		else 
+		else if (name.compare("Ruin") == 0)
+		{
+			result = createBlock(position, "Ruin");
+			result->setType((int)EntityTypes::Ruin);
+		}
+		else if (name.compare("Hell") == 0)
+		{
+			result = createBlock(position, "Hell");
+			result->setType((int)EntityTypes::Hell);
+		}
 
 		return result;
 	}
@@ -125,6 +133,7 @@ namespace Entities
 	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name, std::vector<std::vector<Entities::GameEntity*>>& cache, b2Vec2 indexes)
 	{
 		GameEntity *result = nullptr;
+
 		if (name.compare("delete") == 0)
 		{
 			if (indexes.y < 0 || indexes.y >= cache.size() ||
@@ -176,7 +185,6 @@ namespace Entities
 
 	Block* EntityFactory::createBlock(b2Vec2 position, std::string modelName)
 	{
-		position.y += Globals::BLOCK_HEIGHT / 2;
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
 			.withEntityName("Block")
@@ -199,7 +207,7 @@ namespace Entities
 		Block* block = new Block(components.body, components.renderComponent);
 		block->setZIndex(ENTITY_Z_INDEX)
 			->setType((int)EntityTypes::Block);
-		
+
 		components.renderComponent->forEntity(block);
 		entityManager_.addToWorld(block);
 		return block;
@@ -235,7 +243,7 @@ namespace Entities
 	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
 	{
 		position.y += Globals::TREE_HEIGHT / 2;
-
+		position.y -= Globals::BLOCK_HEIGHT / 2;
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
 			.withEntityName("Tree")
@@ -253,6 +261,7 @@ namespace Entities
 		components.renderComponent->forEntity(tree);
 		entityManager_.addToWorld(tree);
 		tree->getBody()->GetFixtureList()->SetSensor(true);
+
 		return tree;
 	}
 

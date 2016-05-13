@@ -28,6 +28,7 @@ namespace Globals
 	const float SKELETON_RANGE = 1.5;
 	const float SKELETON_HASTE = 0.3;
 	const float INITIAL_PLAYER_HEALTH = 100;
+	const int UI_Z_INDEX = 100;
 	/*
 	 * World Generation
 	 */
@@ -37,6 +38,9 @@ namespace Globals
 	const b2Vec2 AIR_LAYER_HEIGHT_RANGE(50 * BLOCK_HEIGHT, 2 * BLOCK_HEIGHT);
 	const b2Vec2 GROUND_LAYER_HEIGHT_RANGE(1 * BLOCK_HEIGHT, 1 * BLOCK_HEIGHT);
 	const b2Vec2 UNDERGROUND_LAYER_HEIGHT_RANGE(0, -25 * BLOCK_HEIGHT);
+	const b2Vec2 RUIN_LAYER_HEIGHT_RANGE(-26 * BLOCK_HEIGHT, -50 * BLOCK_HEIGHT);
+	const b2Vec2 HELL_LAYER_HEIGHT_RANGE(-51 * BLOCK_HEIGHT, -76 * BLOCK_HEIGHT);
+	const b2Vec2 PURGATORY_LAYER_HEIGHT_RANGE(-77 * BLOCK_HEIGHT, -100 * BLOCK_HEIGHT);
 
 	// X-axis - inclusive values
 
