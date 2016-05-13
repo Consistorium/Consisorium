@@ -17,11 +17,6 @@ namespace Entities
 
 	int Player::addToActionbar(Entities::GameEntity* entity)
 	{
-		if (actionbar_.size() >= ACTIONBAR_SIZE)
-		{
-			return -1;
-		}
-
 		for (int i = 0; i < actionbar_.size(); i++)
 		{
 			auto rc = dynamic_cast<GameEngine::RenderComponent*>(entity->getRenderableComponent());
@@ -29,6 +24,11 @@ namespace Entities
 			{
 				return i;
 			}
+		}
+
+		if (actionbar_.size() >= ACTIONBAR_SIZE)
+		{
+			return -1;
 		}
 
 		auto itemSlot = new Utils::ItemSlot(entity->getSize(), entity->getPosition(), 1);
@@ -44,13 +44,10 @@ namespace Entities
 		auto itemSlot = new Utils::ItemSlot(entity->getSize(), entity->getPosition());
 		for (int i = 0; i < inventory_.size(); i++)
 		{
-			if (inventory_[i]->getItem().first->getType() == entity->getType())
+			auto rc = dynamic_cast<GameEngine::RenderComponent*>(entity->getRenderableComponent());
+			if (inventory_[i]->tryAdd(1, entity, rc))
 			{
-				auto rc = dynamic_cast<GameEngine::RenderComponent*>(entity->getRenderableComponent());
-				if (inventory_[i]->tryAdd(1, entity, rc))
-				{
-					return i;
-				}
+				return i;
 			}
 		}
 

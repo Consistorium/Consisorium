@@ -74,7 +74,7 @@ namespace UI
 			b2Vec2 textureSize = itemRC->getSize();
 
 			itemRC->setScale(b2Vec2(slotDim.x / textureSize.x, slotDim.y / textureSize.y));
-			renderer->AddRenderable(index + 1, itemRC);
+			renderer->AddRenderable(index, itemRC);
 		}
 	}
 

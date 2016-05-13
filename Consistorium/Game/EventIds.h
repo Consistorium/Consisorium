@@ -1,3 +1,5 @@
+#pragma once
+
 enum EventType
 {
 	ON_BECOME_DAY,

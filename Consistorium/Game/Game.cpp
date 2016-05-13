@@ -13,6 +13,7 @@
 #include <Game\Entities\EntityTypes.h>
 #include <Game\WorldGeneration\SpecialPlacesManager.h>
 #include <Game\Utils\SlotDescriptor.h>
+#include <Game\Input\InputHandler.h>
 #include <HellLayer.h>
 #include <PurgatoryLayer.h>
 
@@ -56,6 +57,8 @@ void Game::Init()
 	srand(time(nullptr));
 	inventoryTimer_.Reset();
 }
+
+long stepSeconds = 0;
 
 void Game::Run()
 {
@@ -115,7 +118,9 @@ void Game::Run()
 	});
 
 	BackgroundManager backgroundManager(&renderer_);
+	Input::InputHandler inputHandler;
 	while (true) {
+		stepSeconds = timer.GetMilliseconds();
 		float dt = timer.GetMilliseconds();
 		timer.Reset();
 		while (SDL_PollEvent(&e) != 0)
@@ -127,13 +132,12 @@ void Game::Run()
 				keyboardHandler_->handleKeyPress(e, e.key.keysym.sym);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				handleMousePress(e, cameraPos, entityFactory, entityManager_, player);
+				inputHandler.handleMousePress(&player, &entityFactory, &entityManager_, e, cameraPos);
 				break;
 			}
 		}
 
-		handleKeyPress(&player);
-
+		inputHandler.handleKeyPress(&player, keyboardHandler_.get(), interfaceManager_, contactListener_.get(), gravity_);
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		cameraPos.x = player.getPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2;
 		cameraPos.y = player.getPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
@@ -146,78 +150,6 @@ void Game::Run()
 		}
 
 		backgroundManager.update(dt, player.getBody()->GetPosition());
-	}
-}
-
-void Game::handleKeyPress(DynamicEntity* player)
-{
-	if (keyboardHandler_->isPressed(SDLK_LEFT))
-	{
-		player->setXDirection(-1);
-		player->move();
-	}
-	else if (keyboardHandler_->isPressed(SDLK_RIGHT))
-	{
-		player->setXDirection(1);
-		player->move();
-	}
-	else if (keyboardHandler_->isPressed(SDLK_b))
-	{
-		if (inventoryTimer_.GetMilliseconds() >= 300)
-		{
-			interfaceManager_->toggleInventory();
-			inventoryTimer_.Reset();
-		}
-	}
-
-	if (keyboardHandler_->isPressed(SDLK_UP))
-	{
-		int contacts = contactListener_->getContactsCount();
-		if (contactListener_->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 700)
-		{
-			player->jump(gravity_);
-			jumpTimer_.Reset();
-		}
-	}
-}
-
-void Game::handleMousePress(SDL_Event e, b2Vec2 camera, EntityFactory entityFactory, EntityManager& eManager, Player& player)
-{
-	SDL_Point clickPoint;
-	SDL_GetMouseState(&clickPoint.x, &clickPoint.y);
-	b2Vec2 worldCoords = eManager.getWorldCoordinates(clickPoint, camera);
-	if (e.button.button == SDL_BUTTON_RIGHT)
-	{
-		entityFactory.createBlock(worldCoords, "Grass");
-		return;
-	}
-	
-	GameEntity* entity = eManager.getClickedEntity(worldCoords);
-	
-	if (entity != nullptr)
-	{
-		if (e.button.button == SDL_BUTTON_LEFT)
-		{
-			if (!EntityTypes::isCognizant(entity->getType()))
-			{
-				int index;
-				SlotDescriptor sd;
-				sd.entity = entity;
-				sd.rc = entity->getRenderableComponent();
-				if ((index = player.addToActionbar(entity)) > -1)
-				{
-					sd.index = index;
-					EventManager::get().signal(ON_ACTIONBAR_ADD, &sd);
-					eManager.removeFromWorld(entity);
-				}
-				else if ((index = player.addToInventory(entity)) > -1)
-				{
-					sd.index = index;
-					EventManager::get().signal(ON_ACTIONBAR_ADD, &sd);
-					eManager.removeFromWorld(entity);
-				}
-			}
-		}
 	}
 }
 

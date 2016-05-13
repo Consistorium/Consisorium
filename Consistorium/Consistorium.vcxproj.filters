@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Game\main.cpp" />
-    <ClCompile Include="Game\Entities\Capsule.cpp">
-      <Filter>Game\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Entities\EntityFactory.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
@@ -74,11 +71,17 @@
     <ClCompile Include="PurgatoryLayer.cpp">
       <Filter>Game\WorldGeneration</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Entities\Capsule.cpp">
+      <Filter>Game\Entities\Bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Entities\Box.cpp">
+      <Filter>Game\Entities\Bodies</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Input\InputHandler.cpp">
+      <Filter>Game\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game\Entities\Capsule.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Entities\EntityFactory.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
@@ -178,6 +181,15 @@
     <ClInclude Include="Game\Entities\EntityTypes.h">
       <Filter>Game\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Entities\Capsule.h">
+      <Filter>Game\Entities\Bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Entities\Box.h">
+      <Filter>Game\Entities\Bodies</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Input\InputHandler.h">
+      <Filter>Game\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -206,6 +218,12 @@
     </Filter>
     <Filter Include="Game\WorldGeneration">
       <UniqueIdentifier>{a4bf0b19-9266-4226-906e-985258dced40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entities\Bodies">
+      <UniqueIdentifier>{b9e832e5-f60e-434a-ae0a-197d5b0f07aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Input">
+      <UniqueIdentifier>{484dc59e-227d-46e8-9827-bcba7071155f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

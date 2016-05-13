@@ -23,8 +23,6 @@ namespace Entities
 
 		~EntityFactory();
 
-		b2Body* createStaticEntityBody(b2Vec2 position, float width, float height);
-
 		b2Body* createDynamicEntityBody(b2Vec2 position, float width, float height, float friction = 1);
 
 		b2Body* createEntityBody(b2BodyType bodyType, b2Vec2 position, double width, double height);

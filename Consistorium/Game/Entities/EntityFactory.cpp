@@ -2,6 +2,7 @@
 #include <Game\Globals\Constants.h>
 
 #include "Capsule.h"
+#include "Box.h"
 #include "EntityTypes.h"
 
 #include "EntityFactory.h"
@@ -18,45 +19,13 @@ namespace Entities
 	}
 
 	b2Body* EntityFactory::createDynamicEntityBody(b2Vec2 position, float width, float height, float friction) {
-		b2Body* body = Capsule::create(entityManager_.getWorld(), position, width, height);
+		b2Body* body = Bodies::Capsule::create(entityManager_.getWorld(), position, width, height);
 		b2Fixture* fixture = body->GetFixtureList();
 		while (fixture != nullptr) {
 			fixture->SetFriction(friction);
 			fixture->SetDensity(1.0);
 			fixture = fixture->GetNext();
 		}
-
-		//add foot sensor fixture
-		float sensorDim = 0.1;
-		b2Vec2 sensorCentre(0, -height / 2 - sensorDim / 2);
-		b2PolygonShape polygonShape;
-		polygonShape.SetAsBox(sensorDim, sensorDim, sensorCentre, 0);
-
-		b2FixtureDef SensorFixtureDef;
-		SensorFixtureDef.shape = &polygonShape;
-		SensorFixtureDef.isSensor = true;
-		b2Fixture* footSensorFixture = body->CreateFixture(&SensorFixtureDef);
-		footSensorFixture->SetUserData((void*)EntityTypes::FootSensor);
-
-		return body;
-	}
-
-	b2Body* EntityFactory::createStaticEntityBody(b2Vec2 position, float width, float height)
-	{
-		b2BodyDef bodyDef;
-		bodyDef.type = b2_staticBody;
-		bodyDef.position.Set(position.x / Globals::PIXELS_PER_METER, position.y / Globals::PIXELS_PER_METER);
-		bodyDef.fixedRotation = true;
-		b2Body* body = entityManager_.getWorld()->CreateBody(&bodyDef);
-
-		b2PolygonShape boxShape;
-		boxShape.SetAsBox(width / 2.0f, height / 2.0f);
-
-		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &boxShape;
-		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.3f;
-		body->CreateFixture(&fixtureDef);
 
 		return body;
 	}
@@ -90,7 +59,7 @@ namespace Entities
 		switch (bodyType)
 		{
 		case b2_staticBody:
-			return createStaticEntityBody(position, width, height);
+			return Bodies::Box::create(entityManager_.getWorld(), position, width, height);
 		case b2_dynamicBody:
 			return createDynamicEntityBody(position, width, height);
 		}
@@ -98,30 +67,31 @@ namespace Entities
 
 	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name)
 	{
+		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 		GameEntity *result = nullptr;
-		if (name.compare("Grass") == 0)
+		if (name.compare("grass") == 0)
 		{
 			result = createBlock(position, "Grass");
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Grass);
 		}
-		else if (name.compare("Ground") == 0) 
+		else if (name.compare("ground") == 0) 
 		{
 			result = createBlock(position, "Ground");
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Rock);
 		}
-		else if (name.compare("PineTree") == 0)
+		else if (name.compare("pineTree") == 0)
 		{
 			result = createTree(position, "Pine");
-			result->setType((int)EntityTypes::Tree);
+			result->setType((int)EntityTypes::PineTree);
 		}
-		else if (name.compare("Ruin") == 0)
+		else if (name.compare("ruin") == 0)
 		{
 			result = createBlock(position, "Ruin");
 			result->setType((int)EntityTypes::Ruin);
 		}
-		else if (name.compare("Hell") == 0)
+		else if (name.compare("hell") == 0)
 		{
 			result = createBlock(position, "Hell");
 			result->setType((int)EntityTypes::Hell);
@@ -177,6 +147,39 @@ namespace Entities
 			->setHealth(health)
 			->setZIndex(ENTITY_Z_INDEX)
 			->setType((int)EntityTypes::Player);
+
+		b2Vec2 playerSize = b2Vec2(
+			player->getSize().x / Globals::PIXELS_PER_METER,
+			player->getSize().y / Globals::PIXELS_PER_METER);
+
+		b2PolygonShape polygonShape;
+		b2FixtureDef sensorFixtureDef;
+		sensorFixtureDef.isSensor = true;
+
+		
+
+		b2Vec2 sensorDim = b2Vec2(playerSize.x, 0.3);
+		b2Vec2 sensorCentre(0, -playerSize.y / 2);
+		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
+		sensorFixtureDef.shape = &polygonShape;
+		
+		b2Fixture* footSensorFixture = player->getBody()->CreateFixture(&sensorFixtureDef);
+		footSensorFixture->SetUserData((void*)EntityTypes::FootSensor);
+
+		sensorDim = b2Vec2(0.1, playerSize.y / 2);
+		sensorCentre = b2Vec2(playerSize.x / 2, 0);
+		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
+		sensorFixtureDef.shape = &polygonShape;
+
+		footSensorFixture = player->getBody()->CreateFixture(&sensorFixtureDef);
+		footSensorFixture->SetUserData((void*)EntityTypes::RightSensor);
+
+		sensorCentre = b2Vec2(-playerSize.x / 2, 0);
+		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
+		sensorFixtureDef.shape = &polygonShape;
+
+		footSensorFixture = player->getBody()->CreateFixture(&sensorFixtureDef);
+		footSensorFixture->SetUserData((void*)EntityTypes::LeftSensor);
 
 		components.renderComponent->forEntity(player);
 		entityManager_.addToWorld(player);
@@ -257,7 +260,7 @@ namespace Entities
 		EntityComponents components = createEntityComponents(descriptor, 80);
 		Tree* tree = new Tree(components.body, components.renderComponent);
 		tree->setZIndex(TREE_Z_INDEX)
-			->setType((int)EntityTypes::Tree);
+			->setType((int)EntityTypes::PineTree);
 		components.renderComponent->forEntity(tree);
 		entityManager_.addToWorld(tree);
 		tree->getBody()->GetFixtureList()->SetSensor(true);

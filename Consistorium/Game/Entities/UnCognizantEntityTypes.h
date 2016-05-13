@@ -5,12 +5,14 @@ public:
 	{
 		PositionEntity = 1,
 		FootSensor,
+		RightSensor,
+		LeftSensor,
 		Block,
 		Grass,
 		Rock,
 		Ruin,
 		Hell,
-		Tree,
+		PineTree,
 		Last
 	};
 };
