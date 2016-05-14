@@ -24,6 +24,7 @@
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
@@ -33,7 +34,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="BST.h" />
+    <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
