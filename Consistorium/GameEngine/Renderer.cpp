@@ -10,7 +10,7 @@ namespace GameEngine
 		windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
 		textureManager_(windowRenderer_),
 		window_(window),
-		staticRenderables_(XY(worldCenter.x, worldCenter.y), XY(halfDimensions.x * 1.5, halfDimensions.y)),
+		staticRenderables_(XY(worldCenter.x, worldCenter.y), XY(halfDimensions.x, halfDimensions.y)),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
 		SDL_GetWindowSurface(window)->h)
 	{
@@ -65,7 +65,7 @@ namespace GameEngine
 
 	void Renderer::RenderAll(b2Vec2 cameraPos)
 	{
-		AABB cameraAABB(XY(cameraPos.x + screenWidth_ / 2, cameraPos.y + screenHeight_ / 2), XY(screenWidth_ / 2, screenHeight_ / 2));
+		AABB cameraAABB(XY(cameraPos.x + screenWidth_ / 2, cameraPos.y + screenHeight_ / 2), XY(screenWidth_ / 1.75, screenHeight_ / 1.75));
 
 		SDL_SetRenderDrawColor(windowRenderer_, renderColor_.r, renderColor_.g, renderColor_.b, renderColor_.a);
 		SDL_RenderClear(this->windowRenderer_);
