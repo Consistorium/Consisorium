@@ -31,7 +31,7 @@ Game::Game(SDL_Window* window)
 	Window(window),
 	gravity_(GRAVITY),
 	keyboardHandler_(new KeyboardHandler()),
-	contactListener_(new JumpContactListener())
+	contactListener_(new PlayerContactListener(EventManager::get()))
 {
 }
 
@@ -122,6 +122,7 @@ void Game::Run()
 	Input::InputHandler inputHandler;
 	while (true) {
 		stepSeconds = timer.GetMilliseconds();
+		stepSeconds = stepSeconds > 1000 ? stepSeconds : 1000;
 		float dt = timer.GetMilliseconds();
 		timer.Reset();
 		while (SDL_PollEvent(&e) != 0)
@@ -138,7 +139,7 @@ void Game::Run()
 			}
 		}
 
-		inputHandler.handleKeyPress(&player, keyboardHandler_.get(), interfaceManager_, contactListener_.get(), gravity_);
+		inputHandler.handleKeyPress(&player, keyboardHandler_.get(), interfaceManager_, contactListener_.get(), gravity_, stepSeconds);
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		cameraPos.x = player.getPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2;
 		cameraPos.y = player.getPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;

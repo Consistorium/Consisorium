@@ -1,5 +1,5 @@
 #include "InputHandler.h"
-
+#include <iostream>
 namespace Input
 {
 	InputHandler::InputHandler()
@@ -8,16 +8,16 @@ namespace Input
 		inventoryTimer_.Reset();
 	}
 
-	void InputHandler::handleKeyPress(Entities::Player* player, KeyboardHandler* keyboardHandler, UI::InterfaceManager* interfaceManager, JumpContactListener* contactListener, b2Vec2 gravity_)
+	void InputHandler::handleKeyPress(Entities::Player* player, KeyboardHandler* keyboardHandler, UI::InterfaceManager* interfaceManager, PlayerContactListener* contactListener, b2Vec2 gravity_, long deltaTime)
 	{
 		if (keyboardHandler->isPressed(SDLK_LEFT))
 		{
-			player->setXDirection(-1);
+			player->setXDirection(LEFT);
 			player->move();
 		}
 		else if (keyboardHandler->isPressed(SDLK_RIGHT))
 		{
-			player->setXDirection(1);
+			player->setXDirection(RIGHT);
 			player->move();
 		}
 		else if (keyboardHandler->isPressed(SDLK_b))
@@ -31,8 +31,7 @@ namespace Input
 
 		if (keyboardHandler->isPressed(SDLK_UP))
 		{
-			int contacts = contactListener->getContactsCount();
-			if (contactListener->getContactsCount() >= 1 && jumpTimer_.GetMilliseconds() > 1000)
+			if (player->canJump() && jumpTimer_.GetMilliseconds() > deltaTime)
 			{
 				player->jump(gravity_);
 				jumpTimer_.Reset();

@@ -158,44 +158,13 @@ namespace Entities
 
 		components.body->SetUserData((void*)EntityTypes::Player);
 
-		Player* player = new Player(components.body, components.renderComponent, components.animationComponent);
+		Player* player = new Player(components.body, components.renderComponent, components.animationComponent, EventManager::get());
 		player->setJumpPower(0.2f)
 			->setMaxSpeed(10.0f)
 			->setMaxHealth(health)
 			->setHealth(health)
 			->setZIndex(ENTITY_Z_INDEX)
 			->setType((int)EntityTypes::Player);
-
-		b2Vec2 playerSize = b2Vec2(
-			player->getSize().x / Globals::PIXELS_PER_METER,
-			player->getSize().y / Globals::PIXELS_PER_METER);
-
-		b2PolygonShape polygonShape;
-		b2FixtureDef sensorFixtureDef;
-		sensorFixtureDef.isSensor = true;
-
-		b2Vec2 sensorDim = b2Vec2(playerSize.x, 0.3);
-		b2Vec2 sensorCentre(0, -playerSize.y / 2);
-		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
-		sensorFixtureDef.shape = &polygonShape;
-		
-		b2Fixture* footSensorFixture = player->getBody()->CreateFixture(&sensorFixtureDef);
-		footSensorFixture->SetUserData((void*)EntityTypes::FootSensor);
-
-		sensorDim = b2Vec2(0.1, playerSize.y / 2);
-		sensorCentre = b2Vec2(playerSize.x / 2, 0);
-		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
-		sensorFixtureDef.shape = &polygonShape;
-
-		footSensorFixture = player->getBody()->CreateFixture(&sensorFixtureDef);
-		footSensorFixture->SetUserData((void*)EntityTypes::RightSensor);
-
-		sensorCentre = b2Vec2(-playerSize.x / 2, 0);
-		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
-		sensorFixtureDef.shape = &polygonShape;
-
-		footSensorFixture = player->getBody()->CreateFixture(&sensorFixtureDef);
-		footSensorFixture->SetUserData((void*)EntityTypes::LeftSensor);
 
 		components.renderComponent->forEntity(player);
 		entityManager_.addToWorld(player);

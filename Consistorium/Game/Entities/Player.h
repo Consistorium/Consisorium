@@ -5,6 +5,7 @@
 #include <SDL\SDL.h>
 #include <AnimationManager.h>
 #include <GameEngine\FluentEntity.h>
+#include <GameEngine\EventManager.h>
 #include "../Utils/ItemSlot.h"
 
 namespace Entities
@@ -16,11 +17,12 @@ namespace Entities
 		std::vector<std::shared_ptr<Utils::ItemSlot>> actionbar_;
 		std::vector<std::shared_ptr<Utils::ItemSlot>> inventory_;
 		int actionbarSelected_;
+		int footContacts_;
 	public:
 		const float ACTIONBAR_SIZE = 8;
 		const float INVENTORY_SIZE = 18;
 
-		Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac);
+		Player(b2Body*, GameEngine::RenderComponent*, GameEngine::AnimationComponent*, EventManager&);
 
 		~Player();
 
@@ -31,6 +33,8 @@ namespace Entities
 		int addToActionbar(Entities::GameEntity*);
 
 		int addToInventory(Entities::GameEntity*);
+
+		bool canJump();
 
 		std::vector<std::shared_ptr<Utils::ItemSlot>> getInventory();
 

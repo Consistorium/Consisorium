@@ -1,5 +1,7 @@
 #include "DynamicEntity.h"
 
+#include <iostream>
+
 namespace Entities
 {
 	DynamicEntity::DynamicEntity(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac)
@@ -40,9 +42,16 @@ namespace Entities
 
 	void DynamicEntity::jump(b2Vec2 gravity)
 	{
+		
+		float maxJumpForce = body_->GetMass() * getJumpPower() * (-gravity.y) / 1.2; //happy constant
 		animationManager_.setAnimation("Jump", false);
-		b2Vec2 oldVelocity = body_->GetLinearVelocity();
-		float jumpForce = body_->GetMass() * getJumpPower() * (-gravity.y);
+		float oldVelocity = body_->GetLinearVelocity().y;
+		float jumpForce = maxJumpForce;
+		if (oldVelocity > 0)
+		{
+			jumpForce -= oldVelocity;
+		}
+
 		b2Vec2 impulse(0, jumpForce);
 		body_->ApplyLinearImpulse(impulse, body_->GetWorldCenter(), true);
 	}

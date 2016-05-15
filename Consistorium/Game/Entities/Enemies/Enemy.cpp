@@ -2,6 +2,7 @@
 
 #include <Game\Globals\Constants.h>
 #include "../EntityTypes.h"
+#include <Game\Utils\Directions.h>
 
 namespace Entities
 {
@@ -30,14 +31,14 @@ namespace Entities
 		tryAttack(player);
 	}
 
-	int locatedEnemy(b2Vec2 position, b2Vec2 enemyPosition, float range)
+	bool locatedEnemy(b2Vec2 position, b2Vec2 enemyPosition, float range)
 	{
-		if (abs(position.y - enemyPosition.y) <= 1)
-		{
-			return abs(position.x - enemyPosition.x) < range;
-		}
+		//if (abs(position.y - enemyPosition.y) <= 1)
+		//{
+			return abs(position.x - enemyPosition.x) <= range;
+		//}
 
-		return 0;
+		return false;
 	}
 
 	int  Enemy::scan(FluentEntity& player)
@@ -48,11 +49,11 @@ namespace Entities
 			float delta = ceil((getSize().x / 2 + player.getSize().x / 2) / Globals::PIXELS_PER_METER);
 			if (getPosition().x - player.getPosition().x > delta)
 			{
-				return -1;
+				return LEFT;
 			}
 			else if (player.getPosition().x - getPosition().x > delta)
 			{
-				return 1;
+				return RIGHT;
 			}
 		}
 

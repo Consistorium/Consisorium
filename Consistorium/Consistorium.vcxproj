@@ -168,7 +168,7 @@
     <ClCompile Include="Game\UI\InterfaceManager.cpp" />
     <ClCompile Include="Game\UI\Inventory.cpp" />
     <ClCompile Include="Game\Utils\ItemSlot.cpp" />
-    <ClCompile Include="Game\Utils\JumpContactListener.cpp" />
+    <ClCompile Include="Game\Utils\PlayerContactListener.cpp" />
     <ClCompile Include="Game\WorldGeneration\GroundLayer.cpp" />
     <ClCompile Include="Game\WorldGeneration\SpecialPlace.cpp" />
     <ClCompile Include="Game\WorldGeneration\SpecialPlacesManager.cpp" />
@@ -204,8 +204,9 @@
     <ClInclude Include="Game\UI\Actionbar.h" />
     <ClInclude Include="Game\UI\InterfaceManager.h" />
     <ClInclude Include="Game\UI\Inventory.h" />
+    <ClInclude Include="Game\Utils\Directions.h" />
     <ClInclude Include="Game\Utils\ItemSlot.h" />
-    <ClInclude Include="Game\Utils\JumpContactListener.h" />
+    <ClInclude Include="Game\Utils\PlayerContactListener.h" />
     <ClInclude Include="Game\Utils\SlotDescriptor.h" />
     <ClInclude Include="Game\WorldGeneration\GroundLayer.h" />
     <ClInclude Include="Game\WorldGeneration\IWorldLayer.h" />

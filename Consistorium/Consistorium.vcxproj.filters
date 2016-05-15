@@ -11,9 +11,6 @@
     <ClCompile Include="Game\Entities\Player.cpp">
       <Filter>Game\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Utils\JumpContactListener.cpp">
-      <Filter>Game\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Entities\Enemies\Skeleton.cpp">
       <Filter>Game\Entities\Enemies</Filter>
     </ClCompile>
@@ -83,6 +80,9 @@
     <ClCompile Include="Bush.cpp">
       <Filter>Game\Entities\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Utils\PlayerContactListener.cpp">
+      <Filter>Game\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\EntityFactory.h">
@@ -96,9 +96,6 @@
     </ClInclude>
     <ClInclude Include="Game\Entities\Player.h">
       <Filter>Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Utils\JumpContactListener.h">
-      <Filter>Game\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Game\Entities\Enemies\Skeleton.h">
       <Filter>Game\Entities\Enemies</Filter>
@@ -195,6 +192,12 @@
     </ClInclude>
     <ClInclude Include="Bush.h">
       <Filter>Game\Entities\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utils\PlayerContactListener.h">
+      <Filter>Game\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Utils\Directions.h">
+      <Filter>Game\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

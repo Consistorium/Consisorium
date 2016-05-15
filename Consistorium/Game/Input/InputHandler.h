@@ -10,7 +10,8 @@
 #include <Game\EventIds.h>
 #include <Game\UI\InterfaceManager.h>
 #include <GameEngine\KeyboardHandler.h>
-#include <Game\Utils\JumpContactListener.h>
+#include <Game\Utils\PlayerContactListener.h>
+#include <Game\Utils\Directions.h>
 
 namespace Input
 {
@@ -22,7 +23,7 @@ namespace Input
 	public:
 		InputHandler();
 
-		void handleKeyPress(Entities::Player*, KeyboardHandler*, UI::InterfaceManager*, JumpContactListener*, b2Vec2 gravity_);
+		void handleKeyPress(Entities::Player*, KeyboardHandler*, UI::InterfaceManager*, PlayerContactListener*, b2Vec2 gravity_, long deltaTime);
 
 		void handleMousePress(Entities::Player*, Entities::EntityFactory*, EntityManager*, SDL_Event, b2Vec2 camera);
 

@@ -14,7 +14,7 @@
 
 #include "Game.h"
 #include "Entities\EntityFactory.h"
-#include "Utils\JumpContactListener.h"
+#include <Game\Utils\PlayerContactListener.h>
 #include "UI\InterfaceManager.h"
 
 class Game : public GameEngine::Window
@@ -29,7 +29,7 @@ private:
 	b2Vec2 gravity_;
 	b2Timer jumpTimer_,
 		inventoryTimer_;
-	std::unique_ptr<JumpContactListener> contactListener_;
+	std::unique_ptr<PlayerContactListener> contactListener_;
 	std::map<int, Entities::GameEntity*> entities_;
 	std::unique_ptr<KeyboardHandler> keyboardHandler_;
 	UI::InterfaceManager* interfaceManager_;

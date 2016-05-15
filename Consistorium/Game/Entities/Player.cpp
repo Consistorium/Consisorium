@@ -1,14 +1,71 @@
 #include "Player.h"
 
 #include <iostream>
+#include <Game\Globals\Constants.h>
+#include <Game\Entities\EntityTypes.h>
+#include <Game\EventIds.h>
+#include <Game\Utils\Directions.h>
 
 namespace Entities
 {
-	Player::Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac)
+	Player::Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac, EventManager& eManager)
 		: FluentEntity(body, rc, ac),
 		actionbarSelected_(0)
 	{
+		footContacts_ = 0;
 		setHealth(100);
+
+		b2Vec2 playerSize = b2Vec2(
+			getSize().x / Globals::PIXELS_PER_METER,
+			getSize().y / Globals::PIXELS_PER_METER);
+
+		b2PolygonShape polygonShape;
+		b2FixtureDef sensorFixtureDef;
+		sensorFixtureDef.isSensor = true;
+
+		b2Vec2 sensorDim = b2Vec2(playerSize.x, 0.3);
+		b2Vec2 sensorCentre(0, -playerSize.y / 2);
+		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
+		sensorFixtureDef.shape = &polygonShape;
+
+		b2Fixture* footSensorFixture = getBody()->CreateFixture(&sensorFixtureDef);
+		footSensorFixture->SetUserData((void*)EntityTypes::FootSensor);
+
+		sensorDim = b2Vec2(0.1, playerSize.y / 2);
+		sensorCentre = b2Vec2(playerSize.x / 2, playerSize.y / 2);
+		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
+		sensorFixtureDef.shape = &polygonShape;
+
+		footSensorFixture = getBody()->CreateFixture(&sensorFixtureDef);
+		footSensorFixture->SetUserData((void*)EntityTypes::RightSensor);
+
+		sensorCentre = b2Vec2(-playerSize.x / 2, playerSize.y / 2);
+		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
+		sensorFixtureDef.shape = &polygonShape;
+
+		footSensorFixture = getBody()->CreateFixture(&sensorFixtureDef);
+		footSensorFixture->SetUserData((void*)EntityTypes::LeftSensor);
+
+		eManager.addWithParams(
+			ON_PLAYER_LAND_OR_JUMP, 
+			[&](bool hasContact) {
+				footContacts_ += hasContact ? 1 : -1;
+				return nullptr;
+			});
+
+		eManager.add(
+			ON_PLAYER_HIT_WALL,
+			[&]() 
+			{
+				auto body = this->getBody();
+				b2Vec2 currentVelocity = body->GetLinearVelocity();
+				body->ApplyLinearImpulse(b2Vec2(-currentVelocity.x, 0), body->GetWorldCenter(), true);
+			});
+	}
+
+	bool Player::canJump()
+	{
+		return footContacts_ > 0;
 	}
 
 	void Player::dig()
