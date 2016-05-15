@@ -10,7 +10,7 @@ namespace GameEngine
 		windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
 		textureManager_(windowRenderer_),
 		window_(window),
-		staticRenderables_(XY(worldCenter.x, worldCenter.y), XY(halfDimensions.x, halfDimensions.y)),
+		staticRenderables_(XY(worldCenter.x, worldCenter.y), XY(halfDimensions.x * 1.5, halfDimensions.y)),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
 		SDL_GetWindowSurface(window)->h)
 	{
@@ -56,7 +56,7 @@ namespace GameEngine
 			return;
 		}
 		
-		//staticRenderables_.remove(renderable);
+		staticRenderables_.remove(renderable);
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, SDL_Point point)
@@ -74,7 +74,6 @@ namespace GameEngine
 		staticRenderables_.queryRange(result, cameraAABB);
 		for (auto item : result)
 		{
-			//printf("static xy: %f %f\n", item->getPosition().x * 50, item->getPosition().y * 50);
 			RenderItem(item, cameraPos);
 		}
 
@@ -83,7 +82,6 @@ namespace GameEngine
 			for (auto entity : zIndex.second)
 			{
 				auto item = entity.second;
-				//(item->getTextureName()->find("Player") != std::string::npos) ? printf("dynamic xy: %f %f\n", item->getPosition().x * 50, item->getPosition().y * 50) : 0 + 0;
 				RenderItem(item, cameraPos);
 			}
 		}

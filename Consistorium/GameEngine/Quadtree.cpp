@@ -17,44 +17,17 @@ Quadtree::Quadtree(XY _center, XY _halfDimension, int _nodeCapacity)
 
 bool Quadtree::remove(GameEngine::IRenderable* toRemove)
 {
-	// doesnt work
-	if (NW == nullptr) { return false; }
-	for (int i = 0; i < NW->points.size(); i++)
+	if (!boundary.containsPoint(toRemove))
+		return false;
+
+	for (int i = 0; i < points.size(); i++)
 	{
-		if (NW->points[i] == toRemove)
+		if (points[i] == toRemove)
 		{
-			NW->points[i] == nullptr;
-			delete toRemove;
-			return true;
+			points.erase(points.begin() + i);
 		}
 	}
-	for (int i = 0; i < NE->points.size(); i++)
-	{
-		if (NE->points[i] == toRemove)
-		{
-			NE->points[i] == nullptr;
-			delete toRemove;
-			return true;
-		}
-	}
-	for (int i = 0; i < SE->points.size(); i++)
-	{
-		if (SE->points[i] == toRemove)
-		{
-			SE->points[i] == nullptr;
-			delete toRemove;
-			return true;
-		}
-	}
-	for (int i = 0; i < SW->points.size(); i++)
-	{
-		if (SW->points[i] == toRemove)
-		{
-			SW->points[i] == nullptr;
-			delete toRemove;
-			return true;
-		}
-	}
+	if (NW == nullptr) subdivide();
 
 	if (NW->remove(toRemove)) return true;
 	if (NE->remove(toRemove)) return true;

@@ -15,7 +15,7 @@ namespace Entities
 		attackTimer_.Reset();
 	}
 
-	void Enemy::iterateAI(FluentEntity& player)
+	void Enemy::iterateAI(FluentEntity& player, float dt)
 	{
 		setXDirection(scan(player));
 		if (getXDirection() != 0)

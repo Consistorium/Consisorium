@@ -15,7 +15,7 @@ namespace Entities
 			GameEngine::RenderComponent* rc,
 			GameEngine::AnimationComponent* ac);
 
-		virtual void iterateAI(FluentEntity& player);
+		virtual void iterateAI(FluentEntity& player, float dt);
 
 		virtual int scan(FluentEntity& player);
 

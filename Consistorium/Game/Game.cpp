@@ -147,12 +147,12 @@ void Game::Run()
 		player.update();
 		for (size_t i = 0; i < enemies.size(); i++)
 		{
-			enemies[i]->iterateAI(player);
+			enemies[i]->iterateAI(player, dt);
 			enemies[i]->update();
 		}
 		for (int i = 0; i < permantentlyLivingEnemies.size(); i++)
 		{
-			permantentlyLivingEnemies[i]->iterateAI(player);
+			permantentlyLivingEnemies[i]->iterateAI(player, dt);
 			permantentlyLivingEnemies[i]->update();
 		}
 
