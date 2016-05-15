@@ -31,7 +31,7 @@ namespace Input
 
 		if (keyboardHandler->isPressed(SDLK_UP))
 		{
-			if (player->canJump() && jumpTimer_.GetMilliseconds() > deltaTime)
+			if (player->canJump() && jumpTimer_.GetMilliseconds() > 1.2 * deltaTime)
 			{
 				player->jump(gravity_);
 				jumpTimer_.Reset();
