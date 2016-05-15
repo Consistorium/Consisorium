@@ -74,7 +74,7 @@ void Quadtree::queryRange(std::vector<GameEngine::IRenderable*>& list, AABB& ran
 		if (range.containsPoint(points[i]))
 			list.push_back(points[i]);
 
-	if (SE == nullptr) return;
+	if (NW == nullptr) return;
 	NW->queryRange(list, range);
 	NE->queryRange(list, range);
 	SW->queryRange(list, range);

@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bush.cpp" />
+    <ClCompile Include="DeathBoss.cpp" />
     <ClCompile Include="Game\BackgroundManager.cpp" />
     <ClCompile Include="Game\Entities\Box.cpp" />
     <ClCompile Include="Game\Entities\Capsule.cpp" />
@@ -180,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bush.h" />
+    <ClInclude Include="DeathBoss.h" />
     <ClInclude Include="Game\BackgroundManager.h" />
     <ClInclude Include="Game\Entities\Box.h" />
     <ClInclude Include="Game\Entities\Capsule.h" />

@@ -120,6 +120,7 @@ void Game::Run()
 
 	BackgroundManager backgroundManager(&renderer_);
 	Input::InputHandler inputHandler;
+	float aiUpdateTimer = 0;
 	while (true) {
 		stepSeconds = timer.GetMilliseconds();
 		stepSeconds = stepSeconds > 1000 ? stepSeconds : 1000;
@@ -145,15 +146,23 @@ void Game::Run()
 		cameraPos.y = player.getPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
 		renderer_.RenderAll(cameraPos);
 		player.update();
-		for (size_t i = 0; i < enemies.size(); i++)
+		if (aiUpdateTimer > 0.3)
 		{
-			enemies[i]->iterateAI(player, dt);
-			enemies[i]->update();
+			aiUpdateTimer = 0;
+			for (size_t i = 0; i < enemies.size(); i++)
+			{
+				enemies[i]->iterateAI(player, dt);
+				enemies[i]->update();
+			}
+			for (int i = 0; i < permantentlyLivingEnemies.size(); i++)
+			{
+				permantentlyLivingEnemies[i]->iterateAI(player, dt);
+				permantentlyLivingEnemies[i]->update();
+			}
 		}
-		for (int i = 0; i < permantentlyLivingEnemies.size(); i++)
+		else 
 		{
-			permantentlyLivingEnemies[i]->iterateAI(player, dt);
-			permantentlyLivingEnemies[i]->update();
+			aiUpdateTimer += dt;
 		}
 
 		backgroundManager.update(dt, player.getBody()->GetPosition());

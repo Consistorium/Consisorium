@@ -101,10 +101,15 @@ namespace Entities
 			result = createFoliage(position, "Tree", "Pine", Globals::TREE_HEIGHT, Globals::TREE_WIDTH);
 			result->setType((int)EntityTypes::Pine);
 		}
-		if (name.compare("purgatory") == 0)
+		else if(name.compare("purgatory") == 0)
 		{
 			result = createBlock(position, "Purgatory");
 			result->setType((int)EntityTypes::PurgatoryBlock);
+		}
+		else if (name.compare("deathboss") == 0)
+		{
+			result = createEnemy(position, "Death", "Idle");
+			result->setType((int)EntityTypes::DeathBoss);
 		}
 		else if (name.compare("bush") == 0)
 		{

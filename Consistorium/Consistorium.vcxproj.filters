@@ -83,6 +83,9 @@
     <ClCompile Include="Game\Utils\PlayerContactListener.cpp">
       <Filter>Game\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="DeathBoss.cpp">
+      <Filter>Game\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\EntityFactory.h">
@@ -195,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="Game\Utils\Directions.h">
       <Filter>Game\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathBoss.h">
+      <Filter>Game\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
