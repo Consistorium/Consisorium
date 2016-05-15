@@ -27,7 +27,7 @@ void jump(DynamicEntity* entity);
 b2Vec2 getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player);
 
 Game::Game(SDL_Window* window)
-	: renderer_(window, Globals::PIXELS_PER_METER, b2Vec2(0, 0), b2Vec2(Globals::LAYER_WIDTH_IN_BLOCKS / 2, Globals::TOTAL_LAYER_HEIGHT / 2)),
+	: renderer_(window, Globals::PIXELS_PER_METER, b2Vec2(0, -Globals::TOTAL_LAYER_HEIGHT / 2), b2Vec2(Globals::LAYER_WIDTH_IN_BLOCKS / 1.8, Globals::TOTAL_LAYER_HEIGHT / 1.8)),
 	Window(window),
 	gravity_(GRAVITY),
 	keyboardHandler_(new KeyboardHandler()),
@@ -174,7 +174,7 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(x, 6.0f);
-		Enemy* skeleton = factory->createEnemy(skeletonPosition, "DarkSaber", "Idle");
+		Enemy* skeleton = factory->createEnemy(skeletonPosition, "Skeleton", "Idle");
 		enemies->push_back(skeleton);
 	}
 
@@ -182,7 +182,7 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(-x, 6.0f);
-		Enemy* skeleton = factory->createEnemy(skeletonPosition, "DarkSaber", "Idle");
+		Enemy* skeleton = factory->createEnemy(skeletonPosition, "Skeleton", "Idle");
 		enemies->push_back(skeleton);
 	}
 }

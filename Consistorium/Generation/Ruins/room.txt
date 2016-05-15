@@ -1,6 +1,6 @@
 [ruin][ruin][ruin][ruin][ruin]
 [ruin][delete][delete][delete][ruin]
-[ruin][delete][centerdelete][delete][ruin]
+[ruin][delete][deletecenter][delete][ruin]
 [ruin][delete][delete][delete][ruin]
 [ruin][ruin][ruin][ruin][ruin]
 100

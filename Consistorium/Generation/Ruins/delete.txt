@@ -1,7 +1,7 @@
 ---[delete][delete]---
 --[delete][delete][delete][delete]--
 -[delete][delete][delete][delete][delete][delete]-
-[delete][delete][delete][centerdelete][delete][delete][delete][delete][delete][delete]
+[delete][delete][delete][deletecenter][delete][delete][delete][delete][delete][delete]
 [delete][delete][delete][delete][delete][delete][delete][delete]
 -[delete][delete][delete][delete][delete][delete]-
 --[delete][delete][delete][delete]--

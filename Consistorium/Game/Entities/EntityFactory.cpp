@@ -86,14 +86,14 @@ namespace Entities
 		{
 			position.x /= Globals::PIXELS_PER_METER;
 			position.y /= Globals::PIXELS_PER_METER;
-			result = createEnemy(position, "DarkSaber", "Idle");
+			result = createEnemy(position, "Skeleton", "Idle");
 			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
 		else if (name.compare("saber") == 0)
 		{
 			position.x /= Globals::PIXELS_PER_METER;
 			position.y /= Globals::PIXELS_PER_METER;
-			result = createEnemy(position, "Skeleton", "Idle");
+			result = createEnemy(position, "DarkSaber", "Idle");
 			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
 		else if (name.compare("pinetree") == 0)
@@ -128,7 +128,7 @@ namespace Entities
 		}
 		else if (name.compare("water") == 0)
 		{
-			result = result = createBlock(position, "Ground");
+			result = createBlock(position, "Water");
 			result->getBody()->GetFixtureList()->SetSensor(true);
 			result->setType((int)EntityTypes::Hell);
 		}
