@@ -32,14 +32,14 @@ namespace Entities
 		footSensorFixture->SetUserData((void*)EntityTypes::FootSensor);
 
 		sensorDim = b2Vec2(0.1, playerSize.y / 2);
-		sensorCentre = b2Vec2(playerSize.x / 2, playerSize.y / 2);
+		sensorCentre = b2Vec2(playerSize.x / 2, 0);
 		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
 		sensorFixtureDef.shape = &polygonShape;
 
 		footSensorFixture = getBody()->CreateFixture(&sensorFixtureDef);
 		footSensorFixture->SetUserData((void*)EntityTypes::RightSensor);
 
-		sensorCentre = b2Vec2(-playerSize.x / 2, playerSize.y / 2);
+		sensorCentre = b2Vec2(-playerSize.x / 2, 0);
 		polygonShape.SetAsBox(sensorDim.x, sensorDim.y, sensorCentre, 0);
 		sensorFixtureDef.shape = &polygonShape;
 
@@ -53,14 +53,49 @@ namespace Entities
 				return nullptr;
 			});
 
-		eManager.add(
+		eManager.addWithParams(
 			ON_PLAYER_HIT_WALL,
-			[&]() 
+			[&](void* arg) 
 			{
-				auto body = this->getBody();
-				b2Vec2 currentVelocity = body->GetLinearVelocity();
-				body->ApplyLinearImpulse(b2Vec2(-currentVelocity.x, 0), body->GetWorldCenter(), true);
+				int dir = *(int*)(arg);
+				if (dir == LEFT)
+				{
+					leftSensorContacts_++;
+				}
+				else
+				{
+					rightSensorContacts_++;
+				}
+
+				return nullptr;
 			});
+
+		eManager.addWithParams(
+			ON_PLAYER_STOP_HITTING_WALL,
+			[&](void* arg)
+		{
+			int dir = *(int*)(arg);
+			if (dir == LEFT)
+			{
+				leftSensorContacts_--;
+			}
+			else
+			{
+				rightSensorContacts_--;
+			}
+
+			return nullptr;
+		});
+	}
+
+	bool Player::rightSensorSensing()
+	{
+		return rightSensorContacts_ > 0;
+	}
+
+	bool Player::leftSensorSensing()
+	{
+		return leftSensorContacts_ > 0;
 	}
 
 	bool Player::canJump()

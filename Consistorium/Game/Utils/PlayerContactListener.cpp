@@ -2,6 +2,7 @@
 
 #include "PlayerContactListener.h"
 #include <Game\EventIds.h>
+#include "Directions.h"
 
 EntityTypes lastSensor;
 
@@ -21,20 +22,20 @@ bool hasLandedOrJumped(b2Fixture* fixtureA, b2Fixture* fixtureB)
 	return false;
 }
 
-bool hasHitAWall(b2Fixture* fixtureA, b2Fixture* fixtureB)
+int hasHitAWall(b2Fixture* fixtureA, b2Fixture* fixtureB)
 {
 	if (((int)fixtureA->GetUserData() == (int)EntityTypes::LeftSensor && !fixtureB->IsSensor()) ||
 		((int)fixtureB->GetUserData() == (int)EntityTypes::LeftSensor && !fixtureA->IsSensor()))
 	{
-		return true;
+		return -1;
 	}
 	else if (((int)fixtureA->GetUserData() == (int)EntityTypes::RightSensor && !fixtureB->IsSensor()) ||
 		((int)fixtureB->GetUserData() == (int)EntityTypes::RightSensor && !fixtureA->IsSensor()))
 	{
-		return true;
+		return 1;
 	}
 
-	return false;
+	return 0;
 }
 
 void PlayerContactListener::EndContact(b2Contact* contact) 
@@ -47,9 +48,13 @@ void PlayerContactListener::EndContact(b2Contact* contact)
 	{
 		eManager_.signal(ON_PLAYER_LAND_OR_JUMP, (void*)false);
 	}
-	else if (hasHitAWall(fixtureA, fixtureB))
+	else
 	{
-		eManager_.signal(ON_PLAYER_HIT_WALL);
+		/*int wallHitDir = hasHitAWall(fixtureA, fixtureB);
+		if (wallHitDir != 0)
+		{
+			eManager_.signal(ON_PLAYER_HIT_WALL, (void*)(Directions)wallHitDir);
+		}*/
 	}
 }
 
@@ -63,10 +68,14 @@ void PlayerContactListener::BeginContact(b2Contact* contact)
 	{
 		eManager_.signal(ON_PLAYER_LAND_OR_JUMP, (void*)true);
 	}
-	else if (hasHitAWall(fixtureA, fixtureB))
+	else
 	{
-		eManager_.signal(ON_PLAYER_HIT_WALL);
-	}
+		int wallHitDir = hasHitAWall(fixtureA, fixtureB);
+		if (wallHitDir != 0)
+		{
+			eManager_.signal(ON_PLAYER_STOP_HITTING_WALL, &wallHitDir);
+		}
+	}	
 }
 
 PlayerContactListener::~PlayerContactListener()

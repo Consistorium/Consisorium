@@ -13,12 +13,18 @@ namespace Input
 		if (keyboardHandler->isPressed(SDLK_LEFT))
 		{
 			player->setXDirection(LEFT);
-			player->move();
+			if (!player->leftSensorSensing())
+			{
+				player->move();
+			}
 		}
 		else if (keyboardHandler->isPressed(SDLK_RIGHT))
 		{
 			player->setXDirection(RIGHT);
-			player->move();
+			if (!player->rightSensorSensing())
+			{
+				player->move();
+			}
 		}
 		else if (keyboardHandler->isPressed(SDLK_b))
 		{

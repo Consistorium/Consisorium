@@ -114,6 +114,12 @@ namespace Entities
 			result = createBlock(position, "Hell");
 			result->setType((int)EntityTypes::Hell);
 		}
+		else if (name.compare("water") == 0)
+		{
+			result = result = createBlock(position, "Ground");
+			result->getBody()->GetFixtureList()->SetSensor(true);
+			result->setType((int)EntityTypes::Hell);
+		}
 
 		return result;
 	}

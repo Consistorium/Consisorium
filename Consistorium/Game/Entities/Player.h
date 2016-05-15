@@ -18,6 +18,8 @@ namespace Entities
 		std::vector<std::shared_ptr<Utils::ItemSlot>> inventory_;
 		int actionbarSelected_;
 		int footContacts_;
+		int leftSensorContacts_;
+		int rightSensorContacts_;
 	public:
 		const float ACTIONBAR_SIZE = 8;
 		const float INVENTORY_SIZE = 18;
@@ -33,6 +35,10 @@ namespace Entities
 		int addToActionbar(Entities::GameEntity*);
 
 		int addToInventory(Entities::GameEntity*);
+
+		bool rightSensorSensing();
+
+		bool leftSensorSensing();
 
 		bool canJump();
 

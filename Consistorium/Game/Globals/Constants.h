@@ -16,8 +16,8 @@ namespace Globals
 		-- haste = attacks per second
 	 */
 
-	const float DEFAULT_ENTITY_WIDTH = 40;
-	const float DEFAULT_ENTITY_HEIGHT = 80;
+	const float DEFAULT_ENTITY_WIDTH = 28;
+	const float DEFAULT_ENTITY_HEIGHT = 55;
 	const float BLOCK_WIDTH = 31; // plEase do not make this int because THE FUCKIGN WORLD WONT GENERATE!!11
 	const float BLOCK_HEIGHT = 31;
 	const int TREE_WIDTH = 120;
