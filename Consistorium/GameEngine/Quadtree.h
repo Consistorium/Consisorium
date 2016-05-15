@@ -19,10 +19,20 @@ struct AABB {
 	}
 
 	bool intersectsAABB(AABB& other) {
-		float newWidth = other.halfDimension.x * 2;
-		float newHeight = other.halfDimension.x * 2;
-		return ((other.center.x - newWidth < center.x) && (other.center.x + newWidth > center.x)) ||
-			((other.center.y - newHeight < center.y) && (other.center.y + newHeight > center.y));
+		float biggerHalfWidth = std::max(other.halfDimension.x, halfDimension.x);
+		float biggerHalfHeight = std::max(other.halfDimension.y, halfDimension.y);
+		float smallerHalfWidth = std::min(other.halfDimension.x, halfDimension.x);
+		float smallerHalfHeight = std::min(other.halfDimension.y, halfDimension.y);
+		XY smallerAABBCenter = other.halfDimension.x == biggerHalfWidth && other.halfDimension.y == biggerHalfHeight ? other.center : center;
+		XY biggerAABBCenter = center.x == smallerAABBCenter.x && center.y == smallerAABBCenter.y ? other.center : center;
+
+		float biggerWidth = biggerHalfWidth * 2;
+		float biggerHeight = biggerHalfHeight * 2;
+
+		return (biggerAABBCenter.x - biggerWidth <= smallerAABBCenter.x && biggerAABBCenter.x + biggerWidth >= smallerAABBCenter.x) &&
+			(biggerAABBCenter.y - biggerHeight <= smallerAABBCenter.y && biggerAABBCenter.y + biggerHeight >= smallerAABBCenter.y);
+		/*return ((other.center.x - newWidth < center.x) && (other.center.x + newWidth > center.x)) ||
+			((other.center.y - newHeight < center.y) && (other.center.y + newHeight > center.y));*/
 	}
 
 	XY center;
