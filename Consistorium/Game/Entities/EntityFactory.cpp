@@ -93,7 +93,7 @@ namespace Entities
 		{
 			position.x /= Globals::PIXELS_PER_METER;
 			position.y /= Globals::PIXELS_PER_METER;
-			result = createEnemy(position, "DarkSaber", "Idle");
+			result = createEnemy(position, "DarkSaber", "Idle", 2, 20);
 			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
 		else if (name.compare("pinetree") == 0)
@@ -138,22 +138,23 @@ namespace Entities
 
 	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name, std::vector<std::vector<Entities::GameEntity*>>& cache, b2Vec2 indexes)
 	{
+		if (name.compare("-") == 0) { return nullptr; }
 		GameEntity *result = nullptr;
+
+		if (indexes.y < 0 || indexes.y >= cache.size() ||
+			indexes.x < 0 || indexes.x >= cache[indexes.y].size()) 
+		{
+			return nullptr;
+		}
+		result = cache[indexes.y][indexes.x];
+		if (result != nullptr)
+		{
+			entityManager_.removeFromWorld(result);
+			cache[indexes.y][indexes.x] = nullptr;
+		}
 
 		if (name.compare("delete") == 0)
 		{
-			if (indexes.y < 0 || indexes.y >= cache.size() ||
-				indexes.x < 0 || indexes.x >= cache[indexes.y].size()) 
-			{
-				return nullptr;
-			}
-			result = cache[indexes.y][indexes.x];
-			if (result != nullptr)
-			{
-				entityManager_.removeFromWorld(result);
-				cache[indexes.y][indexes.x] = nullptr;
-			}
-
 			return result;
 		}
 
@@ -219,7 +220,7 @@ namespace Entities
 		return block;
 	}
 
-	Enemy* EntityFactory::createEnemy(b2Vec2 position, std::string entityName, std::string modelName, float scanRange, float damage, float range, float haste)
+	Enemy* EntityFactory::createEnemy(b2Vec2 position, std::string entityName, std::string modelName, float scale, float animationSpeed, float scanRange, float damage, float range, float haste)
 	{
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
@@ -227,11 +228,11 @@ namespace Entities
 			.withModelName(modelName)
 			.withPosition(position)
 			.withBodyType(b2_dynamicBody)
-			.withWidth(Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER)
-			.withHeight(Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER)
+			.withWidth(Globals::DEFAULT_ENTITY_WIDTH / Globals::PIXELS_PER_METER * scale)
+			.withHeight(Globals::DEFAULT_ENTITY_HEIGHT / Globals::PIXELS_PER_METER * scale)
 			.create();
 
-		EntityComponents components = createEntityComponents(descriptor, 80);
+		EntityComponents components = createEntityComponents(descriptor, animationSpeed);
 		Enemy* skeleton = new Enemy(components.body, components.renderComponent, components.animationComponent);
 		skeleton->setJumpPower(Globals::ENTITY_JUMP_POWER)
 			->setScanRange(scanRange)

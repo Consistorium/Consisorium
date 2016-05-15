@@ -46,6 +46,8 @@ namespace Entities
 			b2Vec2 position,
 			std::string modelName,
 			std::string entityName,
+			float scale = 1,
+			float animationSpeed = 80,
 			float scanRange = Globals::SKELETON_SCAN_RANGE,
 			float damage = Globals::SKELETON_DAMAGE,
 			float range = Globals::SKELETON_RANGE,

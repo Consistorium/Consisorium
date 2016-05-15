@@ -43,7 +43,7 @@ void RuinLayer::Generate(Entities::EntityFactory& factory, SpecialPlacesManager&
 		{
 			std::shared_ptr<SpecialPlace> place = placesManager.getRandomPlace("Ruins");
 			if (cache[y][x] == nullptr) { continue; }
-			if (rand() % *place->getFrequency() == 1 && place->getName().compare("castle.txt") != 0)
+			if (rand() % *place->getFrequency() == 1)
 			{
 				worldCoords = cache[y][x]->getBody()->GetPosition();
 				worldCoords.x *= Globals::PIXELS_PER_METER;

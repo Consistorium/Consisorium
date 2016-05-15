@@ -1,6 +1,6 @@
---[ruin]--
---[ruin]--
+--[ruin]
+--[ruin]
 [ruin]-[ruin]-[ruin]
 [ruin][ruin][ruin][ruin][ruin]
----[center]---
+---[center]
 300

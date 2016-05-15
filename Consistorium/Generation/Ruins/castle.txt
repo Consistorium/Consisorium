@@ -5,4 +5,4 @@
 [ruin][delete][delete][ruin]
 [ruin][delete][delete][ruin]
 [ruin][ruin][ruin][ruin]
-100
+300
