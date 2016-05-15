@@ -12,7 +12,6 @@
 #include <KeyboardHandler.h>
 #include <EntityManager.h>
 
-#include "Game.h"
 #include "Entities\EntityFactory.h"
 #include <Game\Utils\PlayerContactListener.h>
 #include "UI\InterfaceManager.h"

@@ -27,7 +27,7 @@ void jump(DynamicEntity* entity);
 b2Vec2 getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player);
 
 Game::Game(SDL_Window* window)
-	: renderer_(window, Globals::PIXELS_PER_METER),
+	: renderer_(window, Globals::PIXELS_PER_METER, b2Vec2(0, 0), b2Vec2(Globals::LAYER_WIDTH_IN_BLOCKS / 2, Globals::TOTAL_LAYER_HEIGHT / 2)),
 	Window(window),
 	gravity_(GRAVITY),
 	keyboardHandler_(new KeyboardHandler()),

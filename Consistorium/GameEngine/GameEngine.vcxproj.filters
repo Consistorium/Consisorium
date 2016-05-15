@@ -50,6 +50,7 @@
     <ClCompile Include="Event.cpp">
       <Filter>Event System</Filter>
     </ClCompile>
+    <ClCompile Include="Quadtree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
@@ -112,7 +113,7 @@
     <ClInclude Include="Event.h">
       <Filter>Event System</Filter>
     </ClInclude>
-    <ClInclude Include="BST.h" />
+    <ClInclude Include="Quadtree.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameEngine.rc" />

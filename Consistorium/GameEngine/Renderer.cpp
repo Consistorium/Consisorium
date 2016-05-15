@@ -5,14 +5,17 @@
 
 namespace GameEngine
 {
-	Renderer::Renderer(SDL_Window* window, int pixelsPerMeter)
+	Renderer::Renderer(SDL_Window* window, int pixelsPerMeter, b2Vec2 worldCenter, b2Vec2 halfDimensions)
 		: pixelsPerMeter_(pixelsPerMeter),
 		windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
 		textureManager_(windowRenderer_),
 		window_(window),
+		staticRenderables_(XY(worldCenter.x, worldCenter.y), XY(halfDimensions.x, halfDimensions.y)),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
 		SDL_GetWindowSurface(window)->h)
 	{
+		SDL_GetWindowSize(window_, &screenWidth_, &screenHeight_);
+
 		if (this->windowRenderer_ == NULL)
 		{
 			printf("Renderer could not be created! SDL error: %s\n", SDL_GetError());
@@ -39,11 +42,10 @@ namespace GameEngine
 		if(!renderable->isStatic())
 		{
 			this->dynamicRenderables_[zIndex][renderable->getId()] = renderable;
+			return;
 		}
-		else
-		{
-			this->dynamicRenderables_[zIndex][renderable->getId()] = renderable;
-		}
+
+		this->staticRenderables_.insert(renderable);
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, IRenderable *renderable)
@@ -51,11 +53,10 @@ namespace GameEngine
 		if (!renderable->isStatic())
 		{
 			this->dynamicRenderables_[zIndex].erase(renderable->getId());
+			return;
 		}
-		else
-		{
-			this->dynamicRenderables_[zIndex].erase(renderable->getId());
-		}
+		
+		//staticRenderables_.remove(renderable);
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, SDL_Point point)
@@ -64,43 +65,56 @@ namespace GameEngine
 
 	void Renderer::RenderAll(b2Vec2 cameraPos)
 	{
+		AABB cameraAABB(XY(cameraPos.x + screenWidth_ / 2, cameraPos.y + screenHeight_ / 2), XY(screenWidth_ / 2, screenHeight_ / 2));
+
 		SDL_SetRenderDrawColor(windowRenderer_, renderColor_.r, renderColor_.g, renderColor_.b, renderColor_.a);
-
 		SDL_RenderClear(this->windowRenderer_);
-		SDL_Rect boundsRect;
 
-		int screenWidth, screenHeight;
-		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
-		
-		for (auto it = dynamicRenderables_.begin(); it != dynamicRenderables_.end(); ++it)
+		std::vector<IRenderable*> result;
+		staticRenderables_.queryRange(result, cameraAABB);
+		for (auto item : result)
 		{
-			for (auto item : dynamicRenderables_[it->first])
+			//printf("static xy: %f %f\n", item->getPosition().x * 50, item->getPosition().y * 50);
+			RenderItem(item, cameraPos);
+		}
+
+		for (auto zIndex : dynamicRenderables_)
+		{
+			for (auto entity : zIndex.second)
 			{
-				if (item.second->alwaysRender())
-				{
-					RenderUI(item.second);
-					continue;
-				}
-
-				b2Vec2 position = item.second->getPosition();
-				if (shouldRender(position, cameraPos, screenWidth, screenHeight) == SDL_FALSE)
-				{
-					continue;
-				}
-
-				SDL_Texture *currentTexture = textureManager_.getTexture(*item.second->getTextureName());
-				SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
-				b2Vec2 scale = item.second->getScale(boundsRect);
-				SDL_RenderSetScale(this->windowRenderer_, item.second->getScale(boundsRect).x, item.second->getScale(boundsRect).y);
-				boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item.second->getSize().x / 2) / item.second->getScale(boundsRect).x;
-				boundsRect.y = (screenHeight - position.y * pixelsPerMeter_ - item.second->getSize().y / 2 + cameraPos.y) / item.second->getScale(boundsRect).y;
-				SDL_RendererFlip flip = ((item.second->getOrientation() == -1) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
-				SDL_RenderCopyEx(this->windowRenderer_, currentTexture, nullptr, &boundsRect, 0, nullptr, flip);
+				auto item = entity.second;
+				//(item->getTextureName()->find("Player") != std::string::npos) ? printf("dynamic xy: %f %f\n", item->getPosition().x * 50, item->getPosition().y * 50) : 0 + 0;
+				RenderItem(item, cameraPos);
 			}
 		}
 		
 
 		SDL_RenderPresent(this->windowRenderer_);
+	}
+
+	void Renderer::RenderItem(IRenderable *item, b2Vec2 cameraPos)
+	{
+		SDL_Rect boundsRect;
+		if (item->alwaysRender())
+		{
+			RenderUI(item);
+			return;
+		}
+
+		b2Vec2 position = item->getPosition();
+		if (shouldRender(position, cameraPos, screenWidth_, screenHeight_) == SDL_FALSE)
+		{
+			return;
+		}
+
+		SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
+		SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
+		b2Vec2 scale = item->getScale(boundsRect);
+		SDL_RenderSetScale(this->windowRenderer_, item->getScale(boundsRect).x, item->getScale(boundsRect).y);
+		boundsRect.x = (position.x * pixelsPerMeter_ - cameraPos.x - item->getSize().x / 2) / item->getScale(boundsRect).x;
+		boundsRect.y = (screenHeight_ - position.y * pixelsPerMeter_ - item->getSize().y / 2 + cameraPos.y) / item->getScale(boundsRect).y;
+		SDL_RendererFlip flip = ((item->getOrientation() == -1) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+		SDL_RenderCopyEx(this->windowRenderer_, currentTexture, nullptr, &boundsRect, 0, nullptr, flip);
 	}
 
 	void Renderer::SetRenderColor(Color color)
@@ -114,7 +128,7 @@ namespace GameEngine
 		point.x = renderablePosition.x * pixelsPerMeter_;
 		point.y = renderablePosition.y * pixelsPerMeter_;
 		SDL_Rect rect;
-		float renderAdvance = 1.5; // used for renderering a bigger are than the screen, so the player doesnt see the magic happen
+		float renderAdvance = 1.2; // used for renderering a bigger are than the screen, so the player doesnt see the magic happen
 		rect.x = cameraPosition.x;
 		rect.y = cameraPosition.y;
 		
