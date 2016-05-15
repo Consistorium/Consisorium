@@ -19,11 +19,10 @@ struct AABB {
 	}
 
 	bool intersectsAABB(AABB& other) {
-		return true;
-		return (((other.center.x - other.halfDimension.x > center.x - halfDimension.x && other.center.x - other.halfDimension.x < center.x + halfDimension.x) ||
-			(other.center.x + other.halfDimension.x > center.x - halfDimension.x && other.center.x + other.halfDimension.x < center.x + halfDimension.x)) &&
-			((other.center.y - other.halfDimension.y > center.y - halfDimension.y && other.center.y - other.halfDimension.y < center.y + halfDimension.y) ||
-			(other.center.y + other.halfDimension.y > center.y - halfDimension.y && other.center.y + other.halfDimension.y < center.y + halfDimension.y)));
+		float newWidth = other.halfDimension.x * 2;
+		float newHeight = other.halfDimension.x * 2;
+		return ((other.center.x - newWidth < center.x) && (other.center.x + newWidth > center.x)) ||
+			((other.center.y - newHeight < center.y) && (other.center.y + newHeight > center.y));
 	}
 
 	XY center;

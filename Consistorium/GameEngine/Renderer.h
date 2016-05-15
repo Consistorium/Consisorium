@@ -37,7 +37,7 @@ namespace GameEngine
 		std::vector<IRenderable*> ui_renderables;
 		SDL_bool Renderer::shouldRender(b2Vec2& renderablePosition, b2Vec2& cameraPosition, int& width, int& height);
 	public:
-		Renderer(SDL_Window* window, int pixelsPerMeter);
+		Renderer(SDL_Window* window, int pixelsPerMeter, b2Vec2 worldCenter, b2Vec2 halfDimensions);
 
 		~Renderer();
 

@@ -17,6 +17,7 @@ Quadtree::Quadtree(XY _center, XY _halfDimension, int _nodeCapacity)
 
 bool Quadtree::remove(GameEngine::IRenderable* toRemove)
 {
+	// doesnt work
 	if (NW == nullptr) { return false; }
 	for (int i = 0; i < NW->points.size(); i++)
 	{

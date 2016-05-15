@@ -5,12 +5,12 @@
 
 namespace GameEngine
 {
-	Renderer::Renderer(SDL_Window* window, int pixelsPerMeter)
+	Renderer::Renderer(SDL_Window* window, int pixelsPerMeter, b2Vec2 worldCenter, b2Vec2 halfDimensions)
 		: pixelsPerMeter_(pixelsPerMeter),
 		windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
 		textureManager_(windowRenderer_),
 		window_(window),
-		staticRenderables_(XY(0,0), XY(1200, 1200)),
+		staticRenderables_(XY(worldCenter.x, worldCenter.y), XY(halfDimensions.x, halfDimensions.y)),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
 		SDL_GetWindowSurface(window)->h)
 	{
@@ -56,7 +56,7 @@ namespace GameEngine
 			return;
 		}
 		
-		staticRenderables_.remove(renderable);
+		//staticRenderables_.remove(renderable);
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, SDL_Point point)
