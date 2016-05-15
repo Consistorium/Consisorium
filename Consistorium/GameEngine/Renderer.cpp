@@ -72,6 +72,7 @@ namespace GameEngine
 
 		std::vector<IRenderable*> result;
 		staticRenderables_.queryRange(result, cameraAABB);
+		
 		for (auto item : result)
 		{
 			RenderItem(item, cameraPos);
@@ -86,7 +87,6 @@ namespace GameEngine
 			}
 		}
 		
-
 		SDL_RenderPresent(this->windowRenderer_);
 	}
 
@@ -141,8 +141,6 @@ namespace GameEngine
 	{
 		SDL_Rect boundsRect;
 
-		int screenWidth, screenHeight;
-		SDL_GetWindowSize(window_, &screenWidth, &screenHeight);
 		SDL_Texture *currentTexture = textureManager_.getTexture(*item->getTextureName());
 		SDL_QueryTexture(currentTexture, nullptr, nullptr, &boundsRect.w, &boundsRect.h);
 

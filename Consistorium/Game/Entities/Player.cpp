@@ -14,7 +14,7 @@ namespace Entities
 	{
 		footContacts_ = 0;
 		setHealth(100);
-
+		setRange(3);
 		b2Vec2 playerSize = b2Vec2(
 			getSize().x / Globals::PIXELS_PER_METER,
 			getSize().y / Globals::PIXELS_PER_METER);

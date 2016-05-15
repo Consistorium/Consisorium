@@ -33,6 +33,8 @@ namespace Entities
 
 		GameEngine::IAnimateable* getAnimateableComponent();
 
+		float getRange();
+
 		virtual ~DynamicEntity();
 	};
 }
