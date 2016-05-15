@@ -18,7 +18,8 @@ struct AABB {
 			(p.y > center.y - halfDimension.y && p.y <= center.y + halfDimension.y));
 	}
 
-	bool intersectsAABB(AABB other) {
+	bool intersectsAABB(AABB& other) {
+		return true;
 		return (((other.center.x - other.halfDimension.x > center.x - halfDimension.x && other.center.x - other.halfDimension.x < center.x + halfDimension.x) ||
 			(other.center.x + other.halfDimension.x > center.x - halfDimension.x && other.center.x + other.halfDimension.x < center.x + halfDimension.x)) &&
 			((other.center.y - other.halfDimension.y > center.y - halfDimension.y && other.center.y - other.halfDimension.y < center.y + halfDimension.y) ||
@@ -32,22 +33,29 @@ struct AABB {
 class Quadtree {
 public:
 	Quadtree(XY, XY);
+
 	Quadtree(XY, XY, int);
 
-	bool insert(GameEngine::IRenderable *);
+	bool insert(GameEngine::IRenderable*);
+
+	bool remove(GameEngine::IRenderable*);
+
 	void subdivide();
-	void queryRange(std::vector<GameEngine::IRenderable*> &, AABB);
+
+	void queryRange(std::vector<GameEngine::IRenderable*>&, AABB&);
 
 	void clear();
+
 	bool getCollision(std::vector<GameEngine::IRenderable*>);
 
 	AABB boundary;
+
 	int nodeCapacity;
 
-	Quadtree * NW;
-	Quadtree * NE;
-	Quadtree * SW;
-	Quadtree * SE;
+	Quadtree *NW;
+	Quadtree *NE;
+	Quadtree *SW;
+	Quadtree *SE;
 
 	std::vector<GameEngine::IRenderable*> points;
 };

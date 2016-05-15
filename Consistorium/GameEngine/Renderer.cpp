@@ -10,7 +10,7 @@ namespace GameEngine
 		windowRenderer_(SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED)),
 		textureManager_(windowRenderer_),
 		window_(window),
-		staticRenderables_(XY(0,0), XY(1000, 1000)),
+		staticRenderables_(XY(0,0), XY(1200, 1200)),
 		worldConstraints(SDL_GetWindowSurface(window)->w,
 		SDL_GetWindowSurface(window)->h)
 	{
@@ -53,7 +53,10 @@ namespace GameEngine
 		if (!renderable->isStatic())
 		{
 			this->dynamicRenderables_[zIndex].erase(renderable->getId());
+			return;
 		}
+		
+		staticRenderables_.remove(renderable);
 	}
 
 	void Renderer::RemoveRenderable(int zIndex, SDL_Point point)

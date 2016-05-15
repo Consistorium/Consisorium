@@ -34,7 +34,6 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DynamicEntity.h" />
     <ClInclude Include="Entity.h" />
@@ -47,6 +46,7 @@
     <ClInclude Include="IGraphicsRenderer.h" />
     <ClInclude Include="IRenderable.h" />
     <ClInclude Include="KeyboardHandler.h" />
+    <ClInclude Include="Quadtree.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="TextureManager.h" />

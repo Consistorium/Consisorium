@@ -15,6 +15,54 @@ Quadtree::Quadtree(XY _center, XY _halfDimension, int _nodeCapacity)
 	points.reserve(nodeCapacity);
 }
 
+bool Quadtree::remove(GameEngine::IRenderable* toRemove)
+{
+	if (NW == nullptr) { return false; }
+	for (int i = 0; i < NW->points.size(); i++)
+	{
+		if (NW->points[i] == toRemove)
+		{
+			NW->points[i] == nullptr;
+			delete toRemove;
+			return true;
+		}
+	}
+	for (int i = 0; i < NE->points.size(); i++)
+	{
+		if (NE->points[i] == toRemove)
+		{
+			NE->points[i] == nullptr;
+			delete toRemove;
+			return true;
+		}
+	}
+	for (int i = 0; i < SE->points.size(); i++)
+	{
+		if (SE->points[i] == toRemove)
+		{
+			SE->points[i] == nullptr;
+			delete toRemove;
+			return true;
+		}
+	}
+	for (int i = 0; i < SW->points.size(); i++)
+	{
+		if (SW->points[i] == toRemove)
+		{
+			SW->points[i] == nullptr;
+			delete toRemove;
+			return true;
+		}
+	}
+
+	if (NW->remove(toRemove)) return true;
+	if (NE->remove(toRemove)) return true;
+	if (SW->remove(toRemove)) return true;
+	if (SE->remove(toRemove)) return true;
+
+	return false;
+}
+
 bool Quadtree::insert(GameEngine::IRenderable * a) {
 	if (!boundary.containsPoint(a))
 		return false;
@@ -45,7 +93,7 @@ void Quadtree::subdivide() {
 	SE = new Quadtree(XY(center.x + newDim.x, center.y + newDim.y), newDim);
 }
 
-void Quadtree::queryRange(std::vector<GameEngine::IRenderable*> & list, AABB range) {
+void Quadtree::queryRange(std::vector<GameEngine::IRenderable*>& list, AABB& range) {
 	if (!boundary.intersectsAABB(range)) return; // list is empty
 
 	for (int i = 0; i < points.size(); ++i)
