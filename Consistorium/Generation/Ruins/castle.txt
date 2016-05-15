@@ -1,0 +1,6 @@
+[ruin][ruin][ruin][ruin]
+[ruin]--[ruin]
+[ruin]-[ruin]
+[ruin]--[ruin]
+[ruin][ruin][ruin][ruin]
+1

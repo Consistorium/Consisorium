@@ -18,6 +18,7 @@ b2Vec2 RuinLayer::GetLayerRange()
 
 void RuinLayer::Generate(Entities::EntityFactory& factory, SpecialPlacesManager& placesManager)
 {
+	bool hasSpawnerBoss = false;
 	GameEngine::IRenderable *current;
 
 	std::vector<std::vector<Entities::GameEntity*>> cache;
@@ -42,13 +43,24 @@ void RuinLayer::Generate(Entities::EntityFactory& factory, SpecialPlacesManager&
 		{
 			std::shared_ptr<SpecialPlace> place = placesManager.getRandomPlace("Ruins");
 			if (cache[y][x] == nullptr) { continue; }
-			if (rand() % *place->getFrequency() == 1)
+			if (rand() % *place->getFrequency() == 1 && place->getName().compare("castle.txt") != 0)
 			{
 				worldCoords = cache[y][x]->getBody()->GetPosition();
 				worldCoords.x *= Globals::PIXELS_PER_METER;
 				worldCoords.y *= Globals::PIXELS_PER_METER;
 				if (cache[y][x] != nullptr) {
 					placesManager.spawnPlace(worldCoords, place, factory, cache, b2Vec2(x, y));
+				}
+			}
+			else if (!hasSpawnerBoss)
+			{
+				std::shared_ptr<SpecialPlace> castle = placesManager.getPlace("Ruins", "castle.txt");
+				hasSpawnerBoss = true;
+				worldCoords = cache[y][x]->getBody()->GetPosition();
+				worldCoords.x *= Globals::PIXELS_PER_METER;
+				worldCoords.y *= Globals::PIXELS_PER_METER;
+				if (cache[y][x] != nullptr) {
+					placesManager.spawnPlace(worldCoords, castle, factory, cache, b2Vec2(x, y));
 				}
 			}
 		}

@@ -86,6 +86,13 @@ namespace Entities
 		{
 			position.x /= Globals::PIXELS_PER_METER;
 			position.y /= Globals::PIXELS_PER_METER;
+			result = createEnemy(position, "DarkSaber", "Idle");
+			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
+		}
+		else if (name.compare("saber") == 0)
+		{
+			position.x /= Globals::PIXELS_PER_METER;
+			position.y /= Globals::PIXELS_PER_METER;
 			result = createEnemy(position, "Skeleton", "Idle");
 			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
@@ -220,7 +227,7 @@ namespace Entities
 			.create();
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
-		Enemy* skeleton = new Skeleton(components.body, components.renderComponent, components.animationComponent);
+		Enemy* skeleton = new Enemy(components.body, components.renderComponent, components.animationComponent);
 		skeleton->setJumpPower(Globals::ENTITY_JUMP_POWER)
 			->setScanRange(scanRange)
 			->setMaxSpeed(9)
