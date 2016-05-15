@@ -86,12 +86,12 @@ namespace Entities
 		{
 			position.x /= Globals::PIXELS_PER_METER;
 			position.y /= Globals::PIXELS_PER_METER;
-			result = createSkeleton(position, "Idle");
+			result = createEnemy(position, "Skeleton", "Idle");
 			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
 		else if (name.compare("pinetree") == 0)
 		{
-			result = createTree(position, "Pine");
+			result = createFoliage(position, "Tree", "Pine", Globals::TREE_HEIGHT, Globals::TREE_WIDTH);
 			result->setType((int)EntityTypes::Pine);
 		}
 		if (name.compare("purgatory") == 0)
@@ -101,7 +101,7 @@ namespace Entities
 		}
 		else if (name.compare("bush") == 0)
 		{
-			result = createBush(position, "Bush");
+			result = createFoliage(position, "Bush", "Bush", Globals::BUSH_HEIGHT, Globals::BUSH_WIDTH);
 			result->setType((int)EntityTypes::Bush);
 		}
 		else if (name.compare("ruin") == 0)
@@ -201,11 +201,11 @@ namespace Entities
 		return block;
 	}
 
-	Enemy* EntityFactory::createSkeleton(b2Vec2 position, std::string modelName, float scanRange, float damage, float range, float haste)
+	Enemy* EntityFactory::createEnemy(b2Vec2 position, std::string modelName, std::string entityName, float scanRange, float damage, float range, float haste)
 	{
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
-			.withEntityName("Skeleton")
+			.withEntityName(entityName)
 			.withModelName(modelName)
 			.withPosition(position)
 			.withBodyType(b2_dynamicBody)
@@ -228,18 +228,18 @@ namespace Entities
 		return skeleton;
 	}
 
-	Tree* EntityFactory::createTree(b2Vec2 position, std::string modelName)
+	GameEntity* EntityFactory::createFoliage(b2Vec2 position, std::string entityName, std::string modelName, int height, int width)
 	{
-		position.y += Globals::TREE_HEIGHT / 2;
+		position.y += height / 2;
 		position.y -= Globals::BLOCK_HEIGHT / 2;
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
-			.withEntityName("Tree")
+			.withEntityName(entityName)
 			.withModelName(modelName)
 			.withPosition(position)
 			.withBodyType(b2_staticBody)
-			.withWidth(Globals::TREE_WIDTH / Globals::PIXELS_PER_METER)
-			.withHeight(Globals::TREE_HEIGHT / Globals::PIXELS_PER_METER)
+			.withWidth(width / Globals::PIXELS_PER_METER)
+			.withHeight(height / Globals::PIXELS_PER_METER)
 			.create();
 
 		EntityComponents components = createEntityComponents(descriptor, 80);
@@ -251,31 +251,6 @@ namespace Entities
 		tree->getBody()->GetFixtureList()->SetSensor(true);
 
 		return tree;
-	}
-
-	Bush* EntityFactory::createBush(b2Vec2 position, std::string modelName)
-	{
-		position.y += Globals::BUSH_HEIGHT / 2;
-		position.y -= Globals::BLOCK_HEIGHT / 2;
-		EntityDescriptor descriptor = EntityDescriptor()
-			.withAnimation(modelName)
-			.withEntityName("Bush")
-			.withModelName(modelName)
-			.withPosition(position)
-			.withBodyType(b2_staticBody)
-			.withWidth(Globals::BUSH_WIDTH / Globals::PIXELS_PER_METER)
-			.withHeight(Globals::BUSH_HEIGHT / Globals::PIXELS_PER_METER)
-			.create();
-
-		EntityComponents components = createEntityComponents(descriptor, 80);
-		Bush* bush = new Bush(components.body, components.renderComponent);
-		bush->setZIndex(TREE_Z_INDEX)
-			->setType((int)EntityTypes::Bush);
-		components.renderComponent->forEntity(bush);
-		entityManager_.addToWorld(bush);
-		bush->getBody()->GetFixtureList()->SetSensor(true);
-
-		return bush;
 	}
 
 	EntityFactory::~EntityFactory()

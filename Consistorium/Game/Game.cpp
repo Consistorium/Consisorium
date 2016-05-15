@@ -165,7 +165,7 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(x, 6.0f);
-		Enemy* skeleton = factory->createSkeleton(skeletonPosition, "Idle");
+		Enemy* skeleton = factory->createEnemy(skeletonPosition, "Skeleton", "Idle");
 		enemies->push_back(skeleton);
 	}
 
@@ -173,7 +173,7 @@ void Game::addEnemies(Entities::EntityFactory* factory, std::vector<Enemy*>* ene
 	{
 		int x = rand() % 100 + 1;
 		b2Vec2 skeletonPosition(-x, 6.0f);
-		Enemy* skeleton = factory->createSkeleton(skeletonPosition, "Idle");
+		Enemy* skeleton = factory->createEnemy(skeletonPosition, "Skeleton", "Idle");
 		enemies->push_back(skeleton);
 	}
 }
