@@ -24,7 +24,7 @@ void BackgroundManager::update(float dt, b2Vec2 playerPos)
 	updateInterval_ += dt;
 	if (updateInterval_ < 1) { return; }
 	updateInterval_ = 0;
-	float yAxis = playerPos.y * Globals::BLOCK_HEIGHT;
+	float yAxis = playerPos.y * Globals::PIXELS_PER_METER;
 	timeElapsed_ += dt;
 	if (timeElapsed_ > 15000)
 	{

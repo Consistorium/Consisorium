@@ -23,7 +23,9 @@ const b2Vec2 GRAVITY(0, -100);
 const int CAMERA_SPEED = 50;
 
 void moveCharacter(DynamicEntity* entity, int direction);
+
 void jump(DynamicEntity* entity);
+
 b2Vec2 getWorldCoordinates(SDL_Point clickPoint, DynamicEntity* player);
 
 Game::Game(SDL_Window* window)
@@ -144,8 +146,8 @@ void Game::Run()
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		cameraPos.x = player.getPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2;
 		cameraPos.y = player.getPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;
-		renderer_.RenderAll(cameraPos);
 		player.update();
+		renderer_.RenderAll(cameraPos);
 		if (aiUpdateTimer > 0.3)
 		{
 			aiUpdateTimer = 0;
