@@ -10,7 +10,6 @@ namespace Entities
 	{
 		animationManager_.setAnimation("Appear", false);
 		setHealth(70);
-		setMaxSpeed(22.5);
 	}
 
 	void Skeleton::die()

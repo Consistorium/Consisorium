@@ -118,9 +118,6 @@
     <ClInclude Include="Game\UI\InterfaceManager.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Entities\FluentEntity.h">
-      <Filter>Game\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Game\WorldGeneration\GroundLayer.h">
       <Filter>Game\WorldGeneration</Filter>
     </ClInclude>
