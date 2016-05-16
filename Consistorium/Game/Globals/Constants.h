@@ -49,5 +49,5 @@ namespace Globals
 
 	// X-axis - inclusive values
 
-	const int LAYER_WIDTH_IN_BLOCKS = 200 * BLOCK_WIDTH;
+	const int LAYER_WIDTH_IN_BLOCKS = 250 * BLOCK_WIDTH;
 }

@@ -9,7 +9,11 @@ struct XY {
 };
 
 struct AABB {
-	AABB(XY _center, XY _halfDimension) : center(_center), halfDimension(_halfDimension) {}
+	int halfDiag;
+	AABB(XY _center, XY _halfDimension) : center(_center), halfDimension(_halfDimension), halfDiag(0)
+	{
+		halfDiag = std::sqrt(std::pow(halfDimension.x, 2) + std::pow(halfDimension.y, 2));
+	}
 
 	bool containsPoint(GameEngine::IRenderable* item) {
 		XY p(item->getPosition().x * 50, item->getPosition().y * 50);
@@ -17,8 +21,23 @@ struct AABB {
 			(p.y > center.y - halfDimension.y && p.y <= center.y + halfDimension.y));
 	}
 
+	float getHalfDiag() {
+		return halfDiag;
+	}
+
 	bool intersectsAABB(AABB& other) {
-		float biggerHalfWidth = std::max(other.halfDimension.x, halfDimension.x);
+		float x1 = other.center.x;
+		float y1 = other.center.y;
+		float x2 = center.x;
+		float y2 = center.y;
+		float d = std::sqrt(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2));
+
+		if (d >= getHalfDiag() + other.getHalfDiag())
+		{
+			return false;
+		}
+		return true;
+		/*float biggerHalfWidth = std::max(other.halfDimension.x, halfDimension.x);
 		float biggerHalfHeight = std::max(other.halfDimension.y, halfDimension.y);
 		float smallerHalfWidth = std::min(other.halfDimension.x, halfDimension.x);
 		float smallerHalfHeight = std::min(other.halfDimension.y, halfDimension.y);
@@ -30,7 +49,7 @@ struct AABB {
 		float biggerHeight = biggerHalfHeight * 2;
 
 		return (biggerAABBCenter.x - biggerWidth <= smallerAABBCenter.x && biggerAABBCenter.x + biggerWidth >= smallerAABBCenter.x) &&
-			(biggerAABBCenter.y - biggerHeight <= smallerAABBCenter.y && biggerAABBCenter.y + biggerHeight >= smallerAABBCenter.y);
+			(biggerAABBCenter.y - biggerHeight <= smallerAABBCenter.y && biggerAABBCenter.y + biggerHeight >= smallerAABBCenter.y);*/
 	}
 
 	XY center;

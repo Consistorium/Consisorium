@@ -123,10 +123,8 @@ namespace Input
 
 				if (!EntityTypes::isCognizant(entity->getType()))
 				{
-					GameState gameState = GameState::get(player);
-					std::vector<int> breakableBlocks = *gameState.getPlayerBreakableBlocks();
-					std::vector<int>::iterator it = std::find(breakableBlocks.begin(), breakableBlocks.end(), entity->getType());
-					if (it == breakableBlocks.end()) {
+					GameState& gameState = GameState::get(player);
+					if (!gameState.canBreakEntity(entity)) {
 						return;
 					}
 
