@@ -152,6 +152,7 @@ namespace Input
 					entity->setHealth(entity->getHealth() - player->getDamage());
 					if (entity->getHealth() <= 0)
 					{
+						EventManager::get().signal(ON_REMOVE_ENTITY, entity);
 						eManager->removeFromWorld(entity);
 					}
 				}

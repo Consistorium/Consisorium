@@ -87,14 +87,14 @@ void Game::Run()
 	std::vector<IWorldLayer*> layers;
 	GroundLayer ground;
 	layers.push_back(&ground);
-	UndergroundLayer underground;
+	/*UndergroundLayer underground;
 	layers.push_back(&underground);
 	RuinLayer ruins;
 	layers.push_back(&ruins);
 	HellLayer hell;
 	layers.push_back(&hell);
 	PurgatoryLayer purgatory;
-	layers.push_back(&purgatory);
+	layers.push_back(&purgatory);*/
 	WorldGenerator worldGenerator(entityFactory, layers);
 	worldGenerator.Build();
 	//prevent jumping in mid air
@@ -118,6 +118,27 @@ void Game::Run()
 
 	EventManager::get().add(ON_BECOME_NIGHT, [&]() {
 		addEnemies(&entityFactory, &enemies);
+	});
+
+	EventManager::get().addWithParams(ON_REMOVE_ENTITY, [&](void*arg) {
+		auto enemy = (Entities::Enemy*)(arg);
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			if (enemy->getId() == enemies[i]->getId())
+			{
+				enemies.erase(enemies.begin() + i);
+			}
+		}
+
+		for (int i = 0; i < permantentlyLivingEnemies.size(); i++)
+		{
+			if (enemy->getId() == permantentlyLivingEnemies[i]->getId())
+			{
+				permantentlyLivingEnemies.erase(permantentlyLivingEnemies.begin() + i);
+			}
+		}
+
+		return nullptr;
 	});
 
 	EventManager::get().add(ON_GET_HIT, [&]() {
@@ -157,13 +178,20 @@ void Game::Run()
 			aiUpdateTimer = 0;
 			for (size_t i = 0; i < enemies.size(); i++)
 			{
-				enemies[i]->iterateAI(player, dt);
-				enemies[i]->update();
+				if (enemies[i] != nullptr)
+				{
+					enemies[i]->iterateAI(player, dt);
+					enemies[i]->update();
+				}
 			}
+
 			for (int i = 0; i < permantentlyLivingEnemies.size(); i++)
 			{
-				permantentlyLivingEnemies[i]->iterateAI(player, dt);
-				permantentlyLivingEnemies[i]->update();
+				if (permantentlyLivingEnemies[i] != nullptr)
+				{
+					permantentlyLivingEnemies[i]->iterateAI(player, dt);
+					permantentlyLivingEnemies[i]->update();
+				}
 			}
 		}
 		else 
