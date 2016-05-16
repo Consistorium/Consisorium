@@ -33,12 +33,12 @@ SDL_Window* CreateWindow()
 	SDL_GetDesktopDisplayMode(0, &displayMode);
 
 	window = SDL_CreateWindow(
-		"An SDL2 window",
+		"Consistorium",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		Globals::SCREEN_WIDTH,
-		Globals::SCREEN_HEIGHT - 200,
-		SDL_WINDOW_SHOWN
+		Globals::SCREEN_HEIGHT,
+		SDL_WINDOW_BORDERLESS
 		);
 
 	// Check that the window was successfully made

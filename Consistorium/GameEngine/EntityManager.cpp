@@ -52,7 +52,7 @@ Entities::GameEntity* EntityManager::getClickedEntity(b2Vec2 worldCoords)
 b2Vec2 EntityManager::getWorldCoordinates(SDL_Point clickPoint, b2Vec2 camera)
 {
 	float clickHeight = Globals::SCREEN_HEIGHT - clickPoint.y;
-	float renderingHeight = 4;
+	float renderingHeight = 0;
 	b2Vec2 worldCoords;
 	worldCoords.x = (camera.x + clickPoint.x);
 	worldCoords.y = (camera.y + clickHeight) - renderingHeight * Globals::PIXELS_PER_METER;
