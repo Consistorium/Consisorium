@@ -87,14 +87,14 @@ void Game::Run()
 	std::vector<IWorldLayer*> layers;
 	GroundLayer ground;
 	layers.push_back(&ground);
-	UndergroundLayer underground;
+	/*UndergroundLayer underground;
 	layers.push_back(&underground);
 	RuinLayer ruins;
 	layers.push_back(&ruins);
 	HellLayer hell;
 	layers.push_back(&hell);
 	PurgatoryLayer purgatory;
-	layers.push_back(&purgatory);
+	layers.push_back(&purgatory);*/
 	WorldGenerator worldGenerator(entityFactory, layers);
 	worldGenerator.Build();
 	//prevent jumping in mid air
@@ -121,7 +121,7 @@ void Game::Run()
 	});
 
 	BackgroundManager backgroundManager(&renderer_);
-	Input::InputHandler inputHandler;
+	Input::InputHandler inputHandler(keyboardHandler_.get(), interfaceManager_);
 	float aiUpdateTimer = 0;
 	while (true) {
 		stepSeconds = timer.GetMilliseconds();
@@ -142,7 +142,7 @@ void Game::Run()
 			}
 		}
 
-		inputHandler.handleKeyPress(&player, keyboardHandler_.get(), interfaceManager_, contactListener_.get(), gravity_, stepSeconds);
+		inputHandler.handleKeyPress(&player, contactListener_.get(), gravity_, stepSeconds);
 		world_->Step(timeStep_, velocityIterations_, positionIterations_);
 		cameraPos.x = player.getPosition().x * Globals::PIXELS_PER_METER - Globals::SCREEN_WIDTH / 2;
 		cameraPos.y = player.getPosition().y * Globals::PIXELS_PER_METER - Globals::SCREEN_HEIGHT / 2;

@@ -5,12 +5,14 @@
 #include <Game\Entities\EntityTypes.h>
 #include <Game\EventIds.h>
 #include <Game\Utils\Directions.h>
+#include <Game\Entities\EntityTypes.h>
 
 namespace Entities
 {
 	Player::Player(b2Body* body, GameEngine::RenderComponent* rc, GameEngine::AnimationComponent* ac, EventManager& eManager)
 		: FluentEntity(body, rc, ac),
-		actionbarSelected_(0)
+		actionbarSelected_(0),
+		selectedItem_(std::pair<int, int>(EntityTypes::Nothing, 0))
 	{
 		footContacts_ = 0;
 		setHealth(100);
@@ -96,6 +98,22 @@ namespace Entities
 	bool Player::leftSensorSensing()
 	{
 		return leftSensorContacts_ > 0;
+	}
+
+	void Player::setSelectedItem(std::pair<int, int> pair)
+	{
+		selectedItem_.first = pair.first;
+		selectedItem_.second = pair.second;
+	}
+
+	int Player::getSelectedItemType()
+	{
+		return selectedItem_.first;
+	}
+
+	int Player::getSelectedItemIndex()
+	{
+		return selectedItem_.second;
 	}
 
 	bool Player::canJump()

@@ -66,42 +66,42 @@ namespace Entities
 		}
 	}
 
-	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name)
+	GameEntity* EntityFactory::createFromName(b2Vec2 position, std::string name, int type)
 	{
 		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 		GameEntity *result = nullptr;
-		if (name.compare("grass") == 0)
+		if (name.compare("grass") == 0 || type == (int)EntityTypes::Grass)
 		{
 			result = createBlock(position, "Grass");
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Grass);
 		}
-		else if (name.compare("ground") == 0) 
+		else if (name.compare("ground") == 0 || type == (int)EntityTypes::Rock)
 		{
 			result = createBlock(position, "Ground");
 			result->setZIndex(ENTITY_Z_INDEX)
 				->setType((int)EntityTypes::Rock);
 		} 
-		else if (name.compare("skeleton") == 0)
+		else if (name.compare("skeleton") == 0 || type == (int)EntityTypes::Skeleton)
 		{
 			position.x /= Globals::PIXELS_PER_METER;
 			position.y /= Globals::PIXELS_PER_METER;
 			result = createEnemy(position, "Skeleton", "Idle");
 			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
-		else if (name.compare("saber") == 0)
+		else if (name.compare("saber") == 0 || type == (int)EntityTypes::DarkSaber)
 		{
 			position.x /= Globals::PIXELS_PER_METER;
 			position.y /= Globals::PIXELS_PER_METER;
 			result = createEnemy(position, "DarkSaber", "Idle", 2, 20);
 			permantentlyLivingEnemies_.push_back(static_cast<Enemy*>(result));
 		}
-		else if (name.compare("pinetree") == 0)
+		else if (name.compare("pinetree") == 0 || type == (int)EntityTypes::Pine)
 		{
 			result = createFoliage(position, "Tree", "Pine", Globals::TREE_HEIGHT, Globals::TREE_WIDTH);
 			result->setType((int)EntityTypes::Pine);
 		}
-		else if(name.compare("purgatory") == 0)
+		else if (name.compare("purgatory") == 0 || type == (int)EntityTypes::PurgatoryBlock)
 		{
 			result = createBlock(position, "Purgatory");
 			result->setType((int)EntityTypes::PurgatoryBlock);
@@ -111,22 +111,22 @@ namespace Entities
 			result = createEnemy(position, "Death", "Idle");
 			result->setType((int)EntityTypes::DeathBoss);
 		}
-		else if (name.compare("bush") == 0)
+		else if (name.compare("bush") == 0 || type == (int)EntityTypes::Bush)
 		{
 			result = createFoliage(position, "Bush", "Bush", Globals::BUSH_HEIGHT, Globals::BUSH_WIDTH);
 			result->setType((int)EntityTypes::Bush);
 		}
-		else if (name.compare("ruin") == 0)
+		else if (name.compare("ruin") == 0 || type == (int)EntityTypes::Ruin)
 		{
 			result = createBlock(position, "Ruin");
 			result->setType((int)EntityTypes::Ruin);
 		}
-		else if (name.compare("hell") == 0)
+		else if (name.compare("hell") == 0 || type == (int)EntityTypes::Hell)
 		{
 			result = createBlock(position, "Hell");
 			result->setType((int)EntityTypes::Hell);
 		}
-		else if (name.compare("water") == 0)
+		else if (name.compare("water") == 0 || type == (int)EntityTypes::Water)
 		{
 			result = createBlock(position, "Water");
 			result->getBody()->GetFixtureList()->SetSensor(true);

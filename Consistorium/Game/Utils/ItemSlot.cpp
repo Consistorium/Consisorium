@@ -35,9 +35,12 @@ namespace Utils
 
 	void ItemSlot::empty()
 	{
-		itemCount_ = 0;
-		delete item_.first;
-		delete item_.second;
+		item_.second->setTextureName(Globals::MODELS_LOCATION + "Common/empty__001.png");
+	}
+
+	int ItemSlot::getCount()
+	{
+		return itemCount_;
 	}
 
 	std::pair<
@@ -75,7 +78,7 @@ namespace Utils
 	{
 		if (itemCount_ < count)
 		{
-			throw new std::invalid_argument("Trying to remove more items than the slot has.");
+			//throw new std::invalid_argument("Trying to remove more items than the slot has.");
 			return;
 		}
 

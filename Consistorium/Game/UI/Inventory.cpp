@@ -59,6 +59,9 @@ namespace UI
 				   size.x / SIZE_DELIMITER.x - marginXSubtrahend, 
 				   size.y / SIZE_DELIMITER.y - marginYSubtrahend);
 
+		slotDim_ = slotDim;
+		slotMargin_ = margin;
+
 		inventoryPage_.first->setPosition(pos);
 		inventoryPage_.second->setScale(b2Vec2(size.x / oldSize.x, size.y / oldSize.y));
 		renderer->AddRenderable(index, inventoryPage_.second);
@@ -76,6 +79,21 @@ namespace UI
 			itemRC->setScale(b2Vec2(slotDim.x / textureSize.x, slotDim.y / textureSize.y));
 			renderer->AddRenderable(index, itemRC);
 		}
+	}
+
+	b2Vec2 Inventory::getSlotDim()
+	{
+		return slotDim_;
+	}
+
+	int Inventory::getSlotsPerLine()
+	{
+		return slotsPerLine_;
+	}
+
+	int Inventory::getSlotMargin()
+	{
+		return slotMargin_;
 	}
 
 	bool Inventory::isVisible() { return visible_; }

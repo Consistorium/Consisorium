@@ -12,6 +12,8 @@
 #include <GameEngine\KeyboardHandler.h>
 #include <Game\Utils\PlayerContactListener.h>
 #include <Game\Utils\Directions.h>
+#include <Game\UI\InterfaceManager.h>
+
 
 namespace Input
 {
@@ -20,10 +22,12 @@ namespace Input
 	private:
 		b2Timer jumpTimer_;
 		b2Timer inventoryTimer_;
+		KeyboardHandler* keyboardHandler_;
+		UI::InterfaceManager* interfaceManager_;
 	public:
-		InputHandler();
+		InputHandler(KeyboardHandler*, UI::InterfaceManager*);
 
-		void handleKeyPress(Entities::Player*, KeyboardHandler*, UI::InterfaceManager*, PlayerContactListener*, b2Vec2 gravity_, long deltaTime);
+		void handleKeyPress(Entities::Player*, PlayerContactListener*, b2Vec2 gravity_, long deltaTime);
 
 		void handleMousePress(Entities::Player*, Entities::EntityFactory*, EntityManager*, SDL_Event, b2Vec2 camera);
 

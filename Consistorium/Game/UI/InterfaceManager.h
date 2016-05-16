@@ -43,6 +43,8 @@ namespace UI
 
 		void showActionBar();
 
+		std::pair<int, int> invetorySelect(b2Vec2 clickPoint);
+
 		//void update();
 
 		Actionbar* getActionbar();

@@ -3,6 +3,7 @@ class UnCognizantEntityTypes
 public:
 	enum
 	{
+		Nothing,
 		PositionEntity = 1,
 		FootSensor,
 		RightSensor,
@@ -15,6 +16,7 @@ public:
 		Hell,
 		Pine,
 		Bush,
-		Last
+		Last,
+		Water
 	};
 };

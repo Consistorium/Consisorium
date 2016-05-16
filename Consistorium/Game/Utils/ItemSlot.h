@@ -32,6 +32,8 @@ namespace Utils
 
 		void empty();
 
+		int getCount();
+
 		void setTexture(std::string);
 
 		~ItemSlot();

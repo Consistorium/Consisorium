@@ -36,7 +36,7 @@ namespace Entities
 
 		Bush* createBush(b2Vec2 position, std::string modelName);
 
-		GameEntity* createFromName(b2Vec2 position, std::string name);
+		GameEntity* createFromName(b2Vec2 position, std::string name = "", int type = -1);
 
 		GameEntity* createFromName(b2Vec2 position, std::string name, std::vector<std::vector<Entities::GameEntity*>>& cache, b2Vec2 indexes);
 

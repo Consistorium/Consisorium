@@ -13,8 +13,12 @@ namespace UI
 	{
 	private:
 		int slotCount_,
-			slotsPerLine_;
+			slotsPerLine_,
+			slotMargin_;
 		bool visible_;
+
+		b2Vec2 slotDim_;
+
 		std::pair<
 			Entities::Entity*,
 			GameEngine::RenderComponent*> inventoryPage_;
@@ -32,6 +36,12 @@ namespace UI
 			GameEngine::RenderComponent*>* getPage();
 
 		std::vector<Utils::ItemSlot*> getItems();
+
+		int getSlotsPerLine();
+
+		b2Vec2 getSlotDim();
+
+		int getSlotMargin();
 
 		~Inventory();
 

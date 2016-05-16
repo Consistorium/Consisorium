@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <Box2D\Box2D.h>
 
 namespace Entities

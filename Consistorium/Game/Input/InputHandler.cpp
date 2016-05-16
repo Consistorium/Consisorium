@@ -1,16 +1,19 @@
 #include "InputHandler.h"
 #include <iostream>
+#include <GameEngine\GameEntity.h>
 namespace Input
 {
-	InputHandler::InputHandler()
+	InputHandler::InputHandler(KeyboardHandler* keyboardHandler, UI::InterfaceManager* iManager)
+		:keyboardHandler_(keyboardHandler),
+		interfaceManager_(iManager)
 	{
 		jumpTimer_.Reset();
 		inventoryTimer_.Reset();
 	}
 
-	void InputHandler::handleKeyPress(Entities::Player* player, KeyboardHandler* keyboardHandler, UI::InterfaceManager* interfaceManager, PlayerContactListener* contactListener, b2Vec2 gravity_, long deltaTime)
+	void InputHandler::handleKeyPress(Entities::Player* player, PlayerContactListener* contactListener, b2Vec2 gravity_, long deltaTime)
 	{
-		if (keyboardHandler->isPressed(SDLK_LEFT))
+		if (keyboardHandler_->isPressed(SDLK_LEFT))
 		{
 			player->setXDirection(LEFT);
 			if (!player->leftSensorSensing())
@@ -18,7 +21,7 @@ namespace Input
 				player->move();
 			}
 		}
-		else if (keyboardHandler->isPressed(SDLK_RIGHT))
+		else if (keyboardHandler_->isPressed(SDLK_RIGHT))
 		{
 			player->setXDirection(RIGHT);
 			if (!player->rightSensorSensing())
@@ -26,16 +29,16 @@ namespace Input
 				player->move();
 			}
 		}
-		else if (keyboardHandler->isPressed(SDLK_b))
+		else if (keyboardHandler_->isPressed(SDLK_b))
 		{
 			if (inventoryTimer_.GetMilliseconds() >= 300)
 			{
-				interfaceManager->toggleInventory();
+				interfaceManager_->toggleInventory();
 				inventoryTimer_.Reset();
 			}
 		}
 
-		if (keyboardHandler->isPressed(SDLK_UP))
+		if (keyboardHandler_->isPressed(SDLK_UP))
 		{
 			if (player->canJump() && jumpTimer_.GetMilliseconds() > 1.2 * deltaTime)
 			{
@@ -52,15 +55,40 @@ namespace Input
 		b2Vec2 worldCoords = eManager->getWorldCoordinates(clickPoint, camera);
 		if (e.button.button == SDL_BUTTON_RIGHT)
 		{
-			entityFactory->createBlock(worldCoords, "Grass");
+			if (player->getSelectedItemType() >= 0)
+			{
+				int type = player->getSelectedItemType(),
+					index = player->getSelectedItemIndex();
+				if (type > 0)
+				{
+					entityFactory->createFromName(worldCoords, "", type);
+					std::string container = "inventory";
+					EventManager::get().signal(ON_PLACE_ITEM, &index);
+				}
+			}
+			
 			return;
 		}
 
 		Entities::GameEntity* entity = eManager->getClickedEntity(worldCoords);
-
-		if (entity != nullptr)
+		if (e.button.button == SDL_BUTTON_LEFT)
 		{
-			if (e.button.button == SDL_BUTTON_LEFT)
+			if (interfaceManager_->getInventory()->isVisible())
+			{
+				SDL_Rect inventory;
+				inventory.x = interfaceManager_->getInventory()->getPage()->second->getPosition().x;
+				inventory.y = interfaceManager_->getInventory()->getPage()->second->getPosition().y;
+				inventory.w = interfaceManager_->getInventory()->getPage()->second->getSize().x;
+				inventory.h = interfaceManager_->getInventory()->getPage()->second->getSize().y;
+
+				if (SDL_PointInRect(&clickPoint, &inventory))
+				{
+					b2Vec2 deltaXY(inventory.x - clickPoint.x, inventory.y - clickPoint.y);
+					player->setSelectedItem(interfaceManager_->invetorySelect(deltaXY));
+				}
+			}
+
+			if (entity != nullptr)
 			{
 				if (!EntityTypes::isCognizant(entity->getType()))
 				{
@@ -82,6 +110,7 @@ namespace Input
 					}
 				}
 			}
+				
 		}
 	}
 

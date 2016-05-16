@@ -4,6 +4,7 @@
 #include <GameEngine\RenderComponent.h>
 #include <Game\Globals\Constants.h>
 #include <Game\EventIds.h>
+#include <Game\Entities\EntityTypes.h>
 
 namespace UI
 {
@@ -26,6 +27,34 @@ namespace UI
 			inventory_->getItems()[sd->index]->tryAdd(1, sd->entity, sd->rc);
 			return nullptr;
 		});
+
+		EventManager::get().addWithParams(
+			ON_PLACE_ITEM,
+			[&](void* arg)
+			{
+				int index = *(int*)(arg);
+				int actionbarSlotsCount = actionbar_->getSlotCount();
+				if (index >= actionbarSlotsCount)
+				{
+					int inventoryIndex = index - actionbarSlotsCount;
+					inventory_->getItems()[inventoryIndex]->remove(1);
+					if (inventory_->getItems()[inventoryIndex]->isEmpty())
+					{
+						player_->setSelectedItem(std::pair<int, int>((int)EntityTypes::Nothing, index));
+					}
+				}
+				else
+				{
+					int actionbarIndex = index - (index - actionbarSlotsCount);
+					actionbar_->getItems()[actionbarIndex]->remove(1);
+					if (actionbar_->getItems()[actionbarIndex]->isEmpty())
+					{
+						player_->setSelectedItem(std::pair<int, int>((int)EntityTypes::Nothing, index));
+					}
+				}
+
+				return nullptr;
+			});
 	}
 
 	void InterfaceManager::showHud()
@@ -53,6 +82,24 @@ namespace UI
 	{
 	}
 
+	std::pair<int, int> InterfaceManager::invetorySelect(b2Vec2 clickPoint)
+	{
+		clickPoint.x = abs(clickPoint.x);
+		clickPoint.y = abs(clickPoint.y);
+		b2Vec2 slotDim = inventory_->getSlotDim();
+		int x = ceil(clickPoint.x / (slotDim.x + inventory_->getSlotMargin()));
+		int y = ceil(clickPoint.y / slotDim.y);
+		int index = (y - 1) * inventory_->getSlotsPerLine() + x - 1;
+		if (index > 17)
+		{
+			index = 17;
+		}
+
+		int entityType = inventory_->getItems()[index]->getItem().first->getType();
+		GameEngine::RenderComponent* rc = inventory_->getItems()[index]->getItem().second;
+		return std::pair<int, int>(entityType, index + actionbar_->getSlotCount());
+	}
+
 	void InterfaceManager::createActionbar()
 	{
 		int windowX, windowY;
@@ -73,45 +120,6 @@ namespace UI
 			renderer_->AddRenderable(Globals::UI_Z_INDEX + 1, actionbar_->getItems()[i]->getItem().second);
 		}
 	}
-
-	/*void InterfaceManager::update()
-	{
-		b2Vec2 newScale(0, 0);
-
-		for (size_t i = 0; i < player_->getActionbar().size(); i++)
-		{
-			GameEngine::IRenderable* rc =
-				player_->getActionbar()[i]
-				->getItem().second;
-
-			int zIndex = rc->getZIndex();
-
-			actionbar_
-				->getItems()[i]
-				->getItem()
-				.second
-				->setTextureName(*rc->getTextureName());
-
-			renderer_->RemoveRenderable(zIndex, rc);
-		}
-
-		for (size_t i = 0; i < player_->getInventory().size(); i++)
-		{
-			GameEngine::IRenderable* rc = player_
-				->getInventory()[i]
-				->getItem().second;
-
-			int zIndex = rc->getZIndex();
-
-			inventory_
-				->getItems()[i]
-				->getItem()
-				.second
-				->setTextureName(*rc->getTextureName());
-
-			renderer_->RemoveRenderable(zIndex, rc);
-		}
-	}*/
 
 	Actionbar* InterfaceManager::getActionbar()
 	{

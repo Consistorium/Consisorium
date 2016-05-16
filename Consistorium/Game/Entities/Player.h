@@ -6,6 +6,7 @@
 #include <AnimationManager.h>
 #include <GameEngine\FluentEntity.h>
 #include <GameEngine\EventManager.h>
+#include <GameEngine\GameEntity.h>
 #include "../Utils/ItemSlot.h"
 
 namespace Entities
@@ -16,6 +17,7 @@ namespace Entities
 		const float PLAYER_MAX_SPEED = 3;	
 		std::vector<std::shared_ptr<Utils::ItemSlot>> actionbar_;
 		std::vector<std::shared_ptr<Utils::ItemSlot>> inventory_;
+		std::pair<int, int> selectedItem_;
 		int actionbarSelected_;
 		int footContacts_;
 		int leftSensorContacts_;
@@ -41,6 +43,12 @@ namespace Entities
 		bool leftSensorSensing();
 
 		bool canJump();
+
+		void setSelectedItem(std::pair<int, int>);
+
+		int getSelectedItemIndex();
+
+		int getSelectedItemType();
 
 		std::vector<std::shared_ptr<Utils::ItemSlot>> getInventory();
 
