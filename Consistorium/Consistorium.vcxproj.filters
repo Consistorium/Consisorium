@@ -86,6 +86,7 @@
     <ClCompile Include="DeathBoss.cpp">
       <Filter>Game\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Entities\EntityFactory.h">
@@ -202,6 +203,7 @@
     <ClInclude Include="DeathBoss.h">
       <Filter>Game\Entities\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="GameState.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
