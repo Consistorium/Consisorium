@@ -108,6 +108,8 @@ namespace Entities
 		}
 		else if (name.compare("deathboss") == 0)
 		{
+			position.x /= Globals::PIXELS_PER_METER;
+			position.y /= Globals::PIXELS_PER_METER;
 			result = createEnemy(position, "Death", "Idle");
 			result->setType((int)EntityTypes::DeathBoss);
 		}
