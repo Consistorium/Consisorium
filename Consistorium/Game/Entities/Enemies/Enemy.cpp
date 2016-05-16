@@ -3,6 +3,8 @@
 #include <Game\Globals\Constants.h>
 #include "../EntityTypes.h"
 #include <Game\Utils\Directions.h>
+#include <GameEngine\EventManager.h>
+#include <Game\EventIds.h>
 
 namespace Entities
 {
@@ -71,6 +73,8 @@ namespace Entities
 				animationManager_.setAnimation("Attack", false);
 				attackTimer_.Reset();
 				player.setHealth(player.getHealth() - damage_);
+				float playerHealth = player.getHealth();
+				EventManager::get().signal(ON_GET_HIT, &playerHealth);
 			}
 		}
 	}

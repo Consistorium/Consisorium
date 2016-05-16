@@ -51,7 +51,8 @@ namespace Entities
 			float scanRange = Globals::SKELETON_SCAN_RANGE,
 			float damage = Globals::SKELETON_DAMAGE,
 			float range = Globals::SKELETON_RANGE,
-			float haste = Globals::SKELETON_HASTE);
+			float haste = Globals::SKELETON_HASTE,
+			float health = Globals::ENTITY_HEALTH);
 
 		GameEntity* createFoliage(b2Vec2 position, std::string entityName, std::string modelName, int height, int width);
 	};

@@ -222,7 +222,7 @@ namespace Entities
 		return block;
 	}
 
-	Enemy* EntityFactory::createEnemy(b2Vec2 position, std::string entityName, std::string modelName, float scale, float animationSpeed, float scanRange, float damage, float range, float haste)
+	Enemy* EntityFactory::createEnemy(b2Vec2 position, std::string entityName, std::string modelName, float scale, float animationSpeed, float scanRange, float damage, float range, float haste, float health)
 	{
 		EntityDescriptor descriptor = EntityDescriptor()
 			.withAnimation(modelName)
@@ -238,6 +238,8 @@ namespace Entities
 		Enemy* skeleton = new Enemy(components.body, components.renderComponent, components.animationComponent);
 		skeleton->setJumpPower(Globals::ENTITY_JUMP_POWER)
 			->setScanRange(scanRange)
+			->setHealth(health)
+			->setMaxHealth(health)
 			->setMaxSpeed(9)
 			->setDamage(damage)
 			->setRange(range)

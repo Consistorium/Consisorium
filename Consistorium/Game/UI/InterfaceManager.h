@@ -22,6 +22,7 @@ namespace UI
 	{
 	private:
 		std::unordered_map<std::string, GameEngine::RenderComponent*> cache_;
+		std::pair<Entities::Entity*, GameEngine::RenderComponent*> healthPair_;
 		std::shared_ptr<Entities::Player> player_;
 		std::shared_ptr<GameEngine::Renderer> renderer_;
 		b2Vec2 windowSize_;
@@ -46,6 +47,10 @@ namespace UI
 		std::pair<int, int> invetorySelect(b2Vec2 clickPoint);
 
 		std::pair<int, int> actionbarSelect(int index);
+
+		void setHealthBar(std::pair<Entities::Entity*, GameEngine::RenderComponent*>);
+
+		std::pair<Entities::Entity*, GameEngine::RenderComponent*> getHealthBar();
 
 		Actionbar* getActionbar();
 

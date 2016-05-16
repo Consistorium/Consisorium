@@ -16,6 +16,7 @@ namespace Globals
 		-- haste = attacks per second
 	 */
 
+	const float ENTITY_HEALTH = 100;
 	const float DEFAULT_ENTITY_WIDTH = 28;
 	const float DEFAULT_ENTITY_HEIGHT = 55;
 	const float BLOCK_WIDTH = 31; // plEase do not make this int because THE FUCKIGN WORLD WONT GENERATE!!11
@@ -26,7 +27,7 @@ namespace Globals
 	const int BUSH_HEIGHT = 100;
 	const float ENTITY_JUMP_POWER = 0.2;
 	const float SKELETON_SCAN_RANGE = 5.0;
-	const float SKELETON_DAMAGE = 20;
+	const float SKELETON_DAMAGE = 5;
 	const float SKELETON_RANGE = 1.5;
 	const float SKELETON_HASTE = 0.3;
 	const float INITIAL_PLAYER_HEALTH = 100;

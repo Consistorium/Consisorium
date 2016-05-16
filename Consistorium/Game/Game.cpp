@@ -87,14 +87,14 @@ void Game::Run()
 	std::vector<IWorldLayer*> layers;
 	GroundLayer ground;
 	layers.push_back(&ground);
-	UndergroundLayer underground;
+	/*UndergroundLayer underground;
 	layers.push_back(&underground);
 	RuinLayer ruins;
 	layers.push_back(&ruins);
 	HellLayer hell;
 	layers.push_back(&hell);
 	PurgatoryLayer purgatory;
-	layers.push_back(&purgatory);
+	layers.push_back(&purgatory);*/
 	WorldGenerator worldGenerator(entityFactory, layers);
 	worldGenerator.Build();
 	//prevent jumping in mid air
@@ -120,10 +120,14 @@ void Game::Run()
 		addEnemies(&entityFactory, &enemies);
 	});
 
+	EventManager::get().add(ON_GET_HIT, [&]() {
+		addEnemies(&entityFactory, &enemies);
+	});
+
 	BackgroundManager backgroundManager(&renderer_);
 	Input::InputHandler inputHandler(keyboardHandler_.get(), interfaceManager_);
 	float aiUpdateTimer = 0;
-	while (true) {
+	while (player.getHealth() > 0) {
 		stepSeconds = timer.GetMilliseconds();
 		stepSeconds = stepSeconds > 1000 ? stepSeconds : 1000;
 		float dt = timer.GetMilliseconds();

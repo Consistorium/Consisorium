@@ -45,6 +45,22 @@ namespace Entities
 		body_->ApplyLinearImpulse(force, body_->GetWorldCenter(), true);
 	}
 
+	void DynamicEntity::setHealthBar(std::pair<Entities::Entity*, GameEngine::RenderComponent*> pair)
+	{
+		healthBar.first = pair.first;
+		healthBar.second = pair.second;
+	}
+
+	std::pair<Entities::Entity*, GameEngine::RenderComponent*> DynamicEntity::getHealthBar()
+	{
+		return healthBar;
+	}
+
+	float DynamicEntity::getDamage()
+	{
+		return damage_;
+	}
+
 	void DynamicEntity::jump(b2Vec2 gravity)
 	{
 		

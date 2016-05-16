@@ -137,7 +137,14 @@ namespace Input
 						eManager->removeFromWorld(entity);
 					}
 				}
-
+				else
+				{
+					entity->setHealth(entity->getHealth() - player->getDamage());
+					if (entity->getHealth() <= 0)
+					{
+						eManager->removeFromWorld(entity);
+					}
+				}
 			}
 				
 		}

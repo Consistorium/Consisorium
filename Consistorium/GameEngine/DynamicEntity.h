@@ -16,6 +16,7 @@ namespace Entities
 		float range_;
 		float damage_;
 		float haste_;
+		std::pair<Entities::Entity*, GameEngine::RenderComponent*> healthBar;
 		GameEngine::AnimationComponent* animationComponent_;
 		GameEngine::AnimationManager animationManager_;
 	public:
@@ -29,7 +30,13 @@ namespace Entities
 
 		virtual void move();
 
+		virtual float getDamage();
+
 		virtual void jump(b2Vec2 gravity);
+
+		void setHealthBar(std::pair<Entities::Entity*, GameEngine::RenderComponent*>);
+
+		std::pair<Entities::Entity*, GameEngine::RenderComponent*> getHealthBar();
 
 		GameEngine::IAnimateable* getAnimateableComponent();
 

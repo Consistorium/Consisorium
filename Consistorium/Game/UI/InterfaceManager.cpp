@@ -14,6 +14,33 @@ namespace UI
 		player_(std::shared_ptr<Entities::Player>(player)),
 		inventory_(std::make_unique<Inventory>(Inventory(player_->INVENTORY_SIZE)))
 	{
+		Entities::Entity* healthEntity = new Entities::Entity();
+		healthEntity->setPosition(b2Vec2(20, 20));
+		GameEngine::RenderComponent* healthRc = new GameEngine::RenderComponent(
+			Globals::MODELS_LOCATION + "Common/Bars/health_20.png",
+			b2Vec2(100, 10),
+			healthEntity,
+			true);
+
+		healthPair_ = (std::pair<Entities::Entity*, GameEngine::RenderComponent*>(
+			healthEntity,
+			healthRc
+			));
+
+		renderer_->AddRenderable(Globals::UI_Z_INDEX, healthPair_.second);
+
+		eManager.addWithParams(ON_GET_HIT, [&](void* param) {
+			float playerHp = *(float*)(param);
+			int barNumber = playerHp / (player->getMaxHealth() / 20);
+			if (playerHp <= 0)
+			{
+				printf("YOU LOSE!\n");
+			}
+
+			healthPair_.second->setTextureName(Globals::MODELS_LOCATION + "Common/Bars/health_" + std::to_string(barNumber) + ".png");
+			return nullptr;
+		});
+
 		createActionbar();
 		inventoryPage_;
 		eManager.addWithParams(ON_ACTIONBAR_ADD, [&](void* param) {
@@ -70,6 +97,17 @@ namespace UI
 	void InterfaceManager::showHud()
 	{
 		
+	}
+
+	void InterfaceManager::setHealthBar(std::pair<Entities::Entity*, GameEngine::RenderComponent*> pair)
+	{
+		healthPair_.first = pair.first;
+		healthPair_.second = pair.second;
+	}
+
+	std::pair<Entities::Entity*, GameEngine::RenderComponent*> InterfaceManager::getHealthBar()
+	{
+		return healthPair_;
 	}
 
 	void InterfaceManager::toggleInventory()
