@@ -38,6 +38,7 @@ SDL_Window* CreateWindow()
 		SDL_WINDOWPOS_CENTERED,
 		Globals::SCREEN_WIDTH,
 		Globals::SCREEN_HEIGHT,
+		SDL_WINDOW_BORDERLESS
 		);
 
 	// Check that the window was successfully made
