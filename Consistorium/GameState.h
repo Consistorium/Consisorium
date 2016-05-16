@@ -10,9 +10,10 @@ class GameState
 	int currentPlayerLevel_;
 	Entities::Player *player_;
 	GameState(Entities::Player *player);
+	int playerKillRequirements_;
 public:
 
-	void levelUpPlayer();
+	void getEnemyKilledBonus();
 
 	std::vector<int>* getPlayerBreakableBlocks();
 
