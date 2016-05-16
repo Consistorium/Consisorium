@@ -66,7 +66,7 @@ namespace Entities
 	{
 		float deltaX = ceil(getPosition().x - player.getPosition().x),
 			deltaY = ceil(getPosition().y - player.getPosition().y);
-		if (deltaX < range_ && deltaY < range_)
+		if (abs(deltaX) < range_ && abs(deltaY) < range_)
 		{
 			if (attackTimer_.GetMilliseconds()  > 1000 / haste_ )
 			{
