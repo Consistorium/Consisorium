@@ -1,6 +1,9 @@
 #include "InputHandler.h"
 #include <iostream>
 #include <GameEngine\GameEntity.h>
+#include <GameState.h>
+#include <vector>
+
 namespace Input
 {
 	InputHandler::InputHandler(KeyboardHandler* keyboardHandler, UI::InterfaceManager* iManager)
@@ -120,6 +123,13 @@ namespace Input
 
 				if (!EntityTypes::isCognizant(entity->getType()))
 				{
+					GameState gameState = GameState::get(player);
+					std::vector<int> breakableBlocks = *gameState.getPlayerBreakableBlocks();
+					std::vector<int>::iterator it = std::find(breakableBlocks.begin(), breakableBlocks.end(), entity->getType());
+					if (it == breakableBlocks.end()) {
+						return;
+					}
+
 					int index;
 					SlotDescriptor sd;
 					sd.entity = entity;
@@ -137,7 +147,7 @@ namespace Input
 						eManager->removeFromWorld(entity);
 					}
 				}
-				else
+				else if (entity->getType() != EntityTypes::Player)
 				{
 					entity->setHealth(entity->getHealth() - player->getDamage());
 					if (entity->getHealth() <= 0)

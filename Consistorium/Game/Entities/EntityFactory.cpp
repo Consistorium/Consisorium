@@ -182,6 +182,7 @@ namespace Entities
 		Player* player = new Player(components.body, components.renderComponent, components.animationComponent, EventManager::get());
 		player->setJumpPower(0.2f)
 			->setMaxSpeed(10.0f)
+			->setDamage(50)
 			->setMaxHealth(health)
 			->setHealth(health)
 			->setZIndex(ENTITY_Z_INDEX)
