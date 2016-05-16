@@ -6,16 +6,16 @@
 
 class GameState
 {
-	std::vector<int> breakableBlocks_;
+	std::vector<b2Vec2> breakableIntervals_;
 	int currentPlayerLevel_;
 	Entities::Player *player_;
 	GameState(Entities::Player *player);
 	int playerKillRequirements_;
 public:
 
-	void getEnemyKilledBonus();
+	bool canBreakEntity(Entities::GameEntity *entity);
 
-	std::vector<int>* getPlayerBreakableBlocks();
+	void getEnemyKilledBonus();
 
 	static GameState& get(Entities::Player *player)
 	{
