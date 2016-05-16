@@ -36,6 +36,7 @@ namespace Utils
 	void ItemSlot::empty()
 	{
 		item_.second->setTextureName(Globals::MODELS_LOCATION + "Common/empty__001.png");
+		item_.first->setType(EntityTypes::Nothing);
 	}
 
 	int ItemSlot::getCount()

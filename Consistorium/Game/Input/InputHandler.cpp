@@ -46,6 +46,14 @@ namespace Input
 				jumpTimer_.Reset();
 			}
 		}
+
+		SDL_Keycode result = keyboardHandler_->isNumberPressed();
+		int numberKey = result - SDLK_0;
+
+		if (numberKey > 0 && numberKey <= player->getActionbar().size())
+		{
+			player->setSelectedItem(interfaceManager_->actionbarSelect(numberKey - 1));
+		}
 	}
 
 	void InputHandler::handleMousePress(Entities::Player* player, Entities::EntityFactory* entityFactory, EntityManager* eManager, SDL_Event e, b2Vec2 camera)
@@ -63,7 +71,17 @@ namespace Input
 				{
 					entityFactory->createFromName(worldCoords, "", type);
 					std::string container = "inventory";
+					player->getActionbar();
+					
 					EventManager::get().signal(ON_PLACE_ITEM, &index);
+					if (index >= player->ACTIONBAR_SIZE)
+					{
+						player->getInventory()[index - player->ACTIONBAR_SIZE]->remove(1);
+					}
+					else
+					{
+						player->getActionbar()[index]->remove(1);
+					}
 				}
 			}
 			

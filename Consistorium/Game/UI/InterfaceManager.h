@@ -45,7 +45,7 @@ namespace UI
 
 		std::pair<int, int> invetorySelect(b2Vec2 clickPoint);
 
-		//void update();
+		std::pair<int, int> actionbarSelect(int index);
 
 		Actionbar* getActionbar();
 

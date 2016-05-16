@@ -25,6 +25,20 @@ bool KeyboardHandler::isPressed(SDL_Keycode key)
 	return keyboard_[key] == PRESSED;
 }
 
+SDL_Keycode KeyboardHandler::isNumberPressed()
+{
+	for (SDL_Keycode i = SDLK_0; i <= SDLK_9; i++)
+	{
+		std::map<SDL_Keycode, bool>::iterator it = keyboard_.find(i);
+		if (it != keyboard_.end() && it->second)
+		{
+			return i;
+		}
+	}
+
+	return 0;
+}
+
 KeyboardHandler::~KeyboardHandler()
 {
 }

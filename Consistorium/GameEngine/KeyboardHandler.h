@@ -14,5 +14,7 @@ public:
 
 	bool isPressed(SDL_Keycode key);
 
+	SDL_Keycode isNumberPressed();
+
 	~KeyboardHandler();
 };

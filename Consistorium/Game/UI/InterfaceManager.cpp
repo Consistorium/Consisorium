@@ -37,6 +37,11 @@ namespace UI
 				if (index >= actionbarSlotsCount)
 				{
 					int inventoryIndex = index - actionbarSlotsCount;
+					if (inventory_->getItems()[inventoryIndex]->getCount() <= 0)
+					{
+						return nullptr;
+					}
+
 					inventory_->getItems()[inventoryIndex]->remove(1);
 					if (inventory_->getItems()[inventoryIndex]->isEmpty())
 					{
@@ -45,11 +50,16 @@ namespace UI
 				}
 				else
 				{
-					int actionbarIndex = index - (index - actionbarSlotsCount);
-					actionbar_->getItems()[actionbarIndex]->remove(1);
-					if (actionbar_->getItems()[actionbarIndex]->isEmpty())
+					if (actionbar_->getItems()[index]->getCount() <= 0)
 					{
-						player_->setSelectedItem(std::pair<int, int>((int)EntityTypes::Nothing, index));
+						return nullptr;
+					}
+
+					actionbar_->getItems()[index]->remove(1);
+					if (actionbar_->getItems()[index]->isEmpty())
+					{
+						std::pair<int, int> a((int)EntityTypes::Nothing, index);
+						player_->setSelectedItem(a);
 					}
 				}
 
@@ -98,6 +108,12 @@ namespace UI
 		int entityType = inventory_->getItems()[index]->getItem().first->getType();
 		GameEngine::RenderComponent* rc = inventory_->getItems()[index]->getItem().second;
 		return std::pair<int, int>(entityType, index + actionbar_->getSlotCount());
+	}
+
+	std::pair<int, int> InterfaceManager::actionbarSelect(int index)
+	{
+		int entityType = actionbar_->getItems()[index]->getItem().first->getType();
+		return std::pair<int, int>(entityType, index);
 	}
 
 	void InterfaceManager::createActionbar()
