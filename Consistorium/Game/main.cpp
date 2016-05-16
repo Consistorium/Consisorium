@@ -24,10 +24,8 @@ int main(int argc, char* argv[]) {
 
 SDL_Window* CreateWindow()
 {
-	SDL_Init(SDL_INIT_EVERYTHING);   // Initialize SDL2
-
-	SDL_Window *window;        // Declare a pointer to an SDL_Window
-							   // Create an application window with the following settings:
+	SDL_Init(SDL_INIT_EVERYTHING);
+	SDL_Window *window;
 
 	SDL_DisplayMode displayMode;
 	SDL_GetDesktopDisplayMode(0, &displayMode);
@@ -38,7 +36,7 @@ SDL_Window* CreateWindow()
 		SDL_WINDOWPOS_CENTERED,
 		Globals::SCREEN_WIDTH,
 		Globals::SCREEN_HEIGHT,
-		SDL_WINDOW_BORDERLESS
+		SDL_WINDOW_SHOWN
 		);
 
 	// Check that the window was successfully made

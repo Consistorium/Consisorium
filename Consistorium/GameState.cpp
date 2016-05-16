@@ -51,7 +51,7 @@ void GameState::getEnemyKilledBonus()
 	{
 		breakableIntervals_.push_back(Globals::PURGATORY_LAYER_HEIGHT_RANGE);
 	}
-	else if (currentPlayerLevel_ == 4)
+	else if (currentPlayerLevel_ >= 3 && GameUtils::isInInterval(player_->getPosition().y * Globals::PIXELS_PER_METER, Globals::PURGATORY_LAYER_HEIGHT_RANGE))
 	{
 		printf("You won the game gratz\n");
 		player_->setHealth(0);

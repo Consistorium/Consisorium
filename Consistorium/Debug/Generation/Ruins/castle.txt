@@ -1,0 +1,8 @@
+[ruin][ruin][ruin][ruin]
+[ruin][delete][delete][ruin]
+[ruin][delete][delete][ruin]
+[ruin][saber][center][ruin]
+[ruin][delete][delete][ruin]
+[ruin][delete][delete][ruin]
+[ruin][ruin][ruin][ruin]
+300

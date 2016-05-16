@@ -1,14 +1,47 @@
-﻿  InputHandler.cpp
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(28): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(32): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(52): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(25): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(56): warning C4018: '<=' : signed/unsigned mismatch
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(82): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(100): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(101): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(102): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(103): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(107): warning C4244: 'argument' : conversion from 'int' to 'float32', possible loss of data
-  Consistorium.vcxproj -> C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Debug\Consistorium.exe
+﻿Build started 5/16/2016 1:47:55 PM.
+     1>Project "C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Consistorium.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameState.cpp
+         GameState.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\game\gameutils.h(10): warning C4091: 'static ' : ignored on left of 'GameUtils' when no variable is declared
+     1>c:\users\newmast\documents\github\consisorium\consistorium\game\globals\constants.h(28): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\newmast\documents\github\consisorium\consistorium\game\globals\constants.h(32): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\newmast\documents\github\consisorium\consistorium\game\globals\constants.h(52): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Debug\Consistorium.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Dependencies\dlls /LIBPATH:C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\\Dependencies\dlls /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib Box2D.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Debug\Consistorium.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Debug\Consistorium.lib" /MACHINE:X86 Debug\Bush.obj
+         Debug\DeathBoss.obj
+         Debug\GameState.obj
+         Debug\BackgroundManager.obj
+         Debug\Box.obj
+         Debug\Capsule.obj
+         Debug\Enemy.obj
+         Debug\Skeleton.obj
+         Debug\EntityFactory.obj
+         Debug\Block.obj
+         Debug\Tree.obj
+         Debug\Player.obj
+         Debug\Game.obj
+         Debug\GameUtils.obj
+         Debug\InputHandler.obj
+         Debug\main.obj
+         Debug\Menu.obj
+         Debug\Actionbar.obj
+         Debug\InterfaceManager.obj
+         Debug\Inventory.obj
+         Debug\ItemSlot.obj
+         Debug\PlayerContactListener.obj
+         Debug\GroundLayer.obj
+         Debug\SpecialPlace.obj
+         Debug\SpecialPlacesManager.obj
+         Debug\UndergroundLayer.obj
+         Debug\WorldGenerator.obj
+         Debug\HellLayer.obj
+         Debug\PurgatoryLayer.obj
+         Debug\RuinLayer.obj
+         C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Debug\GameEngine.lib
+         Consistorium.vcxproj -> C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Debug\Consistorium.exe
+     1>Done Building Project "C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Consistorium.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.39

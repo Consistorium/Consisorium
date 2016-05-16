@@ -1,34 +1,84 @@
-﻿  EntityManager.cpp
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(28): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(32): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(52): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\entitymanager.cpp(54): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  Compiling...
-  Quadtree.cpp
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(25): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.cpp(23): warning C4018: '<' : signed/unsigned mismatch
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.cpp(44): warning C4018: '<' : signed/unsigned mismatch
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.cpp(73): warning C4018: '<' : signed/unsigned mismatch
-  Generating Code...
-  Compiling...
-  Renderer.cpp
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(25): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(16): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(68): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(112): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(113): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(126): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(127): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(129): warning C4305: 'initializing' : truncation from 'double' to 'float'
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(130): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(131): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(133): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(134): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(151): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\renderer.cpp(152): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
-  Generating Code...
-LINK : warning LNK4068: /MACHINE not specified; defaulting to X86
-  GameEngine.vcxproj -> C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Debug\GameEngine.lib
+﻿Build started 5/16/2016 1:23:20 PM.
+     1>Project "C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\GameEngine\GameEngine.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D GAMEENGINE_EXPORTS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Animation.cpp AnimationComponent.cpp AnimationManager.cpp DynamicEntity.cpp Entity.cpp EntityManager.cpp Event.cpp EventManager.cpp FluentEntity.cpp GameEntity.cpp KeyboardHandler.cpp RenderComponent.cpp Renderer.cpp Quadtree.cpp TextureManager.cpp UI\Button.cpp UI\UIElement.cpp UI\Window.cpp
+         Window.cpp
+         UIElement.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\ui\uielement.cpp(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\ui\uielement.cpp(16): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\ui\uielement.cpp(28): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\ui\uielement.cpp(33): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         Button.cpp
+         TextureManager.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\texturemanager.cpp(61): warning C4244: 'argument' : conversion from 'int' to 'float32', possible loss of data
+         Quadtree.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\quadtree.h(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\quadtree.h(25): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\quadtree.cpp(23): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\quadtree.cpp(44): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\quadtree.cpp(73): warning C4018: '<' : signed/unsigned mismatch
+         Renderer.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\quadtree.h(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\quadtree.h(25): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(16): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(68): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(112): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(113): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(126): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(127): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(129): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(130): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(131): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(133): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(134): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(151): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\renderer.cpp(152): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+         RenderComponent.cpp
+         KeyboardHandler.cpp
+         GameEntity.cpp
+         FluentEntity.cpp
+         EventManager.cpp
+         Event.cpp
+         EntityManager.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\game\globals\constants.h(28): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\newmast\documents\github\consisorium\consistorium\game\globals\constants.h(32): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>c:\users\newmast\documents\github\consisorium\consistorium\game\globals\constants.h(52): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\entitymanager.cpp(54): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+         Entity.cpp
+         DynamicEntity.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\dynamicentity.cpp(70): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+         AnimationManager.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\animationmanager.cpp(114): warning C4244: '=' : conversion from 'Uint32' to 'float', possible loss of data
+         AnimationComponent.cpp
+         Animation.cpp
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\animation.cpp(26): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\eventmanager.cpp(41): warning C4715: 'EventManager::signal' : not all control paths return a value
+     1>c:\users\newmast\documents\github\consisorium\consistorium\gameengine\ui\uielement.cpp(71): warning C4715: 'GameEngine::UIElement::click' : not all control paths return a value
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Debug\GameEngine.lib" /LIBPATH:"C:\Program Files (x86)\Visual Leak Detector\lib\Win32" /NOLOGO Debug\GameEngine.res
+         Debug\Animation.obj
+         Debug\AnimationComponent.obj
+         Debug\AnimationManager.obj
+         Debug\DynamicEntity.obj
+         Debug\Entity.obj
+         Debug\EntityManager.obj
+         Debug\Event.obj
+         Debug\EventManager.obj
+         Debug\FluentEntity.obj
+         Debug\GameEntity.obj
+         Debug\KeyboardHandler.obj
+         Debug\RenderComponent.obj
+         Debug\Renderer.obj
+         Debug\Quadtree.obj
+         Debug\TextureManager.obj
+         Debug\Button.obj
+         Debug\UIElement.obj
+         Debug\Window.obj
+     1>LINK : warning LNK4068: /MACHINE not specified; defaulting to X86
+         GameEngine.vcxproj -> C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\Debug\GameEngine.lib
+     1>Done Building Project "C:\Users\newmast\Documents\GitHub\Consisorium\Consistorium\GameEngine\GameEngine.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.92
