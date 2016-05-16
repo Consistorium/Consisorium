@@ -32,6 +32,11 @@ namespace Entities
 		return (maxSpeed_ - (xVelocity * getXDirection())) * getXDirection();
 	}
 
+	float DynamicEntity::getRange()
+	{
+		return range_;
+	}
+
 	void DynamicEntity::move()
 	{
 		animationManager_.setAnimation("Walk", false);

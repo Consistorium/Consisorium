@@ -33,16 +33,16 @@ SDL_Window* CreateWindow()
 	SDL_GetDesktopDisplayMode(0, &displayMode);
 
 	window = SDL_CreateWindow(
-		"An SDL2 window",         //    const char* title
-		SDL_WINDOWPOS_CENTERED,  //    int x: initial x position
-		SDL_WINDOWPOS_CENTERED,  //    int y: initial y position
-		Globals::SCREEN_WIDTH,                      //    int w: width, in pixels
-		Globals::SCREEN_HEIGHT - 200,                      //    int h: height, in pixels
-		SDL_WINDOW_SHOWN          //    Uint32 flags: window options, see docs
+		"An SDL2 window",
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		Globals::SCREEN_WIDTH,
+		Globals::SCREEN_HEIGHT - 200,
+		SDL_WINDOW_SHOWN
 		);
 
 	// Check that the window was successfully made
-	if (window == NULL) {
+	if (window == nullptr) {
 		// In the event that the window could not be made...
 		std::cout << "Could not create window: " << SDL_GetError() << '\n';
 		SDL_Quit();

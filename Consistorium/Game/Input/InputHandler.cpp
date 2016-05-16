@@ -90,6 +90,16 @@ namespace Input
 
 			if (entity != nullptr)
 			{
+				float x1 = entity->getPosition().x;
+				float y1 = entity->getPosition().y;
+				float x2 = player->getPosition().x;
+				float y2 = player->getPosition().y;
+				float d = std::sqrt(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2));
+				if (d >= player->getRange())
+				{
+					return;
+				}
+
 				if (!EntityTypes::isCognizant(entity->getType()))
 				{
 					int index;
@@ -109,6 +119,7 @@ namespace Input
 						eManager->removeFromWorld(entity);
 					}
 				}
+
 			}
 				
 		}

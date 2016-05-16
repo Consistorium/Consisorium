@@ -1,0 +1,6 @@
+--[grass]--
+--[grass]--
+-[grass][centergrass][grass]-
+[grass]-[grass]-[grass]
+[grass]---[grass]
+140
