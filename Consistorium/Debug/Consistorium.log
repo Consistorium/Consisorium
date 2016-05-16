@@ -1,0 +1,14 @@
+﻿  InputHandler.cpp
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(28): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(32): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\globals\constants.h(52): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(15): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\gameengine\quadtree.h(25): warning C4244: 'return' : conversion from 'int' to 'float', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(56): warning C4018: '<=' : signed/unsigned mismatch
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(82): warning C4244: 'argument' : conversion from 'const float' to 'unsigned int', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(100): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(101): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(102): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(103): warning C4244: '=' : conversion from 'float32' to 'int', possible loss of data
+c:\users\radostin\documents\informatics\consistorium\consistorium\game\input\inputhandler.cpp(107): warning C4244: 'argument' : conversion from 'int' to 'float32', possible loss of data
+  Consistorium.vcxproj -> C:\Users\radostin\Documents\informatics\Consistorium\Consistorium\Debug\Consistorium.exe

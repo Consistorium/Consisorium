@@ -10,7 +10,8 @@ public:
 		Player = UnCognizantEntityTypes::Last,
 		Skeleton,
 		DeathBoss,
-		DarkSaber
+		DarkSaber,
+		Shadow
 	};
 
 	static bool isCognizant(int type)

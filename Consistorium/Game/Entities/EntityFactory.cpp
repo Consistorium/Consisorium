@@ -113,6 +113,13 @@ namespace Entities
 			result = createEnemy(position, "Death", "Idle");
 			result->setType((int)EntityTypes::DeathBoss);
 		}
+		else if (name.compare("shadow") == 0)
+		{
+			position.x /= Globals::PIXELS_PER_METER;
+			position.y /= Globals::PIXELS_PER_METER;
+			result = createEnemy(position, "Shadow", "Idle");
+			result->setType((int)EntityTypes::Shadow);
+		}
 		else if (name.compare("bush") == 0 || type == (int)EntityTypes::Bush)
 		{
 			result = createFoliage(position, "Bush", "Bush", Globals::BUSH_HEIGHT, Globals::BUSH_WIDTH);

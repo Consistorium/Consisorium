@@ -150,6 +150,7 @@ namespace Input
 					entity->setHealth(entity->getHealth() - player->getDamage());
 					if (entity->getHealth() <= 0)
 					{
+						GameState::get(player).getEnemyKilledBonus();
 						EventManager::get().signal(ON_REMOVE_ENTITY, entity);
 						eManager->removeFromWorld(entity);
 					}
