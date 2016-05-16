@@ -1,8 +1,8 @@
------[delete]
-----[delete][delete][delete]
----[delete][delete][delete][delete][delete]
---[delete][delete][delete][delete][delete][delete][delete]
--[delete][delete][delete][deathboss][delete][delete][delete][delete][delete]
+-----[delete][delete]
+----[delete][delete][delete][delete]
+---[delete][delete][delete][delete][delete][delete]
+--[delete][delete][delete][delete][delete][delete][delete][delete]
+-[delete][delete][delete][center][delete][delete][delete][delete][delete][delete]
 [delete][delete][delete][delete][delete][delete][delete][delete][delete][delete][delete]
-[delete][delete][delete][delete][delete][center]
-200
+[delete][delete][delete][delete][delete][deathBoss]
+100
