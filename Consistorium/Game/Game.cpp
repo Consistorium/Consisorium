@@ -136,6 +136,9 @@ void Game::Run()
 		{
 			switch (e.type)
 			{
+			case SDLK_ESCAPE:
+				player.setHealth(0);
+				break;
 			case SDL_KEYDOWN:
 			case SDL_KEYUP:
 				keyboardHandler_->handleKeyPress(e, e.key.keysym.sym);
